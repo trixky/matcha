@@ -1,0 +1,11 @@
+h1, h2 {
+	margin: 0
+}
+
+.header-top {
+	background-color: red;
+}
+
+.header-bottom {
+	background-color: green;
+}
