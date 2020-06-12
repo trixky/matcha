@@ -1,11 +1,23 @@
-h1, h2 {
-	margin: 0
+header {
+	background-color: rgb(247, 134, 200);
 }
 
 .header-top {
-	background-color: red;
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 .header-bottom {
-	background-color: green;
+	padding-bottom: 5px;
+}
+
+.header-img {
+	width: 38px;
+	margin: 10px;
+	transition: transform 0.2s;
+}
+
+.header-img:hover {
+	transform: scale(1.1);
+	cursor: pointer;
 }
