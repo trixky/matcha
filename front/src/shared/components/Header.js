@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
+
+import { Link } from "react-router-dom";
+
 import './Header.css'
+
 import Search_icone from '../img/interface_icone/search.svg'
 import Visits_icone from '../img/interface_icone/down-arrow.svg'
 import Chat_icone from '../img/interface_icone/speech-bubble-18.svg'
@@ -10,22 +14,24 @@ class Header extends Component {
 		return (
 			<header>
 				<div className='header-top'>
-					<h1>matcha</h1>
+					<Link to='/'>
+						<h1 className='title'>matcha</h1>
+					</Link>
 				</div>
 				<div className='header-bottom'>
 					<nav>
-						<a href='https://github.com/trixky/matcha' target='_blank' rel='noopener noreferrer'>
+						<Link to='/search'>
 							<img className='header-img' src={Search_icone} alt='link to search page' />
-						</a>
-						<a href='https://github.com/trixky/matcha' target='_blank' rel='noopener noreferrer'>
-							<img className='header-img' src={Visits_icone} alt='link to visits page' />
-						</a>
-						<a href='https://github.com/trixky/matcha' target='_blank' rel='noopener noreferrer'>
+						</Link>
+						<Link to='/pretenders'>
 							<img className='header-img' src={Heart_icone} alt='link to pretenders page' />
-						</a>
-						<a href='https://github.com/trixky/matcha' target='_blank' rel='noopener noreferrer'>
+						</Link>
+						<Link to='/chat'>
 							<img className='header-img' src={Chat_icone} alt='link to chat page' />
-						</a>
+						</Link>
+						<Link to='/visits'>
+							<img className='header-img' src={Visits_icone} alt='link to visits page' />
+						</Link>
 					</nav>
 				</div>
 			</header>

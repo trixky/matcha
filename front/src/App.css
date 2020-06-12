@@ -2,7 +2,6 @@ h1, h2 {
 	margin: 0;
 	font-family: 'Fredoka One', cursive;
 	letter-spacing: .1rem;
-
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
@@ -12,6 +11,11 @@ h1, h2 {
 .page {
 	background-color: white;
 	padding: 1px;
+}
+
+a {
+	color: black;
+	text-decoration: none;
 }
 
 .App {

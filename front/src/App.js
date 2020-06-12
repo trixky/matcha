@@ -32,15 +32,15 @@ function App() {
 				<Header />
 				<div className="page">
 					<Switch>
-						<Route exact path='/Account'><Account /></Route>
-						<Route exact path='/Authentification'><Authentification /></Route>
-						<Route exact path='/Chat'><Chat /></Route>
+						<Route exact path='/account'><Account /></Route>
+						<Route exact path='/authentification'><Authentification /></Route>
+						<Route exact path='/chat'><Chat /></Route>
 						<Route exact path='/'><Home /></Route>
-						<Route exact path='/My_profil'><My_profil /></Route>
-						<Route exact path='/Pretenders'><Pretenders /></Route>
-						<Route exact path='/Profil'><Profil /></Route>
-						<Route exact path='/Search'><Search /></Route>
-						<Route exact path='/Visits'><Visits /></Route>
+						<Route exact path='/my_profil'><My_profil /></Route>
+						<Route exact path='/pretenders'><Pretenders /></Route>
+						<Route exact path='/profil'><Profil /></Route>
+						<Route exact path='/search'><Search /></Route>
+						<Route exact path='/visits'><Visits /></Route>
 						<Route path='*'><No_match /></Route>
 					</Switch>
 				</div>
