@@ -1,1 +1,9 @@
-// page to manually search for profiles according to selection criteria
+import React from 'react'
+
+function Search() {
+	return (
+		<h3>Search page</h3>
+	);
+}
+
+export default Search;
