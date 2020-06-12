@@ -1,0 +1,13 @@
+.pretenders-chat-list {
+	display: inline-block;
+	background-color: red;
+	width: 200px;
+	height: 400px;
+}
+
+.chat-box {
+	display: inline-block;
+	background-color: green;
+	width: calc(100% - 200px);
+	height: 400px;
+}

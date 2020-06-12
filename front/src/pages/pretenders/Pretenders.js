@@ -2,7 +2,7 @@ import React from 'react'
 
 function Pretenders() {
 	return (
-		<h3>Pretenders page</h3>
+		<p>Pretenders page</p>
 	);
 }
 

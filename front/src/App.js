@@ -12,7 +12,6 @@ import Account from './pages/account/Account'
 import Authentification from './pages/authentification/Authentification'
 import Chat from './pages/chat/Chat'
 import Home from './pages/home/Home'
-import MyProfil from './pages/myProfil/MyProfil'
 import Pretenders from './pages/pretenders/Pretenders'
 import Profil from './pages/profil/Profil'
 import Search from './pages/search/Search'
@@ -35,7 +34,6 @@ function App() {
 						<Route exact path='/authentification'><Authentification /></Route>
 						<Route exact path='/chat'><Chat /></Route>
 						<Route exact path='/'><Home /></Route>
-						<Route exact path='/myProfil'><MyProfil /></Route>
 						<Route exact path='/pretenders'><Pretenders /></Route>
 						<Route exact path='/profil'><Profil /></Route>
 						<Route exact path='/search'><Search /></Route>

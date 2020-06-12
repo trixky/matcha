@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import './Header.css'
 
 import Search_icone from '../img/interface_icone/search.svg'
-import Visits_icone from '../img/interface_icone/down-arrow.svg'
 import Chat_icone from '../img/interface_icone/speech-bubble-18.svg'
 import Heart_icone from '../img/interface_icone/heart-2.svg'
+import Profil_user from '../img/interface_icone/user-1.svg'
 
 class Header extends Component {
 	render() {
@@ -29,8 +29,8 @@ class Header extends Component {
 						<Link to='/chat'>
 							<img className='header-img' src={Chat_icone} alt='link to chat page' />
 						</Link>
-						<Link to='/visits'>
-							<img className='header-img' src={Visits_icone} alt='link to visits page' />
+						<Link to='/account'>
+							<img className='header-img' src={Profil_user} alt='link to account page' />
 						</Link>
 					</nav>
 				</div>

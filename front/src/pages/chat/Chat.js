@@ -1,8 +1,22 @@
-import React from 'react'
+import React, {Fragment} from 'react'
+import './Chat.css'
+
+import Pretender from './components/Pretender'
 
 function Chat() {
 	return (
-		<h3>Chat page</h3>
+		<Fragment>
+		<div className='pretenders-chat-list'>
+			<Pretender />
+			<Pretender />
+			<Pretender />
+			<Pretender />
+			<Pretender />
+		</div>
+		<div className='chat-box'>
+			<p>chat-box</p>
+		</div>
+		</Fragment>
 	);
 }
 
