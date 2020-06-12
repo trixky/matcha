@@ -6,11 +6,13 @@ import './App.css';
 
 // import components
 import Header from './shared/components/Header'
+import Footer from './shared/components/Footer'
 
 function App() {
   return (
     <div className="App">
       <Header />
+      <Footer />
     </div>
   );
 }
