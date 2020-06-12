@@ -4,7 +4,6 @@ import {
 	BrowserRouter as Router,
 	Switch,
 	Route,
-	Link
 } from "react-router-dom";
 import './App.css';
 
@@ -13,13 +12,13 @@ import Account from './pages/account/Account'
 import Authentification from './pages/authentification/Authentification'
 import Chat from './pages/chat/Chat'
 import Home from './pages/home/Home'
-import My_profil from './pages/my_profil/My_profil'
+import MyProfil from './pages/myProfil/MyProfil'
 import Pretenders from './pages/pretenders/Pretenders'
 import Profil from './pages/profil/Profil'
 import Search from './pages/search/Search'
 import Visits from './pages/visits/Visits'
 
-import No_match from './pages/no_match/No_match'
+import NoMatch from './pages/noMatch/NoMatch'
 
 // import components
 import Header from './shared/components/Header'
@@ -36,12 +35,12 @@ function App() {
 						<Route exact path='/authentification'><Authentification /></Route>
 						<Route exact path='/chat'><Chat /></Route>
 						<Route exact path='/'><Home /></Route>
-						<Route exact path='/my_profil'><My_profil /></Route>
+						<Route exact path='/myProfil'><MyProfil /></Route>
 						<Route exact path='/pretenders'><Pretenders /></Route>
 						<Route exact path='/profil'><Profil /></Route>
 						<Route exact path='/search'><Search /></Route>
 						<Route exact path='/visits'><Visits /></Route>
-						<Route path='*'><No_match /></Route>
+						<Route path='*'><NoMatch /></Route>
 					</Switch>
 				</div>
 				<Footer />

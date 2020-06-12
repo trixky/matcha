@@ -20,8 +20,8 @@ class Footer extends Component {
 						</a>
 					</li>
 					<li>
-						<a chref='https://github.com/trixky/matcha' target='_blank' rel='noopener noreferrer'>
-							<img className='footer-img' src={Pinterest} alt='Pinterest logo'/>
+						<a href='https://github.com/trixky/matcha' target='_blank' rel='noopener noreferrer'>
+							<img className='footer-img' src={Pinterest} alt='Pinterest logo' />
 						</a>
 					</li>
 				</ul>
