@@ -14,6 +14,7 @@ class Header extends Component {
 						<h2>search</h2>
 						<h2>visits</h2>
 						<h2>pretenders</h2>
+						<h2>chat</h2>
 					</nav>
 				</div>
 			</header>
