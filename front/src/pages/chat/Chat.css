@@ -1,13 +1,41 @@
+:root {
+	--main-chat-min-width: 200px;
+}
+
+.chat-container {
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+}
+
 .pretenders-chat-list {
 	display: inline-block;
 	background-color: red;
-	width: 200px;
+	width: var(--main-chat-min-width);
 	height: 400px;
 }
 
 .chat-box {
 	display: inline-block;
 	background-color: green;
-	width: calc(100% - 200px);
+	width: calc(100% - var(--main-chat-min-width));
 	height: 400px;
+}
+
+/* @media screen and (min-width: calc(var(--main-chat-min-width) * 2)) { */
+
+@media screen and (max-width: 450px) {
+	.chat-container {
+		flex-direction: column-reverse;
+	}
+
+	.pretenders-chat-list {
+		width: 100%;
+		height: 400px;
+	}
+
+	.chat-box {
+		width: 100%;
+		height: 400px;
+	}
 }

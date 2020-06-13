@@ -29,19 +29,21 @@ function App() {
 		<Router>
 			<div className="App">
 				<Header />
-				<div className="page">
-					<Switch>
-						<Route exact path='/account'><Account /></Route>
-						<Route exact path='/authentification'><Authentification /></Route>
-						<Route exact path='/chat'><Chat /></Route>
-						<Route exact path='/'><Home /></Route>
-						<Route exact path='/notification'><Notification /></Route>
-						<Route exact path='/pretenders'><Pretenders /></Route>
-						<Route exact path='/profil'><Profil /></Route>
-						<Route exact path='/search'><Search /></Route>
-						<Route exact path='/visits'><Visits /></Route>
-						<Route path='*'><NoMatch /></Route>
-					</Switch>
+				<div className="page-container">
+					<div className="page">
+						<Switch>
+							<Route exact path='/account'><Account /></Route>
+							<Route exact path='/authentification'><Authentification /></Route>
+							<Route exact path='/chat'><Chat /></Route>
+							<Route exact path='/'><Home /></Route>
+							<Route exact path='/notification'><Notification /></Route>
+							<Route exact path='/pretenders'><Pretenders /></Route>
+							<Route exact path='/profil'><Profil /></Route>
+							<Route exact path='/search'><Search /></Route>
+							<Route exact path='/visits'><Visits /></Route>
+							<Route path='*'><NoMatch /></Route>
+						</Switch>
+					</div>
 				</div>
 				<Footer />
 			</div>
