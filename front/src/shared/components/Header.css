@@ -1,13 +1,17 @@
+header {
+	top: 0;
+	overflow: hidden;
+	position: fixed;
+	width: 100%;
+	background-color: rgb(255, 157, 214);
+}
+
 .title {
 	transition: transform 0.2s;
 }
 
 .title:hover {
 	transform: scale(1.1);
-}
-
-header {
-	background-color: rgb(255, 157, 214);
 }
 
 .header-top {

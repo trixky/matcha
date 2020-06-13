@@ -16,13 +16,14 @@ h1, h2 {
 }
 
 .page-container {
+	margin-top: 124px;
 	background-color: white;
 }
 
 .page {
-	/* padding: 0 50px; */
 	max-width: 800px;
 	margin: 0 auto;
+	padding: 20px 0;
 }
 
 a {

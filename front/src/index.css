@@ -1,7 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
+:root {
+	--main-grey-1: #eee;
+	--main-grey-2: #ddd;
+	--main-grey-3: #ccc;
+}
+
 body {
-	background-color: rgb(233, 233, 233);
+	background-color: var(--main-grey-1);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
