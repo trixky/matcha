@@ -36,4 +36,5 @@ li {
 
 .disconnect-btn:hover {
 	cursor: pointer;
+	text-decoration: underline;
 }

@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
+* {
+	box-sizing: content-box
+}
+
 :root {
 	--main-grey-1: #eee;
 	--main-grey-2: #ddd;

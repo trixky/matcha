@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { Link } from "react-router-dom";
+
 import './Footer.css'
 
 // import social network icone
@@ -42,9 +44,11 @@ class Footer extends Component {
 							<img className='footer-img' src={Github} alt='Github logo' />
 						</a>
 					</li>
-					
+
 				</ul>
-				<button onClick={this.handleDisconnect} className='disconnect-btn'>disconnect</button>
+				<Link to='/authentification'>
+					<p className='underline'>disconnect</p>
+				</Link>
 			</footer>
 		)
 	}

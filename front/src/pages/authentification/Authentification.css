@@ -1,0 +1,44 @@
+.auth-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: stretch;
+}
+
+.register-container {
+	padding: 0 20px;
+	display: inline-block;
+	/* background-color: rgba(0, 0, 255, 0.404); */
+	border-right: solid 2px var(--main-grey-1);
+}
+
+.login-container {
+	padding: 0 20px;
+	display: inline-block;
+	/* background-color: rgba(0, 255, 42, 0.404); */
+}
+
+.auth-input {
+	display: block;
+	margin: 0;
+	margin-bottom: 10px;
+	padding: 5px;
+	width: 190px;
+}
+
+.auth-submit:hover {
+	cursor: pointer;
+}
+
+.forgot-identifiers-container {
+	margin-top: 13px;
+	max-width: 100px;
+}
+
+.forgot-identifiers{
+	margin-top: 9px;
+	max-width: 100px;
+	font-size: 13.3333px;
+	margin-bottom: 0;
+	text-align: left;
+}
