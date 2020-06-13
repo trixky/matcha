@@ -7,7 +7,8 @@ import './Header.css'
 import Search_icone from '../img/interface_icone/search.svg'
 import Chat_icone from '../img/interface_icone/speech-bubble-18.svg'
 import Heart_icone from '../img/interface_icone/heart-2.svg'
-import Profil_user from '../img/interface_icone/user-1.svg'
+import Account_icone from '../img/interface_icone/user-1.svg'
+import Notification_icone from '../img/interface_icone/down-arrow.svg'
 
 class Header extends Component {
 	render() {
@@ -29,8 +30,11 @@ class Header extends Component {
 						<Link to='/chat'>
 							<img className='header-img' src={Chat_icone} alt='link to chat page' />
 						</Link>
+						<Link to='/notification'>
+							<img className='header-img' src={Notification_icone} alt='link to notification page' />
+						</Link>
 						<Link to='/account'>
-							<img className='header-img' src={Profil_user} alt='link to account page' />
+							<img className='header-img' src={Account_icone} alt='link to account page' />
 						</Link>
 					</nav>
 				</div>
