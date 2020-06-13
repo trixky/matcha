@@ -1,5 +1,5 @@
 // import modules
-import React from 'react';
+import React, { Component } from 'react';
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -24,31 +24,45 @@ import NoMatch from './pages/noMatch/NoMatch'
 import Header from './shared/components/Header'
 import Footer from './shared/components/Footer'
 
-function App() {
-	return (
-		<Router>
-			<div className="App">
-				<Header />
-				<div className="page-container">
-					<div className="page">
-						<Switch>
-							<Route exact path='/account'><Account /></Route>
-							<Route exact path='/authentification'><Authentification /></Route>
-							<Route exact path='/chat'><Chat /></Route>
-							<Route exact path='/'><Home /></Route>
-							<Route exact path='/notification'><Notification /></Route>
-							<Route exact path='/pretenders'><Pretenders /></Route>
-							<Route exact path='/profil'><Profil /></Route>
-							<Route exact path='/search'><Search /></Route>
-							<Route exact path='/visits'><Visits /></Route>
-							<Route path='*'><NoMatch /></Route>
-						</Switch>
+class App extends Component {
+	state = {
+		page: 'tyty'
+	}
+
+	readPage = () => {
+		return (this.state.page)
+	}
+
+	setPage = page => {
+		this.setState({page})
+	}
+
+	render() {
+		return (
+			<Router>
+				<div className="App">
+					<Header readPage={this.readPage} />
+					<div className="page-container">
+						<div className="page">
+							<Switch>
+								<Route exact path='/account'><Account readPage={this.readPage} setPage={this.setPage}/></Route>
+								<Route exact path='/authentification'><Authentification readPage={this.readPage} setPage={this.setPage}/></Route>
+								<Route exact path='/chat'><Chat readPage={this.readPage} setPage={this.setPage}/></Route>
+								<Route exact path='/'><Home readPage={this.readPage} setPage={this.setPage}/></Route>
+								<Route exact path='/notification'><Notification readPage={this.readPage} setPage={this.setPage}/></Route>
+								<Route exact path='/pretenders'><Pretenders readPage={this.readPage} setPage={this.setPage}/></Route>
+								<Route exact path='/profil'><Profil readPage={this.readPage} setPage={this.setPage}/></Route>
+								<Route exact path='/search'><Search readPage={this.readPage} setPage={this.setPage}/></Route>
+								<Route exact path='/visits'><Visits readPage={this.readPage} setPage={this.setPage}/></Route>
+								<Route path='*'><NoMatch readPage={this.readPage} setPage={this.setPage}/></Route>
+							</Switch>
+						</div>
 					</div>
+					<Footer readPage={this.readPage} />
 				</div>
-				<Footer />
-			</div>
-		</Router>
-	);
+			</Router>
+		);
+	}
 }
 
 export default App;

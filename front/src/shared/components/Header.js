@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 import { Link } from "react-router-dom";
 
@@ -11,6 +11,38 @@ import Account_icone from '../img/interface_icone/user-1.svg'
 import Notification_icone from '../img/interface_icone/down-arrow.svg'
 
 class Header extends Component {
+	navConstructor() {
+		if (this.props.readPage() !== 'Authentification')
+			return (
+				<Fragment>
+					<Link to='/search'>
+						<img className='header-img scale-hover' src={Search_icone} alt='link to search page' />
+					</Link>
+					<Link to='/pretenders'>
+						<img className='header-img scale-hover' src={Heart_icone} alt='link to pretenders page' />
+					</Link>
+					<Link to='/chat'>
+						<img className='header-img scale-hover' src={Chat_icone} alt='link to chat page' />
+					</Link>
+					<Link to='/notification'>
+						<img className='header-img scale-hover' src={Notification_icone} alt='link to notification page' />
+					</Link>
+					<Link to='/account'>
+						<img className='header-img scale-hover' src={Account_icone} alt='link to account page' />
+					</Link>
+				</Fragment>
+			)
+		return (
+			<Fragment>
+				<img className='header-img blocked-hander-img' src={Search_icone} alt='link to search page' />
+				<img className='header-img blocked-hander-img' src={Heart_icone} alt='link to pretenders page' />
+				<img className='header-img blocked-hander-img' src={Chat_icone} alt='link to chat page' />
+				<img className='header-img blocked-hander-img' src={Notification_icone} alt='link to notification page' />
+				<img className='header-img blocked-hander-img' src={Account_icone} alt='link to account page' />
+			</Fragment>
+		)
+	}
+
 	render() {
 		return (
 			<header>
@@ -21,21 +53,7 @@ class Header extends Component {
 				</div>
 				<div className='header-bottom'>
 					<nav>
-						<Link to='/search'>
-							<img className='header-img' src={Search_icone} alt='link to search page' />
-						</Link>
-						<Link to='/pretenders'>
-							<img className='header-img' src={Heart_icone} alt='link to pretenders page' />
-						</Link>
-						<Link to='/chat'>
-							<img className='header-img' src={Chat_icone} alt='link to chat page' />
-						</Link>
-						<Link to='/notification'>
-							<img className='header-img' src={Notification_icone} alt='link to notification page' />
-						</Link>
-						<Link to='/account'>
-							<img className='header-img' src={Account_icone} alt='link to account page' />
-						</Link>
+						{this.navConstructor()}
 					</nav>
 				</div>
 			</header>

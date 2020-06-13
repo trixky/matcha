@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-function Home() {
-	return (
-		<p>Home page</p>
-	);
+class Home extends Component {
+	componentDidMount() {
+		if (this.props.readPage() !== 'Home')
+			this.props.setPage('Home');
+	}
+
+	render() {
+		return (
+			<p>Home page</p>
+		);
+	}
 }
 
 export default Home;

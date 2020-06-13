@@ -1,4 +1,6 @@
 .auth-container {
+	padding-top: 8px;
+	padding-bottom: 15px;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
@@ -14,6 +16,10 @@
 .login-container {
 	padding: 0 20px;
 	display: inline-block;
+}
+
+.auth-title {
+	margin-top: 15px;
 }
 
 .auth-input {
@@ -44,11 +50,22 @@
 @media screen and (max-width: 450px) {
 	.auth-container {
 		display: flex;
-		flex-direction: column;
+		flex-direction: column-reverse;
 		justify-content: center;
-		align-items: stretch;
+		align-items: center;
 	}
 	
+	.register-container {
+		width: 250px;
+		margin-top: 15px;
+		border-top: solid 2px var(--main-grey-1);
+		border-right: none;
+	}
+
+	.login-container {
+		width: 250px;
+	}
+
 	.forgot-identifiers {
 		display: block;
 		margin-left: auto;

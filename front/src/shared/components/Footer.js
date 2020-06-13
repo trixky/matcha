@@ -11,8 +11,14 @@ import Github from '../img/social_icone/Circle Black White/Github_2.svg'
 import Instagram from '../img/social_icone/Circle Black White/Instagram_2.svg'
 
 class Footer extends Component {
-	handleDisconnect = () => {
-		console.log('disconnecte clicked')
+	disconnectConstructor() {
+		if (this.props.readPage() !== 'Authentification')
+			return (
+				<Link to='/authentification'>
+					<p className='underline'>disconnect</p>
+				</Link>
+			)
+		return (null)
 	}
 
 	render() {
@@ -21,34 +27,32 @@ class Footer extends Component {
 				<ul>
 					<li>
 						<a href='https://github.com/trixky/matcha' target='_blank' rel='noopener noreferrer'>
-							<img className='footer-img' src={Facebook} alt='Facebook logo' />
+							<img className='footer-img scale-hover' src={Facebook} alt='Facebook logo' />
 						</a>
 					</li>
 					<li>
 						<a href='https://github.com/trixky/matcha' target='_blank' rel='noopener noreferrer'>
-							<img className='footer-img' src={Twitter} alt='Twitter logo' />
+							<img className='footer-img scale-hover' src={Twitter} alt='Twitter logo' />
 						</a>
 					</li>
 					<li>
 						<a href='https://github.com/trixky/matcha' target='_blank' rel='noopener noreferrer'>
-							<img className='footer-img' src={Pinterest} alt='Pinterest logo' />
+							<img className='footer-img scale-hover' src={Pinterest} alt='Pinterest logo' />
 						</a>
 					</li>
 					<li>
 						<a href='https://github.com/trixky/matcha' target='_blank' rel='noopener noreferrer'>
-							<img className='footer-img' src={Instagram} alt='Instagram logo' />
+							<img className='footer-img scale-hover' src={Instagram} alt='Instagram logo' />
 						</a>
 					</li>
 					<li>
 						<a href='https://github.com/trixky/matcha' target='_blank' rel='noopener noreferrer'>
-							<img className='footer-img' src={Github} alt='Github logo' />
+							<img className='footer-img scale-hover' src={Github} alt='Github logo' />
 						</a>
 					</li>
 
 				</ul>
-				<Link to='/authentification'>
-					<p className='underline'>disconnect</p>
-				</Link>
+				{this.disconnectConstructor()}
 			</footer>
 		)
 	}

@@ -29,7 +29,6 @@ p {
 .page {
 	max-width: 800px;
 	margin: 0 auto;
-	padding: 20px 0;
 }
 
 a {
@@ -39,6 +38,15 @@ a {
 
 .underline:hover {
 	text-decoration: underline;
+}
+
+
+.scale-hover:hover {
+	transition: transform 0.2s;
+}
+
+.scale-hover:hover {
+	transform: scale(1.1);
 }
 
 .App {

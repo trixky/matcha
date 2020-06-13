@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-function Pretenders() {
-	return (
-		<p>Pretenders page</p>
-	);
+class Pretenders extends Component {
+	componentDidMount() {
+		if (this.props.readPage() !== 'Pretenders')
+			this.props.setPage('Pretenders');
+	}
+
+	render() {
+		return (
+			<p>Pretenders page</p>
+		);
+	}
 }
 
 export default Pretenders;

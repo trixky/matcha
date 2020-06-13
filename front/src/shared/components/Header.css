@@ -26,9 +26,8 @@ header {
 .header-img {
 	width: 37px;
 	margin: 10px;
-	transition: transform 0.2s;
 }
 
-.header-img:hover {
-	transform: scale(1.1);
+.blocked-hander-img {
+	opacity: 0.07;
 }
