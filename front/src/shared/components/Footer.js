@@ -12,7 +12,12 @@ import Instagram from '../img/social_icone/Circle Black White/Instagram_2.svg'
 
 class Footer extends Component {
 	disconnectConstructor() {
-		if (this.props.readPage() !== 'Authentification')
+		const page = this.props.readPage();
+		if (page !== 'Authentification' &&
+			page !== 'ForgotUsername' &&
+			page !== 'ForgotPassword' &&
+			page !== 'ForgotPasswordSend' &&
+			page !== 'ForgotUsernameSend')
 			return (
 				<Link to='/authentification'>
 					<p className='underline'>disconnect</p>

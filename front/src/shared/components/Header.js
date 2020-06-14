@@ -12,7 +12,12 @@ import Notification_icone from '../img/interface_icone/down-arrow.svg'
 
 class Header extends Component {
 	navConstructor() {
-		if (this.props.readPage() !== 'Authentification')
+		const page = this.props.readPage();
+		if (page !== 'Authentification' &&
+			page !== 'ForgotUsername' &&
+			page !== 'ForgotPassword' &&
+			page !== 'ForgotPasswordSend' &&
+			page !== 'ForgotUsernameSend')
 			return (
 				<Fragment>
 					<Link to='/search'>
