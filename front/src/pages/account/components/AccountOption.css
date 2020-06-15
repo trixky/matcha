@@ -1,0 +1,7 @@
+.account-options-containers {
+	/* background-color: red; */
+	width: 250px;
+	margin: 15px auto 0;
+	padding-top: 30px;
+	border-top: solid 2px var(--main-grey-1);
+}

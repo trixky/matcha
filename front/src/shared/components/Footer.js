@@ -19,9 +19,7 @@ class Footer extends Component {
 			page !== 'ForgotPasswordSend' &&
 			page !== 'ForgotUsernameSend')
 			return (
-				<Link to='/authentification'>
-					<p className='underline'>disconnect</p>
-				</Link>
+				<p className='underline disconnect-btn'><Link to='/authentification'>disconnect</Link></p>
 			)
 		return (null)
 	}

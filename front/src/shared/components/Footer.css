@@ -22,17 +22,6 @@ li {
 }
 
 .disconnect-btn {
-	margin-top: 6px;
-	font-size: 16px;
-	border: none;
-	background: none;
-}
-
-.disconnect-btn:focus {
-	outline: none;
-}
-
-.disconnect-btn:hover {
-	cursor: pointer;
-	text-decoration: underline;
+	width: max-content;
+	margin: 6px auto 0;
 }

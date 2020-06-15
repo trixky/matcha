@@ -1,0 +1,26 @@
+.states-containers {
+	/* background-color: var(--main-grey-1); */
+	margin: 0 auto;
+	width: 200px;
+	padding: 10px;
+}
+
+.state-line {
+	display: block;
+	margin-top: 5px; 
+}
+
+.state-number, .state-type {
+	margin: 0 6px;
+	display: inline-block;
+	width: 80px;
+}
+
+.state-number {
+	font-weight: bold;
+	text-align: left;
+}
+
+.state-type {
+	text-align: right;
+}
