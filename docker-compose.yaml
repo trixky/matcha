@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+ docker_test:
+   build: .
+   image: project
+   container_name: ft_project
+   volumes:
+    - ./:/test
+   tty: true
+   ports: 
+    - "3000:3000"
