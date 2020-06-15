@@ -4,7 +4,7 @@ const database = pgp('postgres://user:password@localhost:5432/database');
 
 function _exit(value){
     console.error(value);
-    process.exit(1);
+    process.exit(0);
 }
 
 database.none(
@@ -12,25 +12,20 @@ database.none(
     + '('
     + 'id INTEGER NOT NULL PRIMARY KEY'
     + ', '
-    + 'name VARCHAR(32) NOT NULL'
+    + 'email VARCHAR(320) NOT NULL UNIQUE'
+    + ','
+    + 'username VARCHAR(31) NOT NULL'
+    + ', '
+    + 'firstname VARCHAR(255) NOT NULL'
+    + ', '
+    + 'lastname VARCHAR(255) NOT NULL'
+    + ', '
+    + 'password VARCHAR(255) NOT NULL'
     + ', '
     + 'created TIMESTAMP NOT NULL'
     + ', '
     + 'modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP'
     + ')'
-).then(function() {
-    database.none(
-        'INSERT INTO users(id, name, created)'
-        + ' '
-        + 'SELECT COUNT(*) AS id, $1 AS name, CURRENT_TIMESTAMP as created'
-        + ' FROM users',
-        ['cal']
-    ).then(function() {
-        database.any(
-            'SELECT * FROM users'
-        ).then(_exit).catch(_exit);
+).catch(_exit);
 
-    }).catch(_exit);
-
-}).catch(_exit);
-
+_exit('users table was created');
