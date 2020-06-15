@@ -10,6 +10,11 @@
 	margin-top: 5px; 
 }
 
+.state-type:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
 .state-number, .state-type {
 	margin: 0 6px;
 	display: inline-block;
