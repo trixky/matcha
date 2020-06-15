@@ -18,7 +18,7 @@ class ForgotPasswordSend extends Component {
 				<p>You will receive in an email with a password reset link.</p>
 				<p>If you do not receive the email, check your spam emails or resend a password reset request.</p>
 				<Link to='/forgotPassword'>
-					<img className='header-img scale-hover' src={Previous_icone} alt='link resend a password reset request' />
+					<img className='header-img scale-hover' src={Previous_icone} alt='link for resend a password reset request' />
 				</Link>
 			</div>
 		);
