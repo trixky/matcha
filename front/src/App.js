@@ -18,7 +18,7 @@ import ForgotUsernameSend from './pages/forgot_username_send/ForgotUsernameSend'
 import Home from './pages/home/Home'
 import Notification from './pages/notification/Notification'
 import Pretenders from './pages/pretenders/Pretenders'
-import Profil from './pages/profil/Profil'
+import Profile from './pages/profile/Profile'
 import Search from './pages/search/Search'
 import Visits from './pages/visits/Visits'
 import ResetPassword from './pages/reset_password/ResetPassword'
@@ -60,7 +60,7 @@ class App extends Component {
 								<Route exact path='/'><Home readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/notification'><Notification readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/pretenders'><Pretenders readPage={this.readPage} setPage={this.setPage}/></Route>
-								<Route exact path='/profil'><Profil readPage={this.readPage} setPage={this.setPage}/></Route>
+								<Route exact path='/profile/:username'><Profile readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/resetPassword'><ResetPassword readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/search'><Search readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/visits'><Visits readPage={this.readPage} setPage={this.setPage}/></Route>

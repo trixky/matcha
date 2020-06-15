@@ -1,0 +1,59 @@
+.cercle-img {
+	position: absolute;
+	height: 150px;
+	width: 150px;
+	border-radius: 50%;
+	top: -75px;
+}
+
+.profile-img {
+	transition: left 0.2s;
+	left: calc(50% - 75px - 9px);
+	z-index: 20;
+}
+
+.profil-img-container:hover> .profile-img {
+	left: calc(50% - 75px - 12px);
+}
+
+.cercle-img-1 {
+	transition: left 0.2s;
+	left: calc(50% - 75px - 3px);
+	background: #ddd;
+	z-index: 19;
+}
+
+.profil-img-container:hover> .cercle-img-1 {
+	left: calc(50% - 75px - 4px);
+}
+
+.cercle-img-2 {
+	transition: left 0.2s;
+	left: calc(50% - 75px + 3px);
+	background: #ccc;
+	z-index: 18;
+}
+
+.profil-img-container:hover> .cercle-img-2 {
+	left: calc(50% - 75px + 4px);
+}
+
+.cercle-img-3 {
+	transition: left 0.2s;
+	left: calc(50% - 75px + 9px);
+	background: #bbb;
+	z-index: 17;
+}
+
+.profil-img-container:hover> .cercle-img-3 {
+	left: calc(50% - 75px + 12px);
+}
+
+.profil-img-container {
+	transition: opacity 0.2s;
+}
+
+.profil-img-container:hover {
+	opacity: 0.9;
+	cursor: pointer;
+}
