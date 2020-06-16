@@ -14,7 +14,7 @@ class UpdateBio extends Component {
 	render() {
 		return (
 			<form>
-				<textarea className='form-input bio-input' type='textarea' placeholder='bio' value={this.state.value} onChange={this.handleChange.bind(this)} />
+				<textarea className='form-input bio-input' type='textarea' placeholder='my bio here...' value={this.state.value} onChange={this.handleChange.bind(this)} />
 				<input className='form-input auth-submit' type='submit' value='update my bio' />
 			</form>
 		);

@@ -1,6 +1,4 @@
-.update-profile-container > form {
-	background-color: var(--main-grey-1);
-	width: 300px;
-	margin: 10px auto;
-	padding: 15px 10px 5px;
+.update-profile-title {
+	margin-top: 15px;
+	margin-bottom: 30px;
 }

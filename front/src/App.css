@@ -63,6 +63,13 @@ a {
 	width: 190px;
 }
 
+.update-form-container > form {
+	background-color: var(--main-grey-1);
+	width: 300px;
+	margin: 10px auto;
+	padding: 15px 10px 5px;
+}
+
 .App {
 	text-align: center;
 }

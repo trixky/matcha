@@ -21,6 +21,7 @@ import Notification from './pages/notification/Notification'
 import Pretenders from './pages/pretenders/Pretenders'
 import Profile from './pages/profile/Profile'
 import Search from './pages/search/Search'
+import Settings from './pages/settings/Settings'
 import UpdateProfile from './pages/update_profile/UpdateProfile'
 import Visits from './pages/visits/Visits'
 import ResetPassword from './pages/reset_password/ResetPassword'
@@ -66,6 +67,7 @@ class App extends Component {
 								<Route exact path='/profile/:username'><Profile readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/resetPassword'><ResetPassword readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/search'><Search readPage={this.readPage} setPage={this.setPage}/></Route>
+								<Route exact path='/settings'><Settings readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/updateProfile'><UpdateProfile readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/visits'><Visits readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route path='*'><NoMatch readPage={this.readPage} setPage={this.setPage}/></Route>

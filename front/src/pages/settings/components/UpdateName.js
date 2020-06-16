@@ -16,6 +16,7 @@ class UpdateName extends Component {
 			<form>
 				<input className='form-input' type='text' placeholder='name' value={this.state.value} onChange={this.handleChange.bind(this)} />
 				<input className='form-input auth-submit' type='submit' value='update my name' />
+				<p className='update-settings-description'>Your name is not visible to other users.</p>
 			</form>
 		);
 	}
