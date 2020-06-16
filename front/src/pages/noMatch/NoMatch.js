@@ -8,7 +8,9 @@ class NoMatch extends Component {
 
 	render() {
 		return (
-			<p>NoMatch page (404)</p>
+			<div className='intern-page'>
+				<p>NoMatch page (404)</p>
+			</div>
 		);
 	}
 }

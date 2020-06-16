@@ -8,7 +8,9 @@ class ResetPassword extends Component {
 
 	render() {
 		return (
-			<p>ResetPassword page</p>
+			<div className='intern-page'>
+				<p>ResetPassword page</p>
+			</div>
 		);
 	}
 }

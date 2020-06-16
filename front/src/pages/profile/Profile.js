@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+
 import './Profile.css'
 
 import Images from './components/Images'
 import ProfileListInfo from './components/ProfileListInfo'
 import Heart from './components/Heart'
 import Bio from './components/Bio'
+import Tags from './components/Tags'
 
 class Profile extends Component {
 
@@ -24,6 +26,7 @@ class Profile extends Component {
 					<input className='form-input' onClick={() => (this.handleClick('/profile'))} type='submit' value='chat' disabled />
 					<ProfileListInfo />
 					<Bio />
+					<Tags />
 				</div>
 			</div>
 		);

@@ -15,6 +15,7 @@ import ForgotPassword from './pages/forgot_password/ForgotPassword'
 import ForgotPasswordSend from './pages/forgot_password_send/ForgotPasswordSend'
 import ForgotUsername from './pages/forgot_username/ForgotUsername'
 import ForgotUsernameSend from './pages/forgot_username_send/ForgotUsernameSend'
+import Gallery from './pages/gallery/Gallery'
 import Home from './pages/home/Home'
 import Notification from './pages/notification/Notification'
 import Pretenders from './pages/pretenders/Pretenders'
@@ -57,6 +58,7 @@ class App extends Component {
 								<Route exact path='/forgotPasswordSend'><ForgotPasswordSend readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/forgotUsername'><ForgotUsername readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/forgotUsernameSend'><ForgotUsernameSend readPage={this.readPage} setPage={this.setPage}/></Route>
+								<Route exact path='/profile/:username/gallery'><Gallery readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/'><Home readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/notification'><Notification readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/pretenders'><Pretenders readPage={this.readPage} setPage={this.setPage}/></Route>

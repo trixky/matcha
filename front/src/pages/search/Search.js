@@ -8,7 +8,9 @@ class Search extends Component {
 
 	render() {
 		return (
-			<p>Search page</p>
+			<div className='intern-page'>
+				<p>Search page</p>
+			</div>
 		);
 	}
 }

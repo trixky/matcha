@@ -8,7 +8,9 @@ class Visits extends Component {
 
 	render() {
 		return (
-			<p>Visits page</p>
+			<div className='intern-page'>
+				<p>Visits page</p>
+			</div>
 		)
 	}
 }

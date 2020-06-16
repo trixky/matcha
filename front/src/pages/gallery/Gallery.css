@@ -1,0 +1,7 @@
+.gallery-img {
+	max-width: 80%;
+}
+
+.gallery-img:hover {
+	cursor: pointer;
+}

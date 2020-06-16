@@ -1,0 +1,11 @@
+.profil-tags-container {
+	margin: 16px auto 0;
+	padding: 0 15px;
+	border-top: solid 2px var(--main-grey-1);
+	width: 250px;
+}
+
+.profil-tags-container > p {
+	font-style: italic;
+	margin-bottom: 0;
+}

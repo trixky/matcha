@@ -8,7 +8,9 @@ class Home extends Component {
 
 	render() {
 		return (
-			<p>Home page</p>
+			<div className='intern-page'>
+				<p>Home page</p>
+			</div>
 		);
 	}
 }

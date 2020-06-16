@@ -1,0 +1,19 @@
+.profil-state-line {
+	display: block;
+	margin-top: 6px; 
+}
+
+.profil-state-number, .profil-state-type {
+	margin: 0 6px;
+	display: inline-block;
+	width: 80px;
+}
+
+.profil-state-number {
+	font-weight: bold;
+	text-align: left;
+}
+
+.profil-state-type {
+	text-align: right;
+}

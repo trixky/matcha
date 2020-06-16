@@ -8,7 +8,9 @@ class Pretenders extends Component {
 
 	render() {
 		return (
-			<p>Pretenders page</p>
+			<div className='intern-page'>
+				<p>Pretenders page</p>
+			</div>
 		);
 	}
 }

@@ -11,7 +11,7 @@ class Chat extends Component {
 
 	render() {
 		return (
-			<div className='chat-container'>
+			<div className='intern-page chat-container'>
 				<div className='pretenders-chat-list'>
 					<Pretender />
 					<Pretender />

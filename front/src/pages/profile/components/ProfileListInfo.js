@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from "react-router-dom";
 
 import './ProfileListInfo.css'
 
@@ -8,26 +7,26 @@ class ProfileListInfo extends Component {
 		return (
 			<div className='profile-info-list-container'>
 				<ul>
-				<li className='state-line'>
-						<p className='state-type'><Link to='/'>genre</Link></p><p className='state-number'>man</p>
+				<li className='profil-state-line'>
+						<p className='profil-state-type'>genre</p><p className='profil-state-number'>man</p>
 					</li>
-					<li className='state-line'>
-						<p className='state-type'><Link to='/'>orientation</Link></p><p className='state-number'>hetero</p>
+					<li className='profil-state-line'>
+						<p className='profil-state-type'>orientation</p><p className='profil-state-number'>hetero</p>
 					</li>
-					<li className='state-line'>
-						<p className='state-type'><Link to='/'>age</Link></p><p className='state-number'>26</p>
+					<li className='profil-state-line'>
+						<p className='profil-state-type'>age</p><p className='profil-state-number'>26</p>
 					</li>
-					<li className='state-line'>
-						<p className='state-type'><Link to='/'>localisation</Link></p><p className='state-number'>paris</p>
+					<li className='profil-state-line'>
+						<p className='profil-state-type'>localisation</p><p className='profil-state-number'>paris</p>
 					</li>
-					<li className='state-line'>
-						<p className='state-type'><Link to='/'>tags</Link></p><p className='state-number'>6</p>
+					<li className='profil-state-line'>
+						<p className='profil-state-type'>distance</p><p className='profil-state-number'>300 km</p>
 					</li>
-					<li className='state-line'>
-						<p className='state-type'><Link to='/'>reputation</Link></p><p className='state-number'>6676</p>
+					<li className='profil-state-line'>
+						<p className='profil-state-type'>reputation</p><p className='profil-state-number'>6676</p>
 					</li>
-					<li className='state-line'>
-						<p className='state-type'><Link to='/'>saw you</Link></p><p className='state-number'>yes</p>
+					<li className='profil-state-line'>
+						<p className='profil-state-type'>saw you</p><p className='profil-state-number'>yes</p>
 					</li>
 				</ul>
 			</div>

@@ -8,7 +8,9 @@ class Notification extends Component {
 
 	render() {
 		return (
-			<p>Notification page</p>
+			<div className='intern-page'>
+				<p>Notification page</p>
+			</div>
 		);
 	}
 }
