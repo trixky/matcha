@@ -1,0 +1,19 @@
+.update-gallery-container {
+	background-color: var(--main-grey-1);
+	width: 300px;
+	margin: 0 auto;
+	padding: 15px 10px 5px;
+}
+
+.form-input.file-input {
+	width: initial;
+	overflow:hidden;
+}
+
+.update-gallery-img, .update-gallery-img-profile {
+	max-width: 100px;
+}
+
+.update-gallery-img-profile {
+	border-radius: 50%;
+}
