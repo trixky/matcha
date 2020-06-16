@@ -5,7 +5,7 @@ let usersController = {};
 
 usersController.index = function(req, res) {
     database.any(
-        'SELECT * FROM USERS'
+        'SELECT * FROM users'
     ).then(function(data) {
         res.json({ _status: 0, _data: data });
     }).catch(function(error) {
@@ -25,7 +25,7 @@ usersController.login = function(req, res) {
     }
 
     database.one(
-        'SELECT * FROM USERS WHERE (id = $[id] AND password = $[password])',
+        'SELECT * FROM users WHERE (id = $[id] AND password = $[password])',
         req.body.user
     ).then(function(data) {
         res.json({ _status: 0, _data: data });
@@ -46,7 +46,8 @@ usersController.create = function(req, res) {
     }
 
     database.none(
-        'INSERT INTO users(id, email, username, firstname, lastname, password, created)'
+        'INSERT INTO users'
+        + '(id, email, username, firstname, lastname, password, created)'
         + ' '
         + 'SELECT'
         + ' COUNT(*) AS id,'
@@ -75,7 +76,7 @@ usersController.show = function(req, res) {
     }
 
     database.one(
-        'SELECT * FROM USERS WHERE (id = $1)',
+        'SELECT * FROM users WHERE (id = $1)',
         [id]
     ).then(function(data) {
         res.json({ _status: 0, _data: data });

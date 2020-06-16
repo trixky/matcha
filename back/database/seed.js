@@ -26,6 +26,5 @@ database.none(
     + ', '
     + 'modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP'
     + ')'
-).catch(_exit);
+).then(_exit).catch(_exit);
 
-_exit('users table was created');
