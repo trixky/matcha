@@ -8,7 +8,7 @@ class ProfileListInfo extends Component {
 			<div className='profile-info-list-container'>
 				<ul>
 				<li className='profil-state-line'>
-						<p className='profil-state-type'>genre</p><p className='profil-state-number'>man</p>
+						<p className='profil-state-type'>gender</p><p className='profil-state-number'>man</p>
 					</li>
 					<li className='profil-state-line'>
 						<p className='profil-state-type'>orientation</p><p className='profil-state-number'>hetero</p>
