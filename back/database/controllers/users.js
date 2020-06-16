@@ -25,7 +25,8 @@ usersController.login = function(req, res) {
     }
 
     database.one(
-        'SELECT * FROM users WHERE (id = $[id] AND password = $[password])',
+        'SELECT * FROM users WHERE'
+        + ' (email = $[email] AND password = $[password])',
         req.body.user
     ).then(function(data) {
         res.json({ _status: 0, _data: data });

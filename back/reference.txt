@@ -1,0 +1,36 @@
+-------- RESPONSE --------
+
+STATUS: 200
+
+BODY: [json]
+--> success [ { _state: 0, _data: ... } ]
+--> error [ { _state: -1, _message: "..." or null, _error: ... or null } ]
+
+-------- REQUEST --------
+
+/*
+** NOTES
+** +) no authentification is setup (anyone can make requests)
+** +) user information on creation aren't checked (valid email...)
+** +) password isn't encrypted
+*/
+
+GET '/users'                => 'list all users informations'
+
+GET '/users/:id'            => 'user information'
+
+POST '/users/login' [json]  => 'user information'
+[
+    { users { email: "...", password: "..." } }
+]
+
+POST '/users/create' [json] => 'null'
+[
+    { users {
+        email: ."...",
+        username: "...",
+        firstname: "...",
+        lastname: "...",
+        password: "..."
+    } }
+]
