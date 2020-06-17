@@ -6,7 +6,8 @@ services:
    image: project
    container_name: ft_project
    volumes:
-    - ./:/test
+    - ./:/server
    tty: true
    ports: 
     - "3000:3000"
+    - "3001:3001"
