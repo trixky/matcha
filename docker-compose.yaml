@@ -1,13 +1,43 @@
 version: '3.7'
 
 services:
- docker_test:
-   build: .
-   image: project
-   container_name: ft_project
-   volumes:
-    - ./:/server
-   tty: true
-   ports: 
-    - "3000:3000"
-    - "3001:3001"
+
+  database:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: user
+      POSTGRES_DB: database
+      PGDATA: /var/lib/postgresql/data
+      TZ: 'UTC'                           # Universal Time Coordinate/GMT
+      PGTZ: 'UTC'
+    volumes:
+      - ./database:/var/lib/postgresql/data
+
+  server:
+    image: node
+    depends_on:
+      - database
+    volumes:
+      - ./server:/server
+    ports:
+      - 3001:3001
+    working_dir: /server
+    command: bash -c "DEBUG=server:* npm run start"
+
+  client:
+    image: node
+    depends_on:
+      - server
+    volumes:
+      - ./client:/client
+    ports:
+      - 3000:3000
+    working_dir: /client
+    stdin_open: true                    # prevent react app from exiting
+    command: bash -c "npm run start"
+
+## PostgreSQL command line
+# docker-compose up --detach database
+# docker-compose exec database psql --dbname=database --username=user
+# docker-compose down

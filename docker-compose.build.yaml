@@ -1,0 +1,13 @@
+  server:
+    image: node
+    volumes:
+      - ./server:/server
+    working_dir: /server
+    command: bash -c "rm -rf node_modules/ && npm install"
+
+  client:
+    image: node
+    volumes:
+      - ./client:/client
+    working_dir: /client
+    command: bash -c "rm -rf node_modules/ && npm install"
