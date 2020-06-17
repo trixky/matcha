@@ -4,7 +4,7 @@ STATUS: 200
 
 BODY: [json]
 --> success [ { _state: 0, _data: ... } ]
---> error [ { _state: -1, _message: "..." or null, _error: ... or null } ]
+--> error [ { _state: -1, _message: "..." or null } ]
 
 -------- REQUEST --------
 

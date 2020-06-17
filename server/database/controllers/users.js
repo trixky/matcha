@@ -10,7 +10,7 @@ usersController.index = function(req, res) {
     ).then(function(data) {
         res.json({ _status: 0, _data: data });
     }).catch(function(error) {
-        res.json({ _status: -1, _message: null, _error: error });
+        res.json({ _status: -1, _message: error.message });
     });
 };
 
@@ -23,12 +23,11 @@ usersController.login = function(req, res) {
         res.json({
              _status: -1,
             _message: 'missing user information',
-            _error: null
         });
         return;
     }
 
-    let email = req.body.user;
+    let email = req.body.user.email;
     let password = crypto.createHash('sha256')
                          .update(req.body.user.password)
                          .digest('hex');
@@ -41,7 +40,7 @@ usersController.login = function(req, res) {
         req.session.user = data;
         res.json({ _status: 0, _data: data });
     }).catch(function(error) {
-        res.json({ _status: -1, _message: null, _error: error });
+        res.json({ _status: -1, _message: error.message });
     });
 };
 
@@ -53,8 +52,7 @@ usersController.create = function(req, res) {
     {
         res.json({
              _status: -1,
-            _message: 'missing user information',
-            _error: null
+            _message: 'missing user information'
         });
         return;
     }
@@ -81,7 +79,7 @@ usersController.create = function(req, res) {
     ).then(function() {
         res.json({ _status: 0, _data: null });
     }).catch(function(error) {
-        res.json({ _status: -1, _message: null, _error: error });
+        res.json({ _status: -1, _message: error.message });
     });
 };
 
@@ -90,7 +88,7 @@ usersController.show = function(req, res) {
     const id = _string.strToUint(req.params.id);
 
     if (id < 0) {
-        res.json({ _status: -1, _message: 'invalid id', error: null });
+        res.json({ _status: -1, _message: 'invalid id' });
         return;
     }
 
@@ -100,7 +98,7 @@ usersController.show = function(req, res) {
     ).then(function(data) {
         res.json({ _status: 0, _data: data });
     }).catch(function(error) {
-        res.json({ _status: -1, _message: null, _error: error });
+        res.json({ _status: -1, _message: error.message });
     });
 };
 

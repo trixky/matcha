@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 /* Authentication Middleware (before routes) */
+
 app.use(session({
-    store: new (require('connect-pg-simple')(session))(),
     saveUninitialized: false,
     secret: 'session_secret',
     resave: false
