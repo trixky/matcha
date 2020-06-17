@@ -1,5 +1,6 @@
 const database = require('../database');
 const _string = require('../../lib/_string');
+const crypto = require('crypto');
 
 let usersController = {};
 
@@ -9,7 +10,7 @@ usersController.index = function(req, res) {
     ).then(function(data) {
         res.json({ _status: 0, _data: data });
     }).catch(function(error) {
-        res.json({ _status: -1, _message: null, _error: error});
+        res.json({ _status: -1, _message: null, _error: error });
     });
 };
 
@@ -24,14 +25,20 @@ usersController.login = function(req, res) {
         return;
     }
 
+    let email = req.body.user;
+    let password = crypto.createHash('sha256')
+                         .update(req.body.user.password)
+                         .digest('hex');
+
     database.one(
         'SELECT * FROM users WHERE'
-        + ' (email = $[email] AND password = $[password])',
-        req.body.user
+        + ' (email = $1 AND password = $2)',
+        [email, password]
     ).then(function(data) {
+        req.session.user = data;
         res.json({ _status: 0, _data: data });
     }).catch(function(error) {
-        res.json({ _status: -1, _message: null, _error: error});
+        res.json({ _status: -1, _message: null, _error: error });
     });
 };
 
@@ -46,6 +53,11 @@ usersController.create = function(req, res) {
         return;
     }
 
+    let user = req.body.user;
+    user.password = crypto.createHash('sha256')
+                          .update(user.password)
+                          .digest('hex');
+
     database.none(
         'INSERT INTO users'
         + '(id, email, username, firstname, lastname, password, created)'
@@ -59,11 +71,11 @@ usersController.create = function(req, res) {
         + ' $[password] AS password,'
         + ' CURRENT_TIMESTAMP as created'
         + ' FROM users',
-        req.body.user
+        user
     ).then(function() {
         res.json({ _status: 0, _data: null });
     }).catch(function(error) {
-        res.json({ _status: -1, _message: null, _error: error});
+        res.json({ _status: -1, _message: null, _error: error });
     });
 };
 
@@ -82,7 +94,7 @@ usersController.show = function(req, res) {
     ).then(function(data) {
         res.json({ _status: 0, _data: data });
     }).catch(function(error) {
-        res.json({ _status: -1, _message: null, _error: error});
+        res.json({ _status: -1, _message: null, _error: error });
     });
 };
 

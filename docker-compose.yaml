@@ -34,10 +34,5 @@ services:
     ports:
       - 3000:3000
     working_dir: /client
-    stdin_open: true                    # prevent react app from exiting
+    stdin_open: true
     command: bash -c "npm run start"
-
-## PostgreSQL command line
-# docker-compose up --detach database
-# docker-compose exec database psql --dbname=database --username=user
-# docker-compose down
