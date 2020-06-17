@@ -18,6 +18,7 @@ app.use(cookieParser());
 /* Authentication Middleware (before routes) */
 app.use(session({
     store: new (require('connect-pg-simple')(session))(),
+    saveUninitialized: false,
     secret: 'session_secret',
     resave: false
 }));
@@ -32,12 +33,6 @@ app.use(function(req, res, next) {
         res.json({ _status: -1, _message: "acess denied", _error: null });
     }
 });
-
-const crypto = require('crypto');
-
-function encrypt(password) {
-    return (crypto.createHash('sha256').update(password).digest('hex'));
-}
 
 /* ----------------------------------------- */
 

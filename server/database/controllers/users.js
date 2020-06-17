@@ -16,7 +16,10 @@ usersController.index = function(req, res) {
 
 usersController.login = function(req, res) {
 
-    if (req.body === undefined || req.body.user === undefined ) {
+    if (req.body === undefined
+        || req.body.user === undefined
+        || req.body.user.password === undefined)
+    {
         res.json({
              _status: -1,
             _message: 'missing user information',
@@ -44,7 +47,10 @@ usersController.login = function(req, res) {
 
 usersController.create = function(req, res) {
 
-    if (req.body === undefined || req.body.user === undefined ) {
+    if (req.body === undefined
+        || req.body.user === undefined
+        || req.body.user.password === undefined)
+    {
         res.json({
              _status: -1,
             _message: 'missing user information',
