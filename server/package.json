@@ -12,7 +12,8 @@
     "express": "~4.16.1",
     "express-session": "1.17.1",
     "morgan": "~1.9.1",
-    "pg-promise": "10.5.6"
+    "pg-promise": "10.5.6",
+    "nodemailer": "6.4.10"
   },
   "devDependencies": {
     "nodemon": "2.0.4"
