@@ -4,17 +4,27 @@ import { withRouter } from 'react-router-dom';
 import './ForgotUsername.css'
 
 class ForgotUsername extends Component {
-	componentDidMount() {
+    state = {
+        input: ""
+    }
+
+    componentDidMount() {
 		if (this.props.readPage() !== 'ForgotUsername')
 			this.props.setPage('ForgotUsername');
-	}
+    }
+
+    onChange(e){
+        this.setState({
+            input: e.target.value})
+    }
 
 	handleSubmit(event) {
 		event.preventDefault();
-
-		// il faudra ici faire un petit chargement pour etre sur que la demande a ete
-		// recu par le serveur avant d'aller sur la prochaine page
-
+        const xhr = new XMLHttpRequest();
+		xhr.open('post', '/forget/username', true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onload = () => {if(xhr.responseText) {alert(xhr.responseText)}}
+        xhr.send( JSON.stringify({email: this.state.input}));
 		this.props.history.push('/forgotUsernameSend');
 	}
 
@@ -24,7 +34,7 @@ class ForgotUsername extends Component {
 				<h2 className='forgot-username-title'>forgot username</h2>
 				<p>Please enter your account email so we can send you your username.</p>
 				<form onSubmit={this.handleSubmit.bind(this)} className='forgot-username-form'>
-					<input className='form-input' type='email' placeholder='email' required />
+					<input className='form-input' type='email' placeholder='email' value={this.state.input} onChange={(e) => this.onChange(e)} required />
 					<input className='form-input auth-submit' type='submit' value='send' />
 				</form>
 			</div>

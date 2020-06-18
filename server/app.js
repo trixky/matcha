@@ -28,7 +28,8 @@ app.use(function(req, res, next) {
     if (req.session.user
         || req.originalUrl === '/users/login'
         || req.originalUrl === '/users/create'
-        || req.originalUrl === '/forget/password')
+        || req.originalUrl === '/forget/password'
+        || req.originalUrl === '/forget/username')
     {
         next();
     } else {

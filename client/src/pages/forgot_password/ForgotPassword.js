@@ -27,7 +27,7 @@ class ForgotPasswordSend extends Component {
         // il faudra ici faire un petit chargement pour etre sur que la demande a ete
         // recu par le serveur avant d'aller sur la prochaine page
         // le onload doit s'occuper de verifier la reponse 
-        xhr.onload = () => console.log(xhr.responseText);
+        xhr.onload = () => {if(xhr.responseText) {alert(xhr.responseText)}}
         xhr.send( JSON.stringify({email: this.state.input}));
 		
 
