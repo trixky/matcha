@@ -33,23 +33,18 @@ router.post('/password', function(req, res, next) {
 
     if (isValidEmail(email))
         userDB.findOneUserIdByEmail(email)
-        //findOneUserId(email)
         .then(data =>{
             if (!data)
                 return res.send("No user with this email adresse")
             else
                 res.end();
-            
-            const id =  data.row.substr(1, data.row.length - 2).split(",")[0];
-
+            const id =  data.id;
             const newPass = "_" + Math.random().toString(36).substr(2, 9);
             const newPassHash = crypto.createHash('sha256')
                             .update(newPass)
                             .digest('hex');
-
             sendmail(email, newPassMessage(newPass));
             userDB.updateOnePasswordById(id, newPassHash)
-            //updateOne(id, newPassHash)
         })
     else
         res.send("Not a valid email adresse");
@@ -66,8 +61,7 @@ router.post('/username', function(req, res, next) {
                 return res.send("No user with this email adresse")
             else
                 res.end();
-            
-            const username = data.row.substr(1, data.row.length - 2).split(",")[1];
+            const username = data.username;
             sendmail(email, usernameMessage(username));
         })
     else
