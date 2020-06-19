@@ -2,8 +2,17 @@ const database = require('../database');
 const _string = require('../../lib/_string');
 const crypto = require('crypto');
 const sendMail = require("../../Model/sendmail")
-
+const ent = require("ent")
 let usersController = {};
+
+//to prevent xss
+function encodeUserData(user){
+    user.email = ent.encode(user.email);
+    user.username = ent.encode(user.username);
+    user.firstname = ent.encode(user.firstname);
+    user.lastname = ent.encode(user.lastname);
+    return user;
+}
 
 function errorResponse(res,  message)
 {
@@ -41,7 +50,10 @@ usersController.login = function(req, res) {
         [email, password]
     ).then(function(data) {
         if (data.verified)
+        {
+            sendMail.confirmMail(data.email, data.verified)
             return errorResponse(res, 'Your account was not valided, a new email will be send to you')
+        }
         req.session.user = data;
         res.json({ _status: 0, _data: data });
     }).catch(function(error) {
@@ -57,6 +69,7 @@ usersController.create = function(req, res) {
     return errorResponse(res, 'missing user information')
 
     let user = req.body.user;
+    user = encodeUserData(user);
     user.verified =  crypto.createHash('sha256').digest("hex");
     user.password = crypto.createHash('sha256')
                           .update(user.password)
