@@ -22,6 +22,8 @@ database.none(
     + ', '
     + 'password CHAR(64) NOT NULL'
     + ', '
+    + 'verified CHAR(64)'
+    + ', '
     + 'created TIMESTAMP NOT NULL'
     + ', '
     + 'modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP'

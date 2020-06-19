@@ -31,11 +31,21 @@ router.post('/password', function(req, res, next) {
     
     const email = req.body.email;
 
+    if (!email)
+        res.json({
+            _status: -1,
+            _message: "No email gived"
+        })
     if (isValidEmail(email))
         userDB.findOneUserIdByEmail(email)
         .then(data =>{
+            console.log(data)
             if (!data)
-                return res.send("No user with this email adresse")
+                return res.json
+                    ({
+                        _status: -1,
+                        _message: "No user with this email adresse"
+                    })
             else
                 res.end();
             const id =  data.id;
@@ -47,25 +57,42 @@ router.post('/password', function(req, res, next) {
             userDB.updateOnePasswordById(id, newPassHash)
         })
     else
-        res.send("Not a valid email adresse");
+        return res.json(
+        {
+            _status: -1,
+            _message: "Not a valid email adresse"
+        })
 });
 
 router.post('/username', function(req, res, next) {
     
     const email = req.body.email;
-
+    
+    if (!email)
+        res.json({
+            _status: -1,
+            _message: "No email gived"
+        })
     if (isValidEmail(email))
         userDB.findOneUserIdByEmail(email)
         .then(data =>{
             if (!data)
-                return res.send("No user with this email adresse")
+                return res.json
+                ({
+                    _status: -1,
+                    _message: "No user with this email adresse"
+                })
             else
                 res.end();
             const username = data.username;
             sendmail(email, usernameMessage(username));
         })
     else
-        res.send("Not a valid email adresse");
+        return res.json(
+        {
+            _status: -1,
+            _message: "Not a valid email adresse"
+        })
 });
 
 module.exports = router;
