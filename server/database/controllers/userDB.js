@@ -17,16 +17,26 @@ userDB.updateOnePasswordById = async (id, password) => {
 }
 
 userDB.updateUser = async (newData) => {
+    data = [
+        newData.email,
+        newData.username,
+        newData.firstname,
+        newData.lastname,
+        newData.password,
+        newData.verified,
+        newData.id
+    ]
     return  db.none(`UPDATE users 
-                    SET 
-                        email = '${newData.email}',
-                        username = '${newData.username}',
-                        firstname = '${newData.firstname}',
-                        lastname = '${newData.lastname}',
-                        password = '${newData.password}',
-                        verified = '${newData.verified}'
-                    WHERE ID = ${newData.id};`
-            )
+                SET 
+                    email = $1,
+                    username = $2,
+                    firstname = $3,
+                    lastname = $4,
+                    password = $5,
+                    verified = $6
+                WHERE ID = $7`,
+                data
+        )
     .catch(err => null)
 }
 
