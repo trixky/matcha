@@ -16,4 +16,18 @@ userDB.updateOnePasswordById = async (id, password) => {
     .catch(err => null)
 }
 
+userDB.updateUser = async (newData) => {
+    return  db.none(`UPDATE users 
+                    SET 
+                        email = '${newData.email}',
+                        username = '${newData.username}',
+                        firstname = '${newData.firstname}',
+                        lastname = '${newData.lastname}',
+                        password = '${newData.password}',
+                        verified = '${newData.verified}'
+                    WHERE ID = ${newData.id};`
+            )
+    .catch(err => null)
+}
+
 module.exports = userDB;

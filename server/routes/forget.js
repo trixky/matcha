@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const crypto = require('crypto');
-const sendmail = require("../Model/sendmail")
+const sendMail = require("../Model/sendmail")
 const userDB = require("../database/controllers/userDB")
 
 function isValidEmail(email) {
@@ -9,22 +9,12 @@ function isValidEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
-// the message that we send by mail to the user 
-function newPassMessage(newPassword){
-    
-    return `You have request a new password for your matcha account <br/><br/>
-     The new password is : ${newPassword} <br/><br/>
-     <a href="http://localhost:3000">Matcha<a/> <br/>
-     All the team of Matcha thank you for using our service. <br/>
-     This email is automatic, don't reply to it.`
-}
-
-function usernameMessage(username){
-    return `You have request the username for your matcha account <br/><br/>
-     Your username is : ${username} <br/><br/>
-     <a href="http://localhost:3000">Matcha<a/> <br/>
-     All the team of Matcha thank you for using our service. <br/>
-     This email is automatic, don't reply to it.`
+function errorResponse(res,  message)
+{
+    return res.json({
+        _status: -1,
+        _message: message 
+    })
 }
 
 router.post('/password', function(req, res, next) {
@@ -32,20 +22,12 @@ router.post('/password', function(req, res, next) {
     const email = req.body.email;
 
     if (!email)
-        res.json({
-            _status: -1,
-            _message: "No email gived"
-        })
+        return errorResponse(res, "No email gived");
     if (isValidEmail(email))
         userDB.findOneUserIdByEmail(email)
         .then(data =>{
-            console.log(data)
             if (!data)
-                return res.json
-                    ({
-                        _status: -1,
-                        _message: "No user with this email adresse"
-                    })
+                return errorResponse(res, "No user with this email adresse");
             else
                 res.end();
             const id =  data.id;
@@ -53,15 +35,11 @@ router.post('/password', function(req, res, next) {
             const newPassHash = crypto.createHash('sha256')
                             .update(newPass)
                             .digest('hex');
-            sendmail(email, newPassMessage(newPass));
+            sendMail.sendNewPassword(email, newPass);
             userDB.updateOnePasswordById(id, newPassHash)
         })
     else
-        return res.json(
-        {
-            _status: -1,
-            _message: "Not a valid email adresse"
-        })
+        return errorResponse(res, "Not a valid email adresse");
 });
 
 router.post('/username', function(req, res, next) {
@@ -69,30 +47,19 @@ router.post('/username', function(req, res, next) {
     const email = req.body.email;
     
     if (!email)
-        res.json({
-            _status: -1,
-            _message: "No email gived"
-        })
+        return errorResponse(res, "No email gived");
     if (isValidEmail(email))
         userDB.findOneUserIdByEmail(email)
         .then(data =>{
             if (!data)
-                return res.json
-                ({
-                    _status: -1,
-                    _message: "No user with this email adresse"
-                })
+                return errorResponse(res, "No user with this email adresse");
             else
                 res.end();
             const username = data.username;
-            sendmail(email, usernameMessage(username));
+            sendMail.sendUsername(email, username);
         })
     else
-        return res.json(
-        {
-            _status: -1,
-            _message: "Not a valid email adresse"
-        })
+        return errorResponse(res, "Not a valid email adresse");
 });
 
 module.exports = router;

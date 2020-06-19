@@ -6,6 +6,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var forgetRouter = require("./routes/forget")
+var verifiedRouter = require("./routes/verified")
 
 var session = require('express-session');
 
@@ -25,11 +26,13 @@ app.use(session({
 }));
 
 app.use(function(req, res, next) {
+
     if (req.session.user
         || req.originalUrl === '/users/login'
         || req.originalUrl === '/users/create'
         || req.originalUrl === '/forget/password'
-        || req.originalUrl === '/forget/username')
+        || req.originalUrl === '/forget/username'
+        || req.originalUrl.includes('/verified'))
     {
         next();
     } else {
@@ -42,5 +45,6 @@ app.use(function(req, res, next) {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/forget", forgetRouter);
+app.use("/verified", verifiedRouter)
 
 module.exports = app;
