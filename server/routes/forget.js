@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const db = require("../database/database")
 const nodemailer = require("nodemailer")
+const crypto = require('crypto');
 
 var transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -73,10 +74,16 @@ router.post('/password', function(req, res, next) {
                 return res.send("No user with this email adresse")
             else
                 res.end();
+            
             const id =  data.row.substr(1, data.row.length - 2).split(",")[0];
+
             const newPass = "_" + Math.random().toString(36).substr(2, 9);
+            const newPassHash = crypto.createHash('sha256')
+                            .update(newPass)
+                            .digest('hex');
+
             sendmail(email, newPassMessage(newPass));
-            updateOne(id, newPass)
+            updateOne(id, newPassHash)
         })
     else
         res.send("Not a valid email adresse");
