@@ -1,17 +1,20 @@
 var express = require('express');
-var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const path = require("path")
+const cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var forgetRouter = require("./routes/forget")
 var verifiedRouter = require("./routes/verified")
+var testRouter = require("./routes/test")
 
 var session = require('express-session');
 
 var app = express();
 
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,6 +35,7 @@ app.use(function(req, res, next) {
         || req.originalUrl === '/users/create'
         || req.originalUrl === '/forget/password'
         || req.originalUrl === '/forget/username'
+        || req.originalUrl.includes('/test')
         || req.originalUrl.includes('/verified'))
     {
         next();
@@ -42,9 +46,13 @@ app.use(function(req, res, next) {
 
 /* ----------------------------------------- */
 
+
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/forget", forgetRouter);
 app.use("/verified", verifiedRouter)
+app.use("/test", testRouter)
 
 module.exports = app;

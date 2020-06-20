@@ -8,6 +8,19 @@ function _exit(value){
 }
 
 database.none(
+    'CREATE TABLE messages'
+    + '('
+    + 'personID INTEGER[]'
+    + ', '
+    + 'sender VARCHAR(31)'
+    + ', '
+    + 'message VARCHAR(300)'
+    + ','
+    + 'created TIMESTAMP NOT NULL'
+    + ')'
+)
+
+database.none(
     'CREATE TABLE users'
     + '('
     + 'id INTEGER NOT NULL PRIMARY KEY'
@@ -22,6 +35,31 @@ database.none(
     + ', '
     + 'password CHAR(64) NOT NULL'
     + ', '
+    + 'gender CHAR(1)'
+    + ', '
+    + 'sexualPref CHAR(1)'
+    + ', '
+    + 'biography VARCHAR(500)'
+    + ', '
+    + 'tag TEXT[]'
+    + ', '
+    + 'picture TEXT[]'
+    + ', '
+    // people that you like
+    + 'haveLiked INTEGER[]'
+    + ', '
+    // people that liek you 
+    + 'beenLiked INTEGER[]'
+    + ', '
+    // people that look at you
+    + 'looked INTEGER[]'
+    + ', '
+    + 'fame INTEGER DEFAULT 60'
+    + ', '
+    + 'latitude NUMERIC'
+    + ', '
+    + 'longitude NUMERIC'
+    + ', '
     + 'verified CHAR(64)'
     + ', '
     + 'created TIMESTAMP NOT NULL'
@@ -29,3 +67,4 @@ database.none(
     + 'modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP'
     + ')'
 ).then(_exit).catch(_exit);
+
