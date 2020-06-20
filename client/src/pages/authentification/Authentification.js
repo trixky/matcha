@@ -19,39 +19,48 @@ class Authentification extends Component {
 
 
 	log() {
-        console.log(this.xhr.responseText);
+		console.log(this.xhr.responseText);
 	}
 
 	handleCreate(event) {
-		const formData = new FormData(event.target);
 		event.preventDefault();
 
-		let create =  { user: {} };
-		formData.forEach(function(value, key) {
+		const formData = new FormData(event.target);
+
+		let create = { user: {} };
+		formData.forEach(function (value, key) {
 			create.user[key] = value;
 		});
 
-		this.xhr = new XMLHttpRequest();
-		this.xhr.open('post', '/users/create', true);
-		this.xhr.setRequestHeader("Content-Type", "application/json");
-        this.xhr.onload = this.log;
-        this.xhr.send(JSON.stringify(create));
+		const requestOptions = {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(create)
+		};
+		
+		fetch('/users/create', requestOptions)
+			.then(response => response.json())
+			.then(data => { console.log(data) });
 	}
 
 	handleLogin(event) {
-		const formData = new FormData(event.target);
 		event.preventDefault();
 
-		let login =  { user: {} };
-		formData.forEach(function(value, key) {
+		const formData = new FormData(event.target);
+		let login = { user: {} };
+		formData.forEach(function (value, key) {
 			login.user[key] = value;
 		});
 
-		this.xhr = new XMLHttpRequest();
-		this.xhr.open('post', '/users/login', true);
-		this.xhr.setRequestHeader("Content-Type", "application/json");
-		this.xhr.onload = this.log;
-        this.xhr.send(JSON.stringify(login));
+		const requestOptions = {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(login)
+		};
+		
+		fetch('/users/login', requestOptions)
+			.then(response => response.json())
+			.then(data => { console.log(data) });
 	}
 
 	render() {
@@ -65,7 +74,7 @@ class Authentification extends Component {
 						<input className='form-input' name="firstname" type='text' placeholder='name' required />
 						<input className='form-input' name="lastname" type='text' placeholder='first name' required />
 						<input className='form-input' name="password" type='password' placeholder='password' autoComplete='on' required />
-						<input className='form-input auth-submit' type='submit' value='register'/>
+						<input className='form-input auth-submit' type='submit' value='register' />
 					</form>
 				</div>
 				<div className='login-container' onSubmit={this.handleLogin}>
