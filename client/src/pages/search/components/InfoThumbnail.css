@@ -1,0 +1,11 @@
+.info-thumbnail > p > span {
+	padding: 0 3px;
+}
+
+.info-thumbnail > p {
+	margin: 3px;
+}
+
+.it-heart-off {
+	opacity: 0.4;
+}
