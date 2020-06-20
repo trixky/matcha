@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import ProfilThumbnail from './components/ProfilThumbnail'
+
+import './Search.css'
 
 class Search extends Component {
 	componentDidMount() {
@@ -8,8 +11,17 @@ class Search extends Component {
 
 	render() {
 		return (
-			<div className='intern-page'>
-				<p>Search page</p>
+			<div className='intern-page search-container'>
+				<ProfilThumbnail />
+				<ProfilThumbnail />
+				<ProfilThumbnail />
+				<ProfilThumbnail />
+				<ProfilThumbnail />
+				<ProfilThumbnail />
+				<ProfilThumbnail />
+				<ProfilThumbnail />
+				<ProfilThumbnail />
+				<ProfilThumbnail />
 			</div>
 		);
 	}

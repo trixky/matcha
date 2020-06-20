@@ -11,9 +11,9 @@ class AccountOption extends Component {
 	render() {
 		return (
 			<div className='account-options-containers'>
-				<input className='form-input auth-submit' onClick={() => (this.handleClick('/profile/username'))}type='submit' value='show my profile'/>
-				<input className='form-input auth-submit' onClick={() => (this.handleClick('/updateProfile'))}type='submit' value='update my profile'/>
-				<input className='form-input auth-submit' onClick={() => (this.handleClick('/settings'))}type='submit' value='settings'/>
+				<input className='form-input auth-submit' onClick={() => (this.handleClick('/profile/username'))} type='submit' value='show my profile'/>
+				<input className='form-input auth-submit' onClick={() => (this.handleClick('/updateProfile'))} type='submit' value='update my profile'/>
+				<input className='form-input auth-submit' onClick={() => (this.handleClick('/settings'))} type='submit' value='settings'/>
 			</div>
 		);
 	}

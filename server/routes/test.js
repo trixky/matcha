@@ -10,7 +10,7 @@ fs.readFile(__dirname + "/picture/" + picture, (err , data) => {
     pictureData = data;
 })
 
-router.post("/", (req, res) => {
+router.get("/", (req, res) => {
     res.json({data:"ok"})
 })
 
