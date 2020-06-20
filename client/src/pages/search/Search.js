@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ProfilThumbnail from './components/ProfilThumbnail'
+import SearchCriteria from './components/SearchCriteria'
 
 import './Search.css'
 
@@ -12,16 +13,18 @@ class Search extends Component {
 	render() {
 		return (
 			<div className='intern-page search-container'>
-				<ProfilThumbnail />
-				<ProfilThumbnail />
-				<ProfilThumbnail />
-				<ProfilThumbnail />
-				<ProfilThumbnail />
-				<ProfilThumbnail />
-				<ProfilThumbnail />
-				<ProfilThumbnail />
-				<ProfilThumbnail />
-				0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c				<ProfilThumbnail />
+				<SearchCriteria />
+				<div className='search-carousel-container'>
+					<ProfilThumbnail />
+					<ProfilThumbnail />
+					<ProfilThumbnail />
+					<ProfilThumbnail />
+					<ProfilThumbnail />
+					<ProfilThumbnail />
+					<ProfilThumbnail />
+					<ProfilThumbnail />
+				</div>
+				<input className='form-input search-carousel-more-input' type='submit' value='show more profiles' />
 			</div>
 		);
 	}

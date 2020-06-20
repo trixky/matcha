@@ -7,9 +7,9 @@ class UpdateGender extends Component {
 		return (
 			<form>
 				<select className='form-input' name="gender" id="gender">
-					<option value="heterosexual">man</option>
-					<option value="homosexual">women</option>
-					<option value="bisexual">non binary</option>
+					<option value="man">man</option>
+					<option value="women">women</option>
+					<option value="non binary">non binary</option>
 				</select>
 				<input className='form-input auth-submit' type='submit' value='update my gender' />
 			</form>
