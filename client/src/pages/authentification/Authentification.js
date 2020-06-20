@@ -69,6 +69,7 @@ class Authentification extends Component {
 				<div className='register-container'>
 					<h2 className='auth-title'>register</h2>
 					<form className='auth-form' onSubmit={this.handleCreate}>
+						<p>invalid email</p>
 						<input className='form-input' name="email" type='email' placeholder='email' required />
 						<input className='form-input' name="username" type='text' placeholder='username' required />
 						<input className='form-input' name="firstname" type='text' placeholder='name' required />
