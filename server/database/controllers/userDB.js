@@ -16,6 +16,12 @@ userDB.updateOnePasswordById = async (id, password) => {
     .catch(err => null)
 }
 
+userDB.findAll = async () => {
+    return db.multi("SELECT * FROM users;")
+    .then(data => data)
+    .catch(err => null)
+}
+
 userDB.updateUser = async (newData) => {
     data = [
         newData.email,

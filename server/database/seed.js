@@ -66,26 +66,61 @@ database.none(
     + ', '
     + 'modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP'
     + ')'
-).then(_exit).catch(_exit);
+)
 
-// database.none(
-//     'INSERT INTO users'
-//     + '(id, email, username, firstname, lastname, password, verified, created)'
-//     + ' '
-//     + 'VALUES'
-//     + ' '
-//     + '('
-//     + ' COUNT(*),'
-//     + ' email@email.com,'
-//     + ' usermane,'
-//     + ' firstname,'
-//     + ' lastname,'
-//     + ' password,'
-//     + ' null,'
-//     + ' null,'
-//     + ' null,'
-//     + ' CURRENT_TIMESTAMP as created'
-//     + ' FROM users',    
-// )
-// .then(_exit).catch(_exit);
+
+database.none(
+    'INSERT INTO users'
+    + '(id, email, username, firstname, lastname, password, verified, created)'
+    + ' '
+    + 'VALUES'
+    + ' '
+    + '('
+    + " '2',"
+    + " 'email3@email.com',"
+    + " 'momota',"
+    + " 'sito',"
+    + " 'lunie',"
+    + " 'password',"
+    + " null,"
+    + " CURRENT_TIMESTAMP"
+    + ")",    
+)
+
+database.none(
+    'INSERT INTO users'
+    + '(id, email, username, firstname, lastname, password, verified, created)'
+    + ' '
+    + 'VALUES'
+    + ' '
+    + '('
+    + " '1',"
+    + " 'email2@email.com',"
+    + " 'momo',"
+    + " 'star',"
+    + " 'lune',"
+    + " 'password',"
+    + " null,"
+    + " CURRENT_TIMESTAMP"
+    + ")",    
+)
+
+
+database.none(
+    'INSERT INTO users'
+    + '(id, email, username, firstname, lastname, password, verified, created)'
+    + ' '
+    + 'VALUES'
+    + ' '
+    + '('
+    + " '0',"
+    + " 'email@email.com',"
+    + " 'usermane',"
+    + " 'firstname',"
+    + " 'lastname',"
+    + " 'password',"
+    + " null,"
+    + " CURRENT_TIMESTAMP"
+    + ")",    
+).then(_exit).catch(_exit);
 

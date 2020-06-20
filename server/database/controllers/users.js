@@ -17,6 +17,8 @@ function encodeUserData(user){
     return user;
 }
 
+// ---------------------------------------------
+
 function errorResponse(res,  message)
 {
     return res.json({
@@ -24,6 +26,8 @@ function errorResponse(res,  message)
         _data: message 
     })
 }
+
+// ---------------------------------------------
 
 usersController.index = function(req, res) {
     database.any(
@@ -34,6 +38,8 @@ usersController.index = function(req, res) {
         res.json({ _status: -1, _message: error.message });
     });
 };
+
+// ---------------------------------------------
 
 usersController.login = function(req, res) {
 
@@ -55,12 +61,14 @@ usersController.login = function(req, res) {
             sendMail.confirmMail(data.email, data.verified)
             return errorResponse(res, 'Your account was not valided, a new email will be send to you')
         }
-        req.session.user = data;
+        req.session.user = data.id;
         res.json({ _status: 0, _data: data });	
     }).catch(function(error) {
         errorResponse(res, ["Bad identifiant or password"])
     });
 };
+
+//--------------------------------------
 
 usersController.create = function(req, res) {
 
