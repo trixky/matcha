@@ -3,8 +3,10 @@ const _string = require('../../lib/_string');
 const crypto = require('crypto');
 const sendMail = require("../../Model/sendmail")
 const ent = require("ent")
+
 let usersController = {};
 const check = require("../../Model/check")
+
 
 //to prevent xss
 function encodeUserData(user){
@@ -39,12 +41,10 @@ usersController.login = function(req, res) {
         || req.body.user === undefined
         || req.body.user.password === undefined)
     return errorResponse(res, 'missing user information')
-    
     let email = req.body.user.email;
     let password = crypto.createHash('sha256')
                          .update(req.body.user.password)
                          .digest('hex');
-
     database.one(
         'SELECT * FROM users WHERE'
         + ' (email = $1 AND password = $2)',
@@ -56,9 +56,9 @@ usersController.login = function(req, res) {
             return errorResponse(res, 'Your account was not valided, a new email will be send to you')
         }
         req.session.user = data;
-        res.json({ _status: 0, _data: data });
+        res.redirect("http://localhost:3000")
     }).catch(function(error) {
-        errorResponse(res, error.message)
+        errorResponse(res, "Bad identifiant or password")
     });
 };
 

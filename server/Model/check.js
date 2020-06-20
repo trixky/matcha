@@ -1,5 +1,3 @@
-const userDB = require("../database/controllers/userDB")
-
 const check = {}
 
 function isValidEmail(email) {
@@ -14,29 +12,26 @@ const longFirstname = "Firstname to long"
 const longLastname = "Lastname to long"
 const longPassword = "Password to long"
 const passwordNotSecure = "Password not secure should be 8 caracter long with at least one digit and one letter"
-const takenEmail = "This email is already taken"
 
 check.user = (user) =>{
     var ret = []
-    if (userDB.findOneUserIdByEmail(user.email))
-        ret.push(takenEmail);
     if (!isValidEmail(user.email))
         ret.push(badEmail);
     if (user.email.length > 320)
         ret.push(longEmail);
-    if (user.username.length > 31)
+    if (user.username.length > 30)
         ret.push(longUsername)
-    if (user.firstname.length > 2)
+    if (user.firstname.length > 30)
         ret.push(longFirstname)
-    if (user.lastname.length > 2)
+    if (user.lastname.length > 30)
         ret.push(longLastname)
-    if (user.password.length > 3)
+    if (user.password.length > 30)
         ret.push(longPassword)
     if (!/\d*/.test(user.password) 
     || !/[a-z,A-Z]*/.test(user.password)
     || user.password.length < 8)
         ret.push(passwordNotSecure)
-    return ret;
+    return ret;    
 }
 
 module.exports = check;
