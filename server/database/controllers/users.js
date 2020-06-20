@@ -21,7 +21,7 @@ function errorResponse(res,  message)
 {
     return res.json({
         _status: -1,
-        _message: message 
+        _data: message 
     })
 }
 
@@ -58,7 +58,7 @@ usersController.login = function(req, res) {
         req.session.user = data;
         res.json({ _status: 0, _data: data });	
     }).catch(function(error) {
-        errorResponse(res, "Bad identifiant or password")
+        errorResponse(res, ["Bad identifiant or password"])
     });
 };
 
@@ -67,14 +67,14 @@ usersController.create = function(req, res) {
     if (req.body === undefined
         || req.body.user === undefined
         || req.body.user.password === undefined)
-    return errorResponse(res, 'missing user information')
+    return errorResponse(res, ['missing user information'])
     
     let user = req.body.user;
     
     const error = check.user(user)
-
-    if (error.length)
-        return res.json({_status: -2, data: error});
+    
+    if (Object.entries(error).length)
+        return errorResponse(res, error)
         
     user = encodeUserData(user);
     user.verified =  crypto.createHash('sha256').digest("hex");
@@ -100,7 +100,8 @@ usersController.create = function(req, res) {
     ).then(function() {
         res.json({ _status: 0, _data: null });
     }).catch(function(error) {
-        return errorResponse(res, error.message)
+        error.email = "Email already taken"
+        return errorResponse(res, error)
     });
 };
 
