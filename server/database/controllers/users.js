@@ -56,7 +56,7 @@ usersController.login = function(req, res) {
             return errorResponse(res, 'Your account was not valided, a new email will be send to you')
         }
         req.session.user = data;
-        res.redirect("http://localhost:3000")
+        res.json({ _status: 0, _data: data });	
     }).catch(function(error) {
         errorResponse(res, "Bad identifiant or password")
     });
