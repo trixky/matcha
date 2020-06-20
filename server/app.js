@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 var forgetRouter = require("./routes/forget")
 var verifiedRouter = require("./routes/verified")
 var testRouter = require("./routes/test")
+var pictureRouter = require("./routes/picture")
 
 var session = require('express-session');
 
@@ -53,6 +54,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/forget", forgetRouter);
 app.use("/verified", verifiedRouter)
-app.use("/test", testRouter)
+app.use("/test", pictureRouter)
 
 module.exports = app;

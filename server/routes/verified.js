@@ -10,7 +10,7 @@ router.get('/', (req, res) =>{
                 if (data.verified === "") {return res.redirect("http://localhost:3000/")}
                 if (data.verified === req.query.verified)
                 {
-                    data.verified = "";
+                    data.verified = null;
                     userDB.updateUser(data)
                     res.redirect("http://localhost:3000")
                 }

@@ -46,7 +46,7 @@ function usernameMessage(username){
      This email is automatic, don't reply to it.`
 }
 
-function verifiedMessage(email,verified){
+function verifiedMessage(email, verified){
     return `You have just registe to Matcha, Welcome <br/>
      Please click on this link to verified your account <br/><br/>
      <a href="http://localhost:3001/verified?email=${email}&verified=${verified}">Matcha verified<a/> <br/><br/>
