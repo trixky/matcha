@@ -3,6 +3,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const path = require("path")
 const cors = require('cors')
+var session = require('express-session');
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -11,7 +13,6 @@ var verifiedRouter = require("./routes/verified")
 var testRouter = require("./routes/test")
 var pictureRouter = require("./routes/picture")
 
-var session = require('express-session');
 
 var app = express();
 
@@ -47,13 +48,11 @@ app.use(function(req, res, next) {
 
 /* ----------------------------------------- */
 
-
-
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use("/forget", forgetRouter);
 app.use("/verified", verifiedRouter)
-app.use("/test", pictureRouter)
+app.use("/picture", pictureRouter)
+app.use("/test", testRouter)
 
 module.exports = app;

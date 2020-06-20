@@ -2,16 +2,12 @@ const fs = require("fs")
 const express =require("express")
 const router = express.Router();
 var path = require('path');
+const userdb = require("../database/controllers/userDB")
 
-var picture = "canard.jpg"
-var pictureData;
-
-fs.readFile(__dirname + "/picture/" + picture, (err , data) => {
-    pictureData = data;
-})
-
-router.get("/", (req, res) => {
-    res.json({data:"ok"})
+router.use("/", (req, res) =>{
+    userdb.findArray([0,1,2])
+    .then(data => res.send(data))
+    .catch(err => res.send("no"))
 })
 
 module.exports = router

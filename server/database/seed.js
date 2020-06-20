@@ -10,13 +10,57 @@ function _exit(value){
 database.none(
     'CREATE TABLE messages'
     + '('
-    + 'personID INTEGER[]'
+    + 'usersID INTEGER[]'
     + ', '
     + 'sender VARCHAR(31)'
     + ', '
     + 'message VARCHAR(300)'
     + ','
-    + 'created TIMESTAMP NOT NULL'
+    + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+    + ')'
+)
+
+database.none(
+    'CREATE TABLE liked'
+    + '('
+    + 'userID INTEGER'
+    + ', '
+    + 'personID INTEGER'
+    + ', '
+    + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+    + ')'
+)
+
+database.none(
+    'CREATE TABLE blocked'
+    + '('
+    + 'userID INTEGER'
+    + ', '
+    + 'personID INTEGER'
+    + ', '
+    + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+    + ')'
+)
+
+database.none(
+    'CREATE TABLE looked'
+    + '('
+    + 'userID INTEGER'
+    + ', '
+    + 'personID INTEGER'
+    + ', '
+    + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+    + ')'
+)
+
+database.none(
+    'CREATE TABLE relationship'
+    + '('
+    + 'usersID INTEGER[]'
+    + ', '
+    + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+    + ','
+    + 'update TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
 
@@ -62,12 +106,30 @@ database.none(
     + ', '
     + 'verified CHAR(64)'
     + ', '
+    + 'connected BOOLEAN DEFAULT false'
+    + ', '
     + 'created TIMESTAMP NOT NULL'
     + ', '
     + 'modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
-
+database.none(
+    'INSERT INTO users'
+    + '(id, email, username, firstname, lastname, password, verified, created)'
+    + ' '
+    + 'VALUES'
+    + ' '
+    + '('
+    + " '3',"
+    + " '42@42.com',"
+    + " '42',"
+    + " '42',"
+    + " '42',"
+    + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
+    + " null,"
+    + " CURRENT_TIMESTAMP"
+    + ")",    
+)
 
 database.none(
     'INSERT INTO users'
