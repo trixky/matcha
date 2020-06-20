@@ -23,9 +23,8 @@ class Search extends Component {
 					<ProfilThumbnail />
 					<ProfilThumbnail />
 					<ProfilThumbnail />
-					<ProfilThumbnail />
-					<ProfilThumbnail />
 				</div>
+				<input className='form-input search-carousel-more-input' type='submit' value='show more profiles' />
 			</div>
 		);
 	}

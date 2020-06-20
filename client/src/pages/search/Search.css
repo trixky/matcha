@@ -4,3 +4,11 @@
 	flex-wrap: wrap;
 	justify-content: center;
 }
+
+.search-carousel-more-input {
+	margin: 15px auto 0;
+}
+
+.search-carousel-more-input:hover {
+	cursor: pointer;
+}
