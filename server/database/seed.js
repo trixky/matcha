@@ -68,3 +68,24 @@ database.none(
     + ')'
 ).then(_exit).catch(_exit);
 
+// database.none(
+//     'INSERT INTO users'
+//     + '(id, email, username, firstname, lastname, password, verified, created)'
+//     + ' '
+//     + 'VALUES'
+//     + ' '
+//     + '('
+//     + ' COUNT(*),'
+//     + ' email@email.com,'
+//     + ' usermane,'
+//     + ' firstname,'
+//     + ' lastname,'
+//     + ' password,'
+//     + ' null,'
+//     + ' null,'
+//     + ' null,'
+//     + ' CURRENT_TIMESTAMP as created'
+//     + ' FROM users',    
+// )
+// .then(_exit).catch(_exit);
+

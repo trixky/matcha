@@ -12,7 +12,6 @@ multerupdate = multer({dest : dir})
 upload.save = multerupdate.single('image')
 
 upload.changeName = (req, res, next) => {
-    console.log(req.query)
     
     if (!req.file)
         return res.send("error")
