@@ -22,8 +22,9 @@ services:
       - ./server:/server
     ports:
       - 3001:3001
+      - 3002:3002
     working_dir: /server
-    command: bash -c "DEBUG=server:* npm run start"
+    command: bash -c "DEBUG=server:* npm run start & node serverPicture.js"
 
   client:
     image: node
