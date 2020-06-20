@@ -1,0 +1,17 @@
+.search-criteria-container {
+	margin: 0 auto 10px;
+	width: 460px;
+	padding: 10px 0;
+	background-color: var(--main-grey-1)
+}
+
+.search-criteria-container > .form-input {
+	display: inline-block;
+	margin: 5px 10px;
+}
+
+@media screen and (max-width: 500px) {
+	.search-criteria-container {
+		width: 230px;
+	}
+}
