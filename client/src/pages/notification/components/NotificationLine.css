@@ -1,0 +1,23 @@
+.notification-line {
+	padding: 5px;
+	padding-right: 0;
+	border-radius: 2px;
+	background-color: var(--main-grey-1);
+	margin: 10px auto 0;
+	display: table;
+	transition: opacity 0.2s;
+}
+
+.notification-line:hover {
+	opacity: 0.6;
+	cursor: pointer;
+}
+
+.notification-line > p {
+	margin: 0;
+}
+.notification-time {
+	padding: 5px;
+	border-radius: 5px;
+	background-color: var(--main-grey-2);
+}
