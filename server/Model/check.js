@@ -7,9 +7,9 @@ function isValidEmail(email) {
 
 
 const badEmail = "This is not a valid email or it to long it should be max 50 character"
-const longUsername = "Username to long < 30 character"
-const longFirstname = "Firstname to long < 30 character"
-const longLastname = "Lastname to long < 30 character"
+const longUsername = "Username have to be between 1 to 30 character"
+const longFirstname = "Firstname have to be between 1 to 30 character"
+const longLastname = "Name have to be between 1 to 30 character"
 const badPassword = "Password not secure, between 8 to 30 character with at least one digit and one letter"
 
 // !!! have to change the value later 
@@ -20,11 +20,11 @@ check.user = (user) =>{
     
     if (!isValidEmail(user.email) || user.email.length > 50)
         ret.email = badEmail;
-    if (user.username.length > 2)
+    if (user.username.length > 2 || user.username.length === 0)
         ret.username = longUsername
-    if (user.firstname.length > 2)
+    if (user.firstname.length > 2 || user.firstname.length === 0)
         ret.firstname = longFirstname
-    if (user.lastname.length > 2)
+    if (user.lastname.length > 2 || user.lastname.length === 0)
         ret.name = longLastname
     if (!/\d*/.test(user.password) 
     || !/[a-z,A-Z]*/.test(user.password)
