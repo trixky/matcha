@@ -7,10 +7,17 @@
 
 .state-line {
 	display: block;
-	margin-top: 6px; 
+	margin-top: 6px;
 }
 
-.state-type:hover {
+.state-type {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+.state-type.state-link:hover {
 	text-decoration: underline;
 }
 
