@@ -9,6 +9,10 @@ class Authentification extends Component {
 		super(props);
 
 		this.state = {
+			identical_password: {
+				password: '',
+				confirmation_password: ''
+			},
 			invalid_input_register: {
 				email: {
 					status: 'off',
@@ -49,6 +53,10 @@ class Authentification extends Component {
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.handleCreate = this.handleCreate.bind(this);
 		this.handleLogin = this.handleLogin.bind(this);
+		this.handlePasswordChanged = this.handlePasswordChanged.bind(this);
+		this.handleConfirmationPasswordChanged = this.handleConfirmationPasswordChanged.bind(this);
+		this.identical_password_check_on = this.identical_password_check_on.bind(this);
+		this.identical_password_check_off = this.identical_password_check_off.bind(this);
 	}
 
 	componentDidMount() {
@@ -73,27 +81,29 @@ class Authentification extends Component {
 			body: JSON.stringify(create)
 		};
 
-		fetch('/users/create', requestOptions)
-			.then(response => response.json())
-			.then(data => {
-				console.log(data._data)
+		if (this.identical_password_check_on() === false) {
+			fetch('/users/create', requestOptions)
+				.then(response => response.json())
+				.then(data => {
+					console.log(data._data)
 
-				let invalid_input_register = Object.assign(_this.state.invalid_input_register)
+					let invalid_input_register = Object.assign(_this.state.invalid_input_register)
 
-				Object.keys(invalid_input_register).forEach(key => {
-					invalid_input_register[key].status = 'off';
-					invalid_input_register[key].message = '';
-				})
-				if (data._status === -1) {
-					Object.keys(data._data).forEach(key => {
-						if (key !== '_status') {
-							invalid_input_register[key].status = 'on';
-							invalid_input_register[key].message = data._data[key];
-						}
+					Object.keys(invalid_input_register).forEach(key => {
+						invalid_input_register[key].status = 'off';
+						invalid_input_register[key].message = '';
 					})
-				}
-				_this.setState({ invalid_input_register })
-			});
+					if (data._status === -1) {
+						Object.keys(data._data).forEach(key => {
+							if (key !== '_status') {
+								invalid_input_register[key].status = 'on';
+								invalid_input_register[key].message = data._data[key];
+							}
+						})
+					}
+					_this.setState({ invalid_input_register })
+				});
+		}
 	}
 
 	handleLogin(event) {
@@ -118,6 +128,44 @@ class Authentification extends Component {
 			});
 	}
 
+	handlePasswordChanged(event) {
+		let identical_password = Object.assign(this.state.identical_password);
+		identical_password.password = event.currentTarget.value;
+		this.setState({ identical_password })
+		console.log(this.state.identical_password)
+	}
+
+	handleConfirmationPasswordChanged(event) {
+		let identical_password = Object.assign(this.state.identical_password);
+		identical_password.confirmation_password = event.currentTarget.value;
+		this.setState({ identical_password })
+		this.identical_password_check_off()
+		console.log(this.state.identical_password)
+	}
+
+	identical_password_check_on() {
+		let ret = false;
+		const identical_password = this.state.identical_password
+		let invalid_input_register = Object.assign(this.state.invalid_input_register)
+		if (identical_password.password !== identical_password.confirmation_password) {
+			invalid_input_register.confirmation_password.status = 'on';
+			invalid_input_register.confirmation_password.message = 'the confirmation password must be the same as the password';
+			ret = true;
+		}
+		this.setState({ invalid_input_register })
+		return (ret);
+	}
+
+	identical_password_check_off() {
+		const identical_password = this.state.identical_password
+		let invalid_input_register = Object.assign(this.state.invalid_input_register)
+		if (identical_password.password === identical_password.confirmation_password) {
+			invalid_input_register.confirmation_password.status = 'off';
+			invalid_input_register.confirmation_password.message = '';
+		}
+		this.setState({ invalid_input_register })
+	}
+
 	render() {
 		return (
 			<div className='intern-page auth-container'>
@@ -137,10 +185,10 @@ class Authentification extends Component {
 						<input className='form-input' name="firstname" type='text' placeholder='first name' required />
 
 						<p className={`error-input password ${this.state.invalid_input_register.password.status}`}>Invalid password:<br /><span>{this.state.invalid_input_register.password.message}</span></p>
-						<input className='form-input' name="password" type='password' placeholder='password' autoComplete='on' required />
+						<input className='form-input' name="password" type='password' placeholder='password' autoComplete='on' onChange={this.handlePasswordChanged} required />
 
 						<p className={`error-input confirmation-password ${this.state.invalid_input_register.confirmation_password.status}`}>Invalid confirmation password :<br /><span>{this.state.invalid_input_register.confirmation_password.message}</span></p>
-						<input className='form-input' name="confirmation password" type='password' placeholder='confirmation password' autoComplete='on' required />
+						<input className='form-input' name="confirmation password" type='password' placeholder='confirmation password' autoComplete='on' onChange={this.handleConfirmationPasswordChanged} required />
 						<input className='form-input auth-submit' type='submit' value='register' />
 					</form>
 				</div>
