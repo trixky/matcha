@@ -1,3 +1,11 @@
+p::selection,
+p > a::selection,
+h1::selection,
+h2::selection,
+select option:checked {
+	background-color: var(--main-pink-1);
+}
+
 h1 {
 	margin: 0;
 }

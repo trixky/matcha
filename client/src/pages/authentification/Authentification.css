@@ -28,7 +28,7 @@
 	margin-top: 13px;
 }
 
-.forgot-identifiers{
+.forgot-identifiers {
 	margin-top: 9px;
 	max-width: 100px;
 	font-size: 13.3333px;
@@ -48,6 +48,29 @@
 	display: none;
 }
 
+.form-validation-message {
+	margin: 0 0 5px;
+	color: green;
+	font-size: 13.3333px;
+	text-align: left;
+	width: 200px;
+}
+
+.form-validation-message.off {
+	display: none;
+}
+
+.auth-form.on > input {
+	pointer-events: none;
+	opacity: 0.4;
+}
+
+.auth-form.on > input[type=email],
+.auth-form.on > input[type=text],
+.auth-form.on > input[type=password] {
+	text-decoration: line-through;
+}
+
 @media screen and (max-width: 450px) {
 	.auth-container {
 		display: flex;
@@ -55,18 +78,15 @@
 		justify-content: center;
 		align-items: center;
 	}
-	
 	.register-container {
 		width: 250px;
 		margin-top: 15px;
 		border-top: solid 2px var(--main-grey-1);
 		border-right: none;
 	}
-
 	.login-container {
 		width: 250px;
 	}
-
 	.forgot-identifiers {
 		display: block;
 		margin-left: auto;
