@@ -4,22 +4,38 @@ import { Link } from "react-router-dom";
 import './Authentification.css'
 
 class Authentification extends Component {
-
-	constructor(props) {
-		super(props);
-		this.handleCreate = this.handleCreate.bind(this);
-		this.handleLogin = this.handleLogin.bind(this);
-		this.log = this.log.bind(this);
+	state = {
+		invalid_input_register: {
+			email: {
+				status: 'off',
+				message: ''
+			},
+			username: {
+				status: 'off',
+				message: ''
+			},
+			name: {
+				status: 'off',
+				message: ''
+			},
+			first_name: {
+				status: 'off',
+				message: ''
+			},
+			password: {
+				status: 'off',
+				message: ''
+			},
+			confirmation_password: {
+				status: 'off',
+				message: ''
+			}
+		}
 	}
 
 	componentDidMount() {
 		if (this.props.readPage() !== 'Authentification')
 			this.props.setPage('Authentification');
-	}
-
-
-	log() {
-		console.log(this.xhr.responseText);
 	}
 
 	handleCreate(event) {
@@ -40,7 +56,9 @@ class Authentification extends Component {
 		
 		fetch('/users/create', requestOptions)
 			.then(response => response.json())
-			.then(data => { console.log(data) });
+			.then(data => {
+				console.log(data._data)
+			});
 	}
 
 	handleLogin(event) {
@@ -69,12 +87,18 @@ class Authentification extends Component {
 				<div className='register-container'>
 					<h2 className='auth-title'>register</h2>
 					<form className='auth-form' onSubmit={this.handleCreate}>
-						<p>invalid email</p>
+						<p className='error-input email off'>Invalid email:<br /><span>error message</span></p>
 						<input className='form-input' name="email" type='email' placeholder='email' required />
+						<p className='error-input username off'>Invalid username:<br /><span>error message</span></p>
 						<input className='form-input' name="username" type='text' placeholder='username' required />
+						<p className='error-input name off'>Invalid name:<br /><span>error message</span></p>
 						<input className='form-input' name="firstname" type='text' placeholder='name' required />
+						<p className='error-input lastname off'>Invalid lastname:<br /><span>error message</span></p>
 						<input className='form-input' name="lastname" type='text' placeholder='first name' required />
+						<p className='error-input password off'>Invalid password:<br /><span>error message</span></p>
 						<input className='form-input' name="password" type='password' placeholder='password' autoComplete='on' required />
+						<p className='error-input confirmation-password off'>Invalid confirmation password :<br /><span>error message</span></p>
+						<input className='form-input' name="confirmation password" type='password' placeholder='confirmation password' autoComplete='on' required />
 						<input className='form-input auth-submit' type='submit' value='register' />
 					</form>
 				</div>

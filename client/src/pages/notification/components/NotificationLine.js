@@ -36,6 +36,9 @@ class NotificationLine extends Component {
 				this.emoji = '👁️'
 				this.message = 'saw your profile'
 				break;
+			default:
+				break;
+
 		}
 		return (
 			<div className='notification-line'>
