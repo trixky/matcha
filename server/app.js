@@ -4,7 +4,7 @@ var logger = require('morgan');
 const path = require("path")
 const cors = require('cors')
 var session = require('express-session');
-
+const reponse = require("./Model/reponse")
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -42,7 +42,7 @@ app.use(function(req, res, next) {
     {
         next();
     } else {
-        errorResponse(res, {error: "Acces denied"});
+       reponse.errorResponse(res, {error: "Acces denied"});
     }
 });
 
@@ -53,15 +53,8 @@ app.use('/users', usersRouter);
 app.use("/forget", forgetRouter);
 app.use("/verified", verifiedRouter)
 app.use("/picture", pictureRouter)
-app.use("/test", testRouter)
 app.use("/account", accountRouter)
 
+app.use("/test", testRouter)
 
-function errorResponse(res,  data)
-{
-    return res.json({
-        _status: -1,
-        _data: data
-    })
-}
 module.exports = app;

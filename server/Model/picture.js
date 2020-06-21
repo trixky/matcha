@@ -1,23 +1,31 @@
 const fs = require("fs")
-const path = require("path")
 const multer = require("multer")
+const userDB = require("../database/controllers/userDB")
+const reponse = require("../Model/reponse")
 
-const upload = {}
+const picture = {}
 
 const dir = __dirname.split("/Model")[0] + "/public"
 
-
 multerupdate = multer({dest : dir})
 
-upload.save = multerupdate.single('image')
+picture.save = multerupdate.single('image')
 
-upload.changeName = (req, res, next) => {
-    
+picture.changeName = (req, res, next) => {
+    var filename = req.file.originalname
+
     if (!req.file)
-        return res.send("error")
-    fs.rename(req.file.path, dir + "/" + req.file.originalname , () => {
-        res.send("ok")
+        return reponse.errorResponse(res, {picture : "Error upload picture"})
+    fs.rename(req.file.path, dir + "/" + filename , () => {
+        userDB.updatePicture(0, filename)
+        .then(data => {
+            if (data)
+                reponse.Response(res, {picture :"Picture have been upload"});
+            else
+                reponse.errorResponse(res, {picture : "Already 5 picture"})
+        })
+        .catch(err => reponse.errorResponse(res, {picture : "Error upload picture"}))
     })
 }
 
-module.exports = upload
+module.exports = picture

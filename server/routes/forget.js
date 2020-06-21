@@ -9,27 +9,19 @@ function isValidEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
-function errorResponse(res,  message)
-{
-    return res.json({
-        _status: -1,
-        _message: message 
-    })
-}
-
 router.post('/password', function(req, res, next) {
     
     const email = req.body.email;
 
     if (!email)
-        return errorResponse(res, "No email gived");
+        return errorResponse(res, {email :"No email gived"});
     if (isValidEmail(email))
         userDB.findOneUserByEmail(email)
         .then(data =>{
             if (!data)
-                return errorResponse(res, "No user with this email adresse");
+                return errorResponse(res, {email: "No user with this email adresse"});
             else
-                res.end();
+                Response(res, "");
             const id =  data.id;
             const newPass = "_" + Math.random().toString(36).substr(2, 9);
             const newPassHash = crypto.createHash('sha256')
@@ -39,7 +31,7 @@ router.post('/password', function(req, res, next) {
             userDB.updateOnePasswordById(id, newPassHash)
         })
     else
-        return errorResponse(res, "Not a valid email adresse");
+        return errorResponse(res, {email :"Not a valid email adresse"});
 });
 
 router.post('/username', function(req, res, next) {
@@ -47,19 +39,35 @@ router.post('/username', function(req, res, next) {
     const email = req.body.email;
     
     if (!email)
-        return errorResponse(res, "No email gived");
+        return errorResponse(res, {email :"No email gived"});
     if (isValidEmail(email))
         userDB.findOneUserByEmail(email)
         .then(data =>{
             if (!data)
-                return errorResponse(res, "No user with this email adresse");
+                return  errorResponse(res, {email: "No user with this email adresse"});
             else
-                res.end();
+                Response(res, "");
             const username = data.username;
             sendMail.sendUsername(email, username);
         })
     else
-        return errorResponse(res, "Not a valid email adresse");
+        return errorResponse(res, {email :"Not a valid email adresse"});
 });
+
+function errorResponse(res,  message)
+{
+    return res.json({
+        _status: -1,
+        _data: message 
+    })
+}
+
+function Response(res,  message)
+{
+    return res.json({
+        _status: 0,
+        _data: message 
+    })
+}
 
 module.exports = router;

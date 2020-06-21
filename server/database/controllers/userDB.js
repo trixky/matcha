@@ -51,13 +51,25 @@ userDB.findAll = async () => {
 }
 
 userDB.findArray = async (array) => {
-    const a = prepareQuery(array);
-    console.log(a)
     return db.multi(QueryMultyUser(array))
     .then(data => data)
     .catch(err => err)
 }
 
+userDB.updatePicture = async (id, pictureName) => {
+    return userDB.findOneUserById(id)
+    .then(data => {
+        if (data.picture.length >= 5)
+            return false;
+        var picture = data.picture;
+    
+        picture.push(pictureName)
+        return db.none(`UPDATE users SET picture = '{${picture}}' WHERE id = ${id};`)
+        .then(data => true)
+        .catch(err => console.log(err))
+    })
+    .catch(err => err)
+}
 
 userDB.updateUser = async (newData) => {
     data = [

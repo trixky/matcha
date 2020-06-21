@@ -1,8 +1,8 @@
 const express = require("express")
-const upload = require("../Model/picture")
+const picture = require("../Model/picture")
 
 const router = express.Router()
 
-router.use("/", upload.save, upload.changeName)
+router.use("/", picture.save, picture.changeName)
 
 module.exports = router

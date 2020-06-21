@@ -1,11 +1,12 @@
+const crypto = require('crypto');
+const ent = require("ent")
 const database = require('../database');
 const _string = require('../../lib/_string');
-const crypto = require('crypto');
 const sendMail = require("../../Model/sendmail")
-const ent = require("ent")
+const reponse = require("../../Model/reponse")
+const check = require("../../Model/check")
 
 let usersController = {};
-const check = require("../../Model/check")
 
 
 //to prevent xss
@@ -61,12 +62,12 @@ usersController.login = function(req, res) {
         if (data.verified)
         {
             sendMail.confirmMail(data.email, data.verified)
-            return errorResponse(res, 'Your account was not valided, a new email will be send to you')
+            return reponse.errorResponse(res, 'Your account was not valided, a new email will be send to you')
         }
         req.session.user = data.id;
         res.json({ _status: 0, _data: data });	
     }).catch(function(error) {
-        errorResponse(res, ["Bad identifiant or password"])
+        reponse.errorResponse(res, ["Bad identifiant or password"])
     });
 };
 
@@ -77,7 +78,7 @@ usersController.create = function(req, res) {
     if (req.body === undefined
         || req.body.user === undefined
         || req.body.user.password === undefined)
-    return errorResponse(res, ['missing user information'])
+    return reponse.errorResponse(res, ['missing user information'])
 
     let user = req.body.user;
     
@@ -86,7 +87,7 @@ usersController.create = function(req, res) {
     user = encodeUserData(user);
     
     if (Object.entries(error).length)
-        return errorResponse(res, error)
+        return reponse.errorResponse(res, error)
         
     user.verified =  crypto.createHash('sha256').digest("hex");
     user.password = crypto.createHash('sha256')
@@ -112,7 +113,7 @@ usersController.create = function(req, res) {
         res.json({ _status: 0, _data: null });
     }).catch(function() {
         error.email = "Email already taken"
-        return errorResponse(res, error)
+        return reponse.errorResponse(res, error)
     });
 };
 
