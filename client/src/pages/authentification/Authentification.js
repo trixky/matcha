@@ -4,43 +4,51 @@ import { Link } from "react-router-dom";
 import './Authentification.css'
 
 class Authentification extends Component {
-	state = {
-		invalid_input_register: {
-			email: {
-				status: 'off',
-				message: ''
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			invalid_input_register: {
+				email: {
+					status: 'off',
+					message: ''
+				},
+				username: {
+					status: 'off',
+					message: ''
+				},
+				name: {
+					status: 'off',
+					message: ''
+				},
+				firstname: {
+					status: 'off',
+					message: ''
+				},
+				password: {
+					status: 'off',
+					message: ''
+				},
+				confirmation_password: {
+					status: 'off',
+					message: ''
+				}
 			},
-			username: {
-				status: 'off',
-				message: ''
-			},
-			name: {
-				status: 'off',
-				message: ''
-			},
-			firstname: {
-				status: 'off',
-				message: ''
-			},
-			password: {
-				status: 'off',
-				message: ''
-			},
-			confirmation_password: {
-				status: 'off',
-				message: ''
+			invalid_input_login: {
+				email: {
+					status: 'off',
+					message: ''
+				},
+				password: {
+					status: 'off',
+					message: ''
+				}
 			}
-		},
-		invalid_input_login: {
-			email: {
-				status: 'off',
-				message: ''
-			},
-			password: {
-				status: 'off',
-				message: ''
-			}
-		}
+		};
+		this.componentDidMount = this.componentDidMount.bind(this);
+		this.handleCreate = this.handleCreate.bind(this);
+		this.handleLogin = this.handleLogin.bind(this);
 	}
 
 	componentDidMount() {
@@ -49,6 +57,7 @@ class Authentification extends Component {
 	}
 
 	handleCreate(event) {
+		const _this = this;
 		event.preventDefault();
 
 		const formData = new FormData(event.target);
@@ -63,11 +72,27 @@ class Authentification extends Component {
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(create)
 		};
-		
+
 		fetch('/users/create', requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data._status)
+				console.log(data._data)
+
+				let invalid_input_register = Object.assign(_this.state.invalid_input_register)
+
+				Object.keys(invalid_input_register).forEach(key => {
+					invalid_input_register[key].status = 'off';
+					invalid_input_register[key].message = '';
+				})
+				if (data._status === -1) {
+					Object.keys(data._data).forEach(key => {
+						if (key !== '_status') {
+							invalid_input_register[key].status = 'on';
+							invalid_input_register[key].message = data._data[key];
+						}
+					})
+				}
+				_this.setState({ invalid_input_register })
 			});
 	}
 
@@ -85,10 +110,12 @@ class Authentification extends Component {
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify(login)
 		};
-		
+
 		fetch('/users/login', requestOptions)
 			.then(response => response.json())
-			.then(data => { console.log(data) });
+			.then(data => {
+				console.log(data)
+			});
 	}
 
 	render() {
@@ -102,16 +129,16 @@ class Authentification extends Component {
 
 						<p className={`error-input username ${this.state.invalid_input_register.username.status}`}>Invalid username:<br /><span>{this.state.invalid_input_register.username.message}</span></p>
 						<input className='form-input' name="username" type='text' placeholder='username' required />
-						
+
 						<p className={`error-input name ${this.state.invalid_input_register.name.status}`}>Invalid name:<br /><span>{this.state.invalid_input_register.name.message}</span></p>
 						<input className='form-input' name="name" type='text' placeholder='name' required />
-						
+
 						<p className={`error-input firstname ${this.state.invalid_input_register.firstname.status}`}>Invalid firstname:<br /><span>{this.state.invalid_input_register.firstname.message}</span></p>
 						<input className='form-input' name="firstname" type='text' placeholder='first name' required />
-						
+
 						<p className={`error-input password ${this.state.invalid_input_register.password.status}`}>Invalid password:<br /><span>{this.state.invalid_input_register.password.message}</span></p>
 						<input className='form-input' name="password" type='password' placeholder='password' autoComplete='on' required />
-						
+
 						<p className={`error-input confirmation-password ${this.state.invalid_input_register.confirmation_password.status}`}>Invalid confirmation password :<br /><span>{this.state.invalid_input_register.confirmation_password.message}</span></p>
 						<input className='form-input' name="confirmation password" type='password' placeholder='confirmation password' autoComplete='on' required />
 						<input className='form-input auth-submit' type='submit' value='register' />
@@ -123,7 +150,7 @@ class Authentification extends Component {
 						<p className={`error-input email ${this.state.invalid_input_login.email.status}`}>Invalid email:<br /><span>{this.state.invalid_input_login.email.message}</span></p>
 						<input className='form-input' name="email" type='email' placeholder='email' required />
 
-						<p className={`error-input password ${this.state.invalid_input_login.password.status}`}>Invalid password:<br /><span>{this.state.invalid_input_login.password.message}</span></p>						
+						<p className={`error-input password ${this.state.invalid_input_login.password.status}`}>Invalid password:<br /><span>{this.state.invalid_input_login.password.message}</span></p>
 						<input className='form-input' name="password" type='password' placeholder='password' autoComplete='on' required />
 						<input className='form-input auth-submit' type='submit' value='login' />
 					</form>
