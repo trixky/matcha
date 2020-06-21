@@ -88,7 +88,7 @@ database.none(
     + ', '
     + 'firstname VARCHAR(255) NOT NULL'
     + ', '
-    + 'lastname VARCHAR(255) NOT NULL'
+    + 'name VARCHAR(255) NOT NULL'
     + ', '
     + 'password CHAR(64) NOT NULL'
     + ', '
@@ -103,19 +103,21 @@ database.none(
     + 'picture TEXT[]'
     + ', '
     // people that you like
-    + 'haveLiked INTEGER'
+    + 'haveLiked INTEGER DEFAULT 0'
     + ', '
     // people that liek you 
-    + 'beenLiked INTEGER'
+    + 'beenLiked INTEGER DEFAULT 0'
+    + ', '
+    + 'match INTEGER DEFAULT 0'
     + ', '
     // people that look at you
-    + 'looked INTEGER'
+    + 'looked INTEGER DEFAULT 0'
     + ', '
     + 'fame INTEGER DEFAULT 60'
     + ', '
-    + 'latitude NUMERIC'
+    + 'latitude NUMERIC DEFAULT 0'
     + ', '
-    + 'longitude NUMERIC'
+    + 'longitude NUMERIC DEFAULT 0'
     + ', '
     + 'verified CHAR(64)'
     + ', '
@@ -132,7 +134,7 @@ database.none(
     + ' email, '
     + ' username, '
     + ' firstname, '
-    + ' lastname, '
+    + ' name, '
     + ' password, '
     + ' gender,'
     + ' sexualPref,'
@@ -164,7 +166,7 @@ database.none(
     + ' email, '
     + ' username, '
     + ' firstname, '
-    + ' lastname, '
+    + ' name, '
     + ' password, '
     + ' gender,'
     + ' sexualPref,'
@@ -196,7 +198,7 @@ database.none(
     + ' email, '
     + ' username, '
     + ' firstname, '
-    + ' lastname, '
+    + ' name, '
     + ' password, '
     + ' gender,'
     + ' sexualPref,'
@@ -228,7 +230,7 @@ database.none(
     + ' email, '
     + ' username, '
     + ' firstname, '
-    + ' lastname, '
+    + ' name, '
     + ' password, '
     + ' gender,'
     + ' sexualPref,'
@@ -244,7 +246,7 @@ database.none(
     + " 'email@email.com',"
     + " 'usermane',"
     + " 'firstname',"
-    + " 'lastname',"
+    + " 'name',"
     + " 'password',"
     + " 'f'," 
     + " 'm',"

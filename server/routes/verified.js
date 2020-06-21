@@ -5,7 +5,7 @@ router.get('/', (req, res) =>{
     if(req.query)
         if(req.query.email && req.query.verified)
         {
-            userDB.findOneUserIdByEmail(req.query.email)
+            userDB.findOneUserByEmail(req.query.email)
             .then(data => {
                 if (data.verified === "") {return res.redirect("http://localhost:3000/")}
                 if (data.verified === req.query.verified)

@@ -12,7 +12,7 @@ var forgetRouter = require("./routes/forget")
 var verifiedRouter = require("./routes/verified")
 var testRouter = require("./routes/test")
 var pictureRouter = require("./routes/picture")
-
+var accountRouter = require("./routes/account")
 
 var app = express();
 
@@ -30,21 +30,21 @@ app.use(session({
     resave: false
 }));
 
-app.use(function(req, res, next) {
+// app.use(function(req, res, next) {
 
-    if (req.session.user
-        || req.originalUrl === '/users/login'
-        || req.originalUrl === '/users/create'
-        || req.originalUrl === '/forget/password'
-        || req.originalUrl === '/forget/username'
-        || req.originalUrl.includes('/test')
-        || req.originalUrl.includes('/verified'))
-    {
-        next();
-    } else {
-        res.json({ _status: -1, _message: "acess denied", _error: null });
-    }
-});
+//     if (req.session.user
+//         || req.originalUrl === '/users/login'
+//         || req.originalUrl === '/users/create'
+//         || req.originalUrl === '/forget/password'
+//         || req.originalUrl === '/forget/username'
+//         || req.originalUrl.includes('/test')
+//         || req.originalUrl.includes('/verified'))
+//     {
+//         next();
+//     } else {
+//         res.json({ _status: -1, _message: "acess denied", _error: null });
+//     }
+// });
 
 /* ----------------------------------------- */
 
@@ -54,5 +54,6 @@ app.use("/forget", forgetRouter);
 app.use("/verified", verifiedRouter)
 app.use("/picture", pictureRouter)
 app.use("/test", testRouter)
+app.use("/account", accountRouter)
 
 module.exports = app;

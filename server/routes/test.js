@@ -2,16 +2,15 @@ const fs = require("fs")
 const express =require("express")
 const router = express.Router();
 var path = require('path');
-const blocked = require("../database/controllers/blocked")
 const userdb = require("../database/controllers/userDB")
+const account = require("./account")
 
 router.use("/", (req, res) =>{
-    const user = userdb.findOneUserIdByEmail("email@email.com").then(user =>{
-    //blocked.create(0, {id: 1, username : "toto"})
+    const user = userdb.findOneUserByEmail("email@email.com").then(user =>{
     blocked.delete(0, 1)
     .then(data => res.send(data))
     .catch(err => res.send("no"))
     });
 })
 
-module.exports = router
+module.exports = account;

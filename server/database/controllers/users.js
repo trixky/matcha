@@ -9,11 +9,12 @@ const check = require("../../Model/check")
 
 
 //to prevent xss
+
 function encodeUserData(user){
     user.email = ent.encode(user.email);
     user.username = ent.encode(user.username);
     user.firstname = ent.encode(user.firstname);
-    user.lastname = ent.encode(user.name);
+    user.name = ent.encode(user.name);
     return user;
 }
 
@@ -94,14 +95,14 @@ usersController.create = function(req, res) {
     sendMail.confirmMail(user.email, user.verified);
     database.none(
         'INSERT INTO users'
-        + '(id, email, username, firstname, lastname, password, verified, created)'
+        + '(id, email, username, firstname, name, password, verified, created)'
         + ' '
         + 'SELECT'
         + ' COUNT(*) AS id,'
         + ' $[email] AS email,'
         + ' $[username] AS username,'
         + ' $[firstname] AS firstname,'
-        + ' $[lastname] AS lastname,'
+        + ' $[name] AS name,'
         + ' $[password] AS password,'
         + ' $[verified] AS verified,'
         + ' CURRENT_TIMESTAMP as created'

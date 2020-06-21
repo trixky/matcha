@@ -24,7 +24,7 @@ router.post('/password', function(req, res, next) {
     if (!email)
         return errorResponse(res, "No email gived");
     if (isValidEmail(email))
-        userDB.findOneUserIdByEmail(email)
+        userDB.findOneUserByEmail(email)
         .then(data =>{
             if (!data)
                 return errorResponse(res, "No user with this email adresse");
@@ -49,7 +49,7 @@ router.post('/username', function(req, res, next) {
     if (!email)
         return errorResponse(res, "No email gived");
     if (isValidEmail(email))
-        userDB.findOneUserIdByEmail(email)
+        userDB.findOneUserByEmail(email)
         .then(data =>{
             if (!data)
                 return errorResponse(res, "No user with this email adresse");
