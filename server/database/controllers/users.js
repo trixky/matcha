@@ -47,6 +47,7 @@ usersController.login = function(req, res) {
         || req.body.user === undefined
         || req.body.user.password === undefined)
     return errorResponse(res, 'missing user information')
+
     let email = req.body.user.email;
     let password = crypto.createHash('sha256')
                          .update(req.body.user.password)
@@ -78,13 +79,13 @@ usersController.create = function(req, res) {
     return errorResponse(res, ['missing user information'])
     
     let user = req.body.user;
+    user = encodeUserData(user);
     
     const error = check.user(user)
     
     if (Object.entries(error).length)
         return errorResponse(res, error)
         
-    user = encodeUserData(user);
     user.verified =  crypto.createHash('sha256').digest("hex");
     user.password = crypto.createHash('sha256')
                           .update(user.password)

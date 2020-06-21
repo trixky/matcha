@@ -18,11 +18,11 @@ check.user = (user) =>{
 
     if (!isValidEmail(user.email))
         ret.email = badEmail;
-    if (user.username.length > 30)
+    if (user.username.length > 2)
         ret.username = longUsername
-    if (user.firstname.length > 30)
+    if (user.firstname.length > 2)
         ret.firstname = longFirstname
-    if (user.lastname.length > 30)
+    if (user.lastname.length > 2)
         ret.lastname = longLastname
     if (!/\d*/.test(user.password) 
     || !/[a-z,A-Z]*/.test(user.password)
