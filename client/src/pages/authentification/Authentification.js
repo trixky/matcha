@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import './Authentification.css'
 
@@ -48,6 +48,7 @@ class Authentification extends Component {
 			valid_input_register: 'off'
 		};
 		this.componentDidMount = this.componentDidMount.bind(this);
+		this.handleLoginSuccess = this.handleLoginSuccess.bind(this);
 		this.handleCreate = this.handleCreate.bind(this);
 		this.handleLogin = this.handleLogin.bind(this);
 		this.handlePasswordChanged = this.handlePasswordChanged.bind(this);
@@ -59,6 +60,10 @@ class Authentification extends Component {
 	componentDidMount() {
 		if (this.props.readPage() !== 'Authentification')
 			this.props.setPage('Authentification');
+	}
+
+	handleLoginSuccess(url) {
+		this.props.history.push(url);
 	}
 
 	handleCreate(event) {
@@ -130,6 +135,8 @@ class Authentification extends Component {
 					invalid_input_login.all_input.status = 'on';
 					invalid_input_login.all_input.message = data._data[0];
 					_this.setState({ invalid_input_login })
+				} else {
+					_this.handleLoginSuccess('/search')
 				}
 			});
 	}
@@ -216,4 +223,4 @@ class Authentification extends Component {
 	}
 }
 
-export default Authentification;
+export default withRouter(Authentification);
