@@ -17,7 +17,7 @@ const badPassword = "Password not secure, between 8 to 30 character with at leas
 check.user = (user) =>{
     
     var ret = {}
-
+    
     if (!isValidEmail(user.email) || user.email.length > 50)
         ret.email = badEmail;
     if (user.username.length > 2)
@@ -31,6 +31,7 @@ check.user = (user) =>{
     || user.password.length < 8
     || user.password.length > 30)
         ret.password = badPassword;
+    
     return ret;    
 }
 

@@ -13,7 +13,7 @@ function encodeUserData(user){
     user.email = ent.encode(user.email);
     user.username = ent.encode(user.username);
     user.firstname = ent.encode(user.firstname);
-    user.lastname = ent.encode(user.lastname);
+    user.lastname = ent.encode(user.name);
     return user;
 }
 
@@ -78,7 +78,9 @@ usersController.create = function(req, res) {
         || req.body.user.password === undefined)
     return errorResponse(res, ['missing user information'])
     
+    
     let user = req.body.user;
+    
     user = encodeUserData(user);
     
     const error = check.user(user)

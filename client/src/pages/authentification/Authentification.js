@@ -67,8 +67,7 @@ class Authentification extends Component {
 		fetch('/users/create', requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data._data)
-				console.log(this.state.invalid_input_register['password'])
+				console.log(data._status)
 			});
 	}
 
