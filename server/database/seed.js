@@ -8,6 +8,16 @@ function _exit(value){
 }
 
 database.none(
+    'DROP TABLE '
+    + ' IF EXISTS '
+    + 'messages, '
+    + 'liked, '
+    + 'blocked, '
+    + 'looked, '
+    + 'relationship, '
+    + 'users ;'
+)
+.then(() => database.none(
     'CREATE TABLE messages'
     + '('
     + 'usersID INTEGER[]'
@@ -19,8 +29,7 @@ database.none(
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
-
-database.none(
+.then(() => database.none(
     'CREATE TABLE liked'
     + '('
     + 'userID INTEGER'
@@ -32,8 +41,7 @@ database.none(
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
-
-database.none(
+.then(() => database.none(
     'CREATE TABLE blocked'
     + '('
     + 'userID INTEGER'
@@ -45,8 +53,7 @@ database.none(
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
-
-database.none(
+.then(() => database.none(
     'CREATE TABLE looked'
     + '('
     + 'userID INTEGER'
@@ -58,8 +65,7 @@ database.none(
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
-
-database.none(
+.then(() => database.none(
     'CREATE TABLE relationship'
     + '('
     + 'usersID INTEGER[]'
@@ -71,8 +77,7 @@ database.none(
     + 'update TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
-
-database.none(
+.then(() => database.none(
     'CREATE TABLE users'
     + '('
     + 'id INTEGER NOT NULL PRIMARY KEY'
@@ -121,9 +126,7 @@ database.none(
     + 'modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
-
-
-database.none(
+.then(() => database.none(
     'INSERT INTO users'
     + '(id, email, username, firstname, lastname, password, verified, created)'
     + ' '
@@ -140,8 +143,7 @@ database.none(
     + " CURRENT_TIMESTAMP"
     + ")",    
 )
-
-database.none(
+.then(() => database.none(
     'INSERT INTO users'
     + '(id, email, username, firstname, lastname, password, verified, created)'
     + ' '
@@ -158,8 +160,7 @@ database.none(
     + " CURRENT_TIMESTAMP"
     + ")",    
 )
-
-database.none(
+.then(() => database.none(
     'INSERT INTO users'
     + '(id, email, username, firstname, lastname, password, verified, created)'
     + ' '
@@ -176,9 +177,7 @@ database.none(
     + " CURRENT_TIMESTAMP"
     + ")",    
 )
-
-
-database.none(
+.then(() => database.none(
     'INSERT INTO users'
     + '(id, email, username, firstname, lastname, password, verified, created)'
     + ' '
@@ -194,5 +193,6 @@ database.none(
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",    
-).then(_exit).catch(_exit);
+)))))))))))
+.then(_exit).catch(_exit);
 
