@@ -1,0 +1,7 @@
+.notification-more-input {
+	margin: 15px auto 0;
+}
+
+.notification-more-input:hover {
+	cursor: pointer;
+}
