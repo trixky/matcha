@@ -18,7 +18,7 @@ class Authentification extends Component {
 				status: 'off',
 				message: ''
 			},
-			first_name: {
+			firstname: {
 				status: 'off',
 				message: ''
 			},
@@ -27,6 +27,16 @@ class Authentification extends Component {
 				message: ''
 			},
 			confirmation_password: {
+				status: 'off',
+				message: ''
+			}
+		},
+		invalid_input_login: {
+			email: {
+				status: 'off',
+				message: ''
+			},
+			password: {
 				status: 'off',
 				message: ''
 			}
@@ -58,6 +68,7 @@ class Authentification extends Component {
 			.then(response => response.json())
 			.then(data => {
 				console.log(data._data)
+				console.log(this.state.invalid_input_register['password'])
 			});
 	}
 
@@ -87,17 +98,22 @@ class Authentification extends Component {
 				<div className='register-container'>
 					<h2 className='auth-title'>register</h2>
 					<form className='auth-form' onSubmit={this.handleCreate}>
-						<p className='error-input email off'>Invalid email:<br /><span>error message</span></p>
+						<p className={`error-input email ${this.state.invalid_input_register.email.status}`}>Invalid email:<br /><span>{this.state.invalid_input_register.email.message}</span></p>
 						<input className='form-input' name="email" type='email' placeholder='email' required />
-						<p className='error-input username off'>Invalid username:<br /><span>error message</span></p>
+
+						<p className={`error-input username ${this.state.invalid_input_register.username.status}`}>Invalid username:<br /><span>{this.state.invalid_input_register.username.message}</span></p>
 						<input className='form-input' name="username" type='text' placeholder='username' required />
-						<p className='error-input name off'>Invalid name:<br /><span>error message</span></p>
-						<input className='form-input' name="firstname" type='text' placeholder='name' required />
-						<p className='error-input lastname off'>Invalid lastname:<br /><span>error message</span></p>
-						<input className='form-input' name="lastname" type='text' placeholder='first name' required />
-						<p className='error-input password off'>Invalid password:<br /><span>error message</span></p>
+						
+						<p className={`error-input name ${this.state.invalid_input_register.name.status}`}>Invalid name:<br /><span>{this.state.invalid_input_register.name.message}</span></p>
+						<input className='form-input' name="name" type='text' placeholder='name' required />
+						
+						<p className={`error-input firstname ${this.state.invalid_input_register.firstname.status}`}>Invalid firstname:<br /><span>{this.state.invalid_input_register.firstname.message}</span></p>
+						<input className='form-input' name="firstname" type='text' placeholder='first name' required />
+						
+						<p className={`error-input password ${this.state.invalid_input_register.password.status}`}>Invalid password:<br /><span>{this.state.invalid_input_register.password.message}</span></p>
 						<input className='form-input' name="password" type='password' placeholder='password' autoComplete='on' required />
-						<p className='error-input confirmation-password off'>Invalid confirmation password :<br /><span>error message</span></p>
+						
+						<p className={`error-input confirmation-password ${this.state.invalid_input_register.confirmation_password.status}`}>Invalid confirmation password :<br /><span>{this.state.invalid_input_register.confirmation_password.message}</span></p>
 						<input className='form-input' name="confirmation password" type='password' placeholder='confirmation password' autoComplete='on' required />
 						<input className='form-input auth-submit' type='submit' value='register' />
 					</form>
