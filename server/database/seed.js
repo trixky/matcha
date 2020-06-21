@@ -92,9 +92,9 @@ database.none(
     + ', '
     + 'password CHAR(64) NOT NULL'
     + ', '
-    + 'gender CHAR(1)'
+    + "gender CHAR(1) NOT NULL DEFAULT 'b'"
     + ', '
-    + 'sexualPref CHAR(1)'
+    + "sexualPref CHAR(1) NOT NULL DEFAULT 'b'"
     + ', '
     + 'biography VARCHAR(500)'
     + ', '
@@ -103,13 +103,13 @@ database.none(
     + 'picture TEXT[]'
     + ', '
     // people that you like
-    + 'haveLiked INTEGER[]'
+    + 'haveLiked INTEGER'
     + ', '
     // people that liek you 
-    + 'beenLiked INTEGER[]'
+    + 'beenLiked INTEGER'
     + ', '
     // people that look at you
-    + 'looked INTEGER[]'
+    + 'looked INTEGER'
     + ', '
     + 'fame INTEGER DEFAULT 60'
     + ', '
@@ -128,7 +128,18 @@ database.none(
 )
 .then(() => database.none(
     'INSERT INTO users'
-    + '(id, email, username, firstname, lastname, password, verified, created)'
+    + '(id, ' 
+    + ' email, '
+    + ' username, '
+    + ' firstname, '
+    + ' lastname, '
+    + ' password, '
+    + ' gender,'
+    + ' sexualPref,'
+    + ' biography,'
+    + ' tag,'
+    + ' verified, '
+    + 'created)'
     + ' '
     + 'VALUES'
     + ' '
@@ -139,13 +150,28 @@ database.none(
     + " '42',"
     + " '42',"
     + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
-    + " null,"
+    + " 'm'," 
+    + " 'm',"
+    + " 'Salut , je represente 42'," 
+    + " '{toto, tata}',"
+    + ' null, '
     + " CURRENT_TIMESTAMP"
     + ")",    
 )
 .then(() => database.none(
     'INSERT INTO users'
-    + '(id, email, username, firstname, lastname, password, verified, created)'
+    + '(id, ' 
+    + ' email, '
+    + ' username, '
+    + ' firstname, '
+    + ' lastname, '
+    + ' password, '
+    + ' gender,'
+    + ' sexualPref,'
+    + ' biography,'
+    + ' tag,'
+    + ' verified, '
+    + 'created)'
     + ' '
     + 'VALUES'
     + ' '
@@ -156,13 +182,28 @@ database.none(
     + " 'sito',"
     + " 'lunie',"
     + " 'password',"
+    + " 'f'," 
+    + " 'm',"
+    + " 'Salut , je suis momota'," 
+    + " '{moai, tatie}',"
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",    
 )
 .then(() => database.none(
     'INSERT INTO users'
-    + '(id, email, username, firstname, lastname, password, verified, created)'
+    + '(id, ' 
+    + ' email, '
+    + ' username, '
+    + ' firstname, '
+    + ' lastname, '
+    + ' password, '
+    + ' gender,'
+    + ' sexualPref,'
+    + ' biography,'
+    + ' tag,'
+    + ' verified, '
+    + 'created)'
     + ' '
     + 'VALUES'
     + ' '
@@ -173,13 +214,28 @@ database.none(
     + " 'star',"
     + " 'lune',"
     + " 'password',"
+    + " 'f'," 
+    + " 'm',"
+    + " 'Salut , je represente momo'," 
+    + " '{cinema, star}',"
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",    
 )
 .then(() => database.none(
     'INSERT INTO users'
-    + '(id, email, username, firstname, lastname, password, verified, created)'
+    + '(id, ' 
+    + ' email, '
+    + ' username, '
+    + ' firstname, '
+    + ' lastname, '
+    + ' password, '
+    + ' gender,'
+    + ' sexualPref,'
+    + ' biography,'
+    + ' tag,'
+    + ' verified, '
+    + 'created)'
     + ' '
     + 'VALUES'
     + ' '
@@ -190,6 +246,10 @@ database.none(
     + " 'firstname',"
     + " 'lastname',"
     + " 'password',"
+    + " 'f'," 
+    + " 'm',"
+    + " 'Salut , je sus firstname'," 
+    + " '{gaming, computer}',"
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",    
