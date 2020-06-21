@@ -40,11 +40,7 @@ class Authentification extends Component {
 				}
 			},
 			invalid_input_login: {
-				email: {
-					status: 'off',
-					message: ''
-				},
-				password: {
+				all_input: {
 					status: 'off',
 					message: ''
 				}
@@ -65,12 +61,12 @@ class Authentification extends Component {
 	}
 
 	handleCreate(event) {
-		const _this = this;
 		event.preventDefault();
-
+		
+		const _this = this;
 		const formData = new FormData(event.target);
-
 		let create = { user: {} };
+
 		formData.forEach(function (value, key) {
 			create.user[key] = value;
 		});
@@ -108,9 +104,11 @@ class Authentification extends Component {
 
 	handleLogin(event) {
 		event.preventDefault();
-
+		
+		const _this = this;
 		const formData = new FormData(event.target);
 		let login = { user: {} };
+
 		formData.forEach(function (value, key) {
 			login.user[key] = value;
 		});
@@ -124,7 +122,12 @@ class Authentification extends Component {
 		fetch('/users/login', requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data)
+				if (data._status === -1) {
+					let invalid_input_login = Object.assign(_this.state.invalid_input_login)
+					invalid_input_login.all_input.status = 'on';
+					invalid_input_login.all_input.message = data._data[0];
+					_this.setState({ invalid_input_login })
+				}
 			});
 	}
 
@@ -195,10 +198,9 @@ class Authentification extends Component {
 				<div className='login-container' onSubmit={this.handleLogin}>
 					<h2 className='auth-title'>login</h2>
 					<form className='auth-form'>
-						<p className={`error-input email ${this.state.invalid_input_login.email.status}`}>Invalid email:<br /><span>{this.state.invalid_input_login.email.message}</span></p>
+						<p className={`error-input email ${this.state.invalid_input_login.all_input.status}`}>Invalid email:<br /><span>{this.state.invalid_input_login.all_input.message}</span></p>
 						<input className='form-input' name="email" type='email' placeholder='email' required />
 
-						<p className={`error-input password ${this.state.invalid_input_login.password.status}`}>Invalid password:<br /><span>{this.state.invalid_input_login.password.message}</span></p>
 						<input className='form-input' name="password" type='password' placeholder='password' autoComplete='on' required />
 						<input className='form-input auth-submit' type='submit' value='login' />
 					</form>
