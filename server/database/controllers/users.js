@@ -77,13 +77,12 @@ usersController.create = function(req, res) {
         || req.body.user === undefined
         || req.body.user.password === undefined)
     return errorResponse(res, ['missing user information'])
-    
-    
+
     let user = req.body.user;
     
-    user = encodeUserData(user);
-    
     const error = check.user(user)
+    
+    user = encodeUserData(user);
     
     if (Object.entries(error).length)
         return errorResponse(res, error)
@@ -110,7 +109,7 @@ usersController.create = function(req, res) {
         user
     ).then(function() {
         res.json({ _status: 0, _data: null });
-    }).catch(function(error) {
+    }).catch(function() {
         error.email = "Email already taken"
         return errorResponse(res, error)
     });

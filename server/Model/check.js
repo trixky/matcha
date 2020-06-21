@@ -18,15 +18,15 @@ check.user = (user) =>{
     
     var ret = {}
     
-    if (!isValidEmail(user.email) || user.email.length > 50)
+    if (!user.email || !isValidEmail(user.email) || user.email.length > 50)
         ret.email = badEmail;
-    if (user.username.length > 2 || user.username.length === 0)
+    if (!user.username || user.username.length > 2 || user.username.length === 0)
         ret.username = longUsername
-    if (user.firstname.length > 2 || user.firstname.length === 0)
+    if (!user.firstname || user.firstname.length > 2 || user.firstname.length === 0)
         ret.firstname = longFirstname
-    if (user.lastname.length > 2 || user.lastname.length === 0)
+    if (!user.name || user.name.length > 2 || user.name.length === 0)
         ret.name = longLastname
-    if (!/\d*/.test(user.password) 
+    if (!user.password || !/\d*/.test(user.password) 
     || !/[a-z,A-Z]*/.test(user.password)
     || user.password.length < 8
     || user.password.length > 30)
