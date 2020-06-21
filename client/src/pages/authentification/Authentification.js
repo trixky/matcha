@@ -121,7 +121,10 @@ class Authentification extends Component {
 				<div className='login-container' onSubmit={this.handleLogin}>
 					<h2 className='auth-title'>login</h2>
 					<form className='auth-form'>
+						<p className={`error-input email ${this.state.invalid_input_login.email.status}`}>Invalid email:<br /><span>{this.state.invalid_input_login.email.message}</span></p>
 						<input className='form-input' name="email" type='email' placeholder='email' required />
+
+						<p className={`error-input password ${this.state.invalid_input_login.password.status}`}>Invalid password:<br /><span>{this.state.invalid_input_login.password.message}</span></p>						
 						<input className='form-input' name="password" type='password' placeholder='password' autoComplete='on' required />
 						<input className='form-input auth-submit' type='submit' value='login' />
 					</form>
