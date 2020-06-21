@@ -1,0 +1,10 @@
+.people-selection-container {
+	margin: 0 auto 10px;
+	width: 230px;
+	padding: 10px 0;
+	background-color: var(--main-grey-1)
+}
+
+.people-selection-container > .form-input {
+	margin: 5px auto;
+}
