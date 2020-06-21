@@ -12,7 +12,7 @@ class States extends Component {
 						<p className='state-type'><Link to='/'>reputation</Link></p><p className='state-number'>6676</p>
 					</li>
 					<li className='state-line'>
-						<p className='state-type'><Link to='/'>viewer(s)</Link></p><p className='state-number'>421</p>
+						<p className='state-type'><Link to='/'>match(s)</Link></p><p className='state-number'>21</p>
 					</li>
 					<li className='state-line'>
 						<p className='state-type'><Link to='/'>liker(s)</Link></p><p className='state-number'>42</p>
@@ -21,7 +21,7 @@ class States extends Component {
 						<p className='state-type'><Link to='/'>liked</Link></p><p className='state-number'>37</p>
 					</li>
 					<li className='state-line'>
-						<p className='state-type'><Link to='/'>match(s)</Link></p><p className='state-number'>21</p>
+						<p className='state-type'><Link to='/'>viewer(s)</Link></p><p className='state-number'>421</p>
 					</li>
 					<li className='state-line'>
 						<p className='state-type'><Link to='/'>message(s)</Link></p><p className='state-number'>67</p>
