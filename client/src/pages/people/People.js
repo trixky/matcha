@@ -3,12 +3,12 @@ import React, { Component } from 'react'
 import ProfilThumbnail from './components/ProfilThumbnail'
 import PeopleSelection from './components/PeopleSelection'
 
-import './Pretenders.css'
+import './People.css'
 
-class Pretenders extends Component {
+class People extends Component {
 	componentDidMount() {
-		if (this.props.readPage() !== 'Pretenders')
-			this.props.setPage('Pretenders');
+		if (this.props.readPage() !== 'People')
+			this.props.setPage('People');
 	}
 
 	render() {
@@ -31,4 +31,4 @@ class Pretenders extends Component {
 	}
 }
 
-export default Pretenders;
+export default People;

@@ -23,7 +23,7 @@ class Header extends Component {
 					<Link to='/search'>
 						<img className='header-img scale-hover' src={Search_icone} alt='link to search page' />
 					</Link>
-					<Link to='/pretenders'>
+					<Link to='/people'>
 						<img className='header-img scale-hover' src={Heart_icone} alt='link to pretenders page' />
 					</Link>
 					<Link to='/chat'>

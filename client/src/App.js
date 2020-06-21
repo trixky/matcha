@@ -18,7 +18,7 @@ import ForgotUsernameSend from './pages/forgot_username_send/ForgotUsernameSend'
 import Gallery from './pages/gallery/Gallery'
 import Home from './pages/home/Home'
 import Notification from './pages/notification/Notification'
-import Pretenders from './pages/pretenders/Pretenders'
+import People from './pages/people/People'
 import Profile from './pages/profile/Profile'
 import Search from './pages/search/Search'
 import Settings from './pages/settings/Settings'
@@ -63,7 +63,7 @@ class App extends Component {
 								<Route exact path='/profile/:username/gallery'><Gallery readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/'><Home readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/notification'><Notification readPage={this.readPage} setPage={this.setPage}/></Route>
-								<Route exact path='/pretenders'><Pretenders readPage={this.readPage} setPage={this.setPage}/></Route>
+								<Route exact path='/people'><People readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/profile/:username'><Profile readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/resetPassword'><ResetPassword readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/search'><Search readPage={this.readPage} setPage={this.setPage}/></Route>
