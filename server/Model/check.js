@@ -24,8 +24,8 @@ check.user = (user) =>{
         ret.username = longUsername
     if (user.firstname.length > 2)
         ret.firstname = longFirstname
-    if (user.name.length > 2)
-        ret.lastname = longLastname
+    if (user.lastname.length > 2)
+        ret.name = longLastname
     if (!/\d*/.test(user.password) 
     || !/[a-z,A-Z]*/.test(user.password)
     || user.password.length < 8
