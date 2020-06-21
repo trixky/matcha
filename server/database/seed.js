@@ -27,6 +27,8 @@ database.none(
     + ', '
     + 'personID INTEGER'
     + ', '
+    + 'username VARCHAR(31)'
+    + ', '
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
@@ -37,6 +39,8 @@ database.none(
     + 'userID INTEGER'
     + ', '
     + 'personID INTEGER'
+    + ', '
+    + 'username VARCHAR(31)'
     + ', '
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
@@ -49,6 +53,8 @@ database.none(
     + ', '
     + 'personID INTEGER'
     + ', '
+    + 'username VARCHAR(31)'
+    + ', '
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
@@ -57,6 +63,8 @@ database.none(
     'CREATE TABLE relationship'
     + '('
     + 'usersID INTEGER[]'
+    + ', '
+    + 'username VARCHAR(31)[]'
     + ', '
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ','
@@ -113,6 +121,8 @@ database.none(
     + 'modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
+
+
 database.none(
     'INSERT INTO users'
     + '(id, email, username, firstname, lastname, password, verified, created)'

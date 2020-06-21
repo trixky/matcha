@@ -2,37 +2,36 @@ const db = require('../database');
 
 const likedDB = {};
 
-likedDB.create = async (user, like) => {
-    return db.none(
-        `INSERT INTO liked (userid, personid, created) VALUES ('${user}', '${like}', CURRENT_TIMESTAMP);`
+likedDB.create = async (user, liked) => {
+    return db.one(
+        `INSERT INTO liked (userid, personid, username, created) VALUES ('${user.id}', '${liked.id}', '{${user.username}, ${liked.username}}', CURRENT_TIMESTAMP);`
     )
     .then(data => null)
     .catch(err => null)
 }
 
-likedDB.wholiked = async (user) => {
+likedDB.getAll = async (userid) => {
     
     return db.many(
-        `SELECT * FROM liked WHERE ${user} = (personid);`
+        `SELECT * FROM liked WHERE ${userid} = (personid);`
     )
     .then(data => data)
     .catch(err => null);
 }
 
-likedDB.liked = async (user) => {
+likedDB.liked = async (userid) => {
     
     return db.many(
-        `SELECT * FROM liked WHERE ${user} = (userid);`
+        `SELECT * FROM liked WHERE ${userid} = (userid);`
     )
     .then(data => data)
     .catch(err => null);
 }
 
-
-likedDB.delete = async (user, like) => {
+likedDB.delete = async (userid, likedid) => {
     
     return db.none(
-        `DELETE FROM liked WHERE ${user} = (userid) AND ${like} = (personid);`
+        `DELETE FROM liked WHERE ${userid} = (userid) AND ${likedid} = (personid);`
     )
     .then(data => null)
     .catch(err => null);
