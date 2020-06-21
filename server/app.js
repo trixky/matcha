@@ -30,21 +30,21 @@ app.use(session({
     resave: false
 }));
 
-// app.use(function(req, res, next) {
+app.use(function(req, res, next) {
 
-//     if (req.session.user
-//         || req.originalUrl === '/users/login'
-//         || req.originalUrl === '/users/create'
-//         || req.originalUrl === '/forget/password'
-//         || req.originalUrl === '/forget/username'
-//         || req.originalUrl.includes('/test')
-//         || req.originalUrl.includes('/verified'))
-//     {
-//         next();
-//     } else {
-//         res.json({ _status: -1, _message: "acess denied", _error: null });
-//     }
-// });
+    if (req.session.user
+        || req.originalUrl === '/users/login'
+        || req.originalUrl === '/users/create'
+        || req.originalUrl === '/forget/password'
+        || req.originalUrl === '/forget/username'
+        || req.originalUrl.includes('/test')
+        || req.originalUrl.includes('/verified'))
+    {
+        next();
+    } else {
+        errorResponse(res, {error: "Acces denied"});
+    }
+});
 
 /* ----------------------------------------- */
 
@@ -56,4 +56,12 @@ app.use("/picture", pictureRouter)
 app.use("/test", testRouter)
 app.use("/account", accountRouter)
 
+
+function errorResponse(res,  data)
+{
+    return res.json({
+        _status: -1,
+        _data: data
+    })
+}
 module.exports = app;

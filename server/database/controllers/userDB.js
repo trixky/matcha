@@ -1,6 +1,9 @@
 const db  = require("../database")
 
 const userDB = {};
+const userInfo =  "username, firstname, name, gender, sexualpref, " 
+                + "biography, tag, picture, haveLiked, beenLiked, match, "
+                + "looked, fame, latitude, longitude, connected "
 
 function QueryMultyUser(arrayid){
     var query = "SELECT id, username, picture FROM users WHERE ";
@@ -21,13 +24,17 @@ function QueryMultyUser(arrayid){
 // return a array wit the user element
 userDB.findOneUserByEmail = async (email) => {
     return  db.one("SELECT * FROM users WHERE email = $1", email)
-    .then(data => data)
+    .then(data => {
+        data.password = "";
+        return data})
     .catch(err => err)
   }
 
 userDB.findOneUserById = async (id) => {
     return  db.one("SELECT * FROM users WHERE id = $1", id)
-    .then(data => data)
+    .then(data => {
+        data.password = "";
+        return data})
     .catch(err => err)
   }
 
@@ -38,7 +45,7 @@ userDB.updateOnePasswordById = async (id, password) => {
 }
 
 userDB.findAll = async () => {
-    return db.multi("SELECT * FROM users;")
+    return db.multi(`SELECT ${userInfo} FROM users;`)
     .then(data => data)
     .catch(err => err)
 }

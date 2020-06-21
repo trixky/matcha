@@ -10,8 +10,9 @@ router.get("/", (req, res, next) => {
   
     if (checkHaveId(req, res))
         return;
-  
+    
     const userid = req.session.user;
+    
     userDB.findOneUserById(userid)
     .then(data => Response(res, data))
     .catch(err => errorResponse(res, {error: "Something went wrong"}));
@@ -37,25 +38,28 @@ router.put("/", (req, res, next) => {
 })
 
 function updateData(req, res, user){
-            user = encodeUserData(user)    
-            const error = check.userProfile(user)
+            
+    user = encodeUserData(user)    
+            
+    const error = check.userProfile(user)
 
-            if (Object.entries(error).length)
-                return errorResponse(res, error)
+    if (Object.entries(error).length)
+        return errorResponse(res, error)
 
-            const userid = req.session.user;
-            userDB.findOneUserById(userid)
-            .then(data => {
-                var newData = changeValue(data, user)
-                userDB.updateUser(newData)
-                    .then(
-                        userDB.findOneUserById(userid)
-                            .then(data => Response(res, data))
-                            .catch(err => errorResponse(res, {error: "Something went wrong"}))
-                    )
-                    .catch(err => errorResponse(res, {error: "Something went wrong"}));
-            })
+    const userid = req.session.user;
+
+    userDB.findOneUserById(userid)
+        .then(data => {
+            var newData = changeValue(data, user)
+            userDB.updateUser(newData)
+            .then(data =>
+                userDB.findOneUserById(userid)
+                .then(data => Response(res, data))
+                .catch(err => errorResponse(res, {error: "Something went wrong"}))
+            )
             .catch(err => errorResponse(res, {error: "Something went wrong"}));
+        })
+        .catch(err => errorResponse(res, {error: "Something went wrong"}));
 }
 
 function encodeUserData(user){
