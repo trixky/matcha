@@ -13,7 +13,7 @@ database.none(
     + 'messages, '
     + 'liked, '
     + 'blocked, '
-    + 'looked, '
+    + 'viewers, '
     + 'relationship, '
     + 'users ;'
 )
@@ -54,7 +54,7 @@ database.none(
     + ')'
 )
 .then(() => database.none(
-    'CREATE TABLE looked'
+    'CREATE TABLE viewers'
     + '('
     + 'userID INTEGER NOT NULL'
     + ', '
@@ -94,26 +94,28 @@ database.none(
     + ', '
     + "gender CHAR(1) NOT NULL DEFAULT 'b'"
     + ', '
-    + "sexualPref CHAR(1) NOT NULL DEFAULT 'b'"
+    + "orientation CHAR(1) NOT NULL DEFAULT 'b'"
     + ', '
     + 'biography VARCHAR(500)'
     + ', '
-    + "tag TEXT[] NOT NULL DEFAULT '{}'"
+    + 'birthday VARCHAR(500)'
     + ', '
-    + "picture TEXT[] NOT NULL DEFAULT '{}'"
+    + "tags TEXT[] NOT NULL DEFAULT '{}'"
+    + ', '
+    + "pictures TEXT[] NOT NULL DEFAULT '{}'"
     + ', '
     // people that you like
-    + 'haveLiked INTEGER DEFAULT 0'
+    + 'likers INTEGER DEFAULT 0'
     + ', '
     // people that liek you 
-    + 'beenLiked INTEGER DEFAULT 0'
+    + 'liked INTEGER DEFAULT 0'
     + ', '
     + 'match INTEGER DEFAULT 0'
     + ', '
     // people that look at you
-    + 'looked INTEGER DEFAULT 0'
+    + 'viewers INTEGER DEFAULT 0'
     + ', '
-    + 'fame INTEGER DEFAULT 60'
+    + 'reputation INTEGER DEFAULT 60'
     + ', '
     + 'latitude NUMERIC DEFAULT 0'
     + ', '
@@ -137,9 +139,9 @@ database.none(
     + ' name, '
     + ' password, '
     + ' gender,'
-    + ' sexualPref,'
+    + ' orientation,'
     + ' biography,'
-    + ' tag,'
+    + ' tags,'
     + ' verified, '
     + 'created)'
     + ' '
@@ -169,9 +171,9 @@ database.none(
     + ' name, '
     + ' password, '
     + ' gender,'
-    + ' sexualPref,'
+    + ' orientation,'
     + ' biography,'
-    + ' tag,'
+    + ' tags,'
     + ' verified, '
     + 'created)'
     + ' '
@@ -201,9 +203,9 @@ database.none(
     + ' name, '
     + ' password, '
     + ' gender,'
-    + ' sexualPref,'
+    + ' orientation,'
     + ' biography,'
-    + ' tag,'
+    + ' tags,'
     + ' verified, '
     + 'created)'
     + ' '
@@ -233,9 +235,9 @@ database.none(
     + ' name, '
     + ' password, '
     + ' gender,'
-    + ' sexualPref,'
+    + ' orientation,'
     + ' biography,'
-    + ' tag,'
+    + ' tags,'
     + ' verified, '
     + 'created)'
     + ' '

@@ -86,12 +86,12 @@ function changeValue(data, newData){
                     .digest('hex');
     if (newData.gender)
         data.gender = newData.gender
-    if (newData.sexualpref)
-        data.sexualpref = newData.sexualpref
+    if (newData.orientation)
+        data.orientation = newData.orientation
     if (newData.biography)
         data.biography = newData.biography
-    if (newData.tag)
-        data.tag = newData.tag
+    if (newData.tags)
+        data.tags = newData.tags
     return data;
 }
 

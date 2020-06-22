@@ -13,9 +13,9 @@ const longFirstname = "Firstname have to be between 1 to 30 character"
 const longName = "Name have to be between 1 to 30 character"
 const badPassword = "Password is incorrect, between 8 to 30 character with at least one digit and one letter"
 const badGender = "Gender should be f , m or b";
-const badSexualPref = "Sexual preference should be f, m or b"
+const badOrientation = "Orientation sexual should be f, m or b"
 const badBiography = "Biography should be least than 500 caratere"
-const badTag = "A error with a tag"
+const badTag = "A error with the tag"
 
 // !!! have to change the value later 
 
@@ -77,17 +77,17 @@ check.userProfile = (user) =>{
         && user.gender != 'm' 
         && user.gender != 'b')
             ret.gender = badGender;
-    if(user.sexualpref)
-        if (user.sexualpref != 'f' 
-        && user.sexualpref != 'm' 
-        && user.sexualpref != 'b')
-            ret.sexualpref = badSexualPref;
+    if(user.orientation)
+        if (user.orientation != 'f' 
+        && user.orientation != 'm' 
+        && user.orientation != 'b')
+            ret.orientation = badOrientation;
     if (user.biography)
         if (user.biography.length > 500)
             ret.biography = badBiography;
-    if (user.tag)
+    if (user.tags)
         if (ft_checkTag(user))
-            ret.tag = badTag;
+            ret.tags = badTag;
     return ret;
 }
 

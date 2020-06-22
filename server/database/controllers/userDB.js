@@ -1,12 +1,12 @@
 const db  = require("../database")
 
 const userDB = {};
-const userInfo =  "username, firstname, name, gender, sexualpref, " 
-                + "biography, tag, picture, haveLiked, beenLiked, match, "
-                + "looked, fame, latitude, longitude, connected "
+const userInfo =  "username, firstname, name, gender, orientation, " 
+                + "biography, tags, pictures, liked, likers, match, "
+                + "viewers, reputation, latitude, longitude, connected "
 
 function QueryMultyUser(arrayid){
-    var query = "SELECT id, username, picture FROM users WHERE ";
+    var query = "SELECT id, username, pictures FROM users WHERE ";
     
     for (var i= 0; i < arrayid.length; i++)
     {
@@ -77,14 +77,14 @@ userDB.updateUser = async (newData) => {
         newData.name,
         newData.password,
         newData.gender,
-        newData.sexualpref,
+        newData.orientation,
         newData.biography,
-        newData.tag,
-        newData.picture,
-        newData.haveliked,
-        newData.beenliked,
-        newData.looked,
-        newData.fame,
+        newData.tags,
+        newData.pictures,
+        newData.liked,
+        newData.likers,
+        newData.viewers,
+        newData.reputation,
         newData.latitude,
         newData.longitude,
         newData.connected,
@@ -99,14 +99,14 @@ userDB.updateUser = async (newData) => {
                     name = $4,
                     password = $5,
                     gender = $6,
-                    sexualpref = $7,
+                    orientation = $7,
                     biography = $8,
-                    tag = $9,
-                    picture = $10,
-                    haveliked = $11,
-                    beenliked = $12,
-                    looked = $13,
-                    fame = $14,
+                    tags = $9,
+                    pictures = $10,
+                    liked = $11,
+                    likers = $12,
+                    viewers = $13,
+                    reputation = $14,
                     latitude = $15,
                     longitude = $16,
                     connected = $17,

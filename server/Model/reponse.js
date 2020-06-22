@@ -9,7 +9,7 @@ reponse.errorResponse = (res,  message) =>
     })
 }
 
-reponse.Response = (res,  message) => 
+reponse.response = (res,  message) => 
 {
     return res.json({
         _status: 0,

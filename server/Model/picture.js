@@ -25,6 +25,7 @@ var storage = multer.diskStorage({
 
 function fileFilter(req, file, cb){
      if (file.mimetype === 'image/jpeg'
+     || file.mimetype === 'image/png'
      || file.mimetype === 'image/bmp')
          cb(null, true);
      else
