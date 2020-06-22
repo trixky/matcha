@@ -82,7 +82,7 @@ usersController.create = function(req, res) {
 
     let user = req.body.user;
     
-    const error = check.user(user)
+    const error = check.userCreate(user)
     
     user = encodeUserData(user);
     
