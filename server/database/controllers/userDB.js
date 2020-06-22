@@ -24,9 +24,7 @@ function QueryMultyUser(arrayid){
 // return a array wit the user element
 userDB.findOneUserByEmail = async (email) => {
     return  db.one("SELECT * FROM users WHERE email = $1", email)
-    .then(data => {
-        data.password = "";
-        return data})
+    .then(data => data)
     .catch(err => err)
   }
 
@@ -90,6 +88,7 @@ userDB.updateUser = async (newData) => {
         newData.latitude,
         newData.longitude,
         newData.connected,
+        newData.verified,
         newData.id
     ]
     return  db.none(`UPDATE users 
@@ -110,8 +109,9 @@ userDB.updateUser = async (newData) => {
                     fame = $14,
                     latitude = $15,
                     longitude = $16,
-                    connected = $17
-                WHERE ID = $18`,
+                    connected = $17,
+                    verified = $18
+                WHERE ID = $19`,
                 data
         )
     .catch(err => null)

@@ -17,7 +17,9 @@ router.get('/', (req, res) =>{
                 else
                     res.redirect("http://localhost:3000/404")
             })
-            .catch(err => res.redirect("http://localhost:3000/404"))
+            .catch(err => {
+                console.log(err)
+                res.redirect("http://localhost:3000/404")})
         }
 })
 

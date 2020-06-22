@@ -8,6 +8,11 @@ const check = require("../../Model/check")
 
 let usersController = {};
 
+function hashPassword(password){
+    return crypto.createHash('sha256')
+            .update(password)
+            .digest('hex');
+}
 
 //to prevent xss
 
@@ -49,11 +54,9 @@ usersController.login = function(req, res) {
         || req.body.user === undefined
         || req.body.user.password === undefined)
     return errorResponse(res, 'missing user information')
-
     let email = req.body.user.email;
-    let password = crypto.createHash('sha256')
-                         .update(req.body.user.password)
-                         .digest('hex');
+    
+    var password = hashPassword(req.body.user.password)
     database.one(
         'SELECT * FROM users WHERE'
         + ' (email = $1 AND password = $2)',
@@ -90,9 +93,7 @@ usersController.create = function(req, res) {
         return reponse.errorResponse(res, error)
         
     user.verified =  crypto.createHash('sha256').digest("hex");
-    user.password = crypto.createHash('sha256')
-                          .update(user.password)
-                          .digest('hex');
+    user.password = hashPassword(user.password)
     sendMail.confirmMail(user.email, user.verified);
     database.none(
         'INSERT INTO users'
