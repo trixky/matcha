@@ -8,6 +8,10 @@ var verifiedRouter = require("./verified")
 var accountRouter = require("./account")
 var pictureRouter = require("./picture")
 
-router.use("/", pictureRouter)
+router.use("/", (req, res, next) => {
+    req.session.user = 0
+    next()
+}
+,pictureRouter)
 
 module.exports = router;

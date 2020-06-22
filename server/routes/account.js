@@ -4,8 +4,6 @@ const ent = require("ent")
 const check = require("../Model/check")
 const crypto = require("crypto")
 
-//const userid = 1;
-
 router.get("/", (req, res, next) => {
   
     if (checkHaveId(req, res))
