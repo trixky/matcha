@@ -6,19 +6,19 @@ const crypto = require("crypto")
 
 router.get("/", (req, res, next) => {
   
-    if (checkHaveId(req, res))
+    if (!checkHaveId(req, res))
         return;
     
     const userid = req.session.user;
     
     userDB.findOneUserById(userid)
     .then(data => Response(res, data))
-    .catch(err => errorResponse(res, {error: "Something went wrong"}));
+    .catch(err => errorResponse(res, "Something went wrong in account"));
 })
 
 router.put("/", (req, res, next) => {
     
-    if (checkHaveId(req, res))
+    if (!checkHaveId(req, res))
         return;
 
     var user = req.body.user;
@@ -27,10 +27,10 @@ router.put("/", (req, res, next) => {
         userDB.findOneUserByEmail(user.email)
         .then(data => {
                 if (data.email)
-                    return errorResponse(res, {email: "This email is already taked"});
+                    return errorResponse(res, "This email is already taked");
                 return updateData(req, res, user)
             })
-        .catch(err => errorResponse(res, {error: "Something went wrong"}));
+        .catch(err => errorResponse(res, "Something went wrong in account"));
     else
         updateData(req, res, user)
 })
@@ -53,11 +53,11 @@ function updateData(req, res, user){
             .then(data =>
                 userDB.findOneUserById(userid)
                 .then(data => Response(res, data))
-                .catch(err => errorResponse(res, {error: "Something went wrong"}))
+                .catch(err => errorResponse(res, "Something went wrong in account"))
             )
-            .catch(err => errorResponse(res, {error: "Something went wrong"}));
+            .catch(err => errorResponse(res, "Something went wrongin account"));
         })
-        .catch(err => errorResponse(res, {error: "Something went wrong"}));
+        .catch(err => errorResponse(res, "Something went wrong in account"));
 }
 
 function encodeUserData(user){
@@ -114,10 +114,10 @@ function Response(res,  data)
 function checkHaveId(req, res){
     if (!req.session.user)
     {
-        errorResponse(res, {error: "Something went wrong"});
-        return true;
+        errorResponse(res, "Something went wrong in account");
+        return false;
     }
-    return false;
+    return true;
 }
 
 module.exports = router;

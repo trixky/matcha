@@ -42,7 +42,7 @@ app.use(function(req, res, next) {
     {
         next();
     } else {
-       reponse.errorResponse(res, {error: "Acces denied"});
+       reponse.errorResponse(res, "Acces denied");
     }
 });
 

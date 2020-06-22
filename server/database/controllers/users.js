@@ -36,18 +36,6 @@ function errorResponse(res,  message)
 
 // ---------------------------------------------
 
-usersController.index = function(req, res) {
-    database.any(
-        'SELECT * FROM users'
-    ).then(function(data) {
-        res.json({ _status: 0, _data: data });
-    }).catch(function(error) {
-        res.json({ _status: -1, _message: error.message });
-    });
-};
-
-// ---------------------------------------------
-
 usersController.login = function(req, res) {
 
     if (req.body === undefined
@@ -68,9 +56,9 @@ usersController.login = function(req, res) {
             return reponse.errorResponse(res, 'Your account was not valided, a new email will be send to you')
         }
         req.session.user = data.id;
-        res.json({ _status: 0, _data: data });	
+        reponse.response(res, data)
     }).catch(function(error) {
-        reponse.errorResponse(res, ["Bad identifiant or password"])
+        reponse.errorResponse(res, "Bad identifiant or password")
     });
 };
 
@@ -81,7 +69,7 @@ usersController.create = function(req, res) {
     if (req.body === undefined
         || req.body.user === undefined
         || req.body.user.password === undefined)
-    return reponse.errorResponse(res, ['missing user information'])
+    return reponse.errorResponse(res, 'missing user information')
 
     let user = req.body.user;
     
@@ -111,29 +99,10 @@ usersController.create = function(req, res) {
         + ' FROM users',
         user
     ).then(function() {
-        res.json({ _status: 0, _data: null });
+        reponse.reponse(res, "");
     }).catch(function() {
         error.email = "Email already taken"
         return reponse.errorResponse(res, error)
-    });
-};
-
-usersController.show = function(req, res) {
-
-    const id = _string.strToUint(req.params.id);
-
-    if (id < 0) {
-        res.json({ _status: -1, _message: 'invalid id' });
-        return;
-    }
-
-    database.one(
-        'SELECT * FROM users WHERE (id = $1)',
-        [id]
-    ).then(function(data) {
-        res.json({ _status: 0, _data: data });
-    }).catch(function(error) {
-        res.json({ _status: -1, _message: error.message });
     });
 };
 

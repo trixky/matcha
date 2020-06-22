@@ -8,12 +8,16 @@ const usersController = require('../database/controllers/users');
 router.get('/',(req, res) => {
     userDB.findAll()
     .then(data => reponse.response(res, data))
-    .catch(err => reponse.errorResponse(res, {error: "Something went wrong"}))
+    .catch(err => reponse.errorResponse(res, "Something went wrong in users"))
 });
 
 router.post('/login', usersController.login);
 router.post('/create', usersController.create);
 
-router.get('/:id', usersController.show);
+router.get('/:id', (req, res) => {
+    userDB.findOneUserById(req.params.id)
+    .then(data => reponse.response(res, data))
+    .catch(err => reponse.errorResponse(res, "Something went wrong in users"))
+});
 
 module.exports = router;

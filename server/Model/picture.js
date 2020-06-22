@@ -1,25 +1,17 @@
-const fs = require("fs")
 const multer = require("multer")
-const userDB = require("../database/controllers/userDB")
-const reponse = require("../Model/reponse")
-
-const picture = {}
+const {uuid} = require("uuidv4")
 const dir = __dirname.split("/Model")[0] + "/public";
 
+const picture = {}
 
 picture.MulterError = multer.MulterError;
-
-// multerupdate = multer({
-//                         dest : dir,
-//                         filename: "test"
-// })
 
 var storage = multer.diskStorage({
                         destination : function(req, file, cb){
                             cb(null, dir);
                         },
                         filename: function(req, file, cb){
-                            cb(null, "tests");
+                            cb(null, uuid());
                         }
 })
 
@@ -29,7 +21,7 @@ function fileFilter(req, file, cb){
      || file.mimetype === 'image/bmp')
          cb(null, true);
      else
-        cb(new Error("Not a jpg or bmp file"))
+        cb(new Error("Only file in jpg ,png or bmp format"))
 }
 
 multerupdate = multer({
@@ -37,6 +29,6 @@ multerupdate = multer({
                     fileFilter: fileFilter
                     })
 
-picture.save = multerupdate.single('image')
+picture.single = multerupdate.single('image')
 
 module.exports = picture

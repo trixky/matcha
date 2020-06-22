@@ -102,7 +102,15 @@ database.none(
     + ', '
     + "tags TEXT[] NOT NULL DEFAULT '{}'"
     + ', '
-    + "pictures TEXT[] NOT NULL DEFAULT '{}'"
+    + "profile VARCHAR(200)"
+    + ', '
+    + "picture1 VARCHAR(200)"
+    + ', '
+    + "picture2 VARCHAR(200)"
+    + ', '
+    + "picture3 VARCHAR(200)"
+    + ', '
+    + "picture4 VARCHAR(200)"
     + ', '
     // people that you like
     + 'likers INTEGER DEFAULT 0'

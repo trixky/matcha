@@ -2,7 +2,8 @@ const db  = require("../database")
 
 const userDB = {};
 const userInfo =  "username, firstname, name, gender, orientation, " 
-                + "biography, birthday, tags, pictures, liked, likers, match, "
+                + "biography, birthday, tags, profile, picture1, picture2, "
+                + "picture3, picture4, liked, likers, match, "
                 + "viewers, reputation, latitude, longitude, connected "
 
 function QueryMultyUser(arrayid){
@@ -54,17 +55,21 @@ userDB.findArray = async (array) => {
     .catch(err => err)
 }
 
-userDB.updatePicture = async (id, pictureName) => {
+userDB.updatePicture = async (id, pictureName, number) => {
     return userDB.findOneUserById(id)
     .then(data => {
-        if (data.picture.length >= 5)
-            return false;
-        var picture = data.picture;
-    
-        picture.push(pictureName)
-        return db.none(`UPDATE users SET picture = '{${picture}}' WHERE id = ${id};`)
-        .then(data => true)
-        .catch(err => console.log(err))
+        return db.none(`UPDATE users SET picture${number} = 'http://localhost:3002/${pictureName}' WHERE id = ${id};`)
+        .then(data => null)
+        .catch(err => err)
+    })
+    .catch(err => err)
+}
+userDB.updatePictureProfile = async (id, pictureName) => {
+    return userDB.findOneUserById(id)
+    .then(data => {
+        return db.none(`UPDATE users SET profile = 'http://localhost:3002/${pictureName}' WHERE id = ${id};`)
+        .then(data => null)
+        .catch(err => err)
     })
     .catch(err => err)
 }
@@ -80,7 +85,6 @@ userDB.updateUser = async (newData) => {
         newData.orientation,
         newData.biography,
         newData.tags,
-        newData.pictures,
         newData.liked,
         newData.likers,
         newData.viewers,
@@ -102,16 +106,15 @@ userDB.updateUser = async (newData) => {
                     orientation = $7,
                     biography = $8,
                     tags = $9,
-                    pictures = $10,
-                    liked = $11,
-                    likers = $12,
-                    viewers = $13,
-                    reputation = $14,
-                    latitude = $15,
-                    longitude = $16,
-                    connected = $17,
-                    verified = $18
-                WHERE ID = $19`,
+                    liked = $10,
+                    likers = $11,
+                    viewers = $12,
+                    reputation = $13,
+                    latitude = $14,
+                    longitude = $15,
+                    connected = $16,
+                    verified = $17
+                WHERE ID = $18`,
                 data
         )
     .catch(err => null)
