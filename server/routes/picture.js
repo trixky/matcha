@@ -29,9 +29,20 @@ router.post("/:id", function(req, res, next){
     }
 )
 
-router.put("/:id",(req, res, next) => {
-    userDB.deleteColumn(req.session.user, "profile")
+router.put("/:id", pictureId,
+    (req, res, next) => {
+    userDB.deletePicture(req.session.user, req.params.id)
     .then(data => reponse.response(res, ""))
         .catch(err => utils.log(err))
 })
+
+function pictureId(req, res, next){
+    if ((req.params.id < "5" 
+    && req.params.id > "0")
+    || req.params.id === "profile")
+                next()
+    else
+        return reponse.response(res, "Bad image number have to be between 1 - 4")
+}
+
 module.exports = router

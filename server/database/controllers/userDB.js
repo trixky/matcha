@@ -65,10 +65,17 @@ userDB.updatePictureProfile = async (id, pictureName) => {
     .catch(err => err)
 }
 
-userDB.deleteColumn = async (id, column) => {
-        return db.none(`UPDATE users SET ${column} = '' WHERE id = ${id};`)
-        .then(data => data)
-        .catch(err => err)
+userDB.deletePicture = async (id, column) => {
+    userDB.findOneUserById(id)
+    .then(data => deleteFile(column, data))
+    .catch(err => err);
+    if (column != "profile")
+        var columnDelete = "picture" + column;
+    else
+        var columnDelete =  column;
+    return db.none(`UPDATE users SET ${columnDelete} = '' WHERE id = ${id};`)
+    .then(data => data)
+    .catch(err => err)
 }
 
 userDB.updateUser = async (newData) => {
