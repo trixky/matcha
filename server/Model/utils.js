@@ -10,5 +10,8 @@ utils.stream = fs.createWriteStream(__dirname.split("/Model")[0] + "/errorLog", 
 utils.log = (message) => {
     utils.stream.write(message + "\r\n");
 }
+utils.removeFile = (filename) => {
+    fs.unlink(filename, () => {})
+}
 
 module.exports = utils;

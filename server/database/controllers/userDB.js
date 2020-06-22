@@ -1,25 +1,13 @@
 const db  = require("../database")
+const utils = require("../../Model/utils")
 
 const userDB = {};
+
 const userInfo =  "username, firstname, name, gender, orientation, " 
                 + "biography, birthday, tags, profile, picture1, picture2, "
                 + "picture3, picture4, liked, likers, match, "
                 + "viewers, reputation, latitude, longitude, connected "
 
-function QueryMultyUser(arrayid){
-    var query = "SELECT id, username, pictures FROM users WHERE ";
-    
-    for (var i= 0; i < arrayid.length; i++)
-    {
-        query += `id = ${arrayid[i]} `
-        if (i != arrayid.length - 1)
-            query += ` OR `
-        else
-            query += `;`
-    }
-    
-    return query;
-}
 
 // Find one user with the help of the email
 // return a array wit the user element
@@ -58,20 +46,29 @@ userDB.findArray = async (array) => {
 userDB.updatePicture = async (id, pictureName, number) => {
     return userDB.findOneUserById(id)
     .then(data => {
+        deleteFile(number, data)
         return db.none(`UPDATE users SET picture${number} = 'http://localhost:3002/${pictureName}' WHERE id = ${id};`)
         .then(data => null)
         .catch(err => err)
     })
     .catch(err => err)
 }
+
 userDB.updatePictureProfile = async (id, pictureName) => {
     return userDB.findOneUserById(id)
     .then(data => {
+        deleteFile("profile",data)
         return db.none(`UPDATE users SET profile = 'http://localhost:3002/${pictureName}' WHERE id = ${id};`)
         .then(data => null)
         .catch(err => err)
     })
     .catch(err => err)
+}
+
+userDB.deleteColumn = async (id, column) => {
+        return db.none(`UPDATE users SET ${column} = '' WHERE id = ${id};`)
+        .then(data => data)
+        .catch(err => err)
 }
 
 userDB.updateUser = async (newData) => {
@@ -118,6 +115,34 @@ userDB.updateUser = async (newData) => {
                 data
         )
     .catch(err => null)
+}
+
+function QueryMultyUser(arrayid){
+    var query = "SELECT id, username, pictures FROM users WHERE ";
+    
+    for (var i= 0; i < arrayid.length; i++)
+    {
+        query += `id = ${arrayid[i]} `
+        if (i != arrayid.length - 1)
+            query += ` OR `
+        else
+            query += `;`
+    }
+    
+    return query;
+}
+
+function deleteFile(id, user){
+    if (id === "1")
+        utils.removeFile( "public/" + user.picture1.split("http://localhost:3002")[1]);
+    else if (id === "2")
+        utils.removeFile("public/" +  user.picture2.split("http://localhost:3002")[1]);
+    else if (id === "3")
+        utils.removeFile("public/" + user.picture3.split("http://localhost:3002")[1]);
+    else if (id === "4")
+        utils.removeFile("public/" + user.picture4.split("http://localhost:3002")[1]);
+    if (id === "profile")
+        utils.removeFile("public/" + user.profile.split("http://localhost:3002")[1]);
 }
 
 module.exports = userDB;
