@@ -98,7 +98,7 @@ database.none(
     + ', '
     + 'biography VARCHAR(500)'
     + ', '
-    + 'birthday VARCHAR(500)NOT NULL DEFAULT 0'
+    + "birthday VARCHAR(500) NOT NULL DEFAULT '1999-12-13'"
     + ', '
     + "tags TEXT[] NOT NULL DEFAULT '{}'"
     + ', '
