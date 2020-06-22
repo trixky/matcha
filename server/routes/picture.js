@@ -6,8 +6,10 @@ const utils = require("../Model/utils")
 const router = express.Router()
 
 router.post("/:id", function(req, res, next){
+    
     if (req.params.id > 4 || req.params.id < 1)
         return reponse.response(res, "Bad image number have to be between 1 - 4")
+
     picture.single(req, res, (err) => {
         if (err) {return reponse.errorResponse(res,  err.message)}
         next();})},
@@ -19,6 +21,7 @@ router.post("/:id", function(req, res, next){
 )
 
 router.post("/profile", function(req, res, next){
+    
     picture.single(req, res, (err) => {
         if (err) {return reponse.errorResponse(res,  err.message)}
         next();})},
