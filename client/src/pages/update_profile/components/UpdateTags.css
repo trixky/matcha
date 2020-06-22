@@ -4,14 +4,24 @@
 	line-height: 2;
 }
 
-.update-actual-tags-list > span {
+.update-tag-span {
 	background-color: var(--main-grey-3);
-	padding: 4px;
 	border-radius: 4px;
+	display: inline-block;
+	margin: 3px;
+	padding: 0 7px;
 }
 
 .update-tag-span:hover {
 	cursor: pointer;
-	text-decoration : line-through;
+	/* text-decoration : line-through; */
 	opacity: 0.5;
+}
+
+.update-tag-span.on {
+	background-color: var(--main-pink-1);
+}
+
+.update-tag-span.on:hover {
+	text-decoration : line-through;
 }

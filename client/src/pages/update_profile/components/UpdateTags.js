@@ -3,12 +3,44 @@ import React, { Component } from 'react'
 import './UpdateTags.css'
 
 class UpdateTags extends Component {
+	state = {
+		language: 'on',
+		movies: 'off',
+		pets: 'off',
+		nature: 'off',
+		adventure: 'off',
+		writing: 'off',
+		fitness: 'off',
+		astrology: 'on',
+		shopping: 'off',
+		technology: 'off',
+		music: 'off',
+		travel: 'on',
+		photography: 'off',
+		reading: 'off',
+		sports: 'on',
+		cooking: 'on',
+		food: 'off',
+		carrer: 'off',
+		art: 'off',
+		life: 'off',
+		religion: 'off',
+		history: 'on',
+		school: 'off',
+		science: 'off',
+		family: 'off',
+		sex: 'off',
+		relationships: 'off',
+		environement: 'on'
+	}
+
 	render() {
+		console.log(this.state)
 		return (
 			<form>
-				<p className='update-actual-tags-list'><span className='update-tag-span'>#akm</span> <span className='update-tag-span'>#pistache</span> <span className='update-tag-span'>#doliprane</span> <span className='update-tag-span'>#mangue</span> <span className='update-tag-span'>#tir-fesse</span></p>
-				<input className='form-input' type='text' placeholder='cinema' />
-				<input className='form-input auth-submit' type='submit' value='add a tag' />
+				<p className='update-actual-tags-list'>
+					{Object.keys(this.state).map((key, value) => <span className={'update-tag-span ' + this.state[key]} key={key}>{'#' + key}</span>)}
+				</p>
 			</form>
 		);
 	}
