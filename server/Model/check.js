@@ -22,7 +22,9 @@ const badTag = "A error with a tag"
 check.userCreate = (user) =>{
     
     var ret = {}
-        
+    
+    console.log(/[a-zA-Z]/.test(user.password))
+
     if (!user.email || !isValidEmail(user.email) || user.email.length > 50)
         ret.email = badEmail;
     if (!user.username || user.username.length > 30 || user.username.length === 0)
@@ -31,8 +33,9 @@ check.userCreate = (user) =>{
         ret.firstname = longFirstname
     if (!user.name || user.name.length > 30 || user.name.length === 0)
         ret.name = longName
-    if (!user.password || !/\d*/.test(user.password) 
-    || !/[a-z,A-Z]*/.test(user.password)
+    if (!user.password 
+    || !/\d*/.test(user.password) 
+    || !/[a-zA-Z]/.test(user.password)
     || user.password.length < 8
     || user.password.length > 30)
         ret.password = badPassword;
