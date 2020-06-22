@@ -87,11 +87,8 @@ class Authentification extends Component {
 			fetch('/users/create', requestOptions)
 				.then(response => response.json())
 				.then(data => {
-					console.log('status = ', data._status)
+					let invalid_input_register = Object.assign(_this.state.invalid_input_register)
 					if (data._status === -1) {
-						let invalid_input_register = Object.assign(_this.state.invalid_input_register)
-						console.log('invalid_input_register = ', invalid_input_register)
-						console.log(data)
 						Object.keys(invalid_input_register).forEach(key => {
 							invalid_input_register[key].status = 'off';
 							invalid_input_register[key].message = '';
@@ -104,6 +101,11 @@ class Authentification extends Component {
 						})
 						_this.setState({ invalid_input_register })
 					} else {
+						Object.keys(invalid_input_register).forEach(key => {
+							invalid_input_register[key].status = 'off';
+							invalid_input_register[key].message = '';
+						})
+						_this.setState({ invalid_input_register })
 						_this.setState({ valid_input_register: 'on' })
 					}
 				});
