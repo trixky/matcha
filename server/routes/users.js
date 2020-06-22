@@ -8,7 +8,7 @@ const usersController = require('../database/controllers/users');
 router.get('/',(req, res) => {
     userDB.findAll()
     .then(data => reponse.response(res, data))
-    .then(err => reponse.errorResponse(res, {error: "Something went wrong"}))
+    .catch(err => reponse.errorResponse(res, {error: "Something went wrong"}))
 });
 
 router.post('/login', usersController.login);

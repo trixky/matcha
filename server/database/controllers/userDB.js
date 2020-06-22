@@ -2,7 +2,7 @@ const db  = require("../database")
 
 const userDB = {};
 const userInfo =  "username, firstname, name, gender, orientation, " 
-                + "biography, tags, pictures, liked, likers, match, "
+                + "biography, birthday, tags, pictures, liked, likers, match, "
                 + "viewers, reputation, latitude, longitude, connected "
 
 function QueryMultyUser(arrayid){
