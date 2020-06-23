@@ -1,6 +1,6 @@
 const express = require("express")
 const picture = require("../Model/picture")
-const reponse = require("../Model/reponse")
+const response = require("../Model/response")
 const userDB = require("../database/controllers/userDB")
 const utils = require("../Model/utils")
 const router = express.Router()
@@ -11,20 +11,20 @@ router.post("/:id", function(req, res, next){
     || req.params.id === "profile")
         picture.single(req, res, (err) => {
             if (err)
-                return reponse.errorResponse(res,  err.message)
+                return response.errorResponse(res,  err.message)
             else
                 next();})
     else
-        return reponse.response(res, "Bad image number have to be between 1 - 4")
+        return response.response(res, "Bad image number have to be between 1 - 4")
     },
     (req, res, next) => {
         if (req.params.id === "profile")
             userDB.updatePictureProfile(req.session.user, req.file.filename)
-            .then(data => reponse.response(res, ""))
+            .then(data => response.response(res, ""))
             .catch(err => utils.log(err))
         else
             userDB.updatePicture(req.session.user, req.file.filename, req.params.id)
-            .then(data => reponse.response(res, ""))
+            .then(data => response.response(res, ""))
             .catch(err => utils.log(err))
     }
 )
@@ -32,7 +32,7 @@ router.post("/:id", function(req, res, next){
 router.put("/:id", pictureId,
     (req, res, next) => {
     userDB.deletePicture(req.session.user, req.params.id)
-    .then(data => reponse.response(res, ""))
+    .then(data => response.response(res, ""))
         .catch(err => utils.log(err))
 })
 
@@ -42,7 +42,7 @@ function pictureId(req, res, next){
     || req.params.id === "profile")
                 next()
     else
-        return reponse.response(res, "Bad image number have to be between 1 - 4")
+        return response.response(res, "Bad image number have to be between 1 - 4")
 }
 
 module.exports = router

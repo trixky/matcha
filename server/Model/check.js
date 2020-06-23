@@ -47,8 +47,19 @@ function ft_checkTag(user){
     return false;
 }
 
+
+check.password = (user) =>{
+    if (user.password)            
+        if (!/\d*/.test(user.password) 
+        || !/[a-z,A-Z]*/.test(user.password)
+        || user.password.length < 8
+        || user.password.length > 30)
+            return  badPassword;
+    return null;
+}
+
 check.userProfile = (user) =>{
-    var ret = {}
+    
     var ret = {}
     
     if (user.email)

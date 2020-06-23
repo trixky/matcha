@@ -3,10 +3,10 @@ const utils = require("../../Model/utils")
 
 const userDB = {};
 
-const userInfo =  "username, firstname, name, gender, orientation, " 
+const userInfo =  "id ,email, username, firstname, name, gender, orientation, " 
                 + "biography, birthday, tags, profile, picture1, picture2, "
                 + "picture3, picture4, liked, likers, match, "
-                + "viewers, reputation, latitude, longitude, connected "
+                + "viewers, reputation, latitude, longitude, connected, verified"
 
 
 // Find one user with the help of the email
@@ -18,17 +18,16 @@ userDB.findOneUserByEmail = async (email) => {
   }
 
 userDB.findOneUserById = async (id) => {
-    return  db.one("SELECT * FROM users WHERE id = $1", id)
-    .then(data => {
-        data.password = "";
-        return data})
+    return  db.one(`SELECT ${userInfo} FROM users WHERE id = $1`, id)
+    .then(data => data)
     .catch(err => err)
   }
 
 // Only update the password with the id of the user 
 userDB.updateOnePasswordById = async (id, password) => {
     return db.none("UPDATE users SET password = $2 WHERE ID = $1", [id, password])
-    .catch(err => err)
+    .then(data => data)
+    .catch(err => utils.log(err))
 }
 
 userDB.findAll = async () => {
@@ -84,7 +83,6 @@ userDB.updateUser = async (newData) => {
         newData.username,
         newData.firstname,
         newData.name,
-        newData.password,
         newData.gender,
         newData.orientation,
         newData.biography,
@@ -99,29 +97,29 @@ userDB.updateUser = async (newData) => {
         newData.verified,
         newData.id
     ]
+    console.log(data)
     return  db.none(`UPDATE users 
                 SET 
                     email = $1,
                     username = $2,
                     firstname = $3,
                     name = $4,
-                    password = $5,
-                    gender = $6,
-                    orientation = $7,
-                    biography = $8,
-                    tags = $9,
-                    liked = $10,
-                    likers = $11,
-                    viewers = $12,
-                    reputation = $13,
-                    latitude = $14,
-                    longitude = $15,
-                    connected = $16,
-                    verified = $17
-                WHERE ID = $18`,
+                    gender = $5,
+                    orientation = $6,
+                    biography = $7,
+                    tags = $8,
+                    liked = $9,
+                    likers = $10,
+                    viewers = $11,
+                    reputation = $12,
+                    latitude = $13,
+                    longitude = $14,
+                    connected = $15,
+                    verified = $16
+                WHERE ID = $17`,
                 data
         )
-    .catch(err => null)
+    .catch(err => console.log(err))
 }
 
 function QueryMultyUser(arrayid){

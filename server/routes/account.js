@@ -3,6 +3,7 @@ const userDB = require("../database/controllers/userDB");
 const ent = require("ent")
 const check = require("../Model/check")
 const crypto = require("crypto")
+const response = require("../Model/response")
 
 router.get("/", (req, res, next) => {
   
@@ -12,8 +13,27 @@ router.get("/", (req, res, next) => {
     const userid = req.session.user;
     
     userDB.findOneUserById(userid)
-    .then(data => Response(res, data))
-    .catch(err => errorResponse(res, "Something went wrong in account"));
+    .then(data => {
+        data.password = ""
+        response.response(res, data)})
+    .catch(err => response.errorResponse(res, "Something went wrong in account, Error database"));
+})
+
+router.put("/password", (req, res, next) => {
+
+    if (!checkHaveId(req, res))
+        return;
+    var user = req.body.user;
+    var err = check.password(user)
+    if (err)
+        return response.errorResponse(res, err)
+    user.password = crypto.createHash('sha256')
+                .update(user.password)
+                .digest('hex');
+    userDB.updateOnePasswordById(req.session.user, user.password)
+    .then(data => response.response(res, "Password updated"))
+    .catch(err => response.errorResponse(res, "Something went wrong in update password, Error database"));
+                
 })
 
 router.put("/", (req, res, next) => {
@@ -30,7 +50,7 @@ router.put("/", (req, res, next) => {
                     return errorResponse(res, "This email is already taked");
                 return updateData(req, res, user)
             })
-        .catch(err => errorResponse(res, "Something went wrong in account"));
+        .catch(err => errorResponse(res, "Something went wrong in account, Error database"));
     else
         updateData(req, res, user)
 })
@@ -38,7 +58,7 @@ router.put("/", (req, res, next) => {
 function updateData(req, res, user){
             
     user = encodeUserData(user)    
-            
+    
     const error = check.userProfile(user)
 
     if (Object.entries(error).length)
@@ -52,12 +72,14 @@ function updateData(req, res, user){
             userDB.updateUser(newData)
             .then(data =>
                 userDB.findOneUserById(userid)
-                .then(data => Response(res, data))
-                .catch(err => errorResponse(res, "Something went wrong in account"))
+                .then(data => {
+                    data.password = ""
+                    Response(res, data)})
+                .catch(err => errorResponse(res, "Something went wrong in account, Error database"))
             )
-            .catch(err => errorResponse(res, "Something went wrongin account"));
+            .catch(err => errorResponse(res, "Something went wrongin account, Error database"));
         })
-        .catch(err => errorResponse(res, "Something went wrong in account"));
+        .catch(err => errorResponse(res, "Something went wrong in account, Error database"));
 }
 
 function encodeUserData(user){
@@ -80,10 +102,6 @@ function changeValue(data, newData){
         data.firstname = newData.firstname
     if (newData.name)
         data.name = newData.name;
-    if (newData.password)
-        data.password = crypto.createHash('sha256')
-                    .update(newData.password)
-                    .digest('hex');
     if (newData.gender)
         data.gender = newData.gender
     if (newData.orientation)
@@ -112,9 +130,9 @@ function Response(res,  data)
 }
 
 function checkHaveId(req, res){
-    if (!req.session.user)
+    if (req.session.user === undefined)
     {
-        errorResponse(res, "Something went wrong in account");
+        errorResponse(res, "Something went wrong in account, You don't have a session");
         return false;
     }
     return true;

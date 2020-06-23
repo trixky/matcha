@@ -1,7 +1,7 @@
 
-const reponse = {}
+const response = {}
 
-reponse.errorResponse = (res,  message) =>
+response.errorResponse = (res,  message) =>
 {
     return res.json({
         _status: -1,
@@ -9,7 +9,7 @@ reponse.errorResponse = (res,  message) =>
     })
 }
 
-reponse.response = (res,  message) => 
+response.response = (res,  message) => 
 {
     return res.json({
         _status: 0,
@@ -17,4 +17,4 @@ reponse.response = (res,  message) =>
     })
 }
 
-module.exports = reponse;
+module.exports = response;

@@ -3,7 +3,7 @@ const ent = require("ent")
 const database = require('../database');
 const _string = require('../../lib/_string');
 const sendMail = require("../../Model/sendmail")
-const reponse = require("../../Model/reponse")
+const response = require("../../Model/response")
 const check = require("../../Model/check")
 
 let usersController = {};
@@ -53,12 +53,12 @@ usersController.login = function(req, res) {
         if (data.verified)
         {
             sendMail.confirmMail(data.email, data.verified)
-            return reponse.errorResponse(res, 'Your account was not valided, a new email will be send to you')
+            return response.errorResponse(res, 'Your account was not valided, a new email will be send to you')
         }
         req.session.user = data.id;
-        reponse.response(res, data)
+        response.response(res, data)
     }).catch(function(error) {
-        reponse.errorResponse(res, "Bad identifiant or password")
+        response.errorResponse(res, "Bad identifiant or password")
     });
 };
 
@@ -69,7 +69,7 @@ usersController.create = function(req, res) {
     if (req.body === undefined
         || req.body.user === undefined
         || req.body.user.password === undefined)
-    return reponse.errorResponse(res, 'missing user information')
+    return response.errorResponse(res, 'missing user information')
 
     let user = req.body.user;
     
@@ -78,7 +78,7 @@ usersController.create = function(req, res) {
     user = encodeUserData(user);
     
     if (Object.entries(error).length)
-        return reponse.errorResponse(res, error)
+        return response.errorResponse(res, error)
         
     user.verified =  crypto.createHash('sha256').digest("hex");
     user.password = hashPassword(user.password)
@@ -99,10 +99,10 @@ usersController.create = function(req, res) {
         + ' FROM users',
         user
     ).then(function() {
-        reponse.reponse(res, "");
+        response.response(res, "");
     }).catch(function() {
         error.email = "Email already taken"
-        return reponse.errorResponse(res, error)
+        return response.errorResponse(res, error)
     });
 };
 
