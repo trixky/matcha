@@ -21,4 +21,16 @@ router.post("/", (req, res, next) => {
     .catch(err => response.errorResponse(res, "Something wrong in the liked router"))
 })
 
+router.get("/likers", (req, res, next) =>{
+    likedDB.getAlllikers(req.session.user)
+    .then(data => response.response(res, data))
+    .catch(err => response.errorResponse(res, "Something wrong in likers"))
+})
+
+router.get("/liked", (req, res, next) =>{
+    likedDB.getAllLiked(req.session.user)
+    .then(data => response.response(res, data))
+    .catch(err => response.errorResponse(res, "Something wrong in liked"))
+})
+
 module.exports = router;

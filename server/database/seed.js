@@ -32,11 +32,17 @@ database.none(
 .then(() => database.none(
     'CREATE TABLE liked'
     + '('
-    + 'userID INTEGER NOT NULL'
+    + 'likerid INTEGER NOT NULL'
     + ', '
-    + 'personID INTEGER NOT NULL'
+    + 'likedID INTEGER NOT NULL'
     + ', '
-    + 'username VARCHAR(31) NOT NULL'
+    + 'likerusername VARCHAR(31) NOT NULL'
+    + ', '
+    + 'likedusername VARCHAR(31) NOT NULL'
+    + ', '
+    + 'likerpicture VARCHAR(31) NOT NULL'
+    + ', '
+    + 'likedpicture VARCHAR(31) NOT NULL'
     + ', '
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
@@ -145,8 +151,8 @@ database.none(
     +   "liked "
     +   "DO "
     +   "("
-    +   "UPDATE users set liked = liked + 1 WHERE id = NEW.userid; "
-    +   "UPDATE users set likers = likers + 1 WHERE id = NEW.personID;"
+    +   "UPDATE users set liked = liked + 1 WHERE id = NEW.likerid; "
+    +   "UPDATE users set likers = likers + 1 WHERE id = NEW.likedid;"
     +   ");"
 )
 .then(() => database.none(
@@ -155,8 +161,8 @@ database.none(
     +   "liked "
     +   "DO "
     +   "("
-    +   "UPDATE users set liked = liked - 1 WHERE id = OLD.userid ;"
-    +   "UPDATE users set likers = likers - 1 WHERE id = OLD.personID;"
+    +   "UPDATE users set liked = liked - 1 WHERE id = OLD.likerid ;"
+    +   "UPDATE users set likers = likers - 1 WHERE id = OLD.likedid;"
     +   ");"
 )
 .then(() => database.none(
@@ -164,7 +170,7 @@ database.none(
     +   "AS ON INSERT TO "
     +   "match "
     +   "DO "
-    +   "UPDATE users set match = match + 1 WHERE id = ANY (NEW.usersid) OR id = ANY (NEW.usersid);"
+    +   "UPDATE users set match = match + 1 WHERE id = ANY (NEW.usersid);"
 )
 //------------------------------------------- INSERT
 .then(() => database.none(

@@ -13,6 +13,7 @@ router.use("/", (req, res, next) => {
     req.session.user = 0
      next()
  }
+//  ,pictureRouter)
  ,likedRouter)
 
 module.exports = router;

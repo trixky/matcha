@@ -42,9 +42,16 @@ var server = http.createServer(function(req, res){
     })
 
     s.on("error", function(){
-        res.setHeader("Content-Type", "text/plain");
-        res.statusCode = 404;
+        
+        s = fs.createReadStream(__dirname + "/ressource/canard.jpg");
+        s.on('open', function(){
+            res.setHeader("Content-Type", type);
+            s.pipe(res);
+        })
+        s.on("error", function(){
+        res.setHeader("Content-Type", mime.jpeg);
         return res.end("Not found")
+        })
     })
 })
 

@@ -11,7 +11,10 @@ var storage = multer.diskStorage({
                             cb(null, dir);
                         },
                         filename: function(req, file, cb){
-                            cb(null, uuid());
+                            if (req.url === "/profile")
+                                cb(null,  "profile_" + req.session.user)
+                            else
+                                cb(null,  uuid())
                         }
 })
 
