@@ -1,13 +1,13 @@
 const db = require('../database');
-
+const utils = require("../../Model/utils")
 const likedDB = {};
 
 likedDB.create = async (user, liked) => {
-    return db.one(
+    return db.none(
         `INSERT INTO liked (userid, personid, username, created) VALUES ('${user.id}', '${liked.id}', '{${user.username}, ${liked.username}}', CURRENT_TIMESTAMP);`
     )
     .then(data => null)
-    .catch(err => null)
+    .catch(err => utils.log(err))
 }
 
 likedDB.getAll = async (userid) => {
@@ -16,7 +16,7 @@ likedDB.getAll = async (userid) => {
         `SELECT * FROM liked WHERE ${userid} = (personid);`
     )
     .then(data => data)
-    .catch(err => null);
+    .catch(err => utils.log(err))
 }
 
 likedDB.liked = async (userid) => {
@@ -25,7 +25,7 @@ likedDB.liked = async (userid) => {
         `SELECT * FROM liked WHERE ${userid} = (userid);`
     )
     .then(data => data)
-    .catch(err => null);
+    .catch(err => utils.log(err))
 }
 
 likedDB.delete = async (userid, likedid) => {
@@ -34,7 +34,7 @@ likedDB.delete = async (userid, likedid) => {
         `DELETE FROM liked WHERE ${userid} = (userid) AND ${likedid} = (personid);`
     )
     .then(data => null)
-    .catch(err => null);
+    .catch(err => utils.log(err))
 }
 
 module.exports = likedDB;

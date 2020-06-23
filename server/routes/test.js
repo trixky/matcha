@@ -7,11 +7,12 @@ var forgetRouter = require("./forget")
 var verifiedRouter = require("./verified")
 var accountRouter = require("./account")
 var pictureRouter = require("./picture")
+var likedRouter = require("./liked")
 
 router.use("/", (req, res, next) => {
     req.session.user = 0
      next()
  }
- ,accountRouter)
+ ,likedRouter)
 
 module.exports = router;

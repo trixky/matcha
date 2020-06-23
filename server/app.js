@@ -13,7 +13,7 @@ var verifiedRouter = require("./routes/verified")
 var testRouter = require("./routes/test")
 var pictureRouter = require("./routes/picture")
 var accountRouter = require("./routes/account")
-
+var likedRouter = require("./routes/liked")
 var app = express();
 
 app.use(cors())
@@ -54,6 +54,8 @@ app.use("/forget", forgetRouter);
 app.use("/verified", verifiedRouter)
 app.use("/picture", pictureRouter)
 app.use("/account", accountRouter)
+app.use("/liked", likedRouter)
+
 
 app.use("/test", testRouter)
 

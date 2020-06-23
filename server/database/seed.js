@@ -138,19 +138,26 @@ database.none(
     + 'modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
+//------------------------------------------- RULE
 .then(() => database.none(
         "CREATE OR REPLACE RULE liked "
     +   "AS ON INSERT TO "
     +   "liked "
     +   "DO "
-    +   "UPDATE users set liked = liked + 1 WHERE id = NEW.userid;"
+    +   "("
+    +   "UPDATE users set liked = liked + 1 WHERE id = NEW.userid; "
+    +   "UPDATE users set likers = likers + 1 WHERE id = NEW.personID;"
+    +   ");"
 )
 .then(() => database.none(
-        "CREATE OR REPLACE RULE likers "
-    +   "AS ON INSERT TO "
+        "CREATE OR REPLACE RULE deleteliked "
+    +   "AS ON DELETE TO "
     +   "liked "
     +   "DO "
-    +   "UPDATE users set likers = likers + 1 WHERE id = NEW.personID;"
+    +   "("
+    +   "UPDATE users set liked = liked - 1 WHERE id = OLD.userid ;"
+    +   "UPDATE users set likers = likers - 1 WHERE id = OLD.personID;"
+    +   ");"
 )
 .then(() => database.none(
         "CREATE OR REPLACE RULE match "
@@ -159,6 +166,7 @@ database.none(
     +   "DO "
     +   "UPDATE users set match = match + 1 WHERE id = ANY (NEW.usersid) OR id = ANY (NEW.usersid);"
 )
+//------------------------------------------- INSERT
 .then(() => database.none(
     'INSERT INTO users'
     + '(id, ' 
