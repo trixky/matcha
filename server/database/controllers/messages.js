@@ -1,9 +1,9 @@
 const db = require('../database');
 
-const messages = {};
+const messagesDB = {};
 
 
-messages.create = async (senderid, personid , sendername, message) => {
+messagesDB.create = async (senderid, personid , sendername, message) => {
     return db.none(
         `INSERT INTO messages (usersid, sender, message, created) VALUES ('{${senderid}, ${personid}}', '${sendername}', '${message}', CURRENT_TIMESTAMP);`
     )
@@ -11,7 +11,7 @@ messages.create = async (senderid, personid , sendername, message) => {
     .catch(err => null)
 }
 
-messages.getAll= async (user1id, user2id) => {
+messagesDB.getAll= async (user1id, user2id) => {
     return db.many(
         `SELECT * FROM messages WHERE ${user1id} = ANY (usersid) AND ${user2id} = ANY (usersid);`
     )
@@ -19,7 +19,7 @@ messages.getAll= async (user1id, user2id) => {
     .catch(err => null)
 }
 
-messages.delete= async (user1id, user2id) => {
+messagesDB.delete= async (user1id, user2id) => {
     return db.none(
         `DELETE FROM messages WHERE ${user1id} = ANY (usersid) AND ${user2id} = ANY (usersid);`
     )
@@ -28,4 +28,4 @@ messages.delete= async (user1id, user2id) => {
 }
 
 
-module.exports = messages;
+module.exports = messagesDB;

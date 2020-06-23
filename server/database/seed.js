@@ -14,7 +14,7 @@ database.none(
     + 'liked, '
     + 'blocked, '
     + 'viewers, '
-    + 'relationship, '
+    + 'match, '
     + 'users ;'
 )
 .then(() => database.none(
@@ -66,7 +66,7 @@ database.none(
     + ')'
 )
 .then(() => database.none(
-    'CREATE TABLE relationship'
+    'CREATE TABLE match'
     + '('
     + 'usersID INTEGER[] NOT NULL'
     + ', '
@@ -137,6 +137,27 @@ database.none(
     + ', '
     + 'modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP'
     + ')'
+)
+.then(() => database.none(
+        "CREATE OR REPLACE RULE liked "
+    +   "AS ON INSERT TO "
+    +   "liked "
+    +   "DO "
+    +   "UPDATE users set liked = liked + 1 WHERE id = NEW.userid;"
+)
+.then(() => database.none(
+        "CREATE OR REPLACE RULE likers "
+    +   "AS ON INSERT TO "
+    +   "liked "
+    +   "DO "
+    +   "UPDATE users set likers = likers + 1 WHERE id = NEW.personID;"
+)
+.then(() => database.none(
+        "CREATE OR REPLACE RULE match "
+    +   "AS ON INSERT TO "
+    +   "match "
+    +   "DO "
+    +   "UPDATE users set match = match + 1 WHERE id = ANY (NEW.usersid) OR id = ANY (NEW.usersid);"
 )
 .then(() => database.none(
     'INSERT INTO users'
@@ -265,6 +286,6 @@ database.none(
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",    
-)))))))))))
+))))))))))))))
 .then(_exit).catch(_exit);
 

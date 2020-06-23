@@ -42,7 +42,7 @@ router.put("/", (req, res, next) => {
         return;
 
     var user = req.body.user;
-
+    
     if (user.email)
         userDB.findOneUserByEmail(user.email)
         .then(data => {
@@ -50,7 +50,15 @@ router.put("/", (req, res, next) => {
                     return errorResponse(res, "This email is already taked");
                 return updateData(req, res, user)
             })
-        .catch(err => errorResponse(res, "Something went wrong in account, Error database"));
+        .catch(err => errorResponse(res, "Something went wrong in account, Error database in finding email"));
+    else if (user.username)
+        userDB.findOneUserByUsername(user.username)
+        .then(data => {        
+            if (data.username)
+             return response.errorResponse(res, {username: "Username already taken"})
+            updateData(req, res, user)
+        })
+        .catch(err => errorResponse(res, "Something went wrong in account, Error database in finding username"));
     else
         updateData(req, res, user)
 })

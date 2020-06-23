@@ -23,8 +23,6 @@ check.userCreate = (user) =>{
     
     var ret = {}
     
-    console.log(/[a-zA-Z]/.test(user.password))
-
     if (!user.email || !isValidEmail(user.email) || user.email.length > 50)
         ret.email = badEmail;
     if (!user.username || user.username.length > 30 || user.username.length === 0)

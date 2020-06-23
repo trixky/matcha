@@ -5,6 +5,7 @@ const _string = require('../../lib/_string');
 const sendMail = require("../../Model/sendmail")
 const response = require("../../Model/response")
 const check = require("../../Model/check")
+const userDB = require("./userDB")
 
 let usersController = {};
 
@@ -79,31 +80,36 @@ usersController.create = function(req, res) {
     
     if (Object.entries(error).length)
         return response.errorResponse(res, error)
-        
-    user.verified =  crypto.createHash('sha256').digest("hex");
-    user.password = hashPassword(user.password)
-    sendMail.confirmMail(user.email, user.verified);
-    database.none(
-        'INSERT INTO users'
-        + '(id, email, username, firstname, name, password, verified, created)'
-        + ' '
-        + 'SELECT'
-        + ' COUNT(*) AS id,'
-        + ' $[email] AS email,'
-        + ' $[username] AS username,'
-        + ' $[firstname] AS firstname,'
-        + ' $[name] AS name,'
-        + ' $[password] AS password,'
-        + ' $[verified] AS verified,'
-        + ' CURRENT_TIMESTAMP as created'
-        + ' FROM users',
-        user
-    ).then(function() {
-        response.response(res, "");
-    }).catch(function() {
-        error.email = "Email already taken"
-        return response.errorResponse(res, error)
-    });
+    userDB.findOneUserByUsername(user.username)
+    .then(data => {        
+        if (data.username)
+             return response.errorResponse(res, {username: "Username already taken"})
+        user.verified =  crypto.createHash('sha256').digest("hex");
+        user.password = hashPassword(user.password)
+        sendMail.confirmMail(user.email, user.verified);
+        database.none(
+            'INSERT INTO users'
+            + '(id, email, username, firstname, name, password, verified, created)'
+            + ' '
+            + 'SELECT'
+            + ' COUNT(*) AS id,'
+            + ' $[email] AS email,'
+            + ' $[username] AS username,'
+            + ' $[firstname] AS firstname,'
+            + ' $[name] AS name,'
+            + ' $[password] AS password,'
+            + ' $[verified] AS verified,'
+            + ' CURRENT_TIMESTAMP as created'
+            + ' FROM users',
+            user
+        ).then(function() {
+            response.response(res, "");
+        }).catch(function() {
+            error.email = "Email already taken"
+            return response.errorResponse(res, error)
+        });
+    })
+    .catch(error => response.errorResponse(res, "Something went wrong in users controller"))
 };
 
 module.exports = usersController;

@@ -22,6 +22,12 @@ userDB.findOneUserById = async (id) => {
     .then(data => data)
     .catch(err => err)
   }
+  
+userDB.findOneUserByUsername = async (username) => {
+    return  db.one(`SELECT ${userInfo} FROM users WHERE username = $1`, username)
+    .then(data => data)
+    .catch(err => err)
+  }
 
 // Only update the password with the id of the user 
 userDB.updateOnePasswordById = async (id, password) => {
@@ -97,7 +103,6 @@ userDB.updateUser = async (newData) => {
         newData.verified,
         newData.id
     ]
-    console.log(data)
     return  db.none(`UPDATE users 
                 SET 
                     email = $1,
@@ -119,7 +124,7 @@ userDB.updateUser = async (newData) => {
                 WHERE ID = $17`,
                 data
         )
-    .catch(err => console.log(err))
+    .catch(err => utils.log(err))
 }
 
 function QueryMultyUser(arrayid){
