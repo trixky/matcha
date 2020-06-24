@@ -1,10 +1,9 @@
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const path = require("path")
 const cors = require('cors')
-var session = require('express-session');
 const response = require("./Model/response")
+const session = require("./Model/socket").sessionMiddleware;
 
 // -----------------------------------------------
 var indexRouter = require('./routes/index');
@@ -28,16 +27,9 @@ app.use(cookieParser());
 
 /* Authentication Middleware (before routes) */
 
-const sessionMiddleware = session({
-    saveUninitialized: false,
-    secret: 'session_secret',
-    resave: false,
-    cookie : {
-        sameSite: 'strict'
-    }
-});
 
-app.use(sessionMiddleware)
+
+app.use(session)
 
 app.use(function(req, res, next) {
 
@@ -68,7 +60,4 @@ app.use("/liked", likedRouter)
 
 app.use("/test", testRouter)
 
-module.exports = {
-    app,
-    sessionMiddleware
-}
+module.exports = app

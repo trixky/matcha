@@ -5,7 +5,7 @@ const matchDB = {};
 
 matchDB.create = async (user1, user2) =>{
     return db.none(
-        `INSERT INTO match (usersID, username, created) VALUES ('{${user1.id}, ${user2.id}}', '{${user1.username}, ${user2.username}}', CURRENT_TIMESTAMP)`
+        `INSERT INTO match (usersID, username, created) VALUES ('{$1, $2}', '{$3, $4}', CURRENT_TIMESTAMP)`,[user1.id, user2.id, user1.uername, user2.username]
     )
     .then(data => null)
     .then(err => null);
@@ -13,7 +13,7 @@ matchDB.create = async (user1, user2) =>{
 
 matchDB.find = async (user1, user2) =>{
     return  db.one(
-        `SELECT * FROM match WHERE ${user1.id} = ANY (usersid) AND ${user2.id} = ANY (usersid);`
+        `SELECT * FROM match WHERE $1 = ANY (usersid) AND $2 = ANY (usersid);`,[user1.id, user2.id]
     )
     .then(data => data)
     .catch(err => null);
@@ -21,7 +21,7 @@ matchDB.find = async (user1, user2) =>{
 
 matchDB.findAll = async (userid) =>{
     return  db.many(
-        `SELECT * FROM match WHERE ${userid} = ANY (usersid) ORDER BY update DESC;`
+        `SELECT * FROM match WHERE $1 = ANY (usersid) ORDER BY update DESC;`,[userid]
     )
     .then(data => data)
     .catch(err => null);
@@ -29,7 +29,7 @@ matchDB.findAll = async (userid) =>{
 
 matchDB.findAllByUsername = async (username) =>{
     return  db.many(
-        `SELECT * FROM match WHERE ${username} = ANY (username) ORDER BY update DESC;`
+        `SELECT * FROM match WHERE $1 = ANY (username) ORDER BY update DESC;`,[username]
     )
     .then(data => data)
     .catch(err => null);
@@ -37,7 +37,7 @@ matchDB.findAllByUsername = async (username) =>{
 
 matchDB.delete = async (user1, user2) =>{
     return  db.none(
-        `DELETE FROM match WHERE ${user1.id} = ANY (usersid) AND ${user2.id} = ANY (usersid);`
+        `DELETE FROM match WHERE $1 = ANY (usersid) AND $2 = ANY (usersid);`,[user1.id, user2.id]
     )
     .then(data => null)
     .catch(err => null);
@@ -45,7 +45,7 @@ matchDB.delete = async (user1, user2) =>{
 
 matchDB.update = async (user1, user2) =>{
     return  db.none(
-        `UPDATE match SET update = CURRENT_TIMESTAMP WHERE ${user1.id} = ANY (usersid) AND ${user2.id} = ANY (usersid);`
+        `UPDATE match SET update = CURRENT_TIMESTAMP WHERE $1 = ANY (usersid) AND $2 = ANY (usersid);`,[user1.id, user2.id]
     )
     .then(data => null)
     .catch(err => null);

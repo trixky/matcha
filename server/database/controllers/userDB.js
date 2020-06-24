@@ -30,22 +30,27 @@ userDB.findOneUserByUsername = async (username) => {
   }
 
 userDB.updateConnection = async (id ,state) =>{
-    console.log("id of the update connection : " + id)
     if (id)
-    return db.none(`UPDATE users SET connected = ${state} where  id = ${id};`)
+    return db.none(
+        `UPDATE users SET connected = $1 where  id = $2;`,[state, id]
+        )
     .then(data => console.log("updated to "))
     .catch(err => utils.log(err))
 }
 
 // Only update the password with the id of the user 
 userDB.updateOnePasswordById = async (id, password) => {
-    return db.none("UPDATE users SET password = $2 WHERE ID = $1", [id, password])
+    return db.none(
+        "UPDATE users SET password = $2 WHERE ID = $1", [id, password]
+        )
     .then(data => data)
     .catch(err => utils.log(err))
 }
 
 userDB.findAll = async () => {
-    return db.multi(`SELECT ${userInfo} FROM users;`)
+    return db.multi(
+        `SELECT $1 FROM users;`,[userInfo]
+    )
     .then(data => data)
     .catch(err => err)
 }
@@ -60,7 +65,9 @@ userDB.updatePicture = async (id, pictureName, number) => {
     return userDB.findOneUserById(id)
     .then(data => {
         deleteFile(number, data)
-        return db.none(`UPDATE users SET picture${number} = 'http://localhost:3002/${pictureName}' WHERE id = ${id};`)
+        return db.none(
+            `UPDATE users SET picture${number} = 'http://localhost:3002/${pictureName}' WHERE id = $1;`,[id]
+        )
         .then(data => null)
         .catch(err => err)
     })
@@ -71,7 +78,9 @@ userDB.updatePictureProfile = async (id, pictureName) => {
     return userDB.findOneUserById(id)
     .then(data => {
         deleteFile("profile",data)
-        return db.none(`UPDATE users SET profile = 'http://localhost:3002/${pictureName}' WHERE id = ${id};`)
+        return db.none(
+            `UPDATE users SET profile = 'http://localhost:3002/${pictureName}' WHERE id = $1;`, [id]
+        )
         .then(data => null)
         .catch(err => err)
     })
@@ -86,7 +95,7 @@ userDB.deletePicture = async (id, column) => {
         var columnDelete = "picture" + column;
     else
         var columnDelete =  column;
-    return db.none(`UPDATE users SET ${columnDelete} = '' WHERE id = ${id};`)
+    return db.none(`UPDATE users SET $1 = '' WHERE id = $2;`, [columnDelete, id])
     .then(data => data)
     .catch(err => err)
 }
@@ -136,7 +145,7 @@ userDB.updateUser = async (newData) => {
 }
 
 //--------------------------------- Function 
-
+// !!!!! protect this 
 function QueryMultyUser(arrayid){
     var query = "SELECT id, username, pictures FROM users WHERE ";
     

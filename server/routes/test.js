@@ -17,8 +17,9 @@ router.use("/get", (req, res, next) => {
       res.end(file)
   })
  })
+
 router.use("/", (req, res, next) => {
-    req.session.user = 1
+    req.session.user = 0
 next()}
 // ,pictureRouter)
   ,likedRouter)

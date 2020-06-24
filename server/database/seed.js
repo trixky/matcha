@@ -34,7 +34,7 @@ database.none(
     + '('
     + 'likerid INTEGER NOT NULL'
     + ', '
-    + 'likedID INTEGER NOT NULL'
+    + 'likedid INTEGER NOT NULL'
     + ', '
     + 'likerusername VARCHAR(31) NOT NULL'
     + ', '
@@ -45,6 +45,8 @@ database.none(
     + 'likedpicture VARCHAR(31) NOT NULL'
     + ', '
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+    + ","
+    + 'unique (likerid, likedid)'
     + ')'
 )
 .then(() => database.none(

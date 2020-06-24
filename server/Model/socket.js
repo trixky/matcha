@@ -1,20 +1,29 @@
 const socketio = require("socket.io")
-const {sessionMiddleware} = require("../app")
+const session = require("express-session")
 const userDB  = require("../database/controllers/userDB")
 
 var io
 var socketIo = {}
 
+socketIo.sessionMiddleware = session({
+    saveUninitialized: false,
+    secret: 'session_secret',
+    resave: false,
+    cookie : {
+        sameSite: 'strict'
+    }
+});
 
 socketIo.notification = (id, message)=>{
-    io.clients[id].emit('notification', message)
+    if (io.clients[id])
+        io.clients[id].emit('notification', message)
 }
 
 socketIo.listen= (app) => {
     io = socketio.listen(app)
     
     io.use(function(socket, next){
-        sessionMiddleware(socket.request, socket.request.res || {}, next)
+        socketIo.sessionMiddleware(socket.request, socket.request.res || {}, next)
     })
 
     io.on("connection", (socket)=>{
