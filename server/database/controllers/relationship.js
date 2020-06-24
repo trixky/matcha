@@ -12,7 +12,7 @@ matchDB.create = async (user1, user2) =>{
 }
 
 matchDB.find = async (user1, user2) =>{
-    return  db.one(
+    return  db.oneOrNone(
         `SELECT * FROM match WHERE $1 = ANY (usersid) AND $2 = ANY (usersid);`,[user1.id, user2.id]
     )
     .then(data => data)

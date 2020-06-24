@@ -3,8 +3,10 @@ const userDB = require("../database/controllers/userDB")
 const response = require("../Model/response")
 const likedDB = require("../database/controllers/liked")
 const socket = require("../Model/socket")
+const utils = require("../Model/utils")
 
 router.post("/", (req, res, next) => {
+    
     userDB.findOneUserByUsername(req.body.user.username)
     .then(data => {
         if (!data.username)
@@ -14,15 +16,22 @@ router.post("/", (req, res, next) => {
         
         userDB.findOneUserById(req.session.user)
         .then(data => {
-            likedDB.findOneLike(data, likedData)
+            
+            var likerData = data
+            
+            likedDB.findOneLike(likerData, likedData)
             .then(data => {
-                if(data.id)
-                    return likedDB.create(data, likedData)
+                
+                if(!data)
+                    return likedDB.create(likerData, likedData)
                     .then(data => {
-                        response.response(res, "");
+                        
+                        response.response(res, "You liked this person");
+
                         socket.notification(likedData.id, "You just got a new liker")
                     })
                     .catch(err => response.errorResponse(res, "Something wrong in the liked router 1"))
+
                 response.errorResponse(res, "You already like this personne")
             })
             .catch(err => response.errorResponse(res, "Something wrong in the liked router 2"))
@@ -31,6 +40,20 @@ router.post("/", (req, res, next) => {
     })
     .catch(err => response.errorResponse(res, "Something wrong in the liked router 4"))
 })
+
+router.put("/",(req, res, next) => {
+    userDB.findOneUserByUsername(req.body.user.username)
+    .then(data => {
+        if (!data)
+            return response.errorResponse(res, "Something wrong in delete router 1")
+        likedDB.delete(req.session.user, data.id)
+        .then(data => response.response(res, "Like delected"))
+        .catch(err => response.errorResponse(res, "Something wrong in the liked router 2"))
+    })
+    .catch(err => response.errorResponse(res, "Something wrong in delete 3"))
+})
+
+
 
 router.get("/likers", (req, res, next) =>{
     likedDB.getAlllikers(req.session.user)

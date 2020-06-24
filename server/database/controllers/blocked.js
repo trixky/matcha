@@ -13,7 +13,7 @@ blocked.create = async (userid, person) => {
 
 blocked.isBlocked = async (userid, personid) => {
     
-    return db.one(
+    return db.oneOrNone(
         `SELECT * FROM blocked WHERE $1 = (personid) AND $2 = (userid);`,[userid, personid]
     )
     .then(data => data)
@@ -22,7 +22,7 @@ blocked.isBlocked = async (userid, personid) => {
 
 blocked.get = async (userid, personid) => {
     
-    return db.one(
+    return db.oneOrNone(
         `SELECT * FROM blocked WHERE $1 = (userid) AND $2 = (personid);`,[userid, personid]
     )
     .then(data => data)

@@ -6,6 +6,7 @@ const utils = require("../Model/utils")
 const router = express.Router()
 
 router.post("/:id", function(req, res, next){
+    
     if ((req.params.id < "5" 
     && req.params.id > "0")
     || req.params.id === "profile")
@@ -19,12 +20,15 @@ router.post("/:id", function(req, res, next){
     },
     (req, res, next) => {
         if (req.params.id === "profile")
+
             userDB.updatePictureProfile(req.session.user, req.file.filename)
-            .then(data => response.response(res, ""))
+            .then(data => response.response(res, "Profile picture updated"))
             .catch(err => utils.log(err))
+
         else
+
             userDB.updatePicture(req.session.user, req.file.filename, req.params.id)
-            .then(data => response.response(res, ""))
+            .then(data => response.response(res, "Picture updated"))
             .catch(err => utils.log(err))
     }
 )
@@ -32,8 +36,8 @@ router.post("/:id", function(req, res, next){
 router.put("/:id", pictureId,
     (req, res, next) => {
     userDB.deletePicture(req.session.user, req.params.id)
-    .then(data => response.response(res, ""))
-        .catch(err => utils.log(err))
+    .then(data => response.response(res, "Picture delected"))
+    .catch(err => utils.log(err))
 })
 
 function pictureId(req, res, next){

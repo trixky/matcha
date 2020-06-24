@@ -14,13 +14,12 @@ likedDB.create = async (liker, liked) => {
 }
 
 likedDB.findOneLike = async (liker, liked) => {
-    return db.one(
+    return db.oneOrNone(
         `SELECT * FROM liked WHERE likerid = $1 AND likedid = $2;`, [liker.id, liked.id]
     )
     .then(data => data)
     .catch(err => utils.log(err))
 }
-
 
 likedDB.getAllLiked = async (userid) => {
     

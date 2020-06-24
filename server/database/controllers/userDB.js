@@ -12,19 +12,25 @@ const userInfo =  "id ,email, username, firstname, name, gender, orientation, "
 // Find one user with the help of the email
 // return a array wit the user element
 userDB.findOneUserByEmail = async (email) => {
-    return  db.one("SELECT * FROM users WHERE email = $1", email)
+    return  db.oneOrNone(
+        "SELECT * FROM users WHERE email = $1", email
+        )
     .then(data => data)
     .catch(err => err)
   }
 
 userDB.findOneUserById = async (id) => {
-    return  db.one(`SELECT ${userInfo} FROM users WHERE id = $1`, id)
+    return  db.oneOrNone(
+        `SELECT ${userInfo} FROM users WHERE id = $1`, id
+        )
     .then(data => data)
     .catch(err => err)
   }
   
 userDB.findOneUserByUsername = async (username) => {
-    return  db.one(`SELECT ${userInfo} FROM users WHERE username = $1`, username)
+    return  db.oneOrNone(
+        `SELECT ${userInfo} FROM users WHERE username = $1`, username
+        )
     .then(data => data)
     .catch(err => err)
   }
@@ -64,7 +70,9 @@ userDB.findArray = async (array) => {
 userDB.updatePicture = async (id, pictureName, number) => {
     return userDB.findOneUserById(id)
     .then(data => {
+        console.log(data)
         deleteFile(number, data)
+        
         return db.none(
             `UPDATE users SET picture${number} = 'http://localhost:3002/${pictureName}' WHERE id = $1;`,[id]
         )
@@ -91,13 +99,14 @@ userDB.deletePicture = async (id, column) => {
     userDB.findOneUserById(id)
     .then(data => deleteFile(column, data))
     .catch(err => err);
-    if (column != "profile")
-        var columnDelete = "picture" + column;
+    if (column === "profile")
+        return db.none(`UPDATE users SET profile = '' WHERE id = $1;`, [id])
+            .then(data => data)
+            .catch(err => err)
     else
-        var columnDelete =  column;
-    return db.none(`UPDATE users SET $1 = '' WHERE id = $2;`, [columnDelete, id])
-    .then(data => data)
-    .catch(err => err)
+        return db.none(`UPDATE users SET picture$1 = '' WHERE id = $2;`, [parseInt(column), id])
+            .then(data => data)
+            .catch(err => err)
 }
 
 userDB.updateUser = async (newData) => {
@@ -162,15 +171,15 @@ function QueryMultyUser(arrayid){
 }
 
 function deleteFile(id, user){
-    if (id === "1")
-        utils.removeFile( "public/" + user.picture1.split("http://localhost:3002")[1]);
-    else if (id === "2")
-        utils.removeFile("public/" +  user.picture2.split("http://localhost:3002")[1]);
-    else if (id === "3")
-        utils.removeFile("public/" + user.picture3.split("http://localhost:3002")[1]);
-    else if (id === "4")
-        utils.removeFile("public/" + user.picture4.split("http://localhost:3002")[1]);
-    if (id === "profile")
+    if (id === "1" && user.picture1)
+    utils.removeFile( "public/" + user.picture1.split("http://localhost:3002")[1]);
+    else if (id === "2" && user.picture2)
+    utils.removeFile("public/" +  user.picture2.split("http://localhost:3002")[1]);
+    else if (id === "3" && user.picture3)
+    utils.removeFile("public/" + user.picture3.split("http://localhost:3002")[1]);
+    else if (id === "4" && user.picture4)
+    utils.removeFile("public/" + user.picture4.split("http://localhost:3002")[1]);
+    if (id === "profile" && user.profile)
         utils.removeFile("public/" + user.profile.split("http://localhost:3002")[1]);
 }
 

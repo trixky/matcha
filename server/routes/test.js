@@ -21,7 +21,7 @@ router.use("/get", (req, res, next) => {
 router.use("/", (req, res, next) => {
     req.session.user = 0
 next()}
-// ,pictureRouter)
-  ,likedRouter)
+//,pictureRouter)
+   ,likedRouter)
 
 module.exports = router;
