@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="connect()">socket io</button><br/>
+    <button onclick="emit()">emit to io</button><br/>
+    <button onclick="disconnect()">disconnect</button><br/>
+</body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
+    <script>
+        var io = io
+        var socket;
+
+        function connect(){
+            console.log("connected to ")
+            socket = io.connect({query : "foo=faaa"});
+            socket.on("notification", (message) => {
+                console.log(message)
+            })
+        }
+        function emit(){
+            console.log("sending to server")
+            socket.emit("notification", "salut")
+        }
+        function disconnect(){
+            socket.disconnect();
+        }
+        
+    </script>
+</html>

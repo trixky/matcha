@@ -28,11 +28,16 @@ app.use(cookieParser());
 
 /* Authentication Middleware (before routes) */
 
-app.use(session({
+const sessionMiddleware = session({
     saveUninitialized: false,
     secret: 'session_secret',
-    resave: false
-}));
+    resave: false,
+    cookie : {
+        sameSite: 'strict'
+    }
+});
+
+app.use(sessionMiddleware)
 
 app.use(function(req, res, next) {
 
@@ -63,4 +68,7 @@ app.use("/liked", likedRouter)
 
 app.use("/test", testRouter)
 
-module.exports = app;
+module.exports = {
+    app,
+    sessionMiddleware
+}

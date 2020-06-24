@@ -57,6 +57,8 @@ usersController.login = function(req, res) {
             return response.errorResponse(res, 'Your account was not valided, a new email will be send to you')
         }
         req.session.user = data.id;
+        userDB.updateConnection(socket.request.session.user, true)
+        .catch(err => err);
         response.response(res, data)
     }).catch(function(error) {
         response.errorResponse(res, "Bad identifiant or password")
