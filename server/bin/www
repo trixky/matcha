@@ -7,12 +7,12 @@
 var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
-
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '3001');
+
 app.set('port', port);
 
 /**
@@ -20,6 +20,10 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+
+// --------------------- socketio
+
+const io = require("../Model/socket").listen(server)
 
 /**
  * Listen on provided port, on all network interfaces.

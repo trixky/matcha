@@ -8,17 +8,18 @@ router.post("/", (req, res, next) => {
     .then(data => {
         if (!data.username)
             return response.errorResponse(res, "No use with this username in the database")
+            
         var likedData = data;
         
         userDB.findOneUserById(req.session.user)
         .then(data => {
             likedDB.create(data, likedData)
             .then(data => response.response(res, ""))
-            .catch(err => response.errorResponse(res, "Something wrong in the liked router ok"))
+            .catch(err => response.errorResponse(res, "Something wrong in the liked router 1"))
         })
-        .catch(err => response.errorResponse(res, "Something wrong in the liked router"))
+        .catch(err => response.errorResponse(res, "Something wrong in the liked router 2"))
     })
-    .catch(err => response.errorResponse(res, "Something wrong in the liked router"))
+    .catch(err => response.errorResponse(res, "Something wrong in the liked router 3"))
 })
 
 router.get("/likers", (req, res, next) =>{
@@ -27,7 +28,7 @@ router.get("/likers", (req, res, next) =>{
     .catch(err => response.errorResponse(res, "Something wrong in likers"))
 })
 
-router.get("/liked", (req, res, next) =>{
+router.get("/", (req, res, next) =>{
     likedDB.getAllLiked(req.session.user)
     .then(data => response.response(res, data))
     .catch(err => response.errorResponse(res, "Something wrong in liked"))

@@ -6,6 +6,7 @@ const cors = require('cors')
 var session = require('express-session');
 const response = require("./Model/response")
 
+// -----------------------------------------------
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var forgetRouter = require("./routes/forget")
@@ -14,7 +15,10 @@ var testRouter = require("./routes/test")
 var pictureRouter = require("./routes/picture")
 var accountRouter = require("./routes/account")
 var likedRouter = require("./routes/liked")
+
 var app = express();
+
+
 
 app.use(cors())
 app.use(logger('dev'));
