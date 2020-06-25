@@ -76,7 +76,7 @@ usersController.create = function(req, res) {
         return response.errorResponse(res, error)
     userDB.findOneUserByUsername(user.username)
     .then(data => {        
-        if (data.username)
+        if (data)
              return response.errorResponse(res, {username: "Username already taken"})
         user.verified =  crypto.createHash('sha256').digest("hex");
         user.password = hashPassword(user.password)
