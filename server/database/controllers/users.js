@@ -49,7 +49,7 @@ usersController.login = function(req, res) {
         }
         req.session.user = data.id;
         req.session.username = data.username;
-        userDB.updateConnection(socket.request.session.user, true)
+        userDB.updateConnection(data.id, true)
             .catch(err => utils.log(err));
         response.response(res, data)
     }).catch(function(err) {
