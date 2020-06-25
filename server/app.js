@@ -14,10 +14,10 @@ var testRouter = require("./routes/test")
 var pictureRouter = require("./routes/picture")
 var accountRouter = require("./routes/account")
 var likedRouter = require("./routes/liked")
+var notificationRouter =require("./routes/notifications")
+var messageRouter = require("./routes/message")
 
 var app = express();
-
-
 
 app.use(cors())
 app.use(logger('dev'));
@@ -26,8 +26,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 /* Authentication Middleware (before routes) */
-
-
 
 app.use(session)
 
@@ -56,6 +54,9 @@ app.use("/verified", verifiedRouter)
 app.use("/picture", pictureRouter)
 app.use("/account", accountRouter)
 app.use("/liked", likedRouter)
+app.use("/notifications", notificationRouter)
+app.use("/messages", messageRouter)
+
 
 
 app.use("/test", testRouter)

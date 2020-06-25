@@ -48,9 +48,9 @@ socketIo.listen= (app) => {
             .catch(err => console.log(err))
         })
         
-        socket.on("notification", (message) => {
+        socket.on("notifications", (message) => {
             console.log(message)
-            io.emit("notification", "nous avons bien recus : " + message)
+            io.emit("notifications", "nous avons bien recus : " + message)
             socketIo.notification(1, "salut , tu me recois ?")
         })
     })
