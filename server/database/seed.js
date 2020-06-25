@@ -15,6 +15,7 @@ database.none(
     + 'blocked, '
     + 'viewers, '
     + 'match, '
+    + 'notifications, '
     + 'users ;'
 )
 .then(() => database.none(
@@ -70,6 +71,8 @@ database.none(
     + ', '
     + 'username VARCHAR(31) NOT NULL'
     + ', '
+    + 'personusername VARCHAR(31) NOT NULL'
+    + ', '
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
@@ -83,6 +86,16 @@ database.none(
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ','
     + 'update TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+    + ')'
+)
+.then(() => database.none(
+    'CREATE TABLE notifications'
+    + '('
+    + 'userID INTEGER NOT NULL'
+    + ', '
+    + 'notification VARCHAR(300) NOT NULL'
+    + ', '
+    + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
 .then(() => database.none(
@@ -155,6 +168,7 @@ database.none(
     +   "("
     +   "UPDATE users set liked = liked + 1 WHERE id = NEW.likerid; "
     +   "UPDATE users set likers = likers + 1 WHERE id = NEW.likedid;"
+    +   "INSERT INTO notifications (userid, notification) VALUES (NEW.likedid,  concat(NEW.likerusername ,' liked you, go like back'));"
     +   ");"
 )
 .then(() => database.none(
@@ -172,7 +186,25 @@ database.none(
     +   "AS ON INSERT TO "
     +   "match "
     +   "DO "
+    +   "("
     +   "UPDATE users set match = match + 1 WHERE id = ANY (NEW.usersid);"
+    +   "INSERT INTO notifications (userid, notification) VALUES (NEW.usersid[1],  concat(NEW.username[2] ,' liked you to, you can start a conversation'));"
+    +   "INSERT INTO notifications (userid, notification) VALUES (NEW.usersid[2],  concat(NEW.username[1] ,' liked you to, you can start a conversation'));"
+    +   ");"
+)
+.then(() => database.none(
+    "CREATE OR REPLACE RULE messages "
++   "AS ON INSERT TO "
++   "messages "
++   "DO "
++   "INSERT INTO notifications (userid, notification) VALUES (NEW.usersid[2],  concat(NEW.sender ,' send you a message'));"
+)
+.then(() => database.none(
+    "CREATE OR REPLACE RULE viewers "
++   "AS ON INSERT TO "
++   "viewers "
++   "DO "
++   "INSERT INTO notifications (userid, notification) VALUES (NEW.personid,  concat(NEW.username ,' have look at your profile, check back'));"
 )
 //------------------------------------------- INSERT
 .then(() => database.none(
@@ -302,6 +334,6 @@ database.none(
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",    
-))))))))))))))
+)))))))))))))))))
 .then(_exit).catch(_exit);
 

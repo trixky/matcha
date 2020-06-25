@@ -1,2 +1,4 @@
 
 error: invalid input syntax for type integer: "momo"
+error: column "id" does not exist
+error: column "id" does not exist

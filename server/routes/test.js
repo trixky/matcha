@@ -1,6 +1,8 @@
 
 const express =require("express")
+const fs = require("fs")
 const router = express.Router();
+const userDB = require("../database/controllers/userDB")
 var indexRouter = require('./index');
 var usersRouter = require('./users');
 var forgetRouter = require("./forget")
@@ -8,8 +10,7 @@ var verifiedRouter = require("./verified")
 var accountRouter = require("./account")
 var pictureRouter = require("./picture")
 var likedRouter = require("./liked")
-const fs = require("fs")
-const userDB = require("../database/controllers/userDB")
+var notificationsRouter = require("../routes/notifications")
 
 router.use("/get", (req, res, next) => {
     req.session.user = 1
@@ -22,6 +23,7 @@ router.use("/", (req, res, next) => {
     req.session.user = 0
 next()}
 //,pictureRouter)
-   ,likedRouter)
+//    ,likedRouter)
+   ,notificationsRouter)
 
 module.exports = router;
