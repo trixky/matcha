@@ -16,15 +16,15 @@ userDB.findOneUserByEmail = async (email) => {
         "SELECT * FROM users WHERE email = $1", email
         )
     .then(data => data)
-    .catch(err => err)
-  }
+    .catch(err => utils.log(err));
+}
 
 userDB.findOneUserById = async (id) => {
     return  db.oneOrNone(
         `SELECT ${userInfo} FROM users WHERE id = $1`, id
         )
     .then(data => data)
-    .catch(err => err)
+    .catch(err => utils.log(err));
   }
   
 userDB.findOneUserByUsername = async (username) => {
@@ -32,7 +32,7 @@ userDB.findOneUserByUsername = async (username) => {
         `SELECT ${userInfo} FROM users WHERE username = $1`, [username]
         )
     .then(data => data)
-    .catch(err => err)
+    .catch(err => utils.log(err));
   }
 
 userDB.updateConnection = async (id ,state) =>{
@@ -40,7 +40,7 @@ userDB.updateConnection = async (id ,state) =>{
     return db.none(
         `UPDATE users SET connected = $1 where  id = $2;`,[state, id]
         )
-    .then(data => console.log("updated to "))
+    .then(data => data)
     .catch(err => utils.log(err))
 }
 
@@ -58,28 +58,28 @@ userDB.findAll = async () => {
         `SELECT $1 FROM users;`,[userInfo]
     )
     .then(data => data)
-    .catch(err => err)
+    .catch(err => utils.log(err));
 }
 
 userDB.findArray = async (array) => {
     return db.multi(QueryMultyUser(array))
     .then(data => data)
-    .catch(err => err)
+    .catch(err => utils.log(err));
 }
 
 userDB.updatePicture = async (id, pictureName, number) => {
     return userDB.findOneUserById(id)
     .then(data => {
-        console.log(data)
+        
         deleteFile(number, data)
         
         return db.none(
             `UPDATE users SET picture${number} = 'http://localhost:3002/${pictureName}' WHERE id = $1;`,[id]
         )
         .then(data => null)
-        .catch(err => err)
+        .catch(err => utils.log(err));
     })
-    .catch(err => err)
+    .catch(err => utils.log(err));
 }
 
 userDB.updatePictureProfile = async (id, pictureName) => {
@@ -90,9 +90,9 @@ userDB.updatePictureProfile = async (id, pictureName) => {
             `UPDATE users SET profile = 'http://localhost:3002/${pictureName}' WHERE id = $1;`, [id]
         )
         .then(data => null)
-        .catch(err => err)
+        .catch(err => utils.log(err));
     })
-    .catch(err => err)
+    .catch(err => utils.log(err));
 }
 
 userDB.deletePicture = async (id, column) => {
@@ -100,13 +100,13 @@ userDB.deletePicture = async (id, column) => {
     .then(data => deleteFile(column, data))
     .catch(err => err);
     if (column === "profile")
-        return db.none(`UPDATE users SET profile = '' WHERE id = $1;`, [id])
+        return db.none(`UPDATE users SET profile = 'http://localhost:3002/profile_$1' WHERE id = $1;`, [id])
             .then(data => data)
-            .catch(err => err)
+            .catch(err => utils.log(err));
     else
         return db.none(`UPDATE users SET picture$1 = '' WHERE id = $2;`, [parseInt(column), id])
             .then(data => data)
-            .catch(err => err)
+            .catch(err => utils.log(err));
 }
 
 userDB.updateUser = async (newData) => {

@@ -5,6 +5,7 @@ const check = require("../Model/check")
 const crypto = require("crypto")
 const response = require("../Model/response")
 
+
 router.get("/", (req, res, next) => {
   
     if (!checkHaveId(req, res))
@@ -16,7 +17,7 @@ router.get("/", (req, res, next) => {
     .then(data => {
         data.password = ""
         response.response(res, data)})
-    .catch(err => response.errorResponse(res, "Something went wrong in account, Error database"));
+    .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
 })
 
 router.put("/password", (req, res, next) => {
@@ -32,7 +33,7 @@ router.put("/password", (req, res, next) => {
                 .digest('hex');
     userDB.updateOnePasswordById(req.session.user, user.password)
     .then(data => response.response(res, "Password updated"))
-    .catch(err => response.errorResponse(res, "Something went wrong in update password, Error database"));
+    .catch(err => response.errorCatch(res, "Something went wrong in update password, Error database", err));
                 
 })
 
@@ -46,19 +47,19 @@ router.put("/", (req, res, next) => {
     if (user.email)
         userDB.findOneUserByEmail(user.email)
         .then(data => {
-                if (data.email)
-                    return errorResponse(res, "This email is already taked");
+                if (data)
+                    return response.errorResponse(res, "This email is already taked");
                 return updateData(req, res, user)
             })
-        .catch(err => errorResponse(res, "Something went wrong in account, Error database in finding email"));
+        .catch(err => response.errorCatch(res, "Something went wrong in account, Error database in finding email", err));
     else if (user.username)
         userDB.findOneUserByUsername(user.username)
         .then(data => {        
-            if (data.username)
+            if (data)
              return response.errorResponse(res, {username: "Username already taken"})
             updateData(req, res, user)
         })
-        .catch(err => errorResponse(res, "Something went wrong in account, Error database in finding username"));
+        .catch(err => response.errorCatch(res, "Something went wrong in account, Error database in finding username", err));
     else
         updateData(req, res, user)
 })
@@ -70,7 +71,7 @@ function updateData(req, res, user){
     const error = check.userProfile(user)
 
     if (Object.entries(error).length)
-        return errorResponse(res, error)
+        return response.errorResponse(res, error)
 
     const userid = req.session.user;
 
@@ -82,12 +83,12 @@ function updateData(req, res, user){
                 userDB.findOneUserById(userid)
                 .then(data => {
                     data.password = ""
-                    Response(res, data)})
-                .catch(err => errorResponse(res, "Something went wrong in account, Error database"))
+                    response.response(res, data)})
+                .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err))
             )
-            .catch(err => errorResponse(res, "Something went wrongin account, Error database"));
+            .catch(err => response.errorCatch(res, "Something went wrongin account, Error database", err));
         })
-        .catch(err => errorResponse(res, "Something went wrong in account, Error database"));
+        .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
 }
 
 function encodeUserData(user){
@@ -121,26 +122,10 @@ function changeValue(data, newData){
     return data;
 }
 
-function errorResponse(res,  data)
-{
-    return res.json({
-        _status: -1,
-        _data: data
-    })
-}
-
-function Response(res,  data)
-{
-    return res.json({
-        _status: 0,
-        _data: data
-    })
-}
-
 function checkHaveId(req, res){
     if (req.session.user === undefined)
     {
-        errorResponse(res, "Something went wrong in account, You don't have a session");
+        response.errorResponse(res, "Something went wrong in account, You don't have a session");
         return false;
     }
     return true;

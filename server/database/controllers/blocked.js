@@ -1,4 +1,5 @@
 const db  = require("../database")
+const utils = require("../../Model/utils")
 
 const blocked = {}
 
@@ -8,7 +9,7 @@ blocked.create = async (userid, person) => {
         `INSERT INTO blocked (userid, personid, username) VALUES ($1, $2, '$3');`, [userid, person.id, person.username]
     )
     .then(data => null)
-    .catch(err => null);
+    .catch(err => utils.log(err));
 }
 
 blocked.isBlocked = async (userid, personid) => {
@@ -17,7 +18,7 @@ blocked.isBlocked = async (userid, personid) => {
         `SELECT * FROM blocked WHERE $1 = (personid) AND $2 = (userid);`,[userid, personid]
     )
     .then(data => data)
-    .catch(err => null);
+    .catch(err => utils.log(err));
 }
 
 blocked.get = async (userid, personid) => {
@@ -26,7 +27,7 @@ blocked.get = async (userid, personid) => {
         `SELECT * FROM blocked WHERE $1 = (userid) AND $2 = (personid);`,[userid, personid]
     )
     .then(data => data)
-    .catch(err => null);
+    .catch(err => utils.log(err));
 }
 
 blocked.getAll = async (userid) => {
@@ -35,7 +36,7 @@ blocked.getAll = async (userid) => {
         `SELECT * FROM blocked WHERE $1 = (userid);`,[userid]
     )
     .then(data => data)
-    .catch(err => null);
+    .catch(err => utils.log(err));
 }
 
 blocked.delete = async (userid, blockedid) => {
@@ -44,7 +45,7 @@ blocked.delete = async (userid, blockedid) => {
         `DELETE FROM blocked WHERE $1 = (userid) AND $2 = (personid);`,[userid, blockedid]
     )
     .then(data => null)
-    .catch(err => null);
+    .catch(err => utils.log(err));
 }
 
 module.exports = blocked

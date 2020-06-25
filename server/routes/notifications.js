@@ -5,7 +5,7 @@ const response = require("../Model/response")
 router.get("/", (req, res, next) =>{
     notificationsDB.findAllById(req.session.user)
     .then(data => response.response(res, data))
-    .catch(err => response.errorResponse(res, "Something went wrong in notifications router"))
+    .catch(err => response.errorCatch(res, "Something went wrong in notifications router", err))
 })
 
 

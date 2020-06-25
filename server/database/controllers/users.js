@@ -6,6 +6,7 @@ const sendMail = require("../../Model/sendmail")
 const response = require("../../Model/response")
 const check = require("../../Model/check")
 const userDB = require("./userDB")
+const utils = require("../../Model/utils")
 
 let usersController = {};
 
@@ -27,22 +28,12 @@ function encodeUserData(user){
 
 // ---------------------------------------------
 
-function errorResponse(res,  message)
-{
-    return res.json({
-        _status: -1,
-        _data: message 
-    })
-}
-
-// ---------------------------------------------
-
 usersController.login = function(req, res) {
 
     if (req.body === undefined
         || req.body.user === undefined
         || req.body.user.password === undefined)
-    return errorResponse(res, 'missing user information')
+    return response.errorResponse(res, 'missing user information')
     let email = req.body.user.email;
     
     var password = hashPassword(req.body.user.password)
@@ -59,10 +50,10 @@ usersController.login = function(req, res) {
         req.session.user = data.id;
         req.session.username = data.username;
         userDB.updateConnection(socket.request.session.user, true)
-        .catch(err => err);
+            .catch(err => utils.log(err));
         response.response(res, data)
-    }).catch(function(error) {
-        response.errorResponse(res, "Bad identifiant or password")
+    }).catch(function(err) {
+        response.errorCatch(res, "Bad identifiant or password", err)
     });
 };
 
@@ -107,12 +98,12 @@ usersController.create = function(req, res) {
             user
         ).then(function() {
             response.response(res, "");
-        }).catch(function() {
+        }).catch(function(err) {
             error.email = "Email already taken"
-            return response.errorResponse(res, error)
+            return response.errorCatch(res, error, err)
         });
     })
-    .catch(error => response.errorResponse(res, "Something went wrong in users controller"))
+    .catch(err => response.errorCatch(res, "Something went wrong in users controller", err))
 };
 
 module.exports = usersController;

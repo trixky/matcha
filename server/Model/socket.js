@@ -14,9 +14,18 @@ socketIo.sessionMiddleware = session({
     }
 });
 
+
 socketIo.notification = (id, message)=>{
     if (io.clients[id])
         io.clients[id].emit('notification', message)
+}
+
+
+socketIo.matchNotification = (user1id, user2id) => {
+    if (io.clients[user1id])
+        socketIo.notification(user1id, "You got a match, check this now")
+    if (io.clients[user2id])
+        socketIo.notification(user2id, "You got a match, check this now")
 }
 
 socketIo.listen= (app) => {
@@ -25,7 +34,7 @@ socketIo.listen= (app) => {
     io.use(function(socket, next){
         socketIo.sessionMiddleware(socket.request, socket.request.res || {}, next)
     })
-
+// !!!! remove console.log
     io.on("connection", (socket)=>{
         console.log("someone connected")
         io.clients[socket.request.session.user] = socket

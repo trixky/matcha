@@ -24,8 +24,9 @@ router.use("/", (req, res, next) => {
     req.session.user = 0
     req.session.username = "username"
 next()}
-//,pictureRouter)
-   ,likedRouter)
+// ,accountRouter)
+,pictureRouter)
+//    ,likedRouter)
 //    ,notificationsRouter)
 // , matchRouter);
 

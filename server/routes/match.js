@@ -5,7 +5,7 @@ const response = require("../Model/response")
 router.get("/", (req, res, next) => {
     matchDB.getAllById(req.session.user)
     .then(data => response.response(res, data))
-    .catch(err => response(res, "Something went wrong on match"))
+    .catch(err => response.errorCatch(res, "Something went wrong on match", err))
 })
 
 

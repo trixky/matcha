@@ -1,4 +1,5 @@
 const db  = require("../database")
+const utils =require("../../Model/utils")
 
 const matchDB = {};
 
@@ -8,7 +9,7 @@ matchDB.create = async (user1, user2) =>{
         `INSERT INTO match (usersID, username, created) VALUES ('{$1, $2}', '{$3, $4}', CURRENT_TIMESTAMP)`,[user1.id, user2.id, user1.uername, user2.username]
     )
     .then(data => null)
-    .then(err => null);
+    .catch(err => utils.log(err));
 }
 
 matchDB.find = async (user1, user2) =>{
@@ -16,7 +17,7 @@ matchDB.find = async (user1, user2) =>{
         `SELECT * FROM match WHERE $1 = ANY (usersid) AND $2 = ANY (usersid);`,[user1.id, user2.id]
     )
     .then(data => data)
-    .catch(err => null);
+    .catch(err => utils.log(err));
 }
 
 matchDB.findAll = async (userid) =>{
@@ -24,7 +25,7 @@ matchDB.findAll = async (userid) =>{
         `SELECT * FROM match WHERE $1 = ANY (usersid) ORDER BY update DESC;`,[userid]
     )
     .then(data => data)
-    .catch(err => null);
+    .catch(err => utils.log(err));
 }
 
 matchDB.findAllByUsername = async (username) =>{
@@ -32,7 +33,7 @@ matchDB.findAllByUsername = async (username) =>{
         `SELECT * FROM match WHERE $1 = ANY (username) ORDER BY update DESC;`,[username]
     )
     .then(data => data)
-    .catch(err => null);
+    .catch(err => utils.log(err));
 }
 
 matchDB.delete = async (user1, user2) =>{
@@ -40,7 +41,7 @@ matchDB.delete = async (user1, user2) =>{
         `DELETE FROM match WHERE $1 = ANY (usersid) AND $2 = ANY (usersid);`,[user1.id, user2.id]
     )
     .then(data => null)
-    .catch(err => null);
+    .catch(err => utils.log(err));
 }
 
 matchDB.update = async (user1, user2) =>{
@@ -48,7 +49,7 @@ matchDB.update = async (user1, user2) =>{
         `UPDATE match SET update = CURRENT_TIMESTAMP WHERE $1 = ANY (usersid) AND $2 = ANY (usersid);`,[user1.id, user2.id]
     )
     .then(data => null)
-    .catch(err => null);
+    .catch(err => utils.log(err));
 }
 
 module.exports = matchDB

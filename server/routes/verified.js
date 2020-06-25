@@ -7,15 +7,18 @@ router.get('/', (req, res) =>{
         {
             userDB.findOneUserByEmail(req.query.email)
             .then(data => {
-                if (data.verified === "") {return res.redirect("http://localhost:3000/")}
-                if (data.verified === req.query.verified)
+                if(data)
                 {
-                    data.verified = null;
-                    userDB.updateUser(data)
-                    res.redirect("http://localhost:3000")
+                    if (data.verified === "") {return res.redirect("http://localhost:3000/")}
+                    if (data.verified === req.query.verified)
+                    {
+                        data.verified = null;
+                        userDB.updateUser(data)
+                        return res.redirect("http://localhost:3000")
+                    }
                 }
-                else
-                    res.redirect("http://localhost:3000/404")
+                res.redirect("http://localhost:3000/404")
+                
             })
             .catch(err => {
                 res.redirect("http://localhost:3000/404")})
