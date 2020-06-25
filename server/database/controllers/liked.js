@@ -13,9 +13,9 @@ likedDB.create = async (liker, liked) => {
     .catch(err => utils.log(err))
 }
 
-likedDB.findOneLike = async (liker, liked) => {
+likedDB.findOneLikeById = async (likerid, likedid) => {
     return db.oneOrNone(
-        `SELECT * FROM liked WHERE likerid = $1 AND likedid = $2;`, [liker.id, liked.id]
+        `SELECT * FROM liked WHERE likerid = $1 AND likedid = $2;`, [likerid, likedid]
     )
     .then(data => data)
     .catch(err => utils.log(err))

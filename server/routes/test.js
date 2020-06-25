@@ -11,6 +11,7 @@ var accountRouter = require("./account")
 var pictureRouter = require("./picture")
 var likedRouter = require("./liked")
 var notificationsRouter = require("../routes/notifications")
+var matchRouter = require("./match")
 
 router.use("/get", (req, res, next) => {
     req.session.user = 1
@@ -21,9 +22,11 @@ router.use("/get", (req, res, next) => {
 
 router.use("/", (req, res, next) => {
     req.session.user = 0
+    req.session.username = "username"
 next()}
 //,pictureRouter)
-//    ,likedRouter)
-   ,notificationsRouter)
+   ,likedRouter)
+//    ,notificationsRouter)
+// , matchRouter);
 
 module.exports = router;

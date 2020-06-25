@@ -8,10 +8,13 @@
     <button onclick="connect()">socket io</button><br/>
     <button onclick="emit()">emit to io</button><br/>
     <button onclick="disconnect()">disconnect</button><br/>
+    <button onclick="liked()">like</button><br/>
+</body>
 </body>
     <script src="/socket.io/socket.io.js"></script>
     <script src='https://code.jquery.com/jquery-3.5.1.min.js'></script>
     <script>
+            
         var io = io
         var socket;
 
@@ -28,6 +31,21 @@
         }
         function disconnect(){
             socket.disconnect();
+        }
+        function liked(){
+            fetch("http://localhost:3001/liked",{
+                method : "POST",
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                credentials: "same-origin",
+                body: JSON.stringify({
+                    user: {username: "username"}
+                })
+            })
+            .then(data => data.json())
+            .then(data => console.log(data))
+
         }
         
     </script>

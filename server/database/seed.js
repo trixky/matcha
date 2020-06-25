@@ -323,7 +323,7 @@ database.none(
     + '('
     + " '0',"
     + " 'email@email.com',"
-    + " 'usermane',"
+    + " 'username',"
     + " 'firstname',"
     + " 'name',"
     + " 'password',"

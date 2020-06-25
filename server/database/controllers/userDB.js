@@ -29,7 +29,7 @@ userDB.findOneUserById = async (id) => {
   
 userDB.findOneUserByUsername = async (username) => {
     return  db.oneOrNone(
-        `SELECT ${userInfo} FROM users WHERE username = $1`, username
+        `SELECT ${userInfo} FROM users WHERE username = $1`, [username]
         )
     .then(data => data)
     .catch(err => err)

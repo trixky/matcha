@@ -57,6 +57,7 @@ usersController.login = function(req, res) {
             return response.errorResponse(res, 'Your account was not valided, a new email will be send to you')
         }
         req.session.user = data.id;
+        req.session.username = data.username;
         userDB.updateConnection(socket.request.session.user, true)
         .catch(err => err);
         response.response(res, data)
