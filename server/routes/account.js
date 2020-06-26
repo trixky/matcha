@@ -6,7 +6,7 @@ const crypto = require("crypto")
 const response = require("../Model/response")
 
 
-router.get("/", (req, res, next) => {
+router.get("/myProfile", (req, res, next) => {
   
     if (!checkHaveId(req, res))
         return;
@@ -16,6 +16,16 @@ router.get("/", (req, res, next) => {
     userDB.findOneUserById(userid)
     .then(data => {
         data.password = ""
+        response.response(res, data)})
+    .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
+})
+
+router.get("/", (req, res, next) => {
+    
+    const userid = req.body.user.username;
+    
+    userDB.findOneUserByUsername(userid)
+    .then(data => {
         response.response(res, data)})
     .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
 })
