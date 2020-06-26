@@ -21,8 +21,11 @@
         function connect(){
             console.log("connected to ")
             socket = io.connect({query : "foo=faaa"});
-            socket.on("notifications", (message) => {
-                console.log(message)
+            socket.on("notifications", (notification) => {
+                console.log(notification)
+            })
+            socket.on("message", (message) => {
+                console.log(data.notification)
             })
         }
         function emit(){

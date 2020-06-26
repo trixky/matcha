@@ -14,12 +14,15 @@ socketIo.sessionMiddleware = session({
     }
 });
 
-
-socketIo.notification = (id, message)=>{
+socketIo.notification = (id, notification)=>{
     if (io.clients[id])
-        io.clients[id].emit('notification', message)
+        io.clients[id].emit('notifications', notification)
 }
 
+socketIo.messages = (id, sender, message)=>{
+    if (io.clients[id])
+        io.clients[id].emit('message', {sender: sender, message: message, notification: sender + " send you : " + message})
+}
 
 socketIo.matchNotification = (user1id, user2id) => {
     if (io.clients[user1id])
@@ -29,6 +32,7 @@ socketIo.matchNotification = (user1id, user2id) => {
 }
 
 socketIo.listen= (app) => {
+    
     io = socketio.listen(app)
     
     io.use(function(socket, next){
@@ -50,13 +54,11 @@ socketIo.listen= (app) => {
         
         socket.on("notifications", (message) => {
             console.log(message)
-            io.emit("notifications", "nous avons bien recus : " + message)
+            socketIo.notification(socket.request.session.user, "nous avons bien recus : " + message)
             socketIo.notification(1, "salut , tu me recois ?")
         })
     })
     return io;
 }
-
-
 
 module.exports = socketIo

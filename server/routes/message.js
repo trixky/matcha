@@ -8,14 +8,20 @@ const ent = require("ent")
 router.post("/", (req, res, next)=>{
     if(!req.body.user.username || !req.body.user.message)
         return response.errorResponse(res, "You didn't give a username or a message")
-    userDB.findOneUserByUsername(req.body.user.username)    
+    if(req.body.user.message.length > 300)
+        return response.errorResponse(res, "Message to long , it should be < 300 caractere")
+        
+    const username = req.body.user.username;
+    const message = ent.encode(req.body.user.message);
+
+    userDB.findOneUserByUsername(username)    
     .then(data => {
         if (!data)
             return response.errorResponse(res, "No user with this username");
         receiverData = data;
-        messagesDB.create(req.session.user, data.id, req.session.username, ent.encode(req.body.user.message))
+        messagesDB.create(req.session.user, data.id, req.session.username, message)
         .then(data => {
-            socketIo.notification(receiverData.id, "You got a new message from " + req.session.username)
+            socketIo.messages(receiverData.id, req.session.username, message)
             response.response(res, "Message created");
         })
         .catch(err => response.errorCatch(res, "Something went wrong in POST message router ", err))

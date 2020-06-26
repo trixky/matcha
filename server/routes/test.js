@@ -25,11 +25,11 @@ router.use("/", (req, res, next) => {
     req.session.user = 0
     req.session.username = "username"
 next()}
-,accountRouter)
+// ,accountRouter)
 // ,pictureRouter)
 //    ,likedRouter)
 //    ,notificationsRouter)
 // , matchRouter);
-// , messageRouter);
+, messageRouter);
 
 module.exports = router;
