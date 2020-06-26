@@ -42,7 +42,7 @@ socketIo.listen= (app) => {
     io.on("connection", (socket)=>{
         console.log("someone connected")
         io.clients[socket.request.session.user] = socket
-        socketIo.notification(socket.request.session.user, "salut vous vous etez bien connecter")
+        socketIo.notification(socket.request.session.user, "hello, you are connected to server")
         userDB.updateConnection(socket.request.session.user, true)
         
         socket.on("disconnect", ()=>{
@@ -54,8 +54,8 @@ socketIo.listen= (app) => {
         
         socket.on("notifications", (message) => {
             console.log(message)
-            socketIo.notification(socket.request.session.user, "nous avons bien recus : " + message)
-            socketIo.notification(1, "salut , tu me recois ?")
+            socketIo.notification(socket.request.session.user, "this have been well received : " + message)
+            socketIo.notification(1, "over")
         })
     })
     return io;

@@ -4,7 +4,8 @@ const ent = require("ent")
 const check = require("../Model/check")
 const crypto = require("crypto")
 const response = require("../Model/response")
-
+const viewerDB = require("../database/controllers/viewers")
+const socketIO = require("../Model/socket")
 
 router.get("/myProfile", (req, res, next) => {
   
@@ -22,10 +23,14 @@ router.get("/myProfile", (req, res, next) => {
 
 router.get("/", (req, res, next) => {
     
-    const userid = req.body.user.username;
+    const username = req.body.user.username;
     
-    userDB.findOneUserByUsername(userid)
+    userDB.findOneUserByUsername(username)
     .then(data => {
+        if (!data)
+            return response.response(res, "No user with this username");
+        viewerDB.create(req.session.user, req.session.username, data)
+        socketIO.notification(data.id, req.session.username + " have look at your profile, check back");
         response.response(res, data)})
     .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
 })
@@ -47,7 +52,7 @@ router.put("/password", (req, res, next) => {
                 
 })
 
-router.put("/", (req, res, next) => {
+router.put("/myprofile", (req, res, next) => {
     
     if (!checkHaveId(req, res))
         return;

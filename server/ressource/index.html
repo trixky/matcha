@@ -5,10 +5,12 @@
     <title>Document</title>
 </head>
 <body>
-    <button onclick="connect()">socket io</button><br/>
-    <button onclick="emit()">emit to io</button><br/>
+    <button onclick="connect()">Connect to server</button><br/>
+    <input placeholder="send a message to the server" size=30 id="send"/><br/>
+    <button onclick="emit()" id='emit'>send to server</button><br/>
     <button onclick="disconnect()">disconnect</button><br/>
     <button onclick="liked()">like</button><br/>
+    <div id="notification"></div>
 </body>
 </body>
     <script src="/socket.io/socket.io.js"></script>
@@ -17,12 +19,19 @@
             
         var io = io
         var socket;
+        $("#send").keydown(check)
+        
+        function check(e){
+            if (e.keyCode === 13)
+                $("#emit").click();
+        }
 
         function connect(){
             console.log("connected to ")
             socket = io.connect({query : "foo=faaa"});
             socket.on("notifications", (notification) => {
                 console.log(notification)
+                $("#notification").append(notification + "<br/>")
             })
             socket.on("messages", (data) => {
                 console.log(data.notification)
@@ -30,7 +39,8 @@
         }
         function emit(){
             console.log("sending to server")
-            socket.emit("notifications", "salut")
+            const txt = $("#send").val()
+            socket.emit("notifications", txt)
         }
         function disconnect(){
             socket.disconnect();

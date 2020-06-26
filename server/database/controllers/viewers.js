@@ -3,27 +3,28 @@ const utils = require("../../Model/utils")
 
 const viewers = {}
 
-viewers.create = async (user, person) => {
+viewers.create = async (userid, username, person) => {
+    
     return db.none(
-        `INSERT INTO viewers (userid, personid, username) VALUES ($1, $2, '$3');`,[user.id, person.id, person.uername]
+        `INSERT INTO viewers (viewerid, personid, viewerusername, personusername) VALUES ($1, $2, $3, $4);`,[userid, person.id, username, person.username]
     )
     .then(data => null)
     .catch(err => utils.log(err));
 }
 
-viewers.getAll = async (userid) => {
+viewers.getView = async (userid) => {
     
-    return db.many(
-        `SELECT * FROM viewers WHERE $1 = (personid);`,[userid]
+    return db.manyOrNone(
+        `SELECT * FROM viewers WHERE $1 = (viewerid);`,[userid]
     )
     .then(data => data)
     .catch(err => utils.log(err));
 }
 
-viewers.viewers = async (userid) => {
+viewers.getViewers = async (userid) => {
     
-    return db.many(
-        `SELECT * FROM viewers WHERE $1 = (userid);`,[userid]
+    return db.manyOrNone(
+        `SELECT * FROM viewers WHERE $1 = (personid);`,[userid]
     )
     .then(data => data)
     .catch(err => utils.log(err));

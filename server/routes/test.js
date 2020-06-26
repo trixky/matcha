@@ -21,15 +21,40 @@ router.use("/get", (req, res, next) => {
   })
  })
 
-router.use("/", (req, res, next) => {
+router.use("/account", (req, res, next) => {
     req.session.user = 0
     req.session.username = "username"
 next()}
-// ,accountRouter)
-// ,pictureRouter)
-//    ,likedRouter)
-//    ,notificationsRouter)
-// , matchRouter);
+,accountRouter)
+
+router.use("/picture", (req, res, next) => {
+    req.session.user = 0
+    req.session.username = "username"
+next()}
+,pictureRouter)
+
+router.use("/liked", (req, res, next) => {
+    req.session.user = 0
+    req.session.username = "username"
+next()}
+   ,likedRouter)
+
+router.use("/notification", (req, res, next) => {
+    req.session.user = 0
+    req.session.username = "username"
+next()}
+ ,notificationsRouter)
+
+ router.use("/match", (req, res, next) => {
+    req.session.user = 0
+    req.session.username = "username"
+next()}
+, matchRouter);
+
+router.use("/message", (req, res, next) => {
+    req.session.user = 0
+    req.session.username = "username"
+next()}
 , messageRouter);
 
 module.exports = router;

@@ -65,11 +65,11 @@ database.none(
 .then(() => database.none(
     'CREATE TABLE viewers'
     + '('
-    + 'userID INTEGER NOT NULL'
+    + 'viewerID INTEGER NOT NULL'
     + ', '
     + 'personID INTEGER NOT NULL'
     + ', '
-    + 'username VARCHAR(31) NOT NULL'
+    + 'viewerusername VARCHAR(31) NOT NULL'
     + ', '
     + 'personusername VARCHAR(31) NOT NULL'
     + ', '
@@ -204,7 +204,7 @@ database.none(
 +   "AS ON INSERT TO "
 +   "viewers "
 +   "DO "
-+   "INSERT INTO notifications (userid, notification) VALUES (NEW.personid,  concat(NEW.username ,' have look at your profile, check back'));"
++   "INSERT INTO notifications (userid, notification) VALUES (NEW.personid,  concat(NEW.viewerusername ,' have look at your profile, check back'));"
 )
 //------------------------------------------- INSERT
 .then(() => database.none(
