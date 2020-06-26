@@ -21,7 +21,7 @@ userDB.findOneUserByEmail = async (email) => {
 
 userDB.findOneUserById = async (id) => {
     return  db.oneOrNone(
-        `SELECT ${userInfo} FROM users WHERE id = $1`, id
+        `SELECT ${userInfo} FROM users WHERE id = $1;`, id
         )
     .then(data => data)
     .catch(err => utils.log(err));
@@ -70,8 +70,8 @@ userDB.findArray = async (array) => {
 userDB.updatePicture = async (id, pictureName, number) => {
     return userDB.findOneUserById(id)
     .then(data => {
-        
-        deleteFile(number, data)
+        if(data)        
+            deleteFile(number, data)
         
         return db.none(
             `UPDATE users SET picture${number} = 'http://localhost:3002/${pictureName}' WHERE id = $1;`,[id]
@@ -85,7 +85,6 @@ userDB.updatePicture = async (id, pictureName, number) => {
 userDB.updatePictureProfile = async (id, pictureName) => {
     return userDB.findOneUserById(id)
     .then(data => {
-        deleteFile("profile",data)
         return db.none(
             `UPDATE users SET profile = 'http://localhost:3002/${pictureName}' WHERE id = $1;`, [id]
         )

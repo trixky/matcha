@@ -1,11 +1,1 @@
 
-QueryResultError {
-    code: queryResultErrorCode.noData
-    message: "No data returned from the query."
-    received: 0
-    query: "SELECT * FROM liked WHERE 0 = (likerid);"
-}
-error: syntax error at or near "username"
-error: INSERT has more target columns than expressions
-error: INSERT has more target columns than expressions
-error: INSERT has more target columns than expressions
