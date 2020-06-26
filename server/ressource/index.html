@@ -24,7 +24,7 @@
             socket.on("notifications", (notification) => {
                 console.log(notification)
             })
-            socket.on("message", (message) => {
+            socket.on("messages", (data) => {
                 console.log(data.notification)
             })
         }

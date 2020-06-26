@@ -21,7 +21,7 @@ socketIo.notification = (id, notification)=>{
 
 socketIo.messages = (id, sender, message)=>{
     if (io.clients[id])
-        io.clients[id].emit('message', {sender: sender, message: message, notification: sender + " send you : " + message})
+        io.clients[id].emit('messages', {sender: sender, message: message, notification: sender + " send you : " + message})
 }
 
 socketIo.matchNotification = (user1id, user2id) => {
