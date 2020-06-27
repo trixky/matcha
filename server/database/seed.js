@@ -147,6 +147,8 @@ database.none(
     + ', '
     + "birthday VARCHAR(500) NOT NULL DEFAULT '1999-12-13'"
     + ', '
+    + "age INTEGER NOT NULL DEFAULT 0"
+    + ', '
     + "tags TEXT[] NOT NULL DEFAULT '{}'"
     + ', '
     + "profile VARCHAR(200)"

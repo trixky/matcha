@@ -100,11 +100,13 @@ function updateData(req, res, user){
                 .then(data => {
                     data.password = ""
                     response.response(res, data)})
-                .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err))
+                .catch(err => response.errorCatch(res, "Something went wrong in account, Error database 1", err))
             )
-            .catch(err => response.errorCatch(res, "Something went wrongin account, Error database", err));
+            .catch(err => response.errorCatch(res, "Something went wrongin account, Error database 2", err));
         })
-        .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
+        .catch(err => {
+            console.log(err)
+            response.errorCatch(res, "Something went wrong in account, Error database 3", err)});
 }
 
 function encodeUserData(user){
@@ -133,6 +135,11 @@ function changeValue(data, newData){
         data.orientation = newData.orientation
     if (newData.biography)
         data.biography = newData.biography
+    if (newData.birthday)
+    {
+            data.birthday = newData.birthday;
+            data.age = formatAge(newData.birthday)
+    }
     if (newData.tags)
         data.tags = newData.tags
     return data;
@@ -145,6 +152,18 @@ function checkHaveId(req, res){
         return false;
     }
     return true;
+}
+
+function formatAge(birthday){
+  
+    var dob = new Date(birthday);
+    var today = new Date();
+    var age = today.getFullYear() - dob.getFullYear();
+    var m = today.getMonth() - dob.getMonth();
+    if (m < 0 || (m === 0 && today.getDay() < birthday.getDay()))
+        age--;
+    
+    return age;
 }
 
 module.exports = router;

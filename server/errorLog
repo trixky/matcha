@@ -45,3 +45,52 @@ error: column "updated" of relation "users" does not exist
 error: column "updated" of relation "users" does not exist
 error: column "updated" of relation "users" does not exist
 error: column "updated" of relation "users" does not exist
+Something went wrong in account, Error database
+TypeError: dob.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+error: invalid input syntax for type integer: "NaN"
+error: invalid input syntax for type integer: "NaN"
+Something went wrong in account, Error database 3
+TypeError: birthday.getTime is not a function
+Something went wrong in account, Error database 3
+TypeError: dob.getTime is not a function
+error: invalid input syntax for type integer: "NaN"
+Something went wrong in account, Error database 3
+TypeError: Date(...).getTime is not a function
+error: invalid input syntax for type integer: "NaN"
+error: invalid input syntax for type integer: "NaN"
+Something went wrong in account, Error database 3
+ReferenceError: age_dt is not defined
+Something went wrong in account, Error database 3
+ReferenceError: age_dt is not defined
+Something went wrong in account, Error database 3
+ReferenceError: age_dt is not defined

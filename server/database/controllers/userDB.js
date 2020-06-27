@@ -4,7 +4,7 @@ const utils = require("../../Model/utils")
 const userDB = {};
 
 const userInfo =  "id ,email, username, firstname, name, gender, orientation, " 
-                + "biography, birthday, tags, profile, picture1, picture2, "
+                + "biography, birthday, age, tags, profile, picture1, picture2, "
                 + "picture3, picture4, liked, likers, match, "
                 + "viewers, reputation, latitude, longitude, connected, verified"
 
@@ -141,6 +141,8 @@ userDB.updateUser = async (newData) => {
         newData.gender,
         newData.orientation,
         newData.biography,
+        newData.birthday,
+        newData.age,
         newData.tags,
         newData.liked,
         newData.likers,
@@ -161,19 +163,23 @@ userDB.updateUser = async (newData) => {
                     gender = $5,
                     orientation = $6,
                     biography = $7,
-                    tags = $8,
-                    liked = $9,
-                    likers = $10,
-                    viewers = $11,
-                    reputation = $12,
-                    latitude = $13,
-                    longitude = $14,
-                    connected = $15,
-                    verified = $16
-                WHERE ID = $17`,
+                    birthday = $8,
+                    age = $9,
+                    tags = $10,
+                    liked = $11,
+                    likers = $12,
+                    viewers = $13,
+                    reputation = $14,
+                    latitude = $15,
+                    longitude = $16,
+                    connected = $17,
+                    verified = $18
+                WHERE ID = $19`,
                 data
         )
-    .catch(err => utils.log(err))
+    .catch(err => {
+        console.log(err)
+        utils.log(err)})
 }
 
 //--------------------------------- Function 
