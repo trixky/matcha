@@ -1,7 +1,14 @@
+.pretender-chat-list {
+	text-align: left;
+}
+
 .pretender-chat-list-img {
-	width: 40px;	
+	width: 40px;
+	border-radius: 50%;	
 }
 
 .pretender-chat-list-pseudo {
-	display: inline;
+	display: inline-block;
+	padding-left: 7px;
+	transform: translateY(-15px)
 }
