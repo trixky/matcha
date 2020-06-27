@@ -110,6 +110,14 @@ userDB.updateTime = async (id) => {
     .catch(err => utils.log(err));
 }
 
+userDB.disconnect = async (id) => {
+    db.none(
+        "UPDATE users SET connected = false WHERE id = $1", [id]
+    )
+    .then(data => data)
+    .catch(err => utils.log(err));
+}
+
 userDB.deletePicture = async (id, column) => {
     userDB.findOneUserById(id)
     .then(data => deleteFile(column, data))

@@ -16,6 +16,7 @@ var messageRouter = require("./message")
 var blockedRouter = require("./blocked")
 var conversationsRouter = require("./conversations")
 var fakeRouter = require("./fake")
+var disconnectedRouter = require("./disconnected")
 
 router.use((req, res, next) =>{
     userDB.updateTime(0)
@@ -82,5 +83,11 @@ router.use("/fake", (req, res, next) => {
     req.session.username = "username"
 next()}
 , fakeRouter);
+
+router.use("/disconnect", (req, res, next) => {
+    req.session.user = 0
+    req.session.username = "username"
+next()}
+, disconnectedRouter);
 
 module.exports = router;
