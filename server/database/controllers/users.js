@@ -49,9 +49,9 @@ usersController.login = function(req, res) {
             return response.errorResponse(res, 'Your account was not valided, a new email will be send to you')
         }
         fakeDB.findById(data)
-        .then(data => {
+        .then(dat => {
             
-            if (data)
+            if (dat)
                 return response.errorResponse(res, 'You have been reported to be a faker , your account is suspended')
                 
             req.session.user = data.id;
