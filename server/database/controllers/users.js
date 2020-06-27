@@ -7,6 +7,7 @@ const response = require("../../Model/response")
 const check = require("../../Model/check")
 const userDB = require("./userDB")
 const utils = require("../../Model/utils")
+const fakeDB = require("../controllers/fake")
 
 let usersController = {};
 
@@ -47,11 +48,18 @@ usersController.login = function(req, res) {
             sendMail.confirmMail(data.email, data.verified)
             return response.errorResponse(res, 'Your account was not valided, a new email will be send to you')
         }
-        req.session.user = data.id;
-        req.session.username = data.username;
-        userDB.updateConnection(data.id, true)
-            .catch(err => utils.log(err));
-        response.response(res, data)
+        fakeDB.findById(data)
+        .then(data => {
+            
+            if (data)
+                return response.errorResponse(res, 'You have been reported to be a faker , your account is suspended')
+                
+            req.session.user = data.id;
+            req.session.username = data.username;
+            userDB.updateConnection(data.id, true)
+                .catch(err => utils.log(err));
+            response.response(res, data)
+        })
     }).catch(function(err) {
         response.errorCatch(res, "Bad identifiant or password", err)
     });

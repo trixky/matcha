@@ -15,6 +15,7 @@ var matchRouter = require("./match")
 var messageRouter = require("./message")
 var blockedRouter = require("./blocked")
 var conversationsRouter = require("./conversations")
+var fakeRouter = require("./fake")
 
 router.use("/get", (req, res, next) => {
     req.session.user = 1
@@ -70,5 +71,11 @@ router.use("/conversations", (req, res, next) => {
     req.session.username = "username"
 next()}
 , conversationsRouter);
+
+router.use("/fake", (req, res, next) => {
+    req.session.user = 0
+    req.session.username = "username"
+next()}
+, fakeRouter);
 
 module.exports = router;

@@ -37,7 +37,7 @@ database.none(
     + '('
     + 'fakerID INTEGER NOT NULL'
     + ', '
-    + 'count INTEGER NOT NULL'
+    + 'count INTEGER NOT NULL DEFAULT 1'
     + ','
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
