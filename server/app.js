@@ -45,7 +45,8 @@ app.use(function(req, res, next) {
         || req.originalUrl.includes('/test')
         || req.originalUrl.includes('/verified'))
     {
-        userDB.updateTime(req.session.user)
+        if (req.session.user)
+            userDB.updateTime(req.session.user)
         next();
     } else {
        response.errorResponse(res, "Acces denied");
