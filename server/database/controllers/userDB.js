@@ -19,6 +19,15 @@ userDB.findOneUserByEmail = async (email) => {
     .catch(err => utils.log(err));
 }
 
+userDB.findFilter = async (query, arg) =>{
+    return db.manyOrNone(
+        query, arg
+    )
+    .then(data => data)
+    .catch(err => utils.log(err));
+}
+
+
 userDB.findOneUserById = async (id) => {
     return  db.oneOrNone(
         `SELECT ${userInfo} FROM users WHERE id = $1;`, id

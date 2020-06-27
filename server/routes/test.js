@@ -18,6 +18,9 @@ var conversationsRouter = require("./conversations")
 var fakeRouter = require("./fake")
 var disconnectedRouter = require("./disconnected")
 
+const filter = require("../Model/filter")
+const response = require("../Model/response")
+
 router.use((req, res, next) =>{
     userDB.updateTime(0)
     next();
@@ -89,5 +92,20 @@ router.use("/disconnect", (req, res, next) => {
     req.session.username = "username"
 next()}
 , disconnectedRouter);
+
+
+router.use("/test", (req, res, next) => {
+    req.session.user = 0
+    req.session.username = "username"
+next()}
+,(req, res, next) =>{
+
+    console.log(filter.formatEntry(1,1, null, null))
+    filter.usersFilter()
+    .then(data => {
+        response.response(res, data)
+    })
+    .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
+});
 
 module.exports = router;
