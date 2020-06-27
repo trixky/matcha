@@ -182,7 +182,7 @@ database.none(
     + ', '
     + 'created TIMESTAMP NOT NULL'
     + ', '
-    + 'modified TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP'
+    + 'updated TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
 //------------------------------------------- RULE
@@ -216,7 +216,6 @@ database.none(
     +   "UPDATE users set match = match + 1 WHERE id = ANY (NEW.usersid);"
     +   "INSERT INTO notifications (userid, notification) VALUES (NEW.usersid[1],  concat(NEW.username[2] ,' liked you to, you can start a conversation'));"
     +   "INSERT INTO notifications (userid, notification) VALUES (NEW.usersid[2],  concat(NEW.username[1] ,' liked you to, you can start a conversation'));"
-    +   "INSERT INTO conversations (usersid, usersname) VALUES (NEW.usersid, NEW.username);"
     +   ");"
 )
 .then(() => database.none(
@@ -234,7 +233,9 @@ database.none(
 +   "AS ON INSERT TO "
 +   "viewers "
 +   "DO "
++   "("
 +   "INSERT INTO notifications (userid, notification) VALUES (NEW.personid,  concat(NEW.viewerusername ,' have look at your profile, check back'));"
++   ")"
 )
 //------------------------------------------- INSERT
 .then(() => database.none(

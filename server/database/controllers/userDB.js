@@ -102,6 +102,14 @@ userDB.updateFame = async (userid, number) => {
     .catch(err => utils.log(err));
 }
 
+userDB.updateTime = async (id) => {
+    db.none(
+        "UPDATE users SET updated = CURRENT_TIMESTAMP WHERE id = $1", [id]
+    )
+    .then(data => data)
+    .catch(err => utils.log(err));
+}
+
 userDB.deletePicture = async (id, column) => {
     userDB.findOneUserById(id)
     .then(data => deleteFile(column, data))

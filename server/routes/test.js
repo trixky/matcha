@@ -17,6 +17,11 @@ var blockedRouter = require("./blocked")
 var conversationsRouter = require("./conversations")
 var fakeRouter = require("./fake")
 
+router.use((req, res, next) =>{
+    userDB.updateTime(0)
+    next();
+})
+
 router.use("/get", (req, res, next) => {
     req.session.user = 1
   fs.readFile(__dirname.split("routes")[0] + "/ressource/index.html", (err, file)=>{

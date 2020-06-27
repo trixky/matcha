@@ -4,6 +4,7 @@ var logger = require('morgan');
 const cors = require('cors')
 const response = require("./Model/response")
 const session = require("./Model/socket").sessionMiddleware;
+const userDB = require("./database/controllers/userDB")
 
 // -----------------------------------------------
 var indexRouter = require('./routes/index');
@@ -44,6 +45,7 @@ app.use(function(req, res, next) {
         || req.originalUrl.includes('/test')
         || req.originalUrl.includes('/verified'))
     {
+        userDB.updateTime(req.session.user)
         next();
     } else {
        response.errorResponse(res, "Acces denied");
