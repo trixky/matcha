@@ -13,6 +13,7 @@ var likedRouter = require("./liked")
 var notificationsRouter = require("../routes/notifications")
 var matchRouter = require("./match")
 var messageRouter = require("./message")
+var blockedRouter = require("./blocked")
 
 router.use("/get", (req, res, next) => {
     req.session.user = 1
@@ -39,8 +40,8 @@ router.use("/liked", (req, res, next) => {
 next()}
    ,likedRouter)
 
-router.use("/notification", (req, res, next) => {
-    req.session.user = 0
+router.use("/notifications", (req, res, next) => {
+    req.session.user = 1
     req.session.username = "username"
 next()}
  ,notificationsRouter)
@@ -56,5 +57,11 @@ router.use("/message", (req, res, next) => {
     req.session.username = "username"
 next()}
 , messageRouter);
+
+router.use("/blocked", (req, res, next) => {
+    req.session.user = 0
+    req.session.username = "username"
+next()}
+, blockedRouter);
 
 module.exports = router;

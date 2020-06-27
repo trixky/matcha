@@ -94,6 +94,14 @@ userDB.updatePictureProfile = async (id, pictureName) => {
     .catch(err => utils.log(err));
 }
 
+userDB.updateFame = async (userid, number) => {
+    return db.none(
+        "UPDATE users SET reputation = reputation + $2 WHERE id = $1;", [userid, number]
+    )
+    .then(data => data)
+    .catch(err => utils.log(err));
+}
+
 userDB.deletePicture = async (id, column) => {
     userDB.findOneUserById(id)
     .then(data => deleteFile(column, data))

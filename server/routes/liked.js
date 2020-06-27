@@ -6,6 +6,7 @@ const socket = require("../Model/socket")
 const utils = require("../Model/utils")
 const matchDB = require("../database/controllers/match")
 const socketIo = require("../Model/socket")
+const blockedDB = require("../database/controllers/blocked")
 
 router.post("/", (req, res, next) => {
 
@@ -18,37 +19,42 @@ router.post("/", (req, res, next) => {
         
         userDB.findOneUserById(req.session.user)
         .then(data => {
+        
+        var likerData = data
+        blockedDB.isBlocked(req.session.user, likedData.id)
+        .then(data => {    
             
-            var likerData = data
-            
-            likedDB.findOneLikeById(likerData.id, likedData.id)
-            .then(data => {
-                if(!data)
-                    return likedDB.create(likerData, likedData)
-                    .then(data => {
-                        
-                        response.response(res, "You liked this person");
-                        socket.notification(likedData.id, "You just got a new liker")
-                        
-                        matchDB.checkAndCreate(likerData,likedData)
+            if (data)
+                return response.errorResponse(res, "You are blocked");
+
+                likedDB.findOneLikeById(likerData.id, likedData.id)
+                .then(data => {
+
+                    if(!data)
+                        return likedDB.create(likerData, likedData)
                         .then(data => {
-                            if (data){
-                                socketIo.matchNotification(likerData.id, likedData.id)
-                                        // console.log("create a match ")
-                            }
-                        })
-                        .catch(err => utils.log(err))
-                    })
-                    .catch(err => response.errorCatch(res, "Something wrong in the liked router 1", err))
+                        
+                            response.response(res, "You liked this person");
+                            socket.notification(likedData.id, "You just got a new liker")
+                            userDB.updateFame(likedData.id, 2);                        
+                            matchDB.checkAndCreate(likerData,likedData)
+                            .then(data => {
+                                if (data)
+                                    socketIo.matchNotification(likerData.id, likedData.id)
+                            })
+                            .catch(err => utils.log(err))
+                            })
+                            .catch(err => response.errorCatch(res, "Something wrong in the liked router 1", err))
 
-                response.errorResponse(res, "You already like this personne")
+                    response.errorResponse(res, "You already like this personne")
+                })
+                .catch(err => response.errorCatch(res, "Something wrong in the liked router 2", err))
             })
-            .catch(err => response.errorCatch(res, "Something wrong in the liked router 2", err))
+            .catch(err => response.errorCatch(res, "Something wrong in the liked router 3", err))
         })
-        .catch(err => response.errorCatch(res, "Something wrong in the liked router 3", err))
+        .catch(err => response.errorCatch(res, "Something wrong in the liked router 4", err))
     })
-
-    .catch(err => response.errorCatch(res, "Something wrong in the liked router 4", err))
+    .catch(err => response.errorCatch(res, "Something wrong in the liked router 5", err))
 })
 
 router.put("/",(req, res, next) => {
@@ -56,6 +62,7 @@ router.put("/",(req, res, next) => {
     .then(data => {
         if (!data)
             return response.errorResponse(res, "Something wrong in delete router 1")
+        userDB.updateFame(data.id, -1)
         likedDB.delete(req.session.user, data.id)
         .then(data => response.response(res, "Like delected"))
         .catch(err => response.errorCatch(res, "Something wrong in the liked router 2", err))

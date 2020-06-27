@@ -31,6 +31,7 @@ router.get("/", (req, res, next) => {
             return response.response(res, "No user with this username");
         viewerDB.create(req.session.user, req.session.username, data)
         socketIO.notification(data.id, req.session.username + " have look at your profile, check back");
+        userDB.updateFame(data.id, 1);
         response.response(res, data)})
     .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
 })
