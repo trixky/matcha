@@ -20,7 +20,7 @@ class States extends Component {
 		const _this = this;
 		
 		setTimeout(() => {
-			if (this._isMounted === true && !_this.state.data) {
+			if (_this._isMounted === true && !_this.props.data) {
 				const point_nbr = _this.state.point_nbr;
 				const new_point_nbr = (point_nbr === 3 ? 1 : point_nbr + 1);
 				_this.setState({ point_nbr: new_point_nbr, loading_message: 'loading' + '.'.repeat(new_point_nbr)})
@@ -36,6 +36,7 @@ class States extends Component {
 	render() {
 		const data = this.props.data;
 
+		console.log(data)
 		return (
 			<div className='states-containers'>
 				<ul>

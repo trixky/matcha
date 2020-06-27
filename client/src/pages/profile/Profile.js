@@ -13,6 +13,20 @@ class Profile extends Component {
 	componentDidMount() {
 		if (this.props.readPage() !== 'Profile')
 			this.props.setPage('Profile');
+
+		// const data=''
+
+		// const requestOptions = {
+		// 	method: 'GET',
+		// 	bodyu: JSON.stringify(data)
+		// };
+		// fetch('/account/myprofile', requestOptions)
+		// 	.then(response => response.json())
+		// 	.then(data => {
+		// 		if (this._isMounted) {
+		// 			this.setState({ data: data._data })
+		// 		}
+		// 	});
 	}
 
 	render() {

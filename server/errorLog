@@ -7,3 +7,14 @@ error: column "fakeid" does not exist
 error: column "fakeid" does not exist
 error: column "fakeid" does not exist
 error: column "fakeid" does not exist
+Bad identifiant or password
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM users WHERE (email = '42@42.com' AND password = '803cddad31e1c5a7bc5d588ba70d120b4255eb4b09f67bea1b7cc648d7e599d6')"
+}
+error: column "updated" of relation "users" does not exist
+error: column "updated" of relation "users" does not exist
+error: column "updated" of relation "users" does not exist
+error: column "updated" of relation "users" does not exist
