@@ -9,24 +9,27 @@ import Bio from './components/Bio'
 import Tags from './components/Tags'
 
 class Profile extends Component {
+	state = {
+		data: null
+	}
 
 	componentDidMount() {
 		if (this.props.readPage() !== 'Profile')
 			this.props.setPage('Profile');
 
-		// const data=''
+		const current_user = window.location.pathname.split('/')[2];
 
-		// const requestOptions = {
-		// 	method: 'GET',
-		// 	bodyu: JSON.stringify(data)
-		// };
-		// fetch('/account/myprofile', requestOptions)
-		// 	.then(response => response.json())
-		// 	.then(data => {
-		// 		if (this._isMounted) {
-		// 			this.setState({ data: data._data })
-		// 		}
-		// 	});
+		const requestOptions = {
+			method: 'GET',
+		};
+		if (current_user === 'myprofile') {
+			fetch('/account/myprofile', requestOptions)
+				.then(response => response.json())
+				.then(data => {
+					console.log(data)
+					this.setState({ data: data._data })
+				});
+		}
 	}
 
 	render() {
@@ -35,12 +38,12 @@ class Profile extends Component {
 				<h2 className='profil-title'>username</h2>
 				<h3 className='connection-status'>connected</h3>
 				<div className='profile-info-container'>
-					<Images />
-					<Heart />
+					<Images data={this.state.data}/>
+					<Heart data={this.state.data}/>
 					<input className='form-input' onClick={() => (this.handleClick('/profile'))} type='submit' value='chat' disabled />
-					<ProfileListInfo />
-					<Bio />
-					<Tags />
+					<ProfileListInfo data={this.state.data}/>
+					<Bio data={this.state.data}/>
+					<Tags data={this.state.data}/>
 				</div>
 			</div>
 		);
