@@ -6,3 +6,6 @@ error: column "id" does not exist
 error: column "id" does not exist
 error: column "id" does not exist
 error: column "id" does not exist
+error: syntax error at or near "usersid"
+error: column "update" does not exist
+error: column "update" does not exist

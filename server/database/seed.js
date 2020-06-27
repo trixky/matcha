@@ -16,6 +16,8 @@ database.none(
     + 'viewers, '
     + 'match, '
     + 'notifications, '
+    + 'fake, '
+    + 'conversations, '
     + 'users ;'
 )
 .then(() => database.none(
@@ -26,6 +28,16 @@ database.none(
     + 'sender VARCHAR(31) NOT NULL'
     + ', '
     + 'message VARCHAR(300) NOT NULL'
+    + ','
+    + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+    + ')'
+)
+.then(() => database.none(
+    'CREATE TABLE fake'
+    + '('
+    + 'fakerID INTEGER NOT NULL'
+    + ', '
+    + 'count INTEGER NOT NULL'
     + ','
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
@@ -98,6 +110,18 @@ database.none(
     + 'read BOOLEAN DEFAULT false'
     + ', '
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+    + ')'
+)
+.then(() => database.none(
+    'CREATE TABLE conversations'
+    + '('
+    + 'usersID INTEGER[] NOT NULL'
+    + ', '
+    + 'usersname VARCHAR(30)[] NOT NULL'
+    + ', '
+    + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+    + ', '
+    + 'updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
 .then(() => database.none(
@@ -192,6 +216,7 @@ database.none(
     +   "UPDATE users set match = match + 1 WHERE id = ANY (NEW.usersid);"
     +   "INSERT INTO notifications (userid, notification) VALUES (NEW.usersid[1],  concat(NEW.username[2] ,' liked you to, you can start a conversation'));"
     +   "INSERT INTO notifications (userid, notification) VALUES (NEW.usersid[2],  concat(NEW.username[1] ,' liked you to, you can start a conversation'));"
+    +   "INSERT INTO conversations (usersid, usersname) VALUES (NEW.usersid, NEW.username);"
     +   ");"
 )
 .then(() => database.none(
@@ -199,7 +224,10 @@ database.none(
 +   "AS ON INSERT TO "
 +   "messages "
 +   "DO "
++   "("
 +   "INSERT INTO notifications (userid, notification) VALUES (NEW.usersid[2],  concat(NEW.sender ,' send you a message'));"
++   "UPDATE conversations SET updated = CURRENT_TIMESTAMP WHERE usersid = NEW.usersid;"
++   ")"
 )
 .then(() => database.none(
     "CREATE OR REPLACE RULE viewers "
@@ -336,6 +364,6 @@ database.none(
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",    
-)))))))))))))))))
+)))))))))))))))))))
 .then(_exit).catch(_exit);
 

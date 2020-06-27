@@ -14,6 +14,7 @@ var notificationsRouter = require("../routes/notifications")
 var matchRouter = require("./match")
 var messageRouter = require("./message")
 var blockedRouter = require("./blocked")
+var conversationsRouter = require("./conversations")
 
 router.use("/get", (req, res, next) => {
     req.session.user = 1
@@ -63,5 +64,11 @@ router.use("/blocked", (req, res, next) => {
     req.session.username = "username"
 next()}
 , blockedRouter);
+
+router.use("/conversations", (req, res, next) => {
+    req.session.user = 0
+    req.session.username = "username"
+next()}
+, conversationsRouter);
 
 module.exports = router;

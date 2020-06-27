@@ -10,12 +10,17 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var forgetRouter = require("./routes/forget")
 var verifiedRouter = require("./routes/verified")
-var testRouter = require("./routes/test")
-var pictureRouter = require("./routes/picture")
 var accountRouter = require("./routes/account")
+var pictureRouter = require("./routes/picture")
 var likedRouter = require("./routes/liked")
 var notificationRouter =require("./routes/notifications")
+var matchRouter = require("./routes/match")
 var messageRouter = require("./routes/message")
+var blockedRouter = require("./routes/blocked")
+var conversationsRouter = require("./routes/conversations")
+
+var testRouter = require("./routes/test")
+
 
 var app = express();
 
@@ -56,6 +61,9 @@ app.use("/account", accountRouter)
 app.use("/liked", likedRouter)
 app.use("/notifications", notificationRouter)
 app.use("/messages", messageRouter)
+app.use("/match", matchRouter)
+app.use("/blocked", blockedRouter)
+app.use("/conversations", conversationsRouter)
 
 
 
