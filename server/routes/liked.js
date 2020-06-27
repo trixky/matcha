@@ -7,8 +7,12 @@ const utils = require("../Model/utils")
 const matchDB = require("../database/controllers/match")
 const socketIo = require("../Model/socket")
 const blockedDB = require("../database/controllers/blocked")
+const file = require('../Model/file')
 
 router.post("/", (req, res, next) => {
+
+    if (!file.CheckProfilePicture(req.session.user))
+        return response.errorResponse(res, "You don't have a profile picture , update one to start using this feature")      
 
     userDB.findOneUserByUsername(req.body.user.username)
     .then(data => {
@@ -58,11 +62,16 @@ router.post("/", (req, res, next) => {
 })
 
 router.put("/",(req, res, next) => {
+    
+    if (!file.CheckProfilePicture(req.session.user))
+        return response.errorResponse(res, "You don't have a profile picture , update one to start using this feature")      
+
     userDB.findOneUserByUsername(req.body.user.username)
     .then(data => {
         if (!data)
             return response.errorResponse(res, "Something wrong in delete router 1")
         userDB.updateFame(data.id, -1)
+        socket.notification(data.id, "Someone unliked you, check some new account")
         likedDB.delete(req.session.user, data.id)
         .then(data => response.response(res, "Like delected"))
         .catch(err => response.errorCatch(res, "Something wrong in the liked router 2", err))
