@@ -17,9 +17,10 @@ var blockedRouter = require("./blocked")
 var conversationsRouter = require("./conversations")
 var fakeRouter = require("./fake")
 var disconnectedRouter = require("./disconnected")
-
 const filter = require("../Model/filter")
 const response = require("../Model/response")
+
+const gps = require("../Model/gps")
 
 router.use((req, res, next) =>{
     userDB.updateTime(0)
@@ -106,6 +107,21 @@ next()}
         response.response(res, data)
     })
     .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
+});
+
+
+
+router.use("/gps/:ip", (req, res, next) => {
+    req.session.user = 0
+    req.session.username = "username"
+next()}
+,(req, res, next) =>{
+    console.log(req.params.ip)
+    gps.getCoordonned(req.params.ip)
+    .then(data => {
+        response.response(res, data)
+    })
+    .catch(err => response.errorCatch(res, "Something went wrong in gps", err));
 });
 
 module.exports = router;

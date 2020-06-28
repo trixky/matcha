@@ -38,22 +38,21 @@ app.use(cookieParser());
 app.use(session)
 
 app.use(function(req, res, next) {
-
     
     if (req.session.user
-        || req.originalUrl === '/users/login'
-        || req.originalUrl === '/users/create'
-        || req.originalUrl === '/forget/password'
-        || req.originalUrl === '/forget/username'
-        || req.originalUrl.includes('/test')
-        || req.originalUrl.includes('/verified'))
-    {
-         if (req.session.user)
-             userDB.updateTime(req.session.user)
+    || req.originalUrl === '/users/login'
+    || req.originalUrl === '/users/create'
+    || req.originalUrl === '/forget/password'
+    || req.originalUrl === '/forget/username'
+    || req.originalUrl.includes('/test')
+    || req.originalUrl.includes('/verified'))
+    {       
+        if (req.session.user)
+            userDB.updateTime(req.session.user)
         next();
-    } else {
-        response.errorResponse(res, "Acces denied");
     }
+    else 
+        response.errorResponse(res, "Acces denied");
 });
 
 /* ----------------------------------------- */
