@@ -12,23 +12,37 @@ import UpdateTags from './components/UpdateTags'
 import './UpdateProfile.css'
 
 class UpdateProfile extends Component {
+	state = {
+		data: null
+	}
+
 	componentDidMount() {
 		if (this.props.readPage() !== 'UpdateProfile')
 			this.props.setPage('UpdateProfile');
+
+		const requestOptions = {
+			method: 'GET',
+		};
+		fetch('/account/myprofile', requestOptions)
+			.then(response => response.json())
+			.then(data => {
+				console.log(data)
+				this.setState({ data: data._data })
+			});
 	}
 
 	render() {
 		return (
 			<div className='intern-page update-form-container'>
 				<h2 className='update-profile-title'>update my profile</h2>
-				<UpdateUsername />
-				<UpdateGallery />
-				<UpdateGender />
-				<UpdateOrientation />
-				<UpdateBirthday />
-				<UpdateLocalisation />
-				<UpdateBio />
-				<UpdateTags />
+				<UpdateUsername data={this.state.data}/>
+				<UpdateGallery data={this.state.data}/>
+				<UpdateGender data={this.state.data}/>
+				<UpdateOrientation data={this.state.data}/>
+				<UpdateBirthday data={this.state.data}/>
+				<UpdateLocalisation data={this.state.data}/>
+				<UpdateBio data={this.state.data}/>
+				<UpdateTags data={this.state.data}/>
 			</div>
 		);
 	}

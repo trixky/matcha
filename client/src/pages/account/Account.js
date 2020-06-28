@@ -38,7 +38,7 @@ class Account extends Component {
 			<div className='intern-page account-container'>
 				<h2 className='account-title'>my account</h2>
 				<States data={this.state.data} />
-				<AccountOptions />
+				<AccountOptions data={this.state.data}/>
 			</div>
 		);
 	}
