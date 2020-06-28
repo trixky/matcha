@@ -337,6 +337,44 @@ database.none(
     + 'VALUES'
     + ' '
     + '('
+    + " '4',"
+    + " '42@42.com',"
+    + " '42',"
+    + " '42',"
+    + " '42',"
+    + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
+    + " 'm'," 
+    + " 'f',"
+    + " '42'," 
+    + " '1965-04-4',"
+    + " 55,"
+    + " '',"
+    + " '{}',"
+    + " null,"
+    + " CURRENT_TIMESTAMP"
+    + ")",    
+)
+.then(() => database.none(
+    'INSERT INTO users'
+    + '(id, ' 
+    + ' email, '
+    + ' username, '
+    + ' firstname, '
+    + ' name, '
+    + ' password, '
+    + ' gender,'
+    + ' orientation,'
+    + ' biography,'
+    + ' birthday,'
+    + ' age,'
+    + ' profile,'
+    + ' tags,'
+    + ' verified, '
+    + 'created)'
+    + ' '
+    + 'VALUES'
+    + ' '
+    + '('
     + " '1',"
     + " 'ElonMusk@telsa.com',"
     + " 'BigFuckingCompany',"
@@ -391,6 +429,6 @@ database.none(
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",    
-)))))))))))))))))))
+))))))))))))))))))))
 .then(_exit).catch(_exit);
 
