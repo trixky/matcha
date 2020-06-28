@@ -18,18 +18,18 @@ class Profile extends Component {
 			this.props.setPage('Profile');
 
 		const current_user = window.location.pathname.split('/')[2];
+		const body = { _data: { username: current_user } }
 
 		const requestOptions = {
 			method: 'GET',
+			// body
 		};
-		if (current_user === 'myprofile') {
-			fetch('/account/myprofile', requestOptions)
-				.then(response => response.json())
-				.then(data => {
-					console.log(data)
-					this.setState({ data: data._data })
-				});
-		}
+		fetch('/account', requestOptions)
+			.then(response => response.json())
+			.then(data => {
+				console.log(data)
+				this.setState({ data: data._data })
+			});
 	}
 
 	render() {
@@ -38,12 +38,12 @@ class Profile extends Component {
 				<h2 className='profil-title'>username</h2>
 				<h3 className='connection-status'>connected</h3>
 				<div className='profile-info-container'>
-					<Images data={this.state.data}/>
-					<Heart data={this.state.data}/>
+					<Images data={this.state.data} />
+					<Heart data={this.state.data} />
 					<input className='form-input' onClick={() => (this.handleClick('/profile'))} type='submit' value='chat' disabled />
-					<ProfileListInfo data={this.state.data}/>
-					<Bio data={this.state.data}/>
-					<Tags data={this.state.data}/>
+					<ProfileListInfo data={this.state.data} />
+					<Bio data={this.state.data} />
+					<Tags data={this.state.data} />
 				</div>
 			</div>
 		);
