@@ -75,13 +75,15 @@ class UpdateTags extends Component {
 			}
 		}
 
-		console.log(body);
-
 		const requestOptions = {
 			method: 'PUT',
-			body
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(body)
 		};
-		fetch('http://localhost:3001/account/myprofile', requestOptions)
+		fetch('/account/myprofile', requestOptions)
 			.then(response => response.json())
 			.then(data => {
 				console.log(data)
