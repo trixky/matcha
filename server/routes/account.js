@@ -21,9 +21,9 @@ router.get("/myProfile", (req, res, next) => {
     .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
 })
 
-router.get("/", (req, res, next) => {
+router.get("/:id", (req, res, next) => {
     
-    const username = req.body.user.username;
+    const username = req.params.id;
     
     userDB.findOneUserByUsername(username)
     .then(data => {
