@@ -3,40 +3,48 @@ import React, { Component } from 'react'
 import './UpdateTags.css'
 
 class UpdateTags extends Component {
-	tags_fetched = false;
 
-	state = {
-		tags: {
-			language: 'off',
-			movies: 'off',
-			pets: 'off',
-			nature: 'off',
-			adventure: 'off',
-			writing: 'off',
-			fitness: 'off',
-			astrology: 'off',
-			shopping: 'off',
-			technology: 'off',
-			music: 'off',
-			travel: 'off',
-			photography: 'off',
-			reading: 'off',
-			sports: 'off',
-			cooking: 'off',
-			food: 'off',
-			carrer: 'off',
-			art: 'off',
-			life: 'off',
-			religion: 'off',
-			history: 'off',
-			school: 'off',
-			science: 'off',
-			family: 'off',
-			sex: 'off',
-			relationships: 'off',
-			environement: 'off'
+	constructor(props) {
+		super(props);
+
+		this.tags_fetched = false;
+		this.state = {
+			tags: {
+				language: 'off',
+				movies: 'off',
+				pets: 'off',
+				nature: 'off',
+				adventure: 'off',
+				writing: 'off',
+				fitness: 'off',
+				astrology: 'off',
+				shopping: 'off',
+				technology: 'off',
+				music: 'off',
+				travel: 'off',
+				photography: 'off',
+				reading: 'off',
+				sports: 'off',
+				cooking: 'off',
+				food: 'off',
+				carrer: 'off',
+				art: 'off',
+				life: 'off',
+				religion: 'off',
+				history: 'off',
+				school: 'off',
+				science: 'off',
+				family: 'off',
+				sex: 'off',
+				relationships: 'on',
+				environement: 'on'
+			}
 		}
+		this.componentDidUpdate = this.componentDidUpdate.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 	}
+
+
 
 	componentDidUpdate() {
 		if (this.props.data && !this.tags_fetched) {
@@ -50,11 +58,42 @@ class UpdateTags extends Component {
 		}
 	}
 
+	handleClick(e) {
+		let tags = [];
+		const state_tags = this.state.tags;
+
+		Object.keys(state_tags).map((key) => {
+			if (state_tags[key] === 'on') {
+				tags.push(key)
+			}
+		})
+		tags.push(e.currentTarget.textContent.substring(1))
+
+		const body = {
+			user: {
+				tags
+			}
+		}
+
+		console.log(body);
+
+		const requestOptions = {
+			method: 'PUT',
+			body
+		};
+		fetch('http://localhost:3001/account/myprofile', requestOptions)
+			.then(response => response.json())
+			.then(data => {
+				console.log(data)
+				this.setState({ data: data._data })
+			});
+	}
+
 	render() {
 		return (
 			<form>
 				<p className='update-actual-tags-list'>
-					{Object.keys(this.state.tags).map((key, value) => <span className={'update-tag-span ' + this.state.tags[key]} key={key}>{'#' + key}</span>)}
+					{Object.keys(this.state.tags).map((key) => <span className={'update-tag-span ' + this.state.tags[key]} onClick={this.handleClick} key={key}>{'#' + key}</span>)}
 				</p>
 			</form>
 		);
