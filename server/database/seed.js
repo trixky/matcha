@@ -251,6 +251,9 @@ database.none(
     + ' gender,'
     + ' orientation,'
     + ' biography,'
+    + ' birthday,'
+    + ' age,'
+    + ' profile,'
     + ' tags,'
     + ' verified, '
     + 'created)'
@@ -259,15 +262,18 @@ database.none(
     + ' '
     + '('
     + " '3',"
-    + " '42@42.com',"
-    + " '42',"
-    + " '42',"
-    + " '42',"
+    + " 'scarlett@marvel.com',"
+    + " 'BlackWidow',"
+    + " 'Scarlett',"
+    + " 'Johansson',"
     + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
-    + " 'm'," 
+    + " 'f'," 
     + " 'm',"
-    + " 'Salut , je represente 42'," 
-    + " '{toto, tata}',"
+    + " 'Let me put you on hold.'," 
+    + " '1984-11-22',"
+    + " 35,"
+    + " 'http://localhost:3002/profile_3',"
+    + " '{}',"
     + ' null, '
     + " CURRENT_TIMESTAMP"
     + ")",    
@@ -283,6 +289,9 @@ database.none(
     + ' gender,'
     + ' orientation,'
     + ' biography,'
+    + ' birthday,'
+    + ' age,'
+    + ' profile,'
     + ' tags,'
     + ' verified, '
     + 'created)'
@@ -291,15 +300,18 @@ database.none(
     + ' '
     + '('
     + " '2',"
-    + " 'email3@email.com',"
-    + " 'momota',"
-    + " 'sito',"
-    + " 'lunie',"
-    + " 'password',"
-    + " 'f'," 
-    + " 'm',"
-    + " 'Salut , je suis momota'," 
-    + " '{moai, tatie}',"
+    + " 'ironman@stark.com',"
+    + " 'ironman',"
+    + " 'Stark',"
+    + " 'Tony',"
+    + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
+    + " 'm'," 
+    + " 'f',"
+    + " 'Let s face it, this is not the worst thing you ve caught me doing.'," 
+    + " '1965-04-4',"
+    + " 55,"
+    + " 'http://localhost:3002/profile_2',"
+    + " '{}',"
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",    
@@ -315,6 +327,9 @@ database.none(
     + ' gender,'
     + ' orientation,'
     + ' biography,'
+    + ' birthday,'
+    + ' age,'
+    + ' profile,'
     + ' tags,'
     + ' verified, '
     + 'created)'
@@ -323,15 +338,18 @@ database.none(
     + ' '
     + '('
     + " '1',"
-    + " 'email2@email.com',"
-    + " 'momo',"
-    + " 'star',"
-    + " 'lune',"
-    + " 'password',"
-    + " 'f'," 
-    + " 'm',"
-    + " 'Salut , je represente momo'," 
-    + " '{cinema, star}',"
+    + " 'ElonMusk@telsa.com',"
+    + " 'BigFuckingCompany',"
+    + " 'Elon',"
+    + " 'Musk',"
+    + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
+    + " 'm'," 
+    + " 'f',"
+    + " 'When something is important enough, you do it even if the odds are not in your favor.'," 
+    + " '1971-06-28',"
+    + " 49,"
+    + " 'http://localhost:3002/profile_1',"
+    + " '{}',"
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",    
@@ -347,6 +365,9 @@ database.none(
     + ' gender,'
     + ' orientation,'
     + ' biography,'
+    + ' birthday,'
+    + ' age,'
+    + ' profile,'
     + ' tags,'
     + ' verified, '
     + 'created)'
@@ -355,15 +376,18 @@ database.none(
     + ' '
     + '('
     + " '0',"
-    + " 'email@email.com',"
-    + " 'username',"
-    + " 'firstname',"
-    + " 'name',"
-    + " 'password',"
-    + " 'f'," 
-    + " 'm',"
-    + " 'Salut , je sus firstname'," 
-    + " '{gaming, computer}',"
+    + " 'BillGates@microsoft.com',"
+    + " 'Bill',"
+    + " 'Bill',"
+    + " 'Gates',"
+    + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
+    + " 'm'," 
+    + " 'f',"
+    + " 'Your most unhappy customers are your greatest source of learning.'," 
+    + " '1955-10-28',"
+    + " 64,"
+    + " 'http://localhost:3002/profile_0',"
+    + " '{}',"
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",    

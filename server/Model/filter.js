@@ -14,10 +14,11 @@ filter.prepareQuery = (tags) => {
     
 
     var query = `SELECT ${userInfo} FROM users WHERE `
-                + "age >= $1 AND age <= $2 "
-                + "AND reputation >= $3 AND reputation <= $4 "
+                + "id != $1 AND id >= $2 "
+                + "AND age >= $3 AND age <= $4 "
+                + "AND reputation >= $5 AND reputation <= $6 "
 
-    var i = 5;
+    var i = 7;
     
     if (Array.isArray(tags))
         tags.forEach((e) => {
@@ -41,7 +42,10 @@ filter.formatEntry = (ageMin , ageMax, repuMin, repuMax, tags) =>{
     return [ageMin, ageMax, repuMin, repuMax, tags];
 }
 
-filter.usersFilter = async (ageMin , ageMax, repuMin, repuMax, tags) => {
+filter.usersFilter = async (id, currentId, ageMin , ageMax, repuMin, repuMax, tags) => {
+
+    if (!currentId)
+        currentId = 0;
     if (!ageMin)
         ageMin = 0;
     if (!ageMax)
@@ -51,7 +55,7 @@ filter.usersFilter = async (ageMin , ageMax, repuMin, repuMax, tags) => {
     if (!repuMax)
         repuMax = 999;
         
-    return userDB.findFilter(filter.prepareQuery(tags), [ageMin, ageMax, repuMin, repuMax, tags])
+    return userDB.findFilter(filter.prepareQuery(tags), [id, currentId, ageMin, ageMax, repuMin, repuMax, tags])
     .then(data => data)
     .catch(err => console.log(err));
 }

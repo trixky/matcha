@@ -100,8 +100,8 @@ router.use("/test", (req, res, next) => {
 next()}
 ,(req, res, next) =>{
 
-    console.log(filter.formatEntry(1,1, null, null))
-    filter.usersFilter()
+    console.log(filter.formatEntry(1,2))
+    filter.usersFilter(1,2)
     .then(data => {
         response.response(res, data)
     })
