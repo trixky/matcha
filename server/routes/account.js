@@ -6,6 +6,7 @@ const crypto = require("crypto")
 const response = require("../Model/response")
 const viewerDB = require("../database/controllers/viewers")
 const socketIO = require("../Model/socket")
+const filter = require("../Model/filter")
 
 router.get("/myProfile", (req, res, next) => {
   
@@ -24,16 +25,22 @@ router.get("/myProfile", (req, res, next) => {
 router.get("/:id", (req, res, next) => {
     
     const username = req.params.id;
-    
-    userDB.findOneUserByUsername(username)
-    .then(data => {
-        if (!data)
-            return response.response(res, "No user with this username");
-        viewerDB.create(req.session.user, req.session.username, data)
-        socketIO.notification(data.id, req.session.username + " have look at your profile, check back");
-        userDB.updateFame(data.id, 1);
-        response.response(res, data)})
+    userDB.findOneUserById(req.session.user)
+    .then(user => {
+
+        userDB.findOneUserByUsername(username)
+        .then(data => {
+            if (!data)
+                return response.response(res, "No user with this username");
+            viewerDB.create(req.session.user, req.session.username, data)
+            socketIO.notification(data.id, req.session.username + " have look at your profile, check back");
+            userDB.updateFame(data.id, 1);
+            data.distance = filter.findDistance(user, data)
+            response.response(res, data)})
+        .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
+    })
     .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
+    
 })
 
 router.put("/password", (req, res, next) => {
