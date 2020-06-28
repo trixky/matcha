@@ -7,6 +7,7 @@ const session = require("./Model/socket").sessionMiddleware;
 const userDB = require("./database/controllers/userDB")
 
 // -----------------------------------------------
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var forgetRouter = require("./routes/forget")
@@ -26,7 +27,7 @@ var testRouter = require("./routes/test")
 
 var app = express();
 
-app.use(cors())
+app.use(cors({credentials: true}))
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -38,6 +39,7 @@ app.use(session)
 
 app.use(function(req, res, next) {
 
+    
     if (req.session.user
         || req.originalUrl === '/users/login'
         || req.originalUrl === '/users/create'
@@ -46,11 +48,11 @@ app.use(function(req, res, next) {
         || req.originalUrl.includes('/test')
         || req.originalUrl.includes('/verified'))
     {
-        if (req.session.user)
-            userDB.updateTime(req.session.user)
+         if (req.session.user)
+             userDB.updateTime(req.session.user)
         next();
     } else {
-       response.errorResponse(res, "Acces denied");
+        response.errorResponse(res, "Acces denied");
     }
 });
 

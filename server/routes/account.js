@@ -59,8 +59,6 @@ router.put("/myprofile", (req, res, next) => {
         return;
 
     var user = req.body.user;
-    
-    console.log(req.body.user)
 
     if (user.email)
         userDB.findOneUserByEmail(user.email)

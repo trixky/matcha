@@ -141,7 +141,7 @@ database.none(
     + ', '
     + "gender CHAR(1) NOT NULL DEFAULT 'b'"
     + ', '
-    + "orientation CHAR(1) NOT NULL DEFAULT 'b'"
+    + "orientation VARCHAR(200) NOT NULL DEFAULT 'b'"
     + ', '
     + 'biography VARCHAR(500)'
     + ', '
@@ -268,7 +268,7 @@ database.none(
     + " 'Johansson',"
     + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
     + " 'f'," 
-    + " 'm',"
+    + " 'heterosexual',"
     + " 'Let me put you on hold.'," 
     + " '1984-11-22',"
     + " 35,"
@@ -306,7 +306,7 @@ database.none(
     + " 'Tony',"
     + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
     + " 'm'," 
-    + " 'f',"
+    + " 'heterosexual',"
     + " 'Let s face it, this is not the worst thing you ve caught me doing.'," 
     + " '1965-04-4',"
     + " 55,"
@@ -344,7 +344,7 @@ database.none(
     + " '42',"
     + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
     + " 'm'," 
-    + " 'f',"
+    + " 'heterosexual',"
     + " '42'," 
     + " '1965-04-4',"
     + " 55,"
@@ -382,7 +382,7 @@ database.none(
     + " 'Musk',"
     + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
     + " 'm'," 
-    + " 'f',"
+    + " 'heterosexual',"
     + " 'When something is important enough, you do it even if the odds are not in your favor.'," 
     + " '1971-06-28',"
     + " 49,"
@@ -420,7 +420,7 @@ database.none(
     + " 'Gates',"
     + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
     + " 'm'," 
-    + " 'f',"
+    + " 'heterosexual',"
     + " 'Your most unhappy customers are your greatest source of learning.'," 
     + " '1955-10-28',"
     + " 64,"
