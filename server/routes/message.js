@@ -43,12 +43,12 @@ router.post("/", (req, res, next)=>{
     .catch(err => response.errorCatch(res, "Something went wrong in POST message router ", err))
 })
 
-router.get("/",(req, res, next) =>{
+router.get("/:username",(req, res, next) =>{
     
-    if(!req.body.user.username)
+    if(!req.params.username)
         return response.errorResponse(res, "You didn't give a username")
 
-    userDB.findOneUserByUsername(req.body.user.username)    
+    userDB.findOneUserByUsername(req.params.username)    
     .then(data => {
         
         if (!data)

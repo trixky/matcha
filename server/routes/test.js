@@ -17,6 +17,8 @@ var blockedRouter = require("./blocked")
 var conversationsRouter = require("./conversations")
 var fakeRouter = require("./fake")
 var disconnectedRouter = require("./disconnected")
+var searchRouter =require("./search")
+
 const filter = require("../Model/filter")
 const response = require("../Model/response")
 
@@ -95,21 +97,11 @@ next()}
 , disconnectedRouter);
 
 
-router.use("/test", (req, res, next) => {
+router.use("/search", (req, res, next) => {
     req.session.user = 0
     req.session.username = "username"
 next()}
-,(req, res, next) =>{
-
-    console.log(filter.formatEntry(1,2))
-    filter.usersFilter(1,2)
-    .then(data => {
-        response.response(res, data)
-    })
-    .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
-});
-
-
+, searchRouter);
 
 router.use("/gps/:ip", (req, res, next) => {
     req.session.user = 0
@@ -123,5 +115,29 @@ next()}
     })
     .catch(err => response.errorCatch(res, "Something went wrong in gps", err));
 });
+
+router.use("/test", (req, res, next) => {
+    req.session.user = 0
+    req.session.username = "username"
+next()}
+,(req, res, next) =>{
+
+    userDB.findOneUserById(0)
+    .then(data1 => {
+
+        filter.usersFilter(0,0)
+        .then(data => {
+            data = filter.filterGps(data1, data,req.body);
+            data = filter.sortDistance(data1, data)
+            response.response(res, data)
+        })
+        .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
+      
+    })
+
+});
+
+
+
 
 module.exports = router;

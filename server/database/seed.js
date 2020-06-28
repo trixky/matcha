@@ -255,6 +255,9 @@ database.none(
     + ' age,'
     + ' profile,'
     + ' tags,'
+    + ' latitude,'
+    + ' longitude,'
+    + ' reputation,'
     + ' verified, '
     + 'created)'
     + ' '
@@ -273,7 +276,10 @@ database.none(
     + " '1984-11-22',"
     + " 35,"
     + " 'http://localhost:3002/profile_3',"
-    + " '{}',"
+    + " '{sports}',"
+    + "48.858674,"
+    + "2.293762,"
+    + "200,"
     + ' null, '
     + " CURRENT_TIMESTAMP"
     + ")",    
@@ -293,6 +299,9 @@ database.none(
     + ' age,'
     + ' profile,'
     + ' tags,'
+    + ' latitude,'
+    + ' longitude,'
+    + ' reputation,'
     + ' verified, '
     + 'created)'
     + ' '
@@ -312,6 +321,9 @@ database.none(
     + " 55,"
     + " 'http://localhost:3002/profile_2',"
     + " '{}',"
+    + "34.003180,"
+    + "-118.807601,"
+    + "120,"
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",    
@@ -330,6 +342,8 @@ database.none(
     + ' birthday,'
     + ' age,'
     + ' profile,'
+    + ' latitude,'
+    + ' longitude,'
     + ' tags,'
     + ' verified, '
     + 'created)'
@@ -337,7 +351,7 @@ database.none(
     + 'VALUES'
     + ' '
     + '('
-    + " '4',"
+    + " '0',"
     + " '42@42.com',"
     + " '42',"
     + " '42',"
@@ -349,7 +363,9 @@ database.none(
     + " '1965-04-4',"
     + " 55,"
     + " '',"
-    + " '{}',"
+    + "48.85826110839844,"
+    + "2.436840057373047,"
+    + " '{pets, sports}',"
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",    
@@ -369,6 +385,8 @@ database.none(
     + ' age,'
     + ' profile,'
     + ' tags,'
+    + ' latitude,'
+    + ' longitude,'
     + ' verified, '
     + 'created)'
     + ' '
@@ -388,6 +406,8 @@ database.none(
     + " 49,"
     + " 'http://localhost:3002/profile_1',"
     + " '{}',"
+    + "37.446280,"
+    + "-122.122392,"
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",    
@@ -407,13 +427,15 @@ database.none(
     + ' age,'
     + ' profile,'
     + ' tags,'
+    + ' latitude,'
+    + ' longitude,'
     + ' verified, '
     + 'created)'
     + ' '
     + 'VALUES'
     + ' '
     + '('
-    + " '0',"
+    + " '4',"
     + " 'BillGates@microsoft.com',"
     + " 'Bill',"
     + " 'Bill',"
@@ -424,11 +446,141 @@ database.none(
     + " 'Your most unhappy customers are your greatest source of learning.'," 
     + " '1955-10-28',"
     + " 64,"
-    + " 'http://localhost:3002/profile_0',"
-    + " '{}',"
+    + " 'http://localhost:3002/profile_4',"
+    + " '{reading}',"
+    + "47.623402,"
+    + "-122.241729,"
     + " null,"
     + " CURRENT_TIMESTAMP"
-    + ")",    
-))))))))))))))))))))
+    + ")",
+)
+.then(() => database.none(
+    'INSERT INTO users'
+    + '(id, ' 
+    + ' email, '
+    + ' username, '
+    + ' firstname, '
+    + ' name, '
+    + ' password, '
+    + ' gender,'
+    + ' orientation,'
+    + ' biography,'
+    + ' birthday,'
+    + ' age,'
+    + ' profile,'
+    + ' tags,'
+    + ' latitude,'
+    + ' longitude,'
+    + ' verified, '
+    + 'created)'
+    + ' '
+    + 'VALUES'
+    + ' '
+    + '('
+    + " '5',"
+    + " 'Pauline@elite.com',"
+    + " 'Pauline',"
+    + " 'Pauline',"
+    + " 'Hoarau',"
+    + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
+    + " 'women'," 
+    + " 'heterosexual',"
+    + " 'Something'," 
+    + " '1994-03-03',"
+    + " 26,"
+    + " 'http://localhost:3002/profile_5',"
+    + " '{reading}',"
+    + "48.855424,"
+    + "2.366662,"
+    + " null,"
+    + " CURRENT_TIMESTAMP"
+    + ")",
+)
+.then(() => database.none(
+    'INSERT INTO users'
+    + '(id, ' 
+    + ' email, '
+    + ' username, '
+    + ' firstname, '
+    + ' name, '
+    + ' password, '
+    + ' gender,'
+    + ' orientation,'
+    + ' biography,'
+    + ' birthday,'
+    + ' age,'
+    + ' profile,'
+    + ' tags,'
+    + ' latitude,'
+    + ' longitude,'
+    + " reputation,"
+    + ' verified, '
+    + 'created)'
+    + ' '
+    + 'VALUES'
+    + ' '
+    + '('
+    + " '6',"
+    + " 'Barbara@elite.com',"
+    + " 'Barbara',"
+    + " 'Barbara',"
+    + " 'Palvin',"
+    + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
+    + " 'women'," 
+    + " 'heterosexual',"
+    + " 'Something'," 
+    + " '1993-10-08',"
+    + " 26,"
+    + " 'http://localhost:3002/profile_6',"
+    + " '{sports}',"
+    + "48.855424,"
+    + "2.366662,"
+    + "180,"
+    + " null,"
+    + " CURRENT_TIMESTAMP"
+    + ")",
+)
+.then(() => database.none(
+    'INSERT INTO users'
+    + '(id, ' 
+    + ' email, '
+    + ' username, '
+    + ' firstname, '
+    + ' name, '
+    + ' password, '
+    + ' gender,'
+    + ' orientation,'
+    + ' biography,'
+    + ' birthday,'
+    + ' age,'
+    + ' profile,'
+    + ' tags,'
+    + ' latitude,'
+    + ' longitude,'
+    + ' verified, '
+    + 'created)'
+    + ' '
+    + 'VALUES'
+    + ' '
+    + '('
+    + " '7',"
+    + " 'Taylor@elite.com',"
+    + " 'Taylor',"
+    + " 'Taylor',"
+    + " 'Marie Hill',"
+    + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
+    + " 'women'," 
+    + " 'heterosexual',"
+    + " 'Something'," 
+    + " '1996-03-05',"
+    + " 24,"
+    + " 'http://localhost:3002/profile_7',"
+    + " '{sports}',"
+    + "48.855424,"
+    + "2.366662,"
+    + " null,"
+    + " CURRENT_TIMESTAMP"
+    + ")",
+)))))))))))))))))))))))
 .then(_exit).catch(_exit);
 

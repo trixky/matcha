@@ -64,7 +64,7 @@ userDB.updateOnePasswordById = async (id, password) => {
 
 userDB.findAll = async () => {
     return db.multi(
-        `SELECT $1 FROM users;`,[userInfo]
+        `SELECT ${userInfo} FROM users;`
     )
     .then(data => data)
     .catch(err => utils.log(err));
