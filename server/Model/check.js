@@ -6,6 +6,35 @@ function isValidEmail(email) {
     return re.test(String(email).toLowerCase());
 }
 
+const allTags = [   "language",
+                    "movies",
+                    "pets",
+                    "nature",
+                    "adventure",
+                    "writing",
+                    "fitness",
+                    "astrology",
+                    "shopping",
+                    "technology",
+                    "music",
+                    "travel",
+                    "photography",
+                    "reading",
+                    "sports",
+                    "cooking",
+                    "food",
+                    "carrer",
+                    "art",
+                    "life",
+                    "religion",
+                    "history",
+                    "school",
+                    "science",
+                    "family",
+                    "sex",
+                    "relationships",
+                    "environement"
+                ]
 
 const badEmail = "This is not a valid email or it to long it should be max 50 character"
 const longUsername = "Username have to be between 1 to 30 character"
@@ -42,6 +71,23 @@ check.userCreate = (user) =>{
 }
 
 function ft_checkTag(user){
+    var notInside = true;
+    
+    user.tags.forEach(e => {
+        
+        notInside = true;
+
+        for(var i = 0; i < allTags.length; i++)
+        {
+            if (e == allTags[i])
+            {
+                notInside == false;
+                break;
+            }   
+        }
+        if (notInside)
+            return true;
+    })
     return false;
 }
 
