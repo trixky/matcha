@@ -20,15 +20,14 @@ class UpdateProfile extends Component {
 		if (this.props.readPage() !== 'UpdateProfile')
 			this.props.setPage('UpdateProfile');
 
-		// const requestOptions = {
-		// 	method: 'GET',
-		// };
-		// fetch('/account/myprofile', requestOptions)
-		// 	.then(response => response.json())
-		// 	.then(data => {
-		// 		console.log(data)
-		// 		this.setState({ data: data._data })
-		// 	});
+		const requestOptions = {
+			method: 'GET',
+		};
+		fetch('/account/myprofile', requestOptions)
+			.then(response => response.json())
+			.then(data => {
+				this.setState({ data: data._data })
+			});
 	}
 
 	render() {

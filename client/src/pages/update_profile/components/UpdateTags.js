@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import './UpdateTags.css'
 
 class UpdateTags extends Component {
-
 	constructor(props) {
 		super(props);
 
@@ -36,8 +35,8 @@ class UpdateTags extends Component {
 				science: 'off',
 				family: 'off',
 				sex: 'off',
-				relationships: 'on',
-				environement: 'on'
+				relationships: 'off',
+				environement: 'off'
 			}
 		}
 		this.componentDidUpdate = this.componentDidUpdate.bind(this);
@@ -47,7 +46,7 @@ class UpdateTags extends Component {
 
 
 	componentDidUpdate() {
-		if (this.props.data && !this.tags_fetched) {
+		if (this.props.data && this.props.data.tags && !this.tags_fetched) {
 			this.tags_fetched = true;
 			const actives_tags = this.props.data.tags;
 			let tags = this.state.tags
@@ -61,13 +60,17 @@ class UpdateTags extends Component {
 	handleClick(e) {
 		let tags = [];
 		const state_tags = this.state.tags;
-
+		const clicked_tag = e.currentTarget.textContent.substring(1);
 		Object.keys(state_tags).map((key) => {
 			if (state_tags[key] === 'on') {
 				tags.push(key)
 			}
 		})
-		tags.push(e.currentTarget.textContent.substring(1))
+		if (state_tags[clicked_tag] === 'off') {
+			tags.push(clicked_tag)
+		} else {
+			tags = tags.filter((value) => value !== clicked_tag)
+		}
 
 		const body = {
 			user: {
@@ -86,9 +89,17 @@ class UpdateTags extends Component {
 		fetch('/account/myprofile', requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data)
-				this.setState({ data: data._data })
-			});
+				const respons_tags = data._data.tags;
+				console.log(respons_tags);
+				let tags_copy = this.state.tags;
+				Object.keys(tags_copy).map((key) => {
+					tags_copy[key] = 'off';
+				})
+				respons_tags.forEach((value) => {
+					tags_copy[value] = 'on'
+				})
+				this.setState({tags: tags_copy})
+		});
 	}
 
 	render() {
