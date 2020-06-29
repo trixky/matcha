@@ -1,5 +1,6 @@
 const userDB = require("../database/controllers/userDB")
 const utils = require("./utils")
+const blockedDB = require("../database/controllers/blocked")
 
 
 const filter = {}
@@ -24,7 +25,7 @@ filter.prepareQuery = (tags) => {
             query += `AND $${i++} = ANY (tags) `;
         })
     query += ";"
-    console.log(query)
+
     return query;
 }
 
@@ -57,6 +58,31 @@ filter.usersFilter = async (id, ageMin , ageMax, repuMin, repuMax, tags) => {
     .then(data => data)
     .catch(err => console.log(err));
 }
+
+filter.filterBlocked = async (user, data) =>{
+    return blockedDB.getAll(user.id)
+    .then(blocked => {
+        
+        if (!blocked)
+            return data
+
+        var hash = []
+
+        for(var i = 0; i < blocked.length; i++)
+        {
+            hash[blocked[i].blockedid] = true;
+        }
+        console.log(hash)
+        for(var i = 0; i < data.length; i++)
+        {
+            if (hash[data[i].id])
+                data[i] = null;
+        }
+        return data;
+    })
+    .catch(err => utils.log(err))
+}
+
 
 filter.findDistance = (user1, user2) => {
     var lat1 = user1.latitude
@@ -106,7 +132,7 @@ filter.sameTags = (user1, user2) =>{
     return nb;
 }
 
-filter.sort = (user, data) => {
+filter.sort = async (user, data) => {
     
     if (!Array.isArray(data))
         return data;
@@ -141,7 +167,9 @@ filter.sort = (user, data) => {
             }
         }
     }
-    return data;
+    return filter.filterBlocked(user, data)
+    .then(data => data)
+    .catch(err => console.log(err));
 }
 
 

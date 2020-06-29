@@ -10,8 +10,11 @@ router.get("/", (req, res, next) => {
     .then(user => {
         filter.usersFilter(req.session.user)
         .then(data => {
-            data = filter.sort(user, data);
-            response.response(res, data)
+            filter.sort(user, data)
+            .then(data => {
+                response.response(res, data)
+            })
+            .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
         })
         .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
     })
@@ -33,10 +36,13 @@ router.post("/", (req, res, next) => {
     .then(user => {
         filter.usersFilter(userid, ageMin, ageMax, repuMin, repuMax, tags)
         .then(data => {
-            data = filter.sort(user, data);
-            if (req.body.user.distanceMax && Number.isInteger(req.body.user.distanceMax))
-                data = filter.filterGps(data, req.body.user.distanceMax)
-            response.response(res, data)
+            filter.sort(user, data)
+            .then(data => {
+                if (req.body.user.distanceMax && Number.isInteger(req.body.user.distanceMax))
+                    data = filter.filterGps(data, req.body.user.distanceMax)
+                response.response(res, data)
+            })
+            .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
         })
         .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
     })
