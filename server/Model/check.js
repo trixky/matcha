@@ -71,24 +71,25 @@ check.userCreate = (user) =>{
 }
 
 function ft_checkTag(user){
-    var notInside = true;
     
-    user.tags.forEach(e => {
-        
+    var notInside;
+    
+    for(var j = 0; j < user.tags.length; j++)
+    {    
         notInside = true;
 
         for(var i = 0; i < allTags.length; i++)
         {
-            if (e == allTags[i])
+            if (user.tags[j] === allTags[i])
             {
-                notInside == false;
+                notInside = false;
                 break;
-            }   
+            }             
         }
-        if (notInside)
-            return true;
-    })
-    return false;
+        if (notInside === true)
+            break;
+    }
+    return notInside;
 }
 
 
