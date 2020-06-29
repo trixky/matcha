@@ -1,3 +1,9 @@
 
 Something went wrong in account, Error database 3
 ReferenceError: Data is not defined
+Something went wrong in account, Error database 3
+TypeError: birthday.getDay is not a function
+Something went wrong in account, Error database 3
+TypeError: birthday.getDay is not a function
+Something went wrong in account, Error database 3
+TypeError: birthday.getDay is not a function
