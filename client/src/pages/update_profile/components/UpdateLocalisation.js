@@ -11,20 +11,28 @@ class UpdateLocalisation extends Component {
 		this.setState({ value: event.target.value })
 	}
 
-	showPosition(position) {
-		console.log('asdfasdf')
-		console.log(position)
-	}
-
 	componentDidMount() {
 		if ("geolocation" in navigator) {
-			console.log("Available");
 			navigator.geolocation.getCurrentPosition(function (position) {
 				console.log("Latitude is :", position.coords.latitude);
 				console.log("Longitude is :", position.coords.longitude);
+
+				const body = {
+					user: {
+						latitude: position.coords.latitude,
+						longitude: position.coords.longitude
+					}
+				}
+				const requestOptions = {
+					method: 'PUT',
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(body)
+				};
+				fetch('/account/myprofile', requestOptions);
 			});
-		} else {
-			console.log("Not Available");
 		}
 
 	}
