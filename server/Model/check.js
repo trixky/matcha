@@ -82,14 +82,14 @@ check.userProfile = (user) =>{
             ret.password = badPassword;
 
     if (user.gender)
-        if (user.gender != 'f' 
-        && user.gender != 'm' 
-        && user.gender != 'b')
+        if (user.gender != 'man' 
+        && user.gender != 'women' 
+        && user.gender != 'non binary')
             ret.gender = badGender;
     if(user.orientation)
-        if (user.orientation != 'f' 
-        && user.orientation != 'm' 
-        && user.orientation != 'b')
+        if (user.orientation != 'heterosexual' 
+        && user.orientation != 'homosexual' 
+        && user.orientation != 'bisexual')
             ret.orientation = badOrientation;
     if (user.biography)
         if (user.biography.length > 500)

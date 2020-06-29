@@ -94,7 +94,7 @@ function updateData(req, res, user){
     user = encodeUserData(user)    
     
     const error = check.userProfile(user)
-
+    
     if (Object.entries(error).length)
         return response.errorResponse(res, error)
 
@@ -102,7 +102,7 @@ function updateData(req, res, user){
 
     userDB.findOneUserById(userid)
         .then(data => {
-
+            
             var newData = changeValue(data, user)
             
             userDB.updateUser(newData)
