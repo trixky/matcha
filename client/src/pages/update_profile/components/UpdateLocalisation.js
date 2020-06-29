@@ -8,7 +8,25 @@ class UpdateLocalisation extends Component {
 	}
 
 	handleChange(event) {
-		this.setState({value: event.target.value})
+		this.setState({ value: event.target.value })
+	}
+
+	showPosition(position) {
+		console.log('asdfasdf')
+		console.log(position)
+	}
+
+	componentDidMount() {
+		if ("geolocation" in navigator) {
+			console.log("Available");
+			navigator.geolocation.getCurrentPosition(function (position) {
+				console.log("Latitude is :", position.coords.latitude);
+				console.log("Longitude is :", position.coords.longitude);
+			});
+		} else {
+			console.log("Not Available");
+		}
+
 	}
 
 	render() {
@@ -16,7 +34,8 @@ class UpdateLocalisation extends Component {
 			<form>
 				<input className='form-input' type='text' placeholder='localisation' value={this.state.value} onChange={this.handleChange.bind(this)} />
 				<input className='form-input auth-submit' type='submit' value='update my localisation' />
-			</form>
+				<div id="map"></div>
+			</form >
 		);
 	}
 }
