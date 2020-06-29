@@ -143,7 +143,7 @@ database.none(
     + ', '
     + "orientation VARCHAR(200) NOT NULL DEFAULT 'bisexual'"
     + ', '
-    + 'biography VARCHAR(500)'
+    + "biography VARCHAR(500) NOT NULL DEFAULT ''"
     + ', '
     + "birthday VARCHAR(500) NOT NULL DEFAULT '1999-12-13'"
     + ', '
