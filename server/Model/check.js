@@ -45,7 +45,7 @@ const badGender = "Gender should be f , m or b";
 const badOrientation = "Orientation sexual should be f, m or b"
 const badBiography = "Biography should be least than 500 caratere"
 const badTag = "A error with the tag"
-
+const badGps = "A error with gps values"
 // !!! have to change the value later 
 
 check.userCreate = (user) =>{
@@ -127,7 +127,12 @@ check.userProfile = (user) =>{
         || user.password.length < 8
         || user.password.length > 30)
             ret.password = badPassword;
-
+    if (user.latitude)
+        if (isNaN(user.latitude))
+            ret.gps = badGps;
+    if (user.longitude)
+        if (isNaN(user.longitude))
+                ret.gps = badGps;
     if (user.gender)
         if (user.gender != 'man' 
         && user.gender != 'women' 
