@@ -40,9 +40,9 @@ app.use(session)
 
 app.use(function(req, res, next) {
     
-    console.log(req.originalUrl.split("?")[0])
+    console.log(req.session)
 
-    if (req.session.user
+    if (req.session.user != null
     || req.originalUrl === '/users/login'
     || req.originalUrl === '/users/create'
     || req.originalUrl === '/forget/password'
