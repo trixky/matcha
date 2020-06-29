@@ -5,7 +5,6 @@ import UpdateGallery from './components/UpdateGallery'
 import UpdateGender from './components/UpdateGender'
 import UpdateOrientation from './components/UpdateOrientation'
 import UpdateBirthday from './components/UpdateBirthday'
-import UpdateLocalisation from './components/UpdateLocalisation'
 import UpdateBio from './components/UpdateBio'
 import UpdateTags from './components/UpdateTags'
 
@@ -40,7 +39,6 @@ class UpdateProfile extends Component {
 				<UpdateGender data={this.state.data}/>
 				<UpdateOrientation data={this.state.data}/>
 				<UpdateBirthday data={this.state.data}/>
-				<UpdateLocalisation data={this.state.data}/>
 				<UpdateBio data={this.state.data}/>
 				<UpdateTags data={this.state.data}/>
 			</div>
