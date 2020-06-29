@@ -150,6 +150,10 @@ function changeValue(data, newData){
             data.birthday = newData.birthday;
             data.age = formatAge(newData.birthday)
     }
+    if (newData.latitude)
+        data.latitude = newData.latitude
+    if (newData.longitude)
+        data.longitude = newData.longitude
     if (newData.tags)
         data.tags = newData.tags
     return data;
