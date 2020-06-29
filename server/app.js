@@ -40,7 +40,6 @@ app.use(session)
 
 app.use(function(req, res, next) {
     
-    console.log(req.session)
 
     if (req.session.user != null
     || req.originalUrl === '/users/login'

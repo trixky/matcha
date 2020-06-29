@@ -8,6 +8,7 @@ var socketIo = {}
 socketIo.sessionMiddleware = session({
     saveUninitialized: false,
     secret: 'session_secret',
+    cookie: { maxAge: 8*60*60*1000 },
     resave: false,
     cookie : {
         sameSite: 'strict'
