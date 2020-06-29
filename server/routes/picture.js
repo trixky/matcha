@@ -7,14 +7,16 @@ const router = express.Router()
 
 router.post("/:id", function(req, res, next){
     
-    if ((req.params.id < "5" 
-    && req.params.id > "0")
+    if ((req.params.id < 5 
+    && req.params.id > 0)
     || req.params.id === "profile")
+    {
         picture.single(req, res, (err) => {
             if (err)
                 return response.errorResponse(res,  err.message)
             else
                 next();})
+    }
     else
         return response.errorResponse(res, "Bad image number have to be between 1 - 4")
     },
@@ -33,7 +35,12 @@ router.post("/:id", function(req, res, next){
 )
 
 router.put("/:id", pictureId,
-    (req, res, next) => {
+(req, res, next) => {
+    if ((req.params.id > 5 
+    || req.params.id < 0)
+    && req.params.id != "profile")
+        return response.errorResponse(res, "Bad image number have to be between 1 - 4")
+
     userDB.deletePicture(req.session.user, req.params.id)
     .then(data => response.response(res, "Picture delected"))
     .catch(err => response.errorCatch(res, "Something went wrong on PUT picture", err))

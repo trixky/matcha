@@ -8,8 +8,8 @@ const blockedDB = require("../database/controllers/blocked")
 
 router.post("/", (req, res, next)=>{
     
-    if(!req.body.user.username || !req.body.user.message)
-        return response.errorResponse(res, "You didn't give a username or a message")
+    if(!req.body.user || !req.body.user.username || !req.body.user.message || typeof(req.body.user.message) != "string")
+        return response.errorResponse(res, "You didn't give a username or a message or parametter not well formated")
     
     if(req.body.user.message.length > 300)
         return response.errorResponse(res, "Message to long , it should be < 300 caractere")

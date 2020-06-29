@@ -3,7 +3,6 @@ const response = require("../Model/response")
 const userDB = require("../database/controllers/userDB")
 
 router.post("/", (req,res, next) =>{
-    console.log(req.session.user)
     userDB.disconnect(req.session.user)
     .then(data => {
         req.session.user = null

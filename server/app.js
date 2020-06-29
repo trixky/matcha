@@ -40,13 +40,15 @@ app.use(session)
 
 app.use(function(req, res, next) {
     
+    console.log(req.originalUrl.split("?")[0])
+
     if (req.session.user
     || req.originalUrl === '/users/login'
     || req.originalUrl === '/users/create'
     || req.originalUrl === '/forget/password'
     || req.originalUrl === '/forget/username'
-    || req.originalUrl.includes('/test')
-    || req.originalUrl.includes('/verified'))
+    || req.originalUrl.split("?")[0] === "/verified"
+    || req.originalUrl.includes('/test'))
     {       
         if (req.session.user)
             userDB.updateTime(req.session.user)

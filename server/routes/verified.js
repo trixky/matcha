@@ -1,8 +1,10 @@
 const router = require("express").Router();
 const userDB = require("../database/controllers/userDB")
+const response = require("../Model/response")
 
 router.get('/', (req, res) =>{
     if(req.query)
+    {
         if(req.query.email && req.query.verified)
         {
             userDB.findOneUserByEmail(req.query.email)
@@ -23,6 +25,11 @@ router.get('/', (req, res) =>{
             .catch(err => {
                 res.redirect("http://localhost:3000/404")})
         }
+        else
+            response.errorResponse(res, "Bad query");
+    }
+    else
+        response.errorResponse(res, "Bad query");
 })
 
 module.exports = router

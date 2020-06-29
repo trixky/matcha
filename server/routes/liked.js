@@ -11,6 +11,9 @@ const file = require('../Model/file')
 
 router.post("/", (req, res, next) => {
 
+    if ( !req.body.user || req.body.user.username)
+        return response.errorResponse(res, "You didn't put a body");
+
     if (!file.CheckProfilePicture(req.session.user))
         return response.errorResponse(res, "You don't have a profile picture , update one to start using this feature")      
 
@@ -25,6 +28,7 @@ router.post("/", (req, res, next) => {
         .then(data => {
         
         var likerData = data
+
         blockedDB.isBlocked(req.session.user, likedData.id)
         .then(data => {    
             
@@ -62,7 +66,10 @@ router.post("/", (req, res, next) => {
 })
 
 router.put("/",(req, res, next) => {
-    
+
+    if ( !req.body.user || req.body.user.username)
+        return response.errorResponse(res, "You didn't put a body");
+
     if (!file.CheckProfilePicture(req.session.user))
         return response.errorResponse(res, "You don't have a profile picture , update one to start using this feature")      
 
@@ -82,12 +89,14 @@ router.put("/",(req, res, next) => {
 
 
 router.get("/likers", (req, res, next) =>{
+    
     likedDB.getAlllikers(req.session.user)
     .then(data => response.response(res, data))
     .catch(err => response.errorCatch(res, "Something wrong in likers", err))
 })
 
 router.get("/", (req, res, next) =>{
+    
     likedDB.getAllLiked(req.session.user)
     .then(data => response.response(res, data))
     .catch(err => response.errorCatch(res, "Something wrong in liked", err))

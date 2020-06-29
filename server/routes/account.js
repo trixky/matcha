@@ -9,15 +9,11 @@ const socketIO = require("../Model/socket")
 const filter = require("../Model/filter")
 
 router.get("/myProfile", (req, res, next) => {
-  
-    if (!checkHaveId(req, res))
-        return;
     
     const userid = req.session.user;
     
     userDB.findOneUserById(userid)
     .then(data => {
-        data.password = ""
         response.response(res, data)})
     .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
 })
@@ -25,6 +21,7 @@ router.get("/myProfile", (req, res, next) => {
 router.get("/:id", (req, res, next) => {
     
     const username = req.params.id;
+
     userDB.findOneUserById(req.session.user)
     .then(user => {
 
@@ -44,16 +41,21 @@ router.get("/:id", (req, res, next) => {
 })
 
 router.put("/password", (req, res, next) => {
+    
+    if ( !req.body.user)
+        return response.errorResponse(res, "You didn't put a body");
 
-    if (!checkHaveId(req, res))
-        return;
     var user = req.body.user;
+
     var err = check.password(user)
+
     if (err)
         return response.errorResponse(res, err)
+
     user.password = crypto.createHash('sha256')
                 .update(user.password)
                 .digest('hex');
+
     userDB.updateOnePasswordById(req.session.user, user.password)
     .then(data => response.response(res, "Password updated"))
     .catch(err => response.errorCatch(res, "Something went wrong in update password, Error database", err));
@@ -61,9 +63,9 @@ router.put("/password", (req, res, next) => {
 })
 
 router.put("/myprofile", (req, res, next) => {
-    
-    if (!checkHaveId(req, res))
-        return;
+
+    if ( !req.body.user)
+        return response.errorResponse(res, "You didn't put a body");
 
     var user = req.body.user;
 
@@ -79,7 +81,7 @@ router.put("/myprofile", (req, res, next) => {
         userDB.findOneUserByUsername(user.username)
         .then(data => {        
             if (data)
-             return response.errorResponse(res, {username: "Username already taken"})
+                return response.errorResponse(res, {username: "Username already taken"})
             updateData(req, res, user)
         })
         .catch(err => response.errorCatch(res, "Something went wrong in account, Error database in finding username", err));
@@ -100,12 +102,13 @@ function updateData(req, res, user){
 
     userDB.findOneUserById(userid)
         .then(data => {
+
             var newData = changeValue(data, user)
+            
             userDB.updateUser(newData)
             .then(data =>
                 userDB.findOneUserById(userid)
                 .then(data => {
-                    data.password = ""
                     response.response(res, data)})
                 .catch(err => response.errorCatch(res, "Something went wrong in account, Error database 1", err))
             )
@@ -150,15 +153,6 @@ function changeValue(data, newData){
     if (newData.tags)
         data.tags = newData.tags
     return data;
-}
-
-function checkHaveId(req, res){
-    if (req.session.user === undefined)
-    {
-        response.errorResponse(res, "Something went wrong in account, You don't have a session");
-        return false;
-    }
-    return true;
 }
 
 function formatAge(birthday){
