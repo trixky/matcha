@@ -26,7 +26,6 @@ class UpdateProfile extends Component {
 			.then(response => response.json())
 			.then(data => {
 				this.setState({ data: data._data })
-				console.log(data)
 			});
 	}
 

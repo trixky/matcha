@@ -37,8 +37,6 @@ class UpdateUsername extends Component {
 			}
 		}
 
-		console.log(body)
-
 		const requestOptions = {
 			method: 'PUT',
 			headers: {
@@ -48,17 +46,12 @@ class UpdateUsername extends Component {
 			body: JSON.stringify(body)
 		};
 		fetch('/account/myprofile', requestOptions)
-			.then(response => response.json())
-			.then(data => {
-				console.log('cest bon')
-				console.log(data)
-		});
 	}
 
 	render() {
 		return (
 			<form>
-				<input className='form-input' type='text' placeholder='username' value={this.state.value} onChange={this.handleChange.bind(this)} />
+				<input className='form-input' type='text' placeholder='username' value={this.state.value} onChange={this.handleChange} />
 				<input className='form-input auth-submit' type='submit' onClick={this.handleClick} value='update my username' />
 			</form>
 		);
