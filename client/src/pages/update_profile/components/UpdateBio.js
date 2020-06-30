@@ -35,8 +35,6 @@ class UpdateBio extends Component {
 			}
 		}
 
-		console.log(body)
-
 		const requestOptions = {
 			method: 'PUT',
 			headers: {

@@ -49,7 +49,6 @@ class UpdateOrientation extends Component {
 	}
 
 	render() {
-		console.log(this.state.value)
 		return (
 			<form>
 				<select className='form-input' name="orientation" id="orientation" value={this.state.value} onChange={this.onChange}>

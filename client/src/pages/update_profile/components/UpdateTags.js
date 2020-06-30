@@ -90,7 +90,6 @@ class UpdateTags extends Component {
 			.then(response => response.json())
 			.then(data => {
 				const respons_tags = data._data.tags;
-				console.log(respons_tags);
 				let tags_copy = this.state.tags;
 				Object.keys(tags_copy).map((key) => {
 					tags_copy[key] = 'off';
