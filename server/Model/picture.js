@@ -19,7 +19,8 @@ var storage = multer.diskStorage({
 })
 
 function fileFilter(req, file, cb){
-     if (file.mimetype === 'image/jpeg'
+    
+    if (file.mimetype === 'image/jpeg'
      || file.mimetype === 'image/png'
      || file.mimetype === 'image/bmp')
          cb(null, true);
@@ -29,7 +30,8 @@ function fileFilter(req, file, cb){
 
 multerupdate = multer({
                     storage: storage,
-                    fileFilter: fileFilter
+                    fileFilter: fileFilter,
+                    limits: {fileSize: 100000}
                     })
 
 picture.single = multerupdate.single('image')

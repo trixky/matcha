@@ -5,7 +5,38 @@ function isValidEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
+// const alltags = {}
+// alltags
 
+const allTags = {   "language": true,
+                    "movies": true,
+                    "pets": true,
+                    "nature": true,
+                    "adventure": true,
+                    "writing": true,
+                    "fitness": true,
+                    "astrology": true,
+                    "shopping": true,
+                    "technology": true,
+                    "music": true,
+                    "travel": true,
+                    "photography": true,
+                    "reading": true,
+                    "sports": true,
+                    "cooking": true,
+                    "food": true,
+                    "carrer": true,
+                    "art": true,
+                    "life": true,
+                    "religion": true,
+                    "history": true,
+                    "school": true,
+                    "science": true,
+                    "family": true,
+                    "sex": true,
+                    "relationships": true,
+                    "environement": true
+                }
 
 const badEmail = "This is not a valid email or it to long it should be max 50 character"
 const longUsername = "Username have to be between 1 to 30 character"
@@ -16,7 +47,7 @@ const badGender = "Gender should be f , m or b";
 const badOrientation = "Orientation sexual should be f, m or b"
 const badBiography = "Biography should be least than 500 caratere"
 const badTag = "A error with the tag"
-
+const badGps = "A error with gps values"
 // !!! have to change the value later 
 
 check.userCreate = (user) =>{
@@ -42,6 +73,12 @@ check.userCreate = (user) =>{
 }
 
 function ft_checkTag(user){
+    
+    for(var j = 0; j < user.tags.length; j++)
+    {    
+        if(allTags[user.tags[j]] === undefined)
+            return true;
+    }
     return false;
 }
 
@@ -80,7 +117,12 @@ check.userProfile = (user) =>{
         || user.password.length < 8
         || user.password.length > 30)
             ret.password = badPassword;
-
+    if (user.latitude)
+        if (isNaN(user.latitude))
+            ret.gps = badGps;
+    if (user.longitude)
+        if (isNaN(user.longitude))
+                ret.gps = badGps;
     if (user.gender)
         if (user.gender != 'man' 
         && user.gender != 'women' 
