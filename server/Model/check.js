@@ -5,36 +5,38 @@ function isValidEmail(email) {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
 }
+// const alltags = {}
+// alltags
 
-const allTags = [   "language",
-                    "movies",
-                    "pets",
-                    "nature",
-                    "adventure",
-                    "writing",
-                    "fitness",
-                    "astrology",
-                    "shopping",
-                    "technology",
-                    "music",
-                    "travel",
-                    "photography",
-                    "reading",
-                    "sports",
-                    "cooking",
-                    "food",
-                    "carrer",
-                    "art",
-                    "life",
-                    "religion",
-                    "history",
-                    "school",
-                    "science",
-                    "family",
-                    "sex",
-                    "relationships",
-                    "environement"
-                ]
+const allTags = {   "language": true,
+                    "movies": true,
+                    "pets": true,
+                    "nature": true,
+                    "adventure": true,
+                    "writing": true,
+                    "fitness": true,
+                    "astrology": true,
+                    "shopping": true,
+                    "technology": true,
+                    "music": true,
+                    "travel": true,
+                    "photography": true,
+                    "reading": true,
+                    "sports": true,
+                    "cooking": true,
+                    "food": true,
+                    "carrer": true,
+                    "art": true,
+                    "life": true,
+                    "religion": true,
+                    "history": true,
+                    "school": true,
+                    "science": true,
+                    "family": true,
+                    "sex": true,
+                    "relationships": true,
+                    "environement": true
+                }
 
 const badEmail = "This is not a valid email or it to long it should be max 50 character"
 const longUsername = "Username have to be between 1 to 30 character"
@@ -72,24 +74,12 @@ check.userCreate = (user) =>{
 
 function ft_checkTag(user){
     
-    var notInside;
-    
     for(var j = 0; j < user.tags.length; j++)
     {    
-        notInside = true;
-
-        for(var i = 0; i < allTags.length; i++)
-        {
-            if (user.tags[j] === allTags[i])
-            {
-                notInside = false;
-                break;
-            }             
-        }
-        if (notInside === true)
-            break;
+        if(allTags[user.tags[j]] === undefined)
+            return true;
     }
-    return notInside;
+    return false;
 }
 
 
