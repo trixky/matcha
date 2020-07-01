@@ -61,11 +61,7 @@ class UpdateTags extends Component {
 		let tags = [];
 		const state_tags = this.state.tags;
 		const clicked_tag = e.currentTarget.textContent.substring(1);
-		Object.keys(state_tags).map((key) => {
-			if (state_tags[key] === 'on') {
-				tags.push(key)
-			}
-		})
+		Object.keys(state_tags).map((key) => state_tags[key] === 'on' && tags.push(key))
 		if (state_tags[clicked_tag] === 'off') {
 			tags.push(clicked_tag)
 		} else {
@@ -91,9 +87,7 @@ class UpdateTags extends Component {
 			.then(data => {
 				const respons_tags = data._data.tags;
 				let tags_copy = this.state.tags;
-				Object.keys(tags_copy).map((key) => {
-					tags_copy[key] = 'off';
-				})
+				Object.keys(tags_copy).map((key) => tags_copy[key] = 'off')
 				respons_tags.forEach((value) => {
 					tags_copy[value] = 'on'
 				})
