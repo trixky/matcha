@@ -12,6 +12,7 @@ class UpdatePicture extends Component {
 
 		this.onFileChange = this.onFileChange.bind(this);
 		this.onFileUpload = this.onFileUpload.bind(this);
+		this.onDeleteFile = this.onDeleteFile.bind(this);
 	}
 
 	onFileChange = event => {
@@ -23,8 +24,6 @@ class UpdatePicture extends Component {
 		if (this.state.selectedFileProfile != null) {
 			const formData = new FormData();
 			const url = this.props.nbr === 0 ? 'picture/profile' : 'picture/' + this.props.nbr;
-
-			console.log(url)
 
 			formData.append(
 				"image",
@@ -39,17 +38,49 @@ class UpdatePicture extends Component {
 		}
 	};
 
+	onDeleteFile = (e) => {
+		e.preventDefault()
+		const url = this.props.nbr === 0 ? 'picture/profile' : 'picture/' + this.props.nbr;
+
+		axios.put(url)
+			.then((response) => {
+				console.log(response.data)
+			})
+	}
+
 	render() {
-		return (
-			<div className='update-gallery-sub-container'>
-				<img className='update-gallery-img' src={this.props.img_url} alt='profile' />
-				<form onSubmit={this['onFileUpload']}>
-					<input type='file' className='form-input file-input' onChange={this.onFileChange} accept=".jpg,.png,.jpeg,.svg" />
-					<input className='form-input auth-submit' type='submit' value='update my seconde picture' />
-					<input className='form-input auth-submit' type='submit' value='delete my seconde picture' />
-				</form>
-			</div>
-		)
+		const picture_name =
+			this.props.nbr === 0 ? 'profile' :
+				this.props.nbr === 1 ? 'first' :
+					this.props.nbr === 2 ? 'second' :
+						this.props.nbr === 3 ? 'thrid' :
+							this.props.nbr === 4 ? 'fourth' : null
+
+		if (!this.props.add) {
+			return (
+				<div className='update-gallery-sub-container'>
+					<img className='update-gallery-img' src={this.props.img_url} alt='profile' />
+					<form onSubmit={this['onFileUpload']}>
+						<input type='file' className='form-input file-input' onChange={this.onFileChange} accept=".jpg,.png,.jpeg,.svg" />
+						<input className='form-input auth-submit' type='submit' value={`update my ${picture_name} picture`} />
+						<input className='form-input auth-submit' onClick={this.onDeleteFile} type='submit' value={`delete my ${picture_name} picture`} />
+					</form>
+				</div>
+			)
+		} else if (this.props.nbr <= 4) {
+			return (
+				<div className='update-gallery-sub-container'>
+					<form onSubmit={this['onFileUpload']}>
+						<input type='file' className='form-input file-input' onChange={this.onFileChange} accept=".jpg,.png,.jpeg,.svg" />
+						<input className='form-input auth-submit' type='submit' value={`add my ${picture_name} picture`} />
+					</form>
+				</div>
+			)
+		} else {
+			return (
+				null
+			)
+		}
 	}
 }
 
@@ -61,38 +92,13 @@ class UpdateGallery extends Component {
 		}
 		this.default_profile_img = 'https://t4.ftcdn.net/jpg/00/64/67/63/240_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'
 
-		this.onFileChange = this.onFileChange.bind(this);
-		this.onFileUpload = this.onFileUpload.bind(this);
 		this.picture_nbr = this.picture_nbr.bind(this);
 	}
-
-
-	onFileChange = event => {
-		this.setState({ selectedFileProfile: event.target.files[0] });
-	};
-
-	onFileUpload = (e) => {
-		e.preventDefault()
-		if (this.state.selectedFileProfile != null) {
-			const formData = new FormData();
-
-			formData.append(
-				"image",
-				this.state.selectedFileProfile,
-				this.state.selectedFileProfile.name
-			);
-
-			axios.post("picture/profile", formData)
-				.then((response) => {
-					console.log(response.data)
-				})
-		}
-	};
 
 	picture_nbr() {
 		if (this.props.data) {
 			for (let i = 1; i < 5; i++) {
-				if (this.props.data['picture' + i] !== '') {
+				if (this.props.data['picture' + i] === '') {
 					return (i);
 				}
 			}
@@ -101,20 +107,14 @@ class UpdateGallery extends Component {
 	}
 
 	render() {
-		console.log(this.props.data)
 		return (
 			<div className='update-gallery-container'>
-				<div className='update-gallery-sub-container'>
-					<img className='update-gallery-img-profile' src={this.props.data && this.props.data.profile !== '' ? this.props.data.profile : this.default_profile_img} alt='profile' />
-					<form onSubmit={this['onFileUpload']} action="picture/profile" method="POST" encType="multipart/form-data">
-						<input className='form-input auth-submit' type="file" onChange={this.onFileChange} name="image" />
-						<input className='form-input auth-submit' type="submit" value="update my profile" />
-					</form>
-				</div>
-				{this.props.data && this.props.data.picture1 ? <UpdatePicture img_url={this.props.data.picture1} nbr={1}/> : null }
-				{this.props.data && this.props.data.picture2 ? <UpdatePicture img_url={this.props.data.picture1} nbr={2}/> : null }
-				{this.props.data && this.props.data.picture3 ? <UpdatePicture img_url={this.props.data.picture1} nbr={3}/> : null }
-				{this.props.data && this.props.data.picture4 ? <UpdatePicture img_url={this.props.data.picture1} nbr={4}/> : null }
+				{this.props.data && this.props.data.profile ? <UpdatePicture img_url={this.props.data ? this.props.data.profile : this.state.default_profile_img} add={false} nbr={0} /> : null}
+				{this.props.data && this.props.data.picture1 ? <UpdatePicture img_url={this.props.data.picture1} add={false} nbr={1} /> : null}
+				{this.props.data && this.props.data.picture2 ? <UpdatePicture img_url={this.props.data.picture2} add={false} nbr={2} /> : null}
+				{this.props.data && this.props.data.picture3 ? <UpdatePicture img_url={this.props.data.picture3} add={false} nbr={3} /> : null}
+				{this.props.data && this.props.data.picture4 ? <UpdatePicture img_url={this.props.data.picture4} add={false} nbr={4} /> : null}
+				{this.props.data ? <UpdatePicture img_url={this.props.data.picture4} add={true} nbr={this.picture_nbr() + 1} /> : null}
 			</div>
 		);
 	}
