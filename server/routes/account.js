@@ -77,14 +77,6 @@ router.put("/myprofile", (req, res, next) => {
                 return updateData(req, res, user)
             })
         .catch(err => response.errorCatch(res, "Something went wrong in account, Error database in finding email", err));
-    else if (user.username)
-        userDB.findOneUserByUsername(user.username)
-        .then(data => {        
-            if (data)
-                return response.errorResponse(res, {username: "Username already taken"})
-            updateData(req, res, user)
-        })
-        .catch(err => response.errorCatch(res, "Something went wrong in account, Error database in finding username", err));
     else
         updateData(req, res, user)
 })

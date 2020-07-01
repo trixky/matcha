@@ -266,7 +266,7 @@ database.none(
     + '('
     + " '3',"
     + " 'scarlett@marvel.com',"
-    + " 'BlackWidow',"
+    + " 'Scarlett',"
     + " 'Scarlett',"
     + " 'Johansson',"
     + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
@@ -310,7 +310,7 @@ database.none(
     + '('
     + " '2',"
     + " 'ironman@stark.com',"
-    + " 'ironman',"
+    + " 'Tony',"
     + " 'Stark',"
     + " 'Tony',"
     + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
@@ -395,7 +395,7 @@ database.none(
     + '('
     + " '1',"
     + " 'ElonMusk@telsa.com',"
-    + " 'BigFuckingCompany',"
+    + " 'Elon',"
     + " 'Elon',"
     + " 'Musk',"
     + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
