@@ -12,7 +12,6 @@ router.post("/:id", function(req, res, next){
     || req.params.id === "profile")
     {
         picture.single(req, res, (err) => {
-            console.log(err)
             if (err)
                 return response.errorResponse(res,  err.message)
             else
