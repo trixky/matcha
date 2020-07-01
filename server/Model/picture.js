@@ -31,7 +31,7 @@ function fileFilter(req, file, cb){
 multerupdate = multer({
                     storage: storage,
                     fileFilter: fileFilter,
-                    limits: {fileSize: 100000}
+                    limits: {fileSize: 1000000}
                     })
 
 picture.single = multerupdate.single('image')
