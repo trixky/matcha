@@ -82,13 +82,10 @@ usersController.create = function(req, res) {
     
     if (Object.entries(error).length)
         return response.errorResponse(res, error)
-    userDB.findOneUserByUsername(user.username)
-    .then(data => {        
-        if (data)
-             return response.errorResponse(res, {username: "Username already taken"})
         user.verified =  crypto.createHash('sha256').digest("hex");
         user.password = hashPassword(user.password)
         sendMail.confirmMail(user.email, user.verified);
+
         database.none(
             'INSERT INTO users'
             + '(id, email, username, firstname, name, password, verified, created)'
@@ -110,8 +107,6 @@ usersController.create = function(req, res) {
             error.email = "Email already taken"
             return response.errorCatch(res, error, err)
         });
-    })
-    .catch(err => response.errorCatch(res, "Something went wrong in users controller", err))
 };
 
 module.exports = usersController;
