@@ -35,7 +35,6 @@ class Search extends Component {
 			});
 	}
 
-
 	render() {
 		return (
 			<div className='intern-page search-container'>
