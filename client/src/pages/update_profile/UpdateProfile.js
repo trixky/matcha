@@ -17,6 +17,7 @@ class UpdateProfile extends Component {
 		this.state = {
 			data: null
 		}
+		
 		this.setData = this.setData.bind(this);
 		this.refresh_profile = this.refresh_profile.bind(this);
 		this.componentDidMount = this.componentDidMount.bind(this);
