@@ -55,6 +55,7 @@ class UpdatePicture extends Component {
 	render() {
 		const nbr = this.props.nbr;
 		const picture_name =
+			nbr === 0 ? 'profile' :
 				nbr === 1 ? 'first' :
 					nbr === 2 ? 'second' :
 						nbr === 3 ? 'thrid' :
