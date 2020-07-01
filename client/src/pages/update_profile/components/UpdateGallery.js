@@ -54,7 +54,6 @@ class UpdatePicture extends Component {
 
 	render() {
 		const nbr = this.props.nbr;
-		console.log(nbr)
 		const picture_name =
 				nbr === 1 ? 'first' :
 					nbr === 2 ? 'second' :
@@ -72,7 +71,7 @@ class UpdatePicture extends Component {
 					</form>
 				</div>
 			)
-		} else if (nbr <= 4) {
+		} else if (nbr <= 4 && nbr !== -1) {
 			return (
 				<div className='update-gallery-sub-container'>
 					<form onSubmit={this['onFileUpload']}>
@@ -112,7 +111,6 @@ class UpdateGallery extends Component {
 	}
 
 	render() {
-		console.log(this.props.data)
 		return (
 			<div className='update-gallery-container'>
 				{this.props.data && this.props.data.profile ? <UpdatePicture refresh_profile={this.props.refresh_profile} img_url={this.props.data ? this.props.data.profile : this.state.default_profile_img} add={false} nbr={0} /> : null}
