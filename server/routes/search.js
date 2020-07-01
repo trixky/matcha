@@ -14,11 +14,11 @@ router.get("/", (req, res, next) => {
             .then(data => {
                 response.response(res, data)
             })
-            .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
+            .catch(err => response.errorCatch(res, "Something went wrong in search, Error database 1", err));
         })
-        .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
+        .catch(err => response.errorCatch(res, "Something went wrong in search, Error database 2", err));
     })
-    .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
+    .catch(err => response.errorCatch(res, "Something went wrong in search, Error database 3", err));
 })
 
 

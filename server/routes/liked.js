@@ -11,7 +11,7 @@ const file = require('../Model/file')
 
 router.post("/", (req, res, next) => {
 
-    if ( !req.body.user || req.body.user.username)
+    if ( !req.body.user || !req.body.user.username)
         return response.errorResponse(res, "You didn't put a body");
 
     if (!file.CheckProfilePicture(req.session.user))
