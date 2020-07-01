@@ -54,8 +54,8 @@ class UpdatePicture extends Component {
 
 	render() {
 		const nbr = this.props.nbr;
+		console.log(nbr)
 		const picture_name =
-			nbr === 0 ? 'profile' :
 				nbr === 1 ? 'first' :
 					nbr === 2 ? 'second' :
 						nbr === 3 ? 'thrid' :
@@ -120,7 +120,7 @@ class UpdateGallery extends Component {
 				{this.props.data && this.props.data.picture2 ? <UpdatePicture refresh_profile={this.props.refresh_profile} img_url={this.props.data.picture2} add={false} nbr={2} /> : null}
 				{this.props.data && this.props.data.picture3 ? <UpdatePicture refresh_profile={this.props.refresh_profile} img_url={this.props.data.picture3} add={false} nbr={3} /> : null}
 				{this.props.data && this.props.data.picture4 ? <UpdatePicture refresh_profile={this.props.refresh_profile} img_url={this.props.data.picture4} add={false} nbr={4} /> : null}
-				{this.props.data ? <UpdatePicture refresh_profile={this.props.refresh_profile} img_url={this.props.data.picture4} add={true} nbr={this.picture_nbr() + 1} /> : null}
+				{this.props.data ? <UpdatePicture refresh_profile={this.props.refresh_profile} img_url={this.props.data.picture4} add={true} nbr={this.picture_nbr()} /> : null}
 			</div>
 		);
 	}
