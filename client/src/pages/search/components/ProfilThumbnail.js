@@ -19,7 +19,7 @@ class ProfilThumbnail extends Component {
 		return (
 			<div className='profil-thumbnail-container' onClick={() => (this.handleClick('/profile/username'))}>
 				<img src={info.profile} alt='profile' />				
-				<h2>username</h2>
+				<h2>{info.username}</h2>
 				<InfoThumbnail info={info} />
 			</div>
 		);
