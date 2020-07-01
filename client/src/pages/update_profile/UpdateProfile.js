@@ -16,8 +16,13 @@ class UpdateProfile extends Component {
 		this.state = {
 			data: null
 		}
+		this.setData = this.setData.bind(this);
 		this.refresh_profile = this.refresh_profile.bind(this);
 		this.componentDidMount = this.componentDidMount.bind(this);
+	}
+
+	setData(data) {
+		this.setState({ data })
 	}
 
 	refresh_profile() {
@@ -27,7 +32,7 @@ class UpdateProfile extends Component {
 		fetch('/account/myprofile', requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				this.setState({ data: data._data })
+				this.setData(data._data)
 			});
 	}
 
@@ -42,7 +47,7 @@ class UpdateProfile extends Component {
 			<div className='intern-page update-form-container'>
 				<h2 className='update-profile-title'>update my profile</h2>
 				<UpdateUsername data={this.state.data} />
-				<UpdateGallery data={this.state.data} />
+				<UpdateGallery data={this.state.data} refresh_profile={this.refresh_profile} />
 				<UpdateGender data={this.state.data} />
 				<UpdateOrientation data={this.state.data} />
 				<UpdateBirthday data={this.state.data} />

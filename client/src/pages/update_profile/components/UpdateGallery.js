@@ -22,8 +22,11 @@ class UpdatePicture extends Component {
 	onFileUpload = (e) => {
 		e.preventDefault()
 		if (this.state.selectedFileProfile != null) {
+			const _this = this;
 			const formData = new FormData();
-			const url = this.props.nbr === 0 ? 'picture/profile' : 'picture/' + this.props.nbr;
+			const url = (this.props.nbr === 0 ? 'picture/profile' : 'picture/' + this.props.nbr);
+
+			console.log(url)
 
 			formData.append(
 				"image",
@@ -32,34 +35,36 @@ class UpdatePicture extends Component {
 			);
 
 			axios.post(url, formData)
-				.then((response) => {
-					console.log(response.data)
+				.then(() => {
+					_this.props.refresh_profile()
 				})
 		}
 	};
 
 	onDeleteFile = (e) => {
 		e.preventDefault()
+		const _this = this;
 		const url = this.props.nbr === 0 ? 'picture/profile' : 'picture/' + this.props.nbr;
 
 		axios.put(url)
-			.then((response) => {
-				console.log(response.data)
+			.then(() => {
+				_this.props.refresh_profile()
 			})
 	}
 
 	render() {
+		const nbr = this.props.nbr;
 		const picture_name =
-			this.props.nbr === 0 ? 'profile' :
-				this.props.nbr === 1 ? 'first' :
-					this.props.nbr === 2 ? 'second' :
-						this.props.nbr === 3 ? 'thrid' :
-							this.props.nbr === 4 ? 'fourth' : null
+			nbr === 0 ? 'profile' :
+				nbr === 1 ? 'first' :
+					nbr === 2 ? 'second' :
+						nbr === 3 ? 'thrid' :
+							nbr === 4 ? 'fourth' : null;
 
 		if (!this.props.add) {
 			return (
 				<div className='update-gallery-sub-container'>
-					<img className='update-gallery-img' src={this.props.img_url} alt='profile' />
+					<img className='update-gallery-img' src={this.props.img_url + '?hash=' + Date.now()} alt='profile' />
 					<form onSubmit={this['onFileUpload']}>
 						<input type='file' className='form-input file-input' onChange={this.onFileChange} accept=".jpg,.png,.jpeg,.svg" />
 						<input className='form-input auth-submit' type='submit' value={`update my ${picture_name} picture`} />
@@ -67,7 +72,7 @@ class UpdatePicture extends Component {
 					</form>
 				</div>
 			)
-		} else if (this.props.nbr <= 4) {
+		} else if (nbr <= 4) {
 			return (
 				<div className='update-gallery-sub-container'>
 					<form onSubmit={this['onFileUpload']}>
@@ -107,14 +112,15 @@ class UpdateGallery extends Component {
 	}
 
 	render() {
+		console.log(this.props.data)
 		return (
 			<div className='update-gallery-container'>
-				{this.props.data && this.props.data.profile ? <UpdatePicture img_url={this.props.data ? this.props.data.profile : this.state.default_profile_img} add={false} nbr={0} /> : null}
-				{this.props.data && this.props.data.picture1 ? <UpdatePicture img_url={this.props.data.picture1} add={false} nbr={1} /> : null}
-				{this.props.data && this.props.data.picture2 ? <UpdatePicture img_url={this.props.data.picture2} add={false} nbr={2} /> : null}
-				{this.props.data && this.props.data.picture3 ? <UpdatePicture img_url={this.props.data.picture3} add={false} nbr={3} /> : null}
-				{this.props.data && this.props.data.picture4 ? <UpdatePicture img_url={this.props.data.picture4} add={false} nbr={4} /> : null}
-				{this.props.data ? <UpdatePicture img_url={this.props.data.picture4} add={true} nbr={this.picture_nbr() + 1} /> : null}
+				{this.props.data && this.props.data.profile ? <UpdatePicture refresh_profile={this.props.refresh_profile} img_url={this.props.data ? this.props.data.profile : this.state.default_profile_img} add={false} nbr={0} /> : null}
+				{this.props.data && this.props.data.picture1 ? <UpdatePicture refresh_profile={this.props.refresh_profile} img_url={this.props.data.picture1} add={false} nbr={1} /> : null}
+				{this.props.data && this.props.data.picture2 ? <UpdatePicture refresh_profile={this.props.refresh_profile} img_url={this.props.data.picture2} add={false} nbr={2} /> : null}
+				{this.props.data && this.props.data.picture3 ? <UpdatePicture refresh_profile={this.props.refresh_profile} img_url={this.props.data.picture3} add={false} nbr={3} /> : null}
+				{this.props.data && this.props.data.picture4 ? <UpdatePicture refresh_profile={this.props.refresh_profile} img_url={this.props.data.picture4} add={false} nbr={4} /> : null}
+				{this.props.data ? <UpdatePicture refresh_profile={this.props.refresh_profile} img_url={this.props.data.picture4} add={true} nbr={this.picture_nbr() + 1} /> : null}
 			</div>
 		);
 	}
