@@ -6,16 +6,21 @@ import InfoThumbnail from './InfoThumbnail'
 import './ProfilThumbnail.css'
 
 class ProfilThumbnail extends Component {
+	constructor(props) {
+		super(props);
+	}
+
 	handleClick(url) {
 		this.props.history.push(url);
 	}
 
 	render() {
+		const info = this.props.info;
 		return (
 			<div className='profil-thumbnail-container' onClick={() => (this.handleClick('/profile/username'))}>
-				<img src={'https://images.theconversation.com/files/312307/original/file-20200128-81416-1bjupq6.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop'} alt='profile' />				
+				<img src={info.profile} alt='profile' />				
 				<h2>username</h2>
-				<InfoThumbnail />
+				<InfoThumbnail info={info} />
 			</div>
 		);
 	}

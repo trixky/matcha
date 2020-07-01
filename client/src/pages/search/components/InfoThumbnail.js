@@ -3,13 +3,17 @@ import React, { Component } from 'react'
 import './InfoThumbnail.css'
 
 class InfoThumbnail extends Component {
+	constructor(props) {
+		super(props);
+	}
+
 	render() {
+		const info = this.props.info;
 		return (
 			<div className='info-thumbnail'>
-				<p><span className='it-genre'>man</span>-<span className='it-orientation'>hetero</span>-<span className='age'>26</span></p>
-				<p><span className='it-localisation'>paris</span>-<span className='it-distance'>300km</span></p>
-				<p><span className='it-reputation'>6676</span></p>
-				<p><span className='it-heart it-heart-off' role='img' aria-label="like">❤️</span></p>
+				<p><span className='it-genre'>{info.gender}</span>-<span className='it-orientation'>{info.orientation}</span>-<span className='age'>{info.age}</span></p>
+				<p><span className='it-localisation'>{info.distance + ' km'}</span></p>
+				<p><span className='it-reputation'>{info.reputation + ' ⭐'}</span></p>
 			</div>
 		);
 	}
