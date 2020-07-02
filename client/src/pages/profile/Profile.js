@@ -18,13 +18,13 @@ class Profile extends Component {
 			this.props.setPage('Profile');
 
 		const current_user = window.location.pathname.split('/')[2];
-		const body = { _data: { username: current_user } }
+		// const body = { _data: { username: current_user } }
 
 		const requestOptions = {
 			method: 'GET',
 			// body
 		};
-		fetch('/account', requestOptions)
+		fetch('/account/' + current_user, requestOptions)
 			.then(response => response.json())
 			.then(data => {
 				console.log(data)

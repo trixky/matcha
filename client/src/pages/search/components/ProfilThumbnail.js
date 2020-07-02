@@ -17,7 +17,7 @@ class ProfilThumbnail extends Component {
 	render() {
 		const info = this.props.info;
 		return (
-			<div className='profil-thumbnail-container' onClick={() => (this.handleClick('/profile/username'))}>
+			<div className='profil-thumbnail-container' onClick={() => (this.handleClick('/profile/' + info.id))}>
 				<img src={info.profile} alt='profile' />				
 				<h2>{info.username}</h2>
 				<InfoThumbnail info={info} />
