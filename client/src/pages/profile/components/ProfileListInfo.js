@@ -4,29 +4,28 @@ import './ProfileListInfo.css'
 
 class ProfileListInfo extends Component {
 	render() {
+		const data = this.props.data;
+
 		return (
 			<div className='profile-info-list-container'>
 				<ul>
 					<li className='profil-state-line'>
-						<p className='profil-state-type'>gender</p><p className='profil-state-number'>man</p>
+						<p className='profil-state-type'>gender</p><p className='profil-state-number'>{data ? data.gender : 'loading...'}</p>
 					</li>
 					<li className='profil-state-line'>
-						<p className='profil-state-type'>orientation</p><p className='profil-state-number'>hetero</p>
+						<p className='profil-state-type'>orientation</p><p className='profil-state-number'>{data ? data.orientation : 'loading...'}</p>
 					</li>
 					<li className='profil-state-line'>
-						<p className='profil-state-type'>age</p><p className='profil-state-number'>26</p>
+						<p className='profil-state-type'>age</p><p className='profil-state-number'>{data ? data.age : 'loading...'}</p>
 					</li>
 					<li className='profil-state-line'>
-						<p className='profil-state-type'>localisation</p><p className='profil-state-number'>paris</p>
+						<p className='profil-state-type'>distance</p><p className='profil-state-number'>{data ? data.age + ' km': 'loading...'}</p>
 					</li>
 					<li className='profil-state-line'>
-						<p className='profil-state-type'>distance</p><p className='profil-state-number'>300 km</p>
+						<p className='profil-state-type'>reputation</p><p className='profil-state-number'>{data ? data.reputation : 'loading...'}</p>
 					</li>
 					<li className='profil-state-line'>
-						<p className='profil-state-type'>reputation</p><p className='profil-state-number'>6676</p>
-					</li>
-					<li className='profil-state-line'>
-						<p className='profil-state-type'>saw you</p><p className='profil-state-number'>yes</p>
+						<p className='profil-state-type'>saw you</p><p className='profil-state-number'>???? !!!!!</p>
 					</li>
 				</ul>
 			</div>

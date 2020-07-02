@@ -4,6 +4,7 @@
 	width: 150px;
 	border-radius: 50%;
 	top: -75px;
+	object-fit: cover;
 }
 
 .profile-img {

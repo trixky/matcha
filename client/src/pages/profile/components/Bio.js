@@ -4,7 +4,10 @@ import './Bio.css'
 
 class Bio extends Component {
 	render() {
-		const bio = 'I am a simple gardener, I particularly like the sweet mint and my wheelbarrow'
+		let bio = 'loading...'
+		if (this.props.data) {
+			bio = this.props.data.biography
+		}
 		return (
 			<div className='bio-container'>
 				<p>{bio}</p>

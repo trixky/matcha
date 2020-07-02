@@ -18,13 +18,13 @@ class Profile extends Component {
 			this.props.setPage('Profile');
 
 		const current_user = window.location.pathname.split('/')[2];
-		const body = { _data: { username: current_user } }
+		// const body = { _data: { username: current_user } }
 
 		const requestOptions = {
 			method: 'GET',
 			// body
 		};
-		fetch('/account', requestOptions)
+		fetch('/account/' + current_user, requestOptions)
 			.then(response => response.json())
 			.then(data => {
 				console.log(data)
@@ -35,8 +35,8 @@ class Profile extends Component {
 	render() {
 		return (
 			<div className='intern-page profile-container'>
-				<h2 className='profil-title'>username</h2>
-				<h3 className='connection-status'>connected</h3>
+				<h2 className='profil-title'>{this.state.data ? this.state.data.username : 'loading...'}</h2>
+				<h3 className='connection-status'>!!connected ??? !!!</h3>
 				<div className='profile-info-container'>
 					<Images data={this.state.data} />
 					<Heart data={this.state.data} />
