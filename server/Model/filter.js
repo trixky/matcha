@@ -122,7 +122,7 @@ filter.findDistance = (user1, user2) => {
             Math.cos(o1) * Math.cos(o2) *
             Math.sin(d2/2) * Math.sin(d2/2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const d = R * c;
+    const d = R * c / 1000;
 
     return (parseInt(d))
 }

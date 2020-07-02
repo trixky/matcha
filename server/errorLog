@@ -374,3 +374,233 @@ QueryResultError {
 error: value "4545454545456484121541514" is out of range for type integer
 Something went wrong in account, Error database in finding email
 TypeError: err.forEach is not a function
+Bad identifiant or password
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM users WHERE (email = '42@42.com' AND password = '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049')"
+}
+Bad identifiant or password
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM users WHERE (email = '42@42.com' AND password = '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049')"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
