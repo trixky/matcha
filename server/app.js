@@ -39,7 +39,6 @@ app.use(cookieParser());
 app.use(session)
 
 app.use(function(req, res, next) {
-    
 
     if (req.session.user != null
     || req.originalUrl === '/users/login'

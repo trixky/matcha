@@ -321,3 +321,56 @@ QueryResultError {
     received: 0
     query: "SELECT * FROM blocked WHERE 0 = (userid);"
 }
+Something went wrong in account, Error database
+TypeError: filter.usersFilter is not a function
+Something went wrong in account, Error database
+TypeError: filter.usersFilter is not a function
+Something went wrong in account, Error database
+TypeError: filter.usersFilter is not a function
+Something went wrong in search, Error database 3
+TypeError: filter.usersFilter is not a function
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+error: value "4545454545456484121541514" is out of range for type integer
+Something went wrong in account, Error database in finding email
+TypeError: err.forEach is not a function

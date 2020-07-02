@@ -20,12 +20,14 @@ router.get("/myProfile", (req, res, next) => {
 
 router.get("/:id", (req, res, next) => {
     
-    const username = req.params.id;
-
+    const id = req.params.id;
+    
+    if (id > 2147483640 || id < -2147483648)
+        return response.response(res, "Number to big");
     userDB.findOneUserById(req.session.user)
     .then(user => {
 
-        userDB.findOneUserByUsername(username)
+        userDB.findOneUserById(id)
         .then(data => {
             if (!data)
                 return response.response(res, "No user with this username");
@@ -42,7 +44,7 @@ router.get("/:id", (req, res, next) => {
 
 router.put("/password", (req, res, next) => {
     
-    if ( !req.body.user)
+    if (!req.body.user)
         return response.errorResponse(res, "You didn't put a body");
 
     var user = req.body.user;
@@ -76,6 +78,10 @@ router.put("/myprofile", (req, res, next) => {
                     return response.errorResponse(res, "This email is already taked");
                 return updateData(req, res, user)
             })
+        .catch(err => {
+            console.log(err)
+            err
+        })
         .catch(err => response.errorCatch(res, "Something went wrong in account, Error database in finding email", err));
     else
         updateData(req, res, user)
@@ -85,9 +91,10 @@ function updateData(req, res, user){
             
     user = encodeUserData(user)    
     
-    const error = check.userProfile(user)
-    
-    if (Object.entries(error).length)
+    var error = check.userProfile(user)
+    error = retError(error)
+    if(error != "")
+    // if (Object.entries(error).length)
         return response.errorResponse(res, error)
 
     const userid = req.session.user;
@@ -109,6 +116,19 @@ function updateData(req, res, user){
         .catch(err => {
             console.log(err)
             response.errorCatch(res, "Something went wrong in account, Error database 3", err)});
+}
+
+function retError(err){
+
+    var returnError = ""
+
+    for(let [key, value] of Object.entries(err))
+    {
+        if(returnError != "")
+            returnError += ", ";     
+        returnError += value; 
+    }   
+    return returnError
 }
 
 function encodeUserData(user){
