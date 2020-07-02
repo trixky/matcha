@@ -35,7 +35,7 @@ class Profile extends Component {
 	render() {
 		return (
 			<div className='intern-page profile-container'>
-				<h2 className='profil-title'>username</h2>
+				<h2 className='profil-title'>{this.state.data ? this.state.data.username : 'loading...'}</h2>
 				<h3 className='connection-status'>!!connected ??? !!!</h3>
 				<div className='profile-info-container'>
 					<Images data={this.state.data} />
