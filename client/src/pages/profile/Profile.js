@@ -36,7 +36,7 @@ class Profile extends Component {
 		return (
 			<div className='intern-page profile-container'>
 				<h2 className='profil-title'>username</h2>
-				<h3 className='connection-status'>connected</h3>
+				<h3 className='connection-status'>!!connected ??? !!!</h3>
 				<div className='profile-info-container'>
 					<Images data={this.state.data} />
 					<Heart data={this.state.data} />
