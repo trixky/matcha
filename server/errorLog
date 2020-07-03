@@ -1389,3 +1389,6 @@ error: duplicate key value violates unique constraint "viewers_viewerid_personid
 error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
 error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
 error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"

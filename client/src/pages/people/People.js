@@ -43,7 +43,8 @@ class People extends Component {
 		fetch(path, requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				this.setState({ profiles: data._data.map((value, index) => <ProfilThumbnail info={value} key={index + Date.now()} />) })
+				this.setState({ profiles: data._data.map((user, index, array) => (user ? <ProfilThumbnail key={user.id} info={array[index]} /> : null))})
+				// {this.state.data.map((user, index, array) => (user ? <ProfilThumbnail key={user.id} info={array[index]} /> : null))}
 			});
 	}
 
