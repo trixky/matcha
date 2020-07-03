@@ -153,7 +153,7 @@ database.none(
     + ', '
     + "tags TEXT[] NOT NULL DEFAULT '{}'"
     + ', '
-    + "profile VARCHAR(200) NOT NULL DEFAULT ''"
+    + "profile VARCHAR(200) NOT NULL DEFAULT 'http://localhost:3002'"
     + ', '
     + "picture1 VARCHAR(200) NOT NULL DEFAULT ''"
     + ', '
