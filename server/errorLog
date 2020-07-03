@@ -1328,3 +1328,27 @@ QueryResultError {
 }
 error: invalid input syntax for type integer: "C-UUgL4hZdPqeTZ3b-RC2TDR9dasgF0a"
 error: invalid input syntax for type integer: "C-UUgL4hZdPqeTZ3b-RC2TDR9dasgF0a"
+Bad identifiant or password
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM users WHERE (email = 'badidou.freeride@gmail.com' AND password = '754068f93ca0903e1db7f0ad3ec5a616179c738f462959dd2380b6e2743680db')"
+}
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"

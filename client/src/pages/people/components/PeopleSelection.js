@@ -6,11 +6,16 @@ class PeopleSelection extends Component {
 	constructor(props) {
 		super(props);
 
+		this.componentDidMount = this.componentDidMount.bind(this);
 		this.selectHandle = this.selectHandle.bind(this);
 	}
 
+	componentDidMount() {
+		this.props.parent.generateProfile('matched')
+	}
+
 	selectHandle(e) {
-		this.props.parent.setState({ selected: e.target.value })
+		this.props.parent.generateProfile(e.target.value)
 	}
 
 	render() {

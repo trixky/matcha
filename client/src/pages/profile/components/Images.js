@@ -11,7 +11,7 @@ class Images extends Component {
 	}
 
 	render() {
-		const default_img = 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQH6-1GcLEZB6Z8LleMMZcWDkCincHaLOPlKA&usqp=CAU'
+		const default_img = 'https://i7.pngguru.com/preview/906/222/368/computer-icons-user-profile-avatar-french-people.jpg'
 		return (
 			<div onClick={() => this.hangleClick(this.props.data)} className='profil-img-container'>
 				<img className='cercle-img profile-img' src={this.props.data ? this.props.data.profile : default_img} alt='profile' />

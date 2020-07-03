@@ -10,9 +10,11 @@ class People extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selected: 'matched'
+			selected: 'matched',
+			profiles: null
 		}
 		this.componentDidMount = this.componentDidMount.bind(this);
+		this.generateProfile = this.generateProfile.bind(this);
 	}
 
 	componentDidMount() {
@@ -20,8 +22,7 @@ class People extends Component {
 			this.props.setPage('People');
 	}
 
-	generateProfile() {
-		const selected = this.state.selected;
+	generateProfile(selected) {
 		let path = '/';
 
 		if (selected === 'matched') {
@@ -42,19 +43,16 @@ class People extends Component {
 		fetch(path, requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data)
-				return (data._data.map((value) => <ProfilThumbnail info={value} />))
+				this.setState({ profiles: data._data.map((value, index) => <ProfilThumbnail info={value} key={index + Date.now()} />) })
 			});
 	}
 
 	render() {
-		console.log('toupitoupi')
-		console.log(this.state.selected)
 		return (
 			<div className='intern-page search-container'>
 				<PeopleSelection parent={this} />
 				<div className='search-carousel-container'>
-					{this.generateProfile()}
+					{this.state.profiles}
 				</div>
 				<input className='form-input search-carousel-more-input' type='submit' value='show more profiles' />
 			</div>
