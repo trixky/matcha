@@ -45,7 +45,7 @@ userDB.findOneUserByUsername = async (username) => {
   }
 
 userDB.updateConnection = async (id ,state) =>{
-    if (id)
+    if (id != null)
     return db.none(
         `UPDATE users SET connected = $1 where  id = $2;`,[state, id]
         )
