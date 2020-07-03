@@ -13,6 +13,7 @@ class Gallery extends Component {
 		}
 
 		this.componentDidMount = this.componentDidMount.bind(this);
+		this.selected_to_url = this.selected_to_url.bind(this);
 		this.handlePrevious = this.handlePrevious.bind(this);
 		this.handleNext = this.handleNext.bind(this);
 		this.picture_nbr = this.picture_nbr.bind(this);
@@ -37,12 +38,26 @@ class Gallery extends Component {
 			});
 	}
 
+	selected_to_url(selected) {
+		if (--selected === 0)
+			return ('profile');
+		return ('picture' + selected);
+	}
+
 	handleNext() {
-		console.log('next image ->')
+		const current_selected  = this.state.selected;
+		
+		if (current_selected < this.picture_nbr()) {
+			this.setState({selected: current_selected + 1})
+		}
 	}
 
 	handlePrevious() {
-		console.log('previous image <-')
+		const current_selected  = this.state.selected;
+		
+		if (current_selected > 1) {
+			this.setState({selected: current_selected - 1})
+		}
 	}
 
 	picture_nbr() {
@@ -57,16 +72,17 @@ class Gallery extends Component {
 	}
 
 	render() {
-		const default_img = 'https://img.ohmymag.com/article/480/buzz/un-chat-bizarre-en-train-de-manger_31a53d5882ee4cb707c5dfaf5cf14895d0860a34.jpg';
+		// const default_url_img = 'https://img.ohmymag.com/article/480/buzz/un-chat-bizarre-en-train-de-manger_31a53d5882ee4cb707c5dfaf5cf14895d0860a34.jpg';
+		const url_img = this.state.data ? this.state.data[this.selected_to_url(this.state.selected)] : false
 		return (
 			<div className='intern-page'>
 				<h2>gallery</h2>
 				<h3>{this.state.selected}/{this.picture_nbr() != -1 ? this.picture_nbr() : 'loading...'}</h3>
 				<div className='gallery-img-container' onClick={this.handleNext}>
-					<img className='gallery-img' src={this.state.data ? this.state.data.profile : default_img} alt='link to account page' />
+					{url_img ? <img className='gallery-img' src={url_img} alt='link to account page' /> : 'loading'}
 				</div>
 				<div className='gallery-row'>
-					<img className='header-img scale-hover' onClick={this.handlePrevious} src={Left_row} alt='link to account page' />
+					<img className='header-img scale-hover' onClick={this.handlePrevious} src={Left_row} alt='link to account page'/>
 					<img className='header-img scale-hover' onClick={this.handleNext} src={Right_row} alt='link to account page' />
 				</div>
 			</div>

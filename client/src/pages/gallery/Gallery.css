@@ -1,5 +1,6 @@
 .gallery-img {
-	max-width: 80%;
+	max-width: 60%;
+	max-height: 300px;
 }
 
 .gallery-img:hover {
