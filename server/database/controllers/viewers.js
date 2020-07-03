@@ -22,7 +22,6 @@ viewers.getView = async (userid) => {
 }
 
 viewers.getViewers = async (userid) => {
-    
     return db.manyOrNone(
         `SELECT * FROM viewers WHERE $1 = (personid);`,[userid]
     )

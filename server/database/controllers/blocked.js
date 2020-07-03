@@ -32,7 +32,7 @@ blocked.get = async (userid, personid) => {
 
 blocked.getAll = async (userid) => {
     
-    return db.many(
+    return db.manyOrNone(
         `SELECT * FROM blocked WHERE $1 = (userid);`,[userid]
     )
     .then(data => data)

@@ -86,7 +86,7 @@ next()}
 , conversationsRouter);
 
 router.use("/viewers", (req, res, next) => {
-    req.session.user = 0
+    req.session.user = 1
     req.session.username = "username"
 next()}
 , viewersRouter);

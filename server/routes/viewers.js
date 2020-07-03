@@ -4,7 +4,7 @@ const viewersDB = require("../database/controllers/viewers")
 const response = require("../Model/response")
 
 router.get("/", (req, res, next) => {
-    viewersDB.getViewers(req.session.id)
+    viewersDB.getViewers(req.session.user)
     .then(data => response.response(res, data))
     .catch(err => response(res, "Something went wrong on viewers", err))
 })

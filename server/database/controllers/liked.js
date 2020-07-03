@@ -24,7 +24,7 @@ likedDB.findOneLikeById = async (likerid, likedid) => {
 
 likedDB.getAllLiked = async (userid) => {
     
-    return db.many(
+    return db.manyOrNone(
         `SELECT * FROM liked WHERE $1 = (likerid);`,[userid]
     )
     .then(data => data)
@@ -33,7 +33,7 @@ likedDB.getAllLiked = async (userid) => {
 
 likedDB.getAlllikers = async (userid) => {
     
-    return db.many(
+    return db.manyOrNone(
         `SELECT * FROM liked WHERE $1 = (likedid);`, [userid]
     )
     .then(data => data)
