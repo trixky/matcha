@@ -22,10 +22,7 @@ class ProfileListInfo extends Component {
 						<p className='profil-state-type'>distance</p><p className='profil-state-number'>{data ? data.age + ' km': 'loading...'}</p>
 					</li>
 					<li className='profil-state-line'>
-						<p className='profil-state-type'>reputation</p><p className='profil-state-number'>{data ? data.reputation : 'loading...'}</p>
-					</li>
-					<li className='profil-state-line'>
-						<p className='profil-state-type'>saw you</p><p className='profil-state-number'>???? !!!!!</p>
+						<p className='profil-state-type'>reputation</p><p className='profil-state-number'>{data ? data.reputation + ' ⭐' : 'loading...'}</p>
 					</li>
 				</ul>
 			</div>
