@@ -18,6 +18,7 @@ var conversationsRouter = require("./conversations")
 var fakeRouter = require("./fake")
 var disconnectedRouter = require("./disconnected")
 var searchRouter =require("./search")
+var viewersRouter = require("./routes/viewers")
 
 const filter = require("../Model/filter")
 const response = require("../Model/response")
@@ -83,6 +84,12 @@ router.use("/conversations", (req, res, next) => {
     req.session.username = "username"
 next()}
 , conversationsRouter);
+
+router.use("/viewers", (req, res, next) => {
+    req.session.user = 0
+    req.session.username = "username"
+next()}
+, viewersRouter);
 
 router.use("/fake", (req, res, next) => {
     req.session.user = 0
