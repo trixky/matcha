@@ -6,7 +6,11 @@ const userDB = require("../database/controllers/userDB")
 router.get("/", (req, res, next) =>{    
     
     blockedDB.getAll(req.session.user)
-    .then(data => response.response(res, data))
+    .then(data => {
+        if(data)
+            return response.response(res, data)
+        response.response(res, [])
+    })
     .catch(err => response.errorCatch(res, "Something went wrong in blocked router 1", err))
 
 })

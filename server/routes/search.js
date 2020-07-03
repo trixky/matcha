@@ -12,7 +12,9 @@ router.get("/", (req, res, next) => {
         .then(data => {
             filter.sort(user, data)
             .then(data => {
-                response.response(res, data)
+                if(data)
+                    return response.response(res, data)
+                response.response(res, [])
             })
             .catch(err => response.errorCatch(res, "Something went wrong in search, Error database 1", err));
         })

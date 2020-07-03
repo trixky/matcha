@@ -5,7 +5,12 @@ const response = require("../Model/response")
 
 router.get("/", (req, res, next) => {
     viewersDB.getViewers(req.session.user)
-    .then(data => response.response(res, data))
+    .then(data => {
+        if (data)
+            response.response(res, data)
+        else
+            response.response(res, [])
+    })
     .catch(err => response(res, "Something went wrong on viewers", err))
 })
 

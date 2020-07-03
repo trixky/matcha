@@ -55,7 +55,11 @@ router.get("/:username",(req, res, next) =>{
             return response.errorResponse(res, "No user with this username");
 
         messagesDB.getAll(req.session.user, data.id)
-        .then(data => response.response(res, data))
+        .then(data => {
+            if(data)
+                return response.response(res, data)
+            response.response(res, [])
+        })
         .catch(err => response.errorCatch(res, "Something went wrong in GET message router ", err))
     })
     .catch(err => response.errorCatch(res, "Something went wrong in GET message router ", err))

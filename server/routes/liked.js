@@ -91,14 +91,22 @@ router.put("/",(req, res, next) => {
 router.get("/likers", (req, res, next) =>{
     
     likedDB.getAlllikers(req.session.user)
-    .then(data => response.response(res, data))
+    .then(data => {
+        if(data)
+            return response.response(res, data)
+        response.response(res, [])
+    })
     .catch(err => response.errorCatch(res, "Something wrong in likers", err))
 })
 
 router.get("/", (req, res, next) =>{
     
     likedDB.getAllLiked(req.session.user)
-    .then(data => response.response(res, data))
+    .then(data => {
+        if(data)
+            return response.response(res, data)
+        response.response(res, [])
+    })
     .catch(err => response.errorCatch(res, "Something wrong in liked", err))
 })
 
