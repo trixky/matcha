@@ -7,6 +7,7 @@ const response = require("../Model/response")
 const viewerDB = require("../database/controllers/viewers")
 const socketIO = require("../Model/socket")
 const filter = require("../Model/filter")
+const matchDB = require("../database/controllers/match")
 
 router.get("/myProfile", (req, res, next) => {
     
@@ -26,16 +27,28 @@ router.get("/:id", (req, res, next) => {
         return response.response(res, "Number to big");
     userDB.findOneUserById(req.session.user)
     .then(user => {
+        
+        if (!user)
+        return response.response(res, "No user with this username");
 
         userDB.findOneUserById(id)
         .then(data => {
             if (!data)
                 return response.response(res, "No user with this username");
-            viewerDB.create(req.session.user, req.session.username, data)
-            socketIO.notification(data.id, req.session.username + " have look at your profile, check back");
-            userDB.updateFame(data.id, 1);
-            data.distance = filter.findDistance(user, data)
-            response.response(res, data)})
+            matchDB.getById(user.id, data.id)
+            .then(matched => {
+                if (matched)
+                    data.matched = true;
+                else 
+                    data.matched = false;
+                viewerDB.create(req.session.user, req.session.username, data)
+                socketIO.notification(data.id, req.session.username + " have look at your profile, check back");
+                userDB.updateFame(data.id, 1);
+                data.distance = filter.findDistance(user, data)
+                response.response(res, data)
+            })
+            .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
+        })
         .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
     })
     .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
