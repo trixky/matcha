@@ -2,14 +2,18 @@ const router = require("express").Router()
 const blockedDB = require("../database/controllers/blocked")
 const response = require("../Model/response")
 const userDB = require("../database/controllers/userDB")
+const filter = require("../Model/filter")
 
 router.get("/", (req, res, next) =>{    
     
     blockedDB.getAll(req.session.user)
     .then(data => {
-        if(data)
-            return response.response(res, data)
-        response.response(res, [])
+        if(!data)
+            return response.response(res, [])
+        var array = [];
+        for (key in data)
+            array[key] = data[key].blockedid;
+        filter.getProfile(req.session.user, array, res)
     })
     .catch(err => response.errorCatch(res, "Something went wrong in blocked router 1", err))
 

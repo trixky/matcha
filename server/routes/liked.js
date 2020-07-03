@@ -8,9 +8,10 @@ const matchDB = require("../database/controllers/match")
 const socketIo = require("../Model/socket")
 const blockedDB = require("../database/controllers/blocked")
 const file = require('../Model/file')
+const filter = require("../Model/filter")
 
 router.post("/", (req, res, next) => {
-
+    
     if ( !req.body.user || !req.body.user.username)
         return response.errorResponse(res, "You didn't put a body");
 
@@ -67,12 +68,12 @@ router.post("/", (req, res, next) => {
 
 router.put("/",(req, res, next) => {
 
-    if ( !req.body.user || req.body.user.username)
+    if ( !req.body.user || !req.body.user.username)
         return response.errorResponse(res, "You didn't put a body");
 
     if (!file.CheckProfilePicture(req.session.user))
         return response.errorResponse(res, "You don't have a profile picture , update one to start using this feature")      
-
+    
     userDB.findOneUserByUsername(req.body.user.username)
     .then(data => {
         if (!data)
@@ -86,15 +87,16 @@ router.put("/",(req, res, next) => {
     .catch(err => response.errorCatch(res, "Something wrong in delete 3", err))
 })
 
-
-
 router.get("/likers", (req, res, next) =>{
     
     likedDB.getAlllikers(req.session.user)
     .then(data => {
-        if(data)
-            return response.response(res, data)
-        response.response(res, [])
+        if(!data)
+            return response.response(res, [])
+        var array = [];
+        for (key in data)
+            array[key] = data[key].likerid;
+        filter.getProfile(req.session.user, array, res)
     })
     .catch(err => response.errorCatch(res, "Something wrong in likers", err))
 })
@@ -103,9 +105,12 @@ router.get("/", (req, res, next) =>{
     
     likedDB.getAllLiked(req.session.user)
     .then(data => {
-        if(data)
-            return response.response(res, data)
-        response.response(res, [])
+        if(!data)
+            return response.response(res, [])
+        var array = [];
+        for (key in data)
+            array[key] = data[key].likedid;
+        filter.getProfile(req.session.user, array, res)
     })
     .catch(err => response.errorCatch(res, "Something wrong in liked", err))
 })

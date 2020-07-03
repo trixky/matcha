@@ -3,26 +3,14 @@ const userDB = require("../database/controllers/userDB")
 const filter = require("../Model/filter")
 const response = require("../Model/response")
 
-
 router.get("/", (req, res, next) => {
     
     userDB.findOneUserById(req.session.user)
     .then(user => {
-        filter.usersFilter(req.session.user)
-        .then(data => {
-            filter.sort(user, data)
-            .then(data => {
-                if(data)
-                    return response.response(res, data)
-                response.response(res, [])
-            })
-            .catch(err => response.errorCatch(res, "Something went wrong in search, Error database 1", err));
-        })
-        .catch(err => response.errorCatch(res, "Something went wrong in search, Error database 2", err));
+        filter.get(user, res)
     })
     .catch(err => response.errorCatch(res, "Something went wrong in search, Error database 3", err));
 })
-
 
 router.post("/", (req, res, next) => {
             

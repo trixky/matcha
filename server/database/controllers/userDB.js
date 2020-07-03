@@ -26,6 +26,7 @@ userDB.findOneUserByEmail = async (email) => {
 }
 
 userDB.findFilter = async (query, arg) =>{
+    
     return db.manyOrNone(
         query, arg
     )

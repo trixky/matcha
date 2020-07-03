@@ -2,7 +2,7 @@ const userDB = require("../database/controllers/userDB")
 const utils = require("./utils")
 const blockedDB = require("../database/controllers/blocked")
 const likedDB = require("../database/controllers/liked")
-
+const response = require("../Model/response")
 
 const filter = {}
 
@@ -27,6 +27,24 @@ filter.prepareQuery = (tags) => {
         })
     query += ";"
 
+    return query;
+}
+
+filter.prepareQueryProfile = (array) => {
+
+    var query = `SELECT ${userInfo} FROM users WHERE `
+
+
+    var i = 1;
+
+    if (Array.isArray(array))
+        array.forEach((e) => {
+            if (i == 1)
+                query += `id = $${i++} `;
+            else
+                query += `AND id = $${i++} `;
+        })
+    query += ";"
     return query;
 }
 
@@ -154,8 +172,7 @@ filter.sameTags = (user1, user2) =>{
     return nb;
 }
 
-filter.sort = async (user, data) => {
-
+filter.market = (user, data) => {
     if (!Array.isArray(data))
         return data;
 
@@ -164,6 +181,15 @@ filter.sort = async (user, data) => {
         data[i].distance = filter.findDistance(user, data[i]);
         data[i].commonTags = filter.sameTags(user, data[i]);
     }
+    return data;
+}
+
+filter.sort = async (user, data) => {
+
+    if (!Array.isArray(data))
+        return data;
+
+    data = filter.market(user, data)
 
     for(var i = 0; i < data.length -1 ; i++)
     {
@@ -198,8 +224,42 @@ filter.sort = async (user, data) => {
     .catch(err => err);
 }
 
+filter.getByArrayProfile = async (user, res)=>{
+    filter.usersFilter(user.id)
+    .then(data => {
+        filter.sort(user, data)
+        .then(data => {
+            if(data)
+                return response.response(res, data)
+            response.response(res, [])
+        })
+        .catch(err => response.errorCatch(res, "Something went wrong in search, Error database 1", err))
+    })
+    .catch(err => response.errorCatch(res, "Something went wrong in search, Error database 1", err));
+}
 
-function swap(data, posi_1, posi_2){
+filter.getProfile = async (userid, array, res) => {
+    
+    userDB.findOneUserById(userid)
+    .then(user => {
+        userDB.findFilter(
+            filter.prepareQueryProfile(array), array)
+        .then(data => 
+        {
+            if(data)
+            {
+                data = filter.market(user, data)
+                return response.response(res, data)
+            }
+            response.response(res, [])
+        })
+        .catch(err => response.errorCatch(res, "Something went wrong in filter, Error  1", err))
+    })
+    .catch(err => response.errorCatch(res, "Something went wrong in filter, Error 2", err));
+}
+
+function swap(data, posi_1, posi_2)
+{
     var tmp;
 
     tmp =  data[posi_1];
