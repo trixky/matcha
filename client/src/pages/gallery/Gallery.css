@@ -1,7 +1,14 @@
 .gallery-img {
-	max-width: 80%;
+	max-width: 60%;
+	max-height: 300px;
 }
 
 .gallery-img:hover {
 	cursor: pointer;
+}
+
+.gallery-row {
+	background-color: var(--main-grey-1);
+	width: 130px;
+	margin: 0 auto;
 }
