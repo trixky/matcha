@@ -22,6 +22,7 @@ var blockedRouter = require("./routes/blocked")
 var conversationsRouter = require("./routes/conversations")
 var disconnectedRouter = require("./routes/disconnected")
 var searchRouter = require("./routes/search")
+var viewersRouter = require("./routes/viewers")
 
 var testRouter = require("./routes/test")
 
@@ -72,6 +73,7 @@ app.use("/blocked", blockedRouter)
 app.use("/conversations", conversationsRouter)
 app.use("/search", searchRouter)
 app.use("/disconnect", disconnectedRouter)
+app.use("/viewers", viewersRouter)
 
 app.use("/test", testRouter)
 

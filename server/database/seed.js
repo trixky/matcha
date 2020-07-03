@@ -86,6 +86,8 @@ database.none(
     + 'personusername VARCHAR(31) NOT NULL'
     + ', '
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+    + ', '
+    + ' unique (viewerID, personID)'
     + ')'
 )
 .then(() => database.none(

@@ -15,7 +15,13 @@ userDB.findOneUserByEmail = async (email) => {
     return  db.oneOrNone(
         "SELECT * FROM users WHERE email = $1", email
         )
-    .then(data => data)
+    .then(data => {
+        if (!data)
+            return data
+        var update = data.updated;
+        data.updated = update.getDate() + "/" + (update.getMonth() + 1) + "/" + update.getFullYear() + " " + update.getHours() + ":" + update.getMinutes();
+        return data
+    })
     .catch(err => utils.log(err));
 }
 
@@ -32,7 +38,13 @@ userDB.findOneUserById = async (id) => {
     return  db.oneOrNone(
         `SELECT ${userInfo} FROM users WHERE id = $1;`, id
         )
-    .then(data => data)
+    .then(data => {
+        if (!data)
+            return data
+        var update = data.updated;
+        data.updated = update.getDate() + "/" + (update.getMonth() + 1) + "/" + update.getFullYear() + " " + update.getHours() + ":" + update.getMinutes();
+        return data
+    })
     .catch(err => utils.log(err));
   }
   
@@ -187,7 +199,6 @@ userDB.updateUser = async (newData) => {
                 data
         )
     .catch(err => {
-        console.log(err)
         utils.log(err)})
 }
 
