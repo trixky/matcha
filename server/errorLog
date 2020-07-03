@@ -1170,3 +1170,39 @@ QueryResultError {
     received: 0
     query: "SELECT * FROM liked WHERE 0 = (likerid);"
 }
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 0 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 0 = (likerid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM blocked WHERE 8 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM liked WHERE 8 = (likerid);"
+}
