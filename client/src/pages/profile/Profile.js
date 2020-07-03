@@ -45,7 +45,7 @@ class Profile extends Component {
 	}
 
 	handleLikeButton() {
-		const body = {user: { username: this.state.data.username }};
+		const body = JSON.stringify({user: { username: this.state.data.username }});
 		const like_button = this.state.like_button;
 
 		if (like_button === 'like') {
