@@ -8,6 +8,8 @@ const viewerDB = require("../database/controllers/viewers")
 const socketIO = require("../Model/socket")
 const filter = require("../Model/filter")
 const matchDB = require("../database/controllers/match")
+const likedDB  = require("../database/controllers/liked")
+const blockedDB = require("../database/controllers/blocked")
 
 router.get("/myProfile", (req, res, next) => {
     
@@ -35,17 +37,33 @@ router.get("/:id", (req, res, next) => {
         .then(data => {
             if (!data)
                 return response.response(res, "No user with this username");
+
+            userDB.updateFame(data.id, 1);
+            socketIO.notification(data.id, req.session.username + " have look at your profile, check back");
+            viewerDB.create(req.session.user, req.session.username, data)
+            data.distance = filter.findDistance(user, data)
+
             matchDB.getById(user.id, data.id)
             .then(matched => {
-                if (matched)
-                    data.matched = true;
-                else 
-                    data.matched = false;
-                viewerDB.create(req.session.user, req.session.username, data)
-                socketIO.notification(data.id, req.session.username + " have look at your profile, check back");
-                userDB.updateFame(data.id, 1);
-                data.distance = filter.findDistance(user, data)
-                response.response(res, data)
+                if (matched){
+                    data.relation = "matched";
+                    return response.response(res, data)
+                }
+                likedDB.findOneLikeById(user.id, data.id)
+                .then(liked => {
+                    if (liked){
+                        data.relation = "liked";
+                        return response.response(res, data)
+                    }
+                    blockedDB.get(user.id, data.id)
+                    .then(blocked => {
+                        if (blocked){
+                            data.relation = "blocked";
+                            return response.response(res, data)
+                        }
+                        return response.response(res, data)
+                    })
+                })
             })
             .catch(err => response.errorCatch(res, "Something went wrong in account, Error database", err));
         })
