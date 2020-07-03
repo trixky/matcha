@@ -26,16 +26,15 @@ class People extends Component {
 
 		if (selected === 'matched') {
 			path += 'matched';
-		} else if (selected === 'liker') {
+		} else if (selected === 'likers') {
 			path += 'liked/likers'
 		} else if (selected === 'liked') {
 			path += 'liked'
+		} else if (selected === 'viewers') {
+			path += 'viewers'
 		} else if (selected === 'blocked') {
 			path += 'blocked'
 		}
-
-
-		// const _this = this;
 
 		const requestOptions = {
 			method: 'GET',

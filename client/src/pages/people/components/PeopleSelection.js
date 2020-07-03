@@ -18,8 +18,9 @@ class PeopleSelection extends Component {
 			<div className='people-selection-container'>
 				<select onChange={this.selectHandle} className='form-input' name="category" id="category">
 					<option value="matched">matched</option>
-					<option value="liker">liker</option>
+					<option value="likers">likers</option>
 					<option value="liked">liked</option>
+					<option value="viewers">viewers</option>
 					<option value="blocked">blocked</option>
 				</select>
 			</div>
