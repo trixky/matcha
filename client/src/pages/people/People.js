@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
-import ProfilThumbnail from './components/ProfilThumbnail'
+// import ProfilThumbnail from './components/ProfilThumbnail'
 import PeopleSelection from './components/PeopleSelection'
+import ProfilThumbnail from '../../shared/components/ProfilThumbnail'
 
 import './People.css'
 
@@ -24,9 +25,9 @@ class People extends Component {
 		let path = '/';
 
 		if (selected === 'matched') {
-			path += 'match';
+			path += 'matched';
 		} else if (selected === 'liker') {
-			path += 'liked/liker'
+			path += 'liked/likers'
 		} else if (selected === 'liked') {
 			path += 'liked'
 		} else if (selected === 'blocked') {
@@ -42,8 +43,8 @@ class People extends Component {
 		fetch(path, requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data._data)
-				// _this.setState({ data: data._data })
+				console.log(data)
+				return (data._data.map((value) => <ProfilThumbnail info={value} />))
 			});
 	}
 
@@ -54,15 +55,7 @@ class People extends Component {
 			<div className='intern-page search-container'>
 				<PeopleSelection parent={this} />
 				<div className='search-carousel-container'>
-				{this.generateProfile()}
-					<ProfilThumbnail />
-					<ProfilThumbnail />
-					<ProfilThumbnail />
-					<ProfilThumbnail />
-					<ProfilThumbnail />
-					<ProfilThumbnail />
-					<ProfilThumbnail />
-					<ProfilThumbnail />
+					{this.generateProfile()}
 				</div>
 				<input className='form-input search-carousel-more-input' type='submit' value='show more profiles' />
 			</div>

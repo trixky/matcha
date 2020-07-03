@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import ProfilThumbnail from './components/ProfilThumbnail'
+import ProfilThumbnail from '../../shared/components/ProfilThumbnail'
 import SearchCriteria from './components/SearchCriteria'
 
 import './Search.css'
