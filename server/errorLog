@@ -1352,3 +1352,40 @@ error: duplicate key value violates unique constraint "viewers_viewerid_personid
 error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
 error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
 error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+Bad identifiant or password
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM users WHERE (email = 'mathisbois.dev@gmail.com' AND password = '739ec448edaf7f4d91eb443462ed320074862935d2c799b76c6ed42ec6edd78c')"
+}
+Bad identifiant or password
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM users WHERE (email = 'badidou.freeride@gmail.com' AND password = '754068f93ca0903e1db7f0ad3ec5a616179c738f462959dd2380b6e2743680db')"
+}
+Bad identifiant or password
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM users WHERE (email = 'badidou.freeride@gmail.com' AND password = '739ec448edaf7f4d91eb443462ed320074862935d2c799b76c6ed42ec6edd78c')"
+}
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: invalid input syntax for type integer: "undefined"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
