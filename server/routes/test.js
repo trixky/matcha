@@ -18,7 +18,7 @@ var conversationsRouter = require("./conversations")
 var fakeRouter = require("./fake")
 var disconnectedRouter = require("./disconnected")
 var searchRouter =require("./search")
-var viewersRouter = require("./routes/viewers")
+var viewersRouter = require("./viewers")
 
 const filter = require("../Model/filter")
 const response = require("../Model/response")
