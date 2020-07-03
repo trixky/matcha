@@ -6,3 +6,9 @@
 .gallery-img:hover {
 	cursor: pointer;
 }
+
+.gallery-row {
+	background-color: var(--main-grey-1);
+	width: 130px;
+	margin: 0 auto;
+}
