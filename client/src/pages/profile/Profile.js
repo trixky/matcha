@@ -11,7 +11,8 @@ class Profile extends Component {
 	state = {
 		data: null,
 		like_button: 'loading...',
-		chat_button: 'loading...'
+		chat_button: 'loading...',
+		block_button: 'loading...'
 	}
 
 	componentDidMount() {
@@ -33,13 +34,13 @@ class Profile extends Component {
 
 				const relation = data._data.relation
 				if (!relation) {
-					this.setState({ like_button: 'like', chat_button: false })
+					this.setState({ like_button: 'like', chat_button: false, block_button: 'block' })
 				} else if (relation === 'matched') {
-					this.setState({ like_button: 'unlike', chat_button: true })
+					this.setState({ like_button: 'unlike', chat_button: true, block_button: 'block' })
 				} else if (relation === 'liked') {
-					this.setState({ like_button: 'unlike', chat_button: false })
+					this.setState({ like_button: 'unlike', chat_button: false, block_button: 'block' })
 				} else if (relation === 'blocked') {
-					this.setState({ like_button: 'blocked', chat_button: false })
+					this.setState({ like_button: 'like', chat_button: false, block_button: 'unblock' })
 				}
 			});
 	}
@@ -72,6 +73,34 @@ class Profile extends Component {
 		}
 	}
 
+	handleBlockButton() {
+		const body = JSON.stringify({user: { username: this.state.data.username }});
+		const block_button = this.state.block_button;
+
+		if (block_button === 'block') {
+			const requestOptions = {
+				method: 'POST',
+				body
+			};
+			console.log(requestOptions)
+			fetch('/blocked', requestOptions)
+				.then(response => response.json())
+				.then(data => {
+					console.log(data)
+				});
+		} else if (block_button === 'unblock') {
+			const requestOptions = {
+				method: 'PUT',
+				body
+			};
+			fetch('/blocked', requestOptions)
+				.then(response => response.json())
+				.then(data => {
+					console.log(data)
+				});
+		}
+	}
+
 	render() {
 		const data = this.state.data;
 		return (
@@ -83,7 +112,9 @@ class Profile extends Component {
 					<ProfileListInfo data={data} />
 					<Bio data={data} />
 					<Tags data={data} />
-					<input className='form-input' onClick={() => (this.handleLikeButton('/profile'))} type='submit' value={this.state.like_button} disabled={this.state.like_button === 'loading'} />
+					<input className='form-input' onClick={() => (this.handleLikeButton('/profile'))} type='submit' value={this.state.like_button} disabled={this.state.like_button === 'loading...' || this.state.block_button === 'unblock'} />
+					<input className='form-input' onClick={() => (this.handleLikeButton('/profile'))} type='submit' value={this.state.block_button} />
+					<input className='form-input' onClick={() => (this.handleLikeButton('/profile'))} type='submit' value='chat' disabled={!this.state.chat_button} />
 				</div>
 			</div>
 		);
