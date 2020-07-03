@@ -9,7 +9,7 @@ const filter = {}
 var userInfo =  "id ,email, username, firstname, name, gender, orientation, "
                 + "birthday, age, tags, profile, picture1, picture2, "
                 + "picture3, picture4, liked, likers, match, "
-                + "viewers, reputation, latitude, longitude, connected, verified"
+                + "viewers, reputation, latitude, longitude, connected, updated, verified"
 
 
 filter.prepareQuery = (tags) => {
