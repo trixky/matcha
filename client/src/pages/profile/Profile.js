@@ -46,13 +46,14 @@ class Profile extends Component {
 	}
 
 	handleLikeButton() {
-		const body = JSON.stringify({user: { username: this.state.data.username }});
+		const body = {user: { username: this.state.data.username }};
 		const like_button = this.state.like_button;
 
 		if (like_button === 'like') {
 			const requestOptions = {
 				method: 'POST',
-				body
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(body)
 			};
 			console.log(requestOptions)
 			fetch('/liked', requestOptions)
@@ -63,7 +64,7 @@ class Profile extends Component {
 		} else if (like_button === 'unlike') {
 			const requestOptions = {
 				method: 'PUT',
-				body
+				body: JSON.stringify(body)
 			};
 			fetch('/liked', requestOptions)
 				.then(response => response.json())

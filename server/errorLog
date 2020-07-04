@@ -1424,3 +1424,7 @@ TypeError: Cannot read property 'id' of null
 TypeError: Cannot read property 'id' of null
 Something went wrong in account, Error database
 TypeError: Cannot read property 'distance' of null
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
