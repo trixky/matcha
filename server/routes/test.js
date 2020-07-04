@@ -115,7 +115,6 @@ router.use("/gps/:ip", (req, res, next) => {
     req.session.username = "username"
 next()}
 ,(req, res, next) =>{
-    console.log(req.params.ip)
     gps.getCoordonned(req.params.ip)
     .then(data => {
         response.response(res, data)

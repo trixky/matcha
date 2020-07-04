@@ -21,6 +21,14 @@ viewers.getView = async (userid) => {
     .catch(err => utils.log(err));
 }
 
+viewers.CheckView = async (userid, personid) => {
+    return db.oneOrNone(
+        `SELECT * FROM viewers WHERE $1 = (viewerid) AND $2 = (personid);`,[userid, personid]
+    )
+    .then(data => data)
+    .catch(err => utils.log(err));
+}
+
 viewers.getViewers = async (userid) => {
     return db.manyOrNone(
         `SELECT * FROM viewers WHERE $1 = (personid);`,[userid]

@@ -34,16 +34,18 @@ filter.prepareQueryProfile = (array) => {
 
     var query = `SELECT ${userInfo} FROM users WHERE `
 
-
     var i = 1;
-
+    
     if (Array.isArray(array))
-        array.forEach((e) => {
+    {       
+        for(var j = 0; j < array.length ; j++)
+        {
             if (i == 1)
-                query += `id = $${i++} `;
-            else
-                query += `AND id = $${i++} `;
-        })
+                  query += `id = $${i++} `;
+             else
+                 query += `OR id = $${i++} `;
+        } 
+    }
     query += ";"
     return query;
 }
@@ -239,7 +241,8 @@ filter.getProfile = async (user, res)=>{
 }
 
 filter.getByArrayProfile = async (userid, array, res) => {
-    
+    if (array.length === 0)
+        return response.response(res, array)
     userDB.findOneUserById(userid)
     .then(user => {
         userDB.findFilter(
