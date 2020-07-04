@@ -26,5 +26,19 @@ utils.formateDate = (update) => {
     return update.getDate() + "/" + (update.getMonth() + 1) + "/" + update.getFullYear() + " " + update.getHours() + ":" + update.getMinutes();
 }
 
-
+utils.marketNotifications = (data) => {
+    for(var i = 0; i < data.length; i++)
+        if (data[i])
+        {
+            if (data[i].type === 1)
+                data[i].notification = '❤️ ' + data[i].notification;
+            else if (data[i].type === 2)
+              data[i].notification = '💕 ' + data[i].notification;
+            else if (data[i].type === 3)
+              data[i].notification = '✉️ ' + data[i].notification;
+            else if (data[i].type === 4)
+              data[i].notification = '🔭 ' + data[i].notification;
+        }
+    return data;
+}
 module.exports = utils;

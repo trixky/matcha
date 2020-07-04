@@ -111,6 +111,8 @@ database.none(
     + ', '
     + 'read BOOLEAN DEFAULT false'
     + ', '
+    + 'type INTEGER NOT NULL'
+    + ', '
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
@@ -198,7 +200,7 @@ database.none(
     +   "("
     +   "UPDATE users set liked = liked + 1 WHERE id = NEW.likerid; "
     +   "UPDATE users set likers = likers + 1 WHERE id = NEW.likedid;"
-    +   "INSERT INTO notifications (userid, notification) VALUES (NEW.likedid,  concat(NEW.likerusername ,' liked you, go like back'));"
+    +   "INSERT INTO notifications (userid, notification, type) VALUES (NEW.likedid,  concat(NEW.likerusername ,' liked you, go like back'), 1);"
     +   ");"
 )
 .then(() => database.none(
@@ -218,8 +220,8 @@ database.none(
     +   "DO "
     +   "("
     +   "UPDATE users set match = match + 1 WHERE id = ANY (NEW.usersid);"
-    +   "INSERT INTO notifications (userid, notification) VALUES (NEW.usersid[1],  concat(NEW.username[2] ,' liked you to, you can start a conversation'));"
-    +   "INSERT INTO notifications (userid, notification) VALUES (NEW.usersid[2],  concat(NEW.username[1] ,' liked you to, you can start a conversation'));"
+    +   "INSERT INTO notifications (userid, notification, type) VALUES (NEW.usersid[1],  concat(NEW.username[2] ,' liked you to, you can start a conversation'), 2);"
+    +   "INSERT INTO notifications (userid, notification, type) VALUES (NEW.usersid[2],  concat(NEW.username[1] ,' liked you to, you can start a conversation'), 2);"
     +   ");"
 )
 .then(() => database.none(
@@ -228,7 +230,7 @@ database.none(
 +   "messages "
 +   "DO "
 +   "("
-+   "INSERT INTO notifications (userid, notification) VALUES (NEW.usersid[2],  concat(NEW.sender ,' send you a message'));"
++   "INSERT INTO notifications (userid, notification, type) VALUES (NEW.usersid[2],  concat(NEW.sender ,' send you a message'), 3);"
 +   "UPDATE conversations SET updated = CURRENT_TIMESTAMP WHERE usersid = NEW.usersid;"
 +   ")"
 )
@@ -238,7 +240,7 @@ database.none(
 +   "viewers "
 +   "DO "
 +   "("
-+   "INSERT INTO notifications (userid, notification) VALUES (NEW.personid,  concat(NEW.viewerusername ,' have look at your profile, check back'));"
++   "INSERT INTO notifications (userid, notification, type) VALUES (NEW.personid,  concat(NEW.viewerusername ,' have look at your profile, check back'), 4);"
 +   ")"
 )
 //------------------------------------------- INSERT
