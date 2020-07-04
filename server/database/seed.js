@@ -386,6 +386,90 @@ database.none(
     + ' birthday,'
     + ' age,'
     + ' profile,'
+    + ' latitude,'
+    + ' longitude,'
+    + ' tags,'
+    + ' verified, '
+    + 'created)'
+    + ' '
+    + 'VALUES'
+    + ' '
+    + '('
+    + " '8',"
+    + " '43@43.com',"
+    + " '43',"
+    + " '43',"
+    + " '43',"
+    + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
+    + " 'man'," 
+    + " 'heterosexual',"
+    + " '43'," 
+    + " '1965-04-04',"
+    + " 55,"
+    + " 'http://localhost:3002/profile_8',"
+    + "48.853349,"
+    + "2.410537,"
+    + " '{pets, sports}',"
+    + " null,"
+    + " CURRENT_TIMESTAMP"
+    + ")",    
+)
+.then(() => database.none(
+    'INSERT INTO users'
+    + '(id, ' 
+    + ' email, '
+    + ' username, '
+    + ' firstname, '
+    + ' name, '
+    + ' password, '
+    + ' gender,'
+    + ' orientation,'
+    + ' biography,'
+    + ' birthday,'
+    + ' age,'
+    + ' profile,'
+    + ' latitude,'
+    + ' longitude,'
+    + ' tags,'
+    + ' verified, '
+    + 'created)'
+    + ' '
+    + 'VALUES'
+    + ' '
+    + '('
+    + " '9',"
+    + " '44@44.com',"
+    + " '44',"
+    + " '44',"
+    + " '44',"
+    + " '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049',"
+    + " 'man'," 
+    + " 'heterosexual',"
+    + " '43'," 
+    + " '1965-04-04',"
+    + " 55,"
+    + " 'http://localhost:3002/profile_9',"
+    + "48.853349,"
+    + "2.410537,"
+    + " '{pets, sports}',"
+    + " null,"
+    + " CURRENT_TIMESTAMP"
+    + ")",    
+)
+.then(() => database.none(
+    'INSERT INTO users'
+    + '(id, ' 
+    + ' email, '
+    + ' username, '
+    + ' firstname, '
+    + ' name, '
+    + ' password, '
+    + ' gender,'
+    + ' orientation,'
+    + ' biography,'
+    + ' birthday,'
+    + ' age,'
+    + ' profile,'
     + ' tags,'
     + ' latitude,'
     + ' longitude,'
@@ -583,6 +667,6 @@ database.none(
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",
-)))))))))))))))))))))))
+)))))))))))))))))))))))))
 .then(_exit).catch(_exit);
 

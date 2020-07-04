@@ -31,12 +31,12 @@ router.get("/:id", (req, res, next) => {
     .then(user => {
         
         if (!user)
-        return response.response(res, "No user with this username");
-
+            return response.errorResponse(res, "No user with this id");
+        
         userDB.findOneUserById(id)
         .then(data => {
             if (!data)
-                return response.response(res, "No user with this username");
+                return response.errorResponse(res, "No user with this id");
 
             userDB.updateFame(data.id, 1);
             socketIO.notification(data.id, req.session.username + " have look at your profile, check back");
