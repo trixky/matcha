@@ -52,8 +52,8 @@ router.post("/", (req, res, next) => {
                                     socketIo.matchNotification(likerData.id, likedData.id)
                             })
                             .catch(err => utils.log(err))
-                            })
-                            .catch(err => response.errorCatch(res, "Something wrong in the liked router 1", err))
+                        })
+                        .catch(err => response.errorCatch(res, "Something wrong in the liked router 1", err))
 
                     response.errorResponse(res, "You already like this personne")
                 })
