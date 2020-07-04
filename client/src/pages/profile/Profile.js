@@ -20,11 +20,8 @@ class Profile extends Component {
 			this.props.setPage('Profile');
 
 		const current_user = window.location.pathname.split('/')[2];
-		// const body = { _data: { username: current_user } }
-
 		const requestOptions = {
 			method: 'GET',
-			// body
 		};
 		fetch('/account/' + current_user, requestOptions)
 			.then(response => response.json())
@@ -46,59 +43,64 @@ class Profile extends Component {
 	}
 
 	handleLikeButton() {
-		const body = {user: { username: this.state.data.username }};
 		const like_button = this.state.like_button;
+		const body = JSON.stringify({ user: { username: this.state.data.username } });
+		const headers = { 'Content-Type': 'application/json' }
 
 		if (like_button === 'like') {
+			this.setState({ like_button: 'unlike' })
 			const requestOptions = {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(body)
+				headers,
+				body
 			};
-			console.log(requestOptions)
 			fetch('/liked', requestOptions)
 				.then(response => response.json())
 				.then(data => {
-					console.log(data)
+					if (data._status === -1) {
+						alert(data._data)
+						this.setState({ like_button: 'like' })
+					}
 				});
 		} else if (like_button === 'unlike') {
+			this.setState({ like_button: 'like' })
 			const requestOptions = {
 				method: 'PUT',
-				body: JSON.stringify(body)
+				headers,
+				body
 			};
 			fetch('/liked', requestOptions)
 				.then(response => response.json())
 				.then(data => {
-					console.log(data)
+					if (data._status === -1) {
+						alert(data._data)
+						this.setState({ like_button: 'unlike' })
+					}
 				});
 		}
 	}
 
 	handleBlockButton() {
-		const body = JSON.stringify({user: { username: this.state.data.username }});
 		const block_button = this.state.block_button;
+		const body = JSON.stringify({ user: { username: this.state.data.username } });
+		const headers = { 'Content-Type': 'application/json' }
 
 		if (block_button === 'block') {
+			this.setState({ block_button: 'unblock' })
 			const requestOptions = {
 				method: 'POST',
+				headers,
 				body
 			};
-			console.log(requestOptions)
 			fetch('/blocked', requestOptions)
-				.then(response => response.json())
-				.then(data => {
-					console.log(data)
-				});
 		} else if (block_button === 'unblock') {
+			this.setState({ block_button: 'block' })
 			const requestOptions = {
 				method: 'PUT',
+				headers,
 				body
 			};
 			fetch('/blocked', requestOptions)
-				.then(response => response.json())
-				.then(data => {
-					console.log(data)
-				});
 		}
 	}
 
@@ -114,7 +116,7 @@ class Profile extends Component {
 					<Bio data={data} />
 					<Tags data={data} />
 					<input className='form-input' onClick={() => (this.handleLikeButton('/profile'))} type='submit' value={this.state.like_button} disabled={this.state.like_button === 'loading...' || this.state.block_button === 'unblock'} />
-					<input className='form-input' onClick={() => (this.handleLikeButton('/profile'))} type='submit' value={this.state.block_button} />
+					<input className='form-input' onClick={() => (this.handleBlockButton('/profile'))} type='submit' value={this.state.block_button} />
 					<input className='form-input' onClick={() => (this.handleLikeButton('/profile'))} type='submit' value='chat' disabled={!this.state.chat_button} />
 				</div>
 			</div>

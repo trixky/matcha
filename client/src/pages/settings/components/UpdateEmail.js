@@ -55,6 +55,7 @@ class UpdateEmail extends Component {
 				_this.setState({email_err_message: data._data.email})
 			} else {
 				_this.setState({email_err_message: ''})
+				alert('your email has been successfully updated')
 			}
 		})
 	}
