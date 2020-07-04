@@ -130,7 +130,7 @@ function updateData(req, res, user){
     var error = check.userProfile(user)
     error = retError(error)
     if(error != "")
-    // if (Object.entries(error).length)
+     if (Object.entries(error).length)
         return response.errorResponse(res, error)
 
     const userid = req.session.user;

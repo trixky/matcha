@@ -56,7 +56,7 @@ next()}
    ,likedRouter)
 
 router.use("/notifications", (req, res, next) => {
-    req.session.user = 1
+    req.session.user = 0
     req.session.username = "username"
 next()}
  ,notificationsRouter)
