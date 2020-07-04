@@ -1428,3 +1428,61 @@ error: duplicate key value violates unique constraint "viewers_viewerid_personid
 error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
 error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
 error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: syntax error at or near ";"
+Bad identifiant or password
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM users WHERE (email = '43@43.com' AND password = '44cb730c420480a0477b505ae68af508fb90f96cf0ec54c6ad16949dd427f13a')"
+}
+Bad identifiant or password
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM users WHERE (email = '43@43.com' AND password = '73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049')"
+}
+error: syntax error at or near ";"
+error: syntax error at or near ";"
+error: syntax error at or near ";"
+error: syntax error at or near ";"
+error: syntax error at or near ";"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: syntax error at or near ";"
+Bad identifiant or password
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM users WHERE (email = '43@43.com' AND password = '44cb730c420480a0477b505ae68af508fb90f96cf0ec54c6ad16949dd427f13a')"
+}
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: syntax error at or near ";"
+error: syntax error at or near ";"
+error: syntax error at or near ";"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: syntax error at or near ";"
+error: syntax error at or near ";"
+error: syntax error at or near ";"
+error: syntax error at or near ";"
+error: syntax error at or near ";"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: syntax error at or near ";"
+error: syntax error at or near ";"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: syntax error at or near ";"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: syntax error at or near ";"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+error: syntax error at or near ";"
+error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"

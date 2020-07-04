@@ -40,11 +40,6 @@ class Footer extends Component {
 					</li>
 					<li>
 						<a href='https://github.com/trixky/matcha' target='_blank' rel='noopener noreferrer'>
-							<img className='footer-img scale-hover' src={Pinterest} alt='Pinterest logo' />
-						</a>
-					</li>
-					<li>
-						<a href='https://github.com/trixky/matcha' target='_blank' rel='noopener noreferrer'>
 							<img className='footer-img scale-hover' src={Instagram} alt='Instagram logo' />
 						</a>
 					</li>

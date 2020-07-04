@@ -10,7 +10,6 @@ import './App.css';
 // import pages
 import Account from './pages/account/Account'
 import Authentification from './pages/authentification/Authentification'
-import Chat from './pages/chat/Chat'
 import ForgotPassword from './pages/forgot_password/ForgotPassword'
 import ForgotPasswordSend from './pages/forgot_password_send/ForgotPasswordSend'
 import ForgotUsername from './pages/forgot_username/ForgotUsername'
@@ -59,7 +58,6 @@ class App extends Component {
 							<Switch>
 								<Route exact path='/account'><Account readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/authentification'><Authentification readPage={this.readPage} setPage={this.setPage}/></Route>
-								<Route exact path='/chat'><Chat readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/forgotPassword'><ForgotPassword readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/forgotPasswordSend'><ForgotPasswordSend readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/forgotUsername'><ForgotUsername readPage={this.readPage} setPage={this.setPage}/></Route>

@@ -26,9 +26,6 @@ class Header extends Component {
 					<Link to='/people'>
 						<img className='header-img scale-hover' src={Heart_icone} alt='link to pretenders page' />
 					</Link>
-					<Link to='/chat'>
-						<img className='header-img scale-hover' src={Chat_icone} alt='link to chat page' />
-					</Link>
 					<Link to='/notification'>
 						<img className='header-img scale-hover' src={Notification_icone} alt='link to notification page' />
 					</Link>
