@@ -95,7 +95,7 @@ filter.filterBlocked = async (user, data) =>{
         }
         for(var i = 0; i < data.length; i++)
         {
-            if (hash[data[i].id])
+            if (data[i].id && hash[data[i].id])
                 data[i] = null;
         }
         return data;
@@ -113,10 +113,13 @@ filter.filterLiked = async (user, data) =>{
 
         for(var i = 0; i < liked.length; i++)
             hash[liked[i].likedid] = true;
-
         for(var i = 0; i < data.length; i++)
-            if (hash[data[i]] && hash[data[i].id])
+        {
+            if (data[i] && hash[data[i].id])
+            {
                 data[i] = null;
+            }
+        }
         return data;
     })
     .catch(err => utils.log(err))
