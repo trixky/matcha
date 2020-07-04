@@ -17,10 +17,6 @@
 	user-select: none;
 }
 
-.state-type.state-link:hover {
-	text-decoration: underline;
-}
-
 .state-number, .state-type {
 	margin: 0 6px;
 	display: inline-block;

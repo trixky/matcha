@@ -44,16 +44,16 @@ class States extends Component {
 						<p className='state-type'>reputation</p><p className='state-number'>{data ? data.reputation : this.state.loading_message}</p>
 					</li>
 					<li className='state-line'>
-						<p className='state-type state-link'><Link to='/'>matchs</Link></p><p className='state-number'>{data ? data.match : this.state.loading_message}</p>
+						<p className='state-type'>matchs</p><p className='state-number'>{data ? data.match : this.state.loading_message}</p>
 					</li>
 					<li className='state-line'>
-						<p className='state-type state-link'><Link to='/'>likers</Link></p><p className='state-number'>{data ? data.likers : this.state.loading_message}</p>
+						<p className='state-type'>likers</p><p className='state-number'>{data ? data.likers : this.state.loading_message}</p>
 					</li>
 					<li className='state-line'>
-						<p className='state-type state-link'><Link to='/'>liked</Link></p><p className='state-number'>{data ? data.liked : this.state.loading_message}</p>
+						<p className='state-type'>liked</p><p className='state-number'>{data ? data.liked : this.state.loading_message}</p>
 					</li>
 					<li className='state-line'>
-						<p className='state-type state-link'><Link to='/'>viewers</Link></p><p className='state-number'>{data ? data.viewers : this.state.loading_message}</p>
+						<p className='state-type'>viewers</p><p className='state-number'>{data ? data.viewers : this.state.loading_message}</p>
 					</li>
 				</ul>
 			</div>
