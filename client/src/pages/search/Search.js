@@ -42,7 +42,6 @@ class Search extends Component {
 				<div className='search-carousel-container'>
 					{this.state.data.map((user, index, array) => (user ? <ProfilThumbnail key={user.id} info={array[index]} /> : null))}
 				</div>
-				<input className='form-input search-carousel-more-input' type='submit' value='show more profiles' />
 			</div>
 		);
 	}
