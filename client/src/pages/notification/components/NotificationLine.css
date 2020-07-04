@@ -8,11 +8,6 @@
 	transition: opacity 0.2s;
 }
 
-.notification-line:hover {
-	opacity: 0.6;
-	cursor: pointer;
-}
-
 .notification-line > p {
 	margin: 0;
 }
