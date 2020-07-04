@@ -7,7 +7,7 @@ router.get("/", (req, res, next) => {
     
     userDB.findOneUserById(req.session.user)
     .then(user => {
-        filter.get(user, res)
+        filter.getProfile(user, res)
     })
     .catch(err => response.errorCatch(res, "Something went wrong in search, Error database 3", err));
 })

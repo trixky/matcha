@@ -17,7 +17,7 @@ router.get("/", (req, res, next) => {
             else
                 array[key] = data[key].usersid[1];
         }
-        filter.getProfile(req.session.user, array, res)
+        filter.getByArrayProfile(req.session.user, array, res)
     })
     .catch(err => response.errorCatch(res, "Something went wrong on match", err))
 })

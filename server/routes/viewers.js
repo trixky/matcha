@@ -14,7 +14,7 @@ router.get("/", (req, res, next) => {
         for (key in data)
             array[key] = data[key].viewerid;
         
-        filter.getProfile(req.session.user, array, res)
+        filter.getByArrayProfile(req.session.user, array, res)
     })
     .catch(err => response(res, "Something went wrong on viewers", err))
 })

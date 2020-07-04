@@ -96,7 +96,7 @@ router.get("/likers", (req, res, next) =>{
         var array = [];
         for (key in data)
             array[key] = data[key].likerid;
-        filter.getProfile(req.session.user, array, res)
+        filter.getByArrayProfile(req.session.user, array, res)
     })
     .catch(err => response.errorCatch(res, "Something wrong in likers", err))
 })
@@ -110,7 +110,7 @@ router.get("/", (req, res, next) =>{
         var array = [];
         for (key in data)
             array[key] = data[key].likedid;
-        filter.getProfile(req.session.user, array, res)
+        filter.getByArrayProfile(req.session.user, array, res)
     })
     .catch(err => response.errorCatch(res, "Something wrong in liked", err))
 })

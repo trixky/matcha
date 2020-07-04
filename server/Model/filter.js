@@ -104,21 +104,17 @@ filter.filterBlocked = async (user, data) =>{
 filter.filterLiked = async (user, data) =>{
     return likedDB.getAllLiked(user.id)
     .then(liked => {
-
         if (!liked)
             return data
-
+        
         var hash = []
 
         for(var i = 0; i < liked.length; i++)
-        {
             hash[liked[i].likedid] = true;
-        }
+
         for(var i = 0; i < data.length; i++)
-        {
-            if (hash[data[i].id])
+            if (hash[data[i]] && hash[data[i].id])
                 data[i] = null;
-        }
         return data;
     })
     .catch(err => utils.log(err))
@@ -151,7 +147,7 @@ filter.filterGps = (data, distanceMax) => {
          return data
 
      for(var i = 0; i < data.length; i++){
-         if (data[i].distance > distanceMax)
+         if (data[i] && (data[i].distance > distanceMax))
             data[i] = null;
      }
      return data;
@@ -159,7 +155,7 @@ filter.filterGps = (data, distanceMax) => {
 
 filter.sameTags = (user1, user2) =>{
 
-    if (!Array.isArray(user1.tags) || !Array.isArray(user2.tags))
+    if (!user2 || !Array.isArray(user1.tags) || !Array.isArray(user2.tags))
         return 0;
 
     var nb = 0;
@@ -173,11 +169,14 @@ filter.sameTags = (user1, user2) =>{
 }
 
 filter.market = (user, data) => {
+
     if (!Array.isArray(data))
         return data;
 
     for(var i = 0; i < data.length; i++)
     {
+        if (!data[i])
+            continue;
         data[i].distance = filter.findDistance(user, data[i]);
         data[i].commonTags = filter.sameTags(user, data[i]);
     }
@@ -185,7 +184,7 @@ filter.market = (user, data) => {
 }
 
 filter.sort = async (user, data) => {
-
+    
     if (!Array.isArray(data))
         return data;
 
@@ -218,13 +217,14 @@ filter.sort = async (user, data) => {
     return filter.filterBlocked(user, data)
     .then(data => {
         return filter.filterLiked(user, data)
-        .then(data => data)
+        .then(data => {
+            return data})
         .catch(err => err);
     })
     .catch(err => err);
 }
 
-filter.getByArrayProfile = async (user, res)=>{
+filter.getProfile = async (user, res)=>{
     filter.usersFilter(user.id)
     .then(data => {
         filter.sort(user, data)
@@ -238,7 +238,7 @@ filter.getByArrayProfile = async (user, res)=>{
     .catch(err => response.errorCatch(res, "Something went wrong in search, Error database 1", err));
 }
 
-filter.getProfile = async (userid, array, res) => {
+filter.getByArrayProfile = async (userid, array, res) => {
     
     userDB.findOneUserById(userid)
     .then(user => {

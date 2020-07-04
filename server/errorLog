@@ -1401,3 +1401,26 @@ error: duplicate key value violates unique constraint "viewers_viewerid_personid
 error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
 error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
 error: duplicate key value violates unique constraint "viewers_viewerid_personid_key"
+Something went wrong in search, Error database 3
+TypeError: filter.get is not a function
+Something went wrong in search, Error database 1
+TypeError: res.json is not a function
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+TypeError: Cannot read property 'id' of null
+Something went wrong in account, Error database
+TypeError: Cannot read property 'distance' of null
