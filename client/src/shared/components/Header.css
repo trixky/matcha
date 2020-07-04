@@ -7,14 +7,6 @@ header {
 	z-index: 100;
 }
 
-.title {
-	transition: transform 0.2s;
-}
-
-.title:hover {
-	transform: scale(1.1);
-}
-
 .header-top {
 	padding-top: 15px;
 	padding-bottom: 5px;

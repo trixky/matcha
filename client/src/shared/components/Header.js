@@ -49,9 +49,7 @@ class Header extends Component {
 		return (
 			<header>
 				<div className='header-top'>
-					<Link to='/'>
-						<h1 className='title'>matcha</h1>
-					</Link>
+					<h1>matcha</h1>
 				</div>
 				<div className='header-bottom'>
 					<nav>
