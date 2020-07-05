@@ -50,7 +50,7 @@ socketIo.listen= (app) => {
         // console.log("someone connected")
         // console.log(id)
         io.clients[id] = socket
-        socketIo.notification(id, "hello, you are connected to server")
+        socketIo.notification(id, "hello, you are connected to server with id = " + id)
         userDB.updateConnection(id, true)
         .catch(err => err)
         
