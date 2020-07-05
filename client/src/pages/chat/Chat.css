@@ -1,3 +1,10 @@
+.message-form-container {
+	width: 320px;
+	margin: 20px auto 0;
+	border: solid 5px var(--main-pink-1);
+	padding: 10px;
+}
+
 .chat-message-input {
 	display: inline-block;
 }
@@ -9,8 +16,7 @@
 }
 
 .message-container {
-	width: 340px;
-	margin: 30px auto 10px;
-	height: 360px;
+	height: 300px;
+	margin: 0 auto 10px;
 	overflow: auto;
 }
