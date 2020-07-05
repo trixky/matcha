@@ -13,7 +13,7 @@ notifications.Create = async (id, notification) => {
 
 notifications.findAllById = async (id) => {
     return db.manyOrNone(
-        "SELECT * FROM notifications WHERE userid = $1;", id
+        "SELECT * FROM notifications WHERE userid = $1 ORDER BY created DESC;", id
     )
     .then(data => {
         db.none(
