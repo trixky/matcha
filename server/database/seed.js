@@ -116,6 +116,8 @@ database.none(
     + 'type INTEGER NOT NULL'
     + ', '
     + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+    + ', '
+    + 'unique (userid, type)'
     + ')'
 )
 .then(() => database.none(
@@ -202,8 +204,17 @@ database.none(
     +   "("
     +   "UPDATE users set liked = liked + 1 WHERE id = NEW.likerid; "
     +   "UPDATE users set likers = likers + 1 WHERE id = NEW.likedid;"
-    +   "INSERT INTO notifications (userid, notification, type) VALUES (NEW.likedid,  concat(NEW.likerusername ,' liked you, go like back'), 1);"
+    +   "INSERT INTO notifications (userid, notification, type) VALUES (NEW.likedid,  concat(NEW.likerusername ,' liked you, go like back'), 1)"
+    +   " ON CONFLICT (userid, type) DO UPDATE SET created = CURRENT_TIMESTAMP;"
     +   ");"
+)
+.then(() => database.none(
+    "CREATE OR REPLACE RULE likeddelete "
++   "AS ON DELETE TO "
++   "liked "
++   "DO "
++   "INSERT INTO notifications (userid, notification, type) VALUES (OLD.likedid,  concat(OLD.likerusername ,' unliked you, check for new love'), 5)"
++   " ON CONFLICT (userid, type) DO UPDATE SET created = CURRENT_TIMESTAMP;"
 )
 .then(() => database.none(
         "CREATE OR REPLACE RULE deleteliked "
@@ -222,8 +233,10 @@ database.none(
     +   "DO "
     +   "("
     +   "UPDATE users set match = match + 1 WHERE id = ANY (NEW.usersid);"
-    +   "INSERT INTO notifications (userid, notification, type) VALUES (NEW.usersid[1],  concat(NEW.username[2] ,' liked you to, you can start a conversation'), 2);"
-    +   "INSERT INTO notifications (userid, notification, type) VALUES (NEW.usersid[2],  concat(NEW.username[1] ,' liked you to, you can start a conversation'), 2);"
+    +   "INSERT INTO notifications (userid, notification, type) VALUES (NEW.usersid[1],  concat(NEW.username[2] ,' liked you to, you can start a conversation'), 2)"
+    +   " ON CONFLICT (userid, type) DO UPDATE SET created = CURRENT_TIMESTAMP;"
+    +   "INSERT INTO notifications (userid, notification, type) VALUES (NEW.usersid[2],  concat(NEW.username[1] ,' liked you to, you can start a conversation'), 2)"
+    +   " ON CONFLICT (userid, type) DO UPDATE SET created = CURRENT_TIMESTAMP;"
     +   ");"
 )
 .then(() => database.none(
@@ -232,7 +245,8 @@ database.none(
 +   "messages "
 +   "DO "
 +   "("
-+   "INSERT INTO notifications (userid, notification, type) VALUES (NEW.usersid[2],  concat(NEW.sender ,' send you a message'), 3);"
++   "INSERT INTO notifications (userid, notification, type) VALUES (NEW.usersid[2],  concat(NEW.sender ,' send you a message'), 3)"
++   " ON CONFLICT (userid, type) DO UPDATE SET created = CURRENT_TIMESTAMP;"
 +   "UPDATE conversations SET updated = CURRENT_TIMESTAMP WHERE usersid = NEW.usersid;"
 +   ")"
 )
@@ -242,7 +256,8 @@ database.none(
 +   "viewers "
 +   "DO "
 +   "("
-+   "INSERT INTO notifications (userid, notification, type) VALUES (NEW.personid,  concat(NEW.viewerusername ,' have look at your profile, check back'), 4);"
++   "INSERT INTO notifications (userid, notification, type) VALUES (NEW.personid,  concat(NEW.viewerusername ,' have look at your profile, check back'), 4)"
++   " ON CONFLICT (userid, type) DO UPDATE SET created = CURRENT_TIMESTAMP;"
 +   ")"
 )
 //------------------------------------------- INSERT
@@ -671,6 +686,6 @@ database.none(
     + " null,"
     + " CURRENT_TIMESTAMP"
     + ")",
-)))))))))))))))))))))))))
+))))))))))))))))))))))))))
 .then(_exit).catch(_exit);
 

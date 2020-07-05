@@ -41,7 +41,9 @@ utils.marketNotifications = (data) => {
             else if (data[i].type === 3)
               data[i].notification = '✉️ ' + data[i].notification;
             else if (data[i].type === 4)
-              data[i].notification = '🔭 ' + data[i].notification;
+              data[i].notification = '👁️ ' + data[i].notification;
+            else if (data[i].type === 5)
+              data[i].notification = '💔 ' + data[i].notification;
         }
     return data;
 }
