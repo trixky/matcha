@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { withRouter } from 'react-router-dom';
 
 import './Profile.css'
@@ -112,6 +112,18 @@ class Profile extends Component {
 		}
 	}
 
+	inputsGenerator() {
+		if (this.state.data && this.state.data.id != this.props.cookies.get('my_id')) {
+			return (
+				<Fragment>
+					<input className='form-input' onClick={() => (this.handleLikeButton())} type='submit' value={this.state.like_button} disabled={this.state.like_button === 'loading...' || this.state.block_button === 'unblock'} />
+					<input className='form-input' onClick={() => (this.handleBlockButton())} type='submit' value={this.state.block_button} />
+					<input className='form-input' onClick={() => (this.handleChatButton())} type='submit' value='chat' disabled={!this.state.chat_button} />
+				</Fragment>
+			)
+		}
+	}
+
 	render() {
 		const data = this.state.data;
 		return (
@@ -123,9 +135,7 @@ class Profile extends Component {
 					<ProfileListInfo data={data} />
 					<Bio data={data} />
 					<Tags data={data} />
-					<input className='form-input' onClick={() => (this.handleLikeButton())} type='submit' value={this.state.like_button} disabled={this.state.like_button === 'loading...' || this.state.block_button === 'unblock'} />
-					<input className='form-input' onClick={() => (this.handleBlockButton())} type='submit' value={this.state.block_button} />
-					<input className='form-input' onClick={() => (this.handleChatButton())} type='submit' value='chat' disabled={!this.state.chat_button} />
+					{this.inputsGenerator()}
 				</div>
 			</div>
 		);
