@@ -9,6 +9,7 @@ class Authentification extends Component {
 		super(props);
 
 		this.state = {
+			notification: false,
 			identical_password: {
 				password: '',
 				confirmation_password: ''
@@ -60,6 +61,9 @@ class Authentification extends Component {
 	componentDidMount() {
 		if (this.props.readPage() !== 'Authentification')
 			this.props.setPage('Authentification');
+		if (this.props.cookies.set('my_id') != undefined)
+			this.props.auth_disconnect();
+		this.props.cookies.set('my_id', undefined);
 	}
 
 	handleLoginSuccess(url) {
@@ -68,7 +72,7 @@ class Authentification extends Component {
 
 	handleCreate(event) {
 		event.preventDefault();
-		
+
 		const _this = this;
 		const formData = new FormData(event.target);
 
@@ -114,7 +118,7 @@ class Authentification extends Component {
 
 	handleLogin(event) {
 		event.preventDefault();
-		
+
 		const _this = this;
 		const formData = new FormData(event.target);
 		let login = { user: {} };
@@ -141,6 +145,7 @@ class Authentification extends Component {
 					_this.setState({ invalid_input_login })
 				} else {
 					_this.handleLoginSuccess('/search')
+					_this.props.cookies.set('my_id', data._data.id);
 				}
 			});
 	}

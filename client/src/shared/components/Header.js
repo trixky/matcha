@@ -38,7 +38,6 @@ class Header extends Component {
 			<Fragment>
 				<img className='header-img blocked-hander-img' src={Search_icone} alt='link to search page' />
 				<img className='header-img blocked-hander-img' src={Heart_icone} alt='link to pretenders page' />
-				<img className='header-img blocked-hander-img' src={Chat_icone} alt='link to chat page' />
 				<img className='header-img blocked-hander-img' src={Notification_icone} alt='link to notification page' />
 				<img className='header-img blocked-hander-img' src={Account_icone} alt='link to account page' />
 			</Fragment>
