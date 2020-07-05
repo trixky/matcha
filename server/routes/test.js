@@ -22,10 +22,12 @@ var viewersRouter = require("./viewers")
 
 const filter = require("../Model/filter")
 const response = require("../Model/response")
+const utils = require("../Model/utils")
 
 const gps = require("../Model/gps")
 
 router.use((req, res, next) =>{
+    utils.getDate()    
     userDB.updateTime(0)
     next();
 })

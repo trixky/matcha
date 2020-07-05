@@ -4,6 +4,7 @@ const utils = require("../../Model/utils")
 const notifications = {}
 
 notifications.Create = async (id, notification) => {
+    const time = utils.getDate()
     return db.none(
         "INSERT INTO notifications (userid, notification) VALUES ($1, $2);", [id, notification]
     )

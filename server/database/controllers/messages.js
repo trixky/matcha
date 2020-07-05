@@ -5,8 +5,9 @@ const messagesDB = {};
 
 
 messagesDB.create = async (senderid, personid , sendername, message) => {
+    var time = utils.getDate()
     return db.none(
-        `INSERT INTO messages (usersid, sender, message, created) VALUES ('{$1, $2}', $3, $4, CURRENT_TIMESTAMP);`,[senderid, personid, sendername, message]
+        `INSERT INTO messages (usersid, sender, message, created) VALUES ('{$1, $2}', $3, $4, $5);`,[senderid, personid, sendername, message, time]
     )
     .then(data => null)
     .catch(err => utils.log(err));

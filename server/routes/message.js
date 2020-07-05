@@ -62,7 +62,6 @@ router.get("/:username",(req, res, next) =>{
         messagesDB.getAll(req.session.user, data.id)
         .then(data => {
             if(data){
-                data = utils.formateDateArray(data)
                 return response.response(res, data)
             }
             response.response(res, [])

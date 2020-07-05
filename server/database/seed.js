@@ -29,7 +29,9 @@ database.none(
     + ', '
     + 'message VARCHAR(300) NOT NULL'
     + ','
-    + 'created TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
+    + "created VARCHAR(30) NOT NULL DEFAULT ''"
+    + ','
+    + 'createdtime TIMESTAMP DEFAULT CURRENT_TIMESTAMP'
     + ')'
 )
 .then(() => database.none(

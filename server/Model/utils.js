@@ -15,6 +15,10 @@ utils.removeFile = (filename) => {
     fs.unlink(filename, () => {})
 }
 
+utils.getDate = () => {
+    return utils.formateDate(new Date());
+}
+
 utils.formateDateArray = (data) => {
     for(var i = 0; i < data.length; i++)
         if (data[i])
