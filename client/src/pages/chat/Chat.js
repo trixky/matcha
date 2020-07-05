@@ -9,18 +9,35 @@ class Chat extends Component {
 			data: null
 		}
 		this.componentDidMount = this.componentDidMount.bind(this);
+		this.fetchMessage = this.fetchMessage.bind(this);
 	}
 
 	componentDidMount() {
 		if (this.props.readPage() !== 'Chat')
 			this.props.setPage('Chat');
+
+		this.fetchMessage();
+	}
+
+	fetchMessage() {
+		const current_user = window.location.pathname.split('/')[2];
+		const requestOptions = {
+			method: 'GET',
+		};
+
+		fetch('/messages/' + current_user, requestOptions)
+			.then(response => response.json())
+			.then(data => {
+				console.log(data)
+			});
 	}
 
 	render() {
-		const username = 'uSeRnAmE'
+		const data = this.state.data;
 		return (
 			<div className='intern-page chat-container'>
-				<h2>{username}</h2>
+				<h2 className='profil-title'>{data ? data.username : 'loading...'}</h2>
+				<h3 className='connection-status'>{data ? data.connected ? 'connected' : data.updated : 'loading...'}</h3>
 				<div className='message-container'>
 					<div className='message message-right'>
 						<p className='message-time'>xx:xx:xxxx</p>

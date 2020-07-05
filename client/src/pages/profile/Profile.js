@@ -104,6 +104,10 @@ class Profile extends Component {
 		}
 	}
 
+	handleChatButton() {
+		console.log('on veut chater')
+	}
+
 	render() {
 		const data = this.state.data;
 		return (
@@ -115,9 +119,9 @@ class Profile extends Component {
 					<ProfileListInfo data={data} />
 					<Bio data={data} />
 					<Tags data={data} />
-					<input className='form-input' onClick={() => (this.handleLikeButton('/profile'))} type='submit' value={this.state.like_button} disabled={this.state.like_button === 'loading...' || this.state.block_button === 'unblock'} />
-					<input className='form-input' onClick={() => (this.handleBlockButton('/profile'))} type='submit' value={this.state.block_button} />
-					<input className='form-input' onClick={() => (this.handleLikeButton('/profile'))} type='submit' value='chat' disabled={!this.state.chat_button} />
+					<input className='form-input' onClick={() => (this.handleLikeButton())} type='submit' value={this.state.like_button} disabled={this.state.like_button === 'loading...' || this.state.block_button === 'unblock'} />
+					<input className='form-input' onClick={() => (this.handleBlockButton())} type='submit' value={this.state.block_button} />
+					<input className='form-input' onClick={() => (this.handleChatButton())} type='submit' value='chat' disabled={!this.state.chat_button} />
 				</div>
 			</div>
 		);
