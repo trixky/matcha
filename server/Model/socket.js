@@ -21,6 +21,7 @@ socketIo.notification = (id, notification)=>{
 }
 
 socketIo.messages = (id, sender, message)=>{
+    console.log("sending message")
     if (io.clients[id])
         io.clients[id].emit('messages', {sender: sender, message: message, notification: sender + " send you : " + message})
 }
@@ -41,21 +42,27 @@ socketIo.listen= (app) => {
     })
 // !!!! remove console.log
     io.on("connection", (socket)=>{
-        console.log("someone connected")
-        io.clients[socket.request.session.user] = socket
-        socketIo.notification(socket.request.session.user, "hello, you are connected to server")
-        userDB.updateConnection(socket.request.session.user, true)
+        var id = socket.request._query['id'];
+        // console.log("someone connected")
+        // console.log(id)
+        io.clients[id] = socket
+        socketIo.notification(id, "hello, you are connected to server")
+        userDB.updateConnection(id, true)
+        .catch(err => err)
         
         socket.on("disconnect", ()=>{
-            io.clients[socket.request.session.user] = null;
-            userDB.updateConnection(socket.request.session.user, false)
-            .then(data => console.log("someone disconnected"))
-            .catch(err => console.log(err))
+            var id = socket.request._query['id'];
+            // console.log("the id is =" + id)
+            io.clients[id] = null;
+            userDB.updateConnection(id, false)
+            // .then(data => console.log("someone disconnected"))
+            .catch(err => err)
         })
         
         socket.on("notifications", (message) => {
-            console.log(message)
-            socketIo.notification(socket.request.session.user, "this have been well received : " + message)
+            var id = socket.request._query['id'];
+            // console.log(message)
+            socketIo.notification(id, "this have been well received : " + message)
             socketIo.notification(1, "over")
         })
     })

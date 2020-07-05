@@ -25,6 +25,7 @@ import Settings from './pages/settings/Settings'
 import UpdateProfile from './pages/update_profile/UpdateProfile'
 import Visits from './pages/visits/Visits'
 import ResetPassword from './pages/reset_password/ResetPassword'
+import socket from "./Socket"
 
 import NoMatch from './pages/noMatch/NoMatch'
 
@@ -46,7 +47,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		
+
 	}
 
 	render() {
@@ -77,6 +78,9 @@ class App extends Component {
 								<Route path='*'><NoMatch readPage={this.readPage} setPage={this.setPage}/></Route>
 							</Switch>
 						</div>
+                    {/* a virer !!!!! */}
+                    <button onClick={() => socket.connect(8,(data) => console.log(data),(data) => console.log(data))}>connect</button>
+                    <button onClick={() => socket.disconnect()}>disconnect</button>
 					</div>
 					<Footer readPage={this.readPage} />
 				</div>
