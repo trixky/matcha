@@ -9,6 +9,7 @@ class Authentification extends Component {
 		super(props);
 
 		this.state = {
+			notification: false,
 			identical_password: {
 				password: '',
 				confirmation_password: ''
@@ -60,6 +61,9 @@ class Authentification extends Component {
 	componentDidMount() {
 		if (this.props.readPage() !== 'Authentification')
 			this.props.setPage('Authentification');
+		if (this.props.cookies.set('my_id') != undefined)
+			this.props.auth_disconnect();
+		this.props.cookies.set('my_id', undefined);
 	}
 
 	handleLoginSuccess(url) {

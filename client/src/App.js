@@ -53,14 +53,19 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-
+		const id = cookies.get('my_id');
+		if (id != undefined) {
+			socket.connect(8,(data) => this.handleNotifs(data),(data) => this.handleMessages(data))
+		}
 	}
 
 	handleNotifs(data) {
+		console.log('notif:')
 		console.log(data)
 	}
 
 	handleMessages(data) {
+		console.log('message:')
 		console.log(data)
 	}
 
@@ -75,7 +80,7 @@ class App extends Component {
 						<div className="page">
 							<Switch>
 								<Route exact path='/account'><Account readPage={this.readPage} setPage={this.setPage}/></Route>
-								<Route exact path='/authentification'><Authentification readPage={this.readPage} setPage={this.setPage} cookies={cookies}/></Route>
+								<Route exact path='/authentification'><Authentification readPage={this.readPage} setPage={this.setPage} cookies={cookies} auth_disconnect={socket.disconnect}/></Route>
 								<Route exact path='/chat/:username'><Chat readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/forgotPassword'><ForgotPassword readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/forgotPasswordSend'><ForgotPasswordSend readPage={this.readPage} setPage={this.setPage}/></Route>
@@ -95,8 +100,8 @@ class App extends Component {
 							</Switch>
 						</div>
 					{/* a virer !!!!! */}
-					{id != undefined ? <button onClick={() => socket.connect(8,(data) => console.log(data),(data) => console.log(data))}>connect</button> : null}
-					{id != undefined ? <button onClick={() => socket.disconnect()}>disconnect</button> : null}
+					{id != undefined ? <button onClick={() => socket.connect(8,(data) => this.handleNotifs(data),(data) => this.handleMessages(data))}>connect</button> : null}
+					{/* {id != undefined ? <button onClick={() => socket.disconnect()}>disconnect</button> : null} */}
 					</div>
 					<Footer readPage={this.readPage} />
 				</div>
