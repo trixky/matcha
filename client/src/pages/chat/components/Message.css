@@ -1,6 +1,7 @@
 .message {
 	background: var(--main-grey-1);
-	width: 180px;
+	width: max-content;
+	max-width: 230px;
 	text-align: left;
 	padding: 10px;
 	margin-bottom: 15px;

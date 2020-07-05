@@ -55,6 +55,7 @@ class Chat extends Component {
 			body
 		};
 		fetch('/messages', requestOptions)
+		this.setState({value: ''})
 	}
 
 	render() {

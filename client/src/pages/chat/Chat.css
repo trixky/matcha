@@ -9,7 +9,8 @@
 }
 
 .message-container {
-	width: 400px;
+	width: 340px;
 	margin: 30px auto 10px;
-	border: solid 1px black;
+	height: 360px;
+	overflow: auto;
 }
