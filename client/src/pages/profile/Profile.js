@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
 
 import './Profile.css'
 
@@ -105,7 +106,10 @@ class Profile extends Component {
 	}
 
 	handleChatButton() {
-		console.log('on veut chater')
+		const data = this.state.data
+		if (data) {
+			this.props.history.push('/chat/' + data.id);
+		}
 	}
 
 	render() {
@@ -128,4 +132,4 @@ class Profile extends Component {
 	}
 }
 
-export default Profile;
+export default withRouter(Profile);
