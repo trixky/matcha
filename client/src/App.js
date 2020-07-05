@@ -59,7 +59,7 @@ class App extends Component {
 							<Switch>
 								<Route exact path='/account'><Account readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/authentification'><Authentification readPage={this.readPage} setPage={this.setPage}/></Route>
-								<Route exact path='/chat/:username/:id'><Chat readPage={this.readPage} setPage={this.setPage}/></Route>
+								<Route exact path='/chat/:username'><Chat readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/forgotPassword'><ForgotPassword readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/forgotPasswordSend'><ForgotPasswordSend readPage={this.readPage} setPage={this.setPage}/></Route>
 								<Route exact path='/forgotUsername'><ForgotUsername readPage={this.readPage} setPage={this.setPage}/></Route>

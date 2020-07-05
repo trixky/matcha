@@ -108,7 +108,7 @@ class Profile extends Component {
 	handleChatButton() {
 		const data = this.state.data
 		if (data) {
-			this.props.history.push('/chat/' + data.username + '/' + data.id);
+			this.props.history.push('/chat/' + data.username);
 		}
 	}
 

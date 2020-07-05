@@ -15,12 +15,13 @@ class Chat extends Component {
 	componentDidMount() {
 		if (this.props.readPage() !== 'Chat')
 			this.props.setPage('Chat');
-
 		this.fetchMessage();
 	}
 
 	fetchMessage() {
 		const current_user = window.location.pathname.split('/')[2];
+
+		console.log(current_user)
 		const requestOptions = {
 			method: 'GET',
 		};
