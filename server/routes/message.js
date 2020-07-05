@@ -6,6 +6,7 @@ const socketIo = require("../Model/socket")
 const ent = require("ent")
 const blockedDB = require("../database/controllers/blocked")
 const matchDB = require("../database/controllers/match")
+const utils = require("../Model/utils")
 
 router.post("/", (req, res, next)=>{
     
@@ -60,8 +61,10 @@ router.get("/:username",(req, res, next) =>{
 
         messagesDB.getAll(req.session.user, data.id)
         .then(data => {
-            if(data)
+            if(data){
+                data = utils.formateDateArray(data)
                 return response.response(res, data)
+            }
             response.response(res, [])
         })
         .catch(err => response.errorCatch(res, "Something went wrong in GET message router ", err))
