@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import './Chat.css'
 
-class Chat extends Chat {
+class Chat extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -17,9 +17,24 @@ class Chat extends Chat {
 	}
 
 	render() {
+		const username = 'uSeRnAmE'
 		return (
 			<div className='intern-page chat-container'>
-			<h2>chaaaat</h2>
+				<h2>{username}</h2>
+				<div className='message-container'>
+					<div className='message message-right'>
+						<p className='message-time'>xx:xx:xxxx</p>
+						<p>that is a message !</p>
+					</div>
+					<div className='message message-left'>
+						<p className='message-time'>xx:xx:xxxx</p>
+						<p>that is a message !</p>
+					</div>
+				</div>
+				<form>
+					<input className='form-input chat-message-input' name="username" type='text' placeholder='your message...' required />
+					<input className='form-input chat-send-input' type='submit' value='send' />
+				</form>
 			</div>
 		);
 	}

@@ -1,0 +1,40 @@
+.chat-message-input {
+	display: inline-block;
+}
+
+.form-input.chat-send-input {
+	width: 50px;
+	display: inline-block;
+	margin-left: 10px;
+}
+
+.message-container {
+	width: 400px;
+	margin: 0 auto;
+}
+
+.message {
+	background: var(--main-grey-1);
+	width: 180px;
+	text-align: left;
+	padding: 5px;
+	margin-bottom: 15px;
+}
+
+.message > p {
+	margin: 0;
+}
+
+.message-time {
+	font-weight: bold;
+}
+
+.message-right {
+	margin-left: auto;
+	margin-right: 0;
+}
+
+.message-left {
+	margin-left: 0;
+	margin-right: auto;
+}
