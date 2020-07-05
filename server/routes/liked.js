@@ -16,7 +16,10 @@ router.post("/", (req, res, next) => {
         return response.errorResponse(res, "You didn't put a body");
 
     if (!file.CheckProfilePicture(req.session.user))
-        return response.errorResponse(res, "You don't have a profile picture , update one to start using this feature")      
+        return response.errorResponse(res, "You don't have a profile picture , update one to start using this feature")
+        
+    if (req.session.user === req.body.user.username)
+        return response.errorResponse(res, "you cannot like yourself")      
 
     userDB.findOneUserByUsername(req.body.user.username)
     .then(data => {

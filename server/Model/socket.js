@@ -45,6 +45,8 @@ socketIo.listen= (app) => {
 // !!!! remove console.log
     io.on("connection", (socket)=>{
         var id = socket.request._query['id'];
+        if (id === undefined)
+            return;
         // console.log("someone connected")
         // console.log(id)
         io.clients[id] = socket
@@ -54,6 +56,8 @@ socketIo.listen= (app) => {
         
         socket.on("disconnect", ()=>{
             var id = socket.request._query['id'];
+            if (id === undefined)
+                return;
             // console.log("the id is =" + id)
             io.clients[id] = null;
             userDB.updateConnection(id, false)
