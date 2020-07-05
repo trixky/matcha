@@ -30,7 +30,7 @@ match.getById = async (user1, user2) => {
 
 match.delete = async (user1id, user2id) => {
     return db.none(
-        "DELETE FROM match WHERE $1 = ANY (userid) AND $2 = ANY (userid);",[user1.id, user2.id]
+        "DELETE FROM match WHERE $1 = ANY (usersid) AND $2 = ANY (usersid);",[user1id, user2id]
     )
     .then(data => data)
     .catch(err => utils.log(err))

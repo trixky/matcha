@@ -77,9 +77,11 @@ router.put("/",(req, res, next) => {
     userDB.findOneUserByUsername(req.body.user.username)
     .then(data => {
         if (!data)
-            return response.errorResponse(res, "Something wrong in delete router 1")
+            return response.errorResponse(res, "No user with this name")
+
         userDB.updateFame(data.id, -1)
-        socket.notification(data.id, "Someone unliked you, check some new account")
+        socket.notification(data.id, "Someone unliked you, check for new love")
+        matchDB.delete(req.session.user, data.id)
         likedDB.delete(req.session.user, data.id)
         .then(data => response.response(res, "Like delected"))
         .catch(err => response.errorCatch(res, "Something wrong in the liked router 2", err))

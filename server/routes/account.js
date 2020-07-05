@@ -46,25 +46,19 @@ router.get("/:id", (req, res, next) => {
                     viewerDB.create(req.session.user, req.session.username, data)
                     .catch(err => err)
                 data.distance = filter.findDistance(user, data)
-                matchDB.getById(user.id, data.id)
-                .then(matched => {
-                    if (matched){
-                        data.relation = "matched";
-                        return response.response(res, data)
-                    }
-                    likedDB.findOneLikeById(user.id, data.id)
-                    .then(liked => {
-                        if (liked){
-                            data.relation = "liked";
+                likedDB.findOneLikeById(user.id, data.id)
+                .then(liked => {
+                    if (liked)
+                        data.relation = "liked";
+                    matchDB.getById(user.id, data.id)
+                    .then(matched => {
+                        if (matched)
+                            data.relation = "matched";
+                        blockedDB.get(user.id, data.id)
+                        .then(blocked => {
+                            if (blocked)
+                                data.relation = "blocked";
                             return response.response(res, data)
-                    }
-                    blockedDB.get(user.id, data.id)
-                    .then(blocked => {
-                        if (blocked){
-                            data.relation = "blocked";
-                            return response.response(res, data)
-                        }
-                        return response.response(res, data)
                         })
                         .catch(err => response.errorCatch(res, "Something went wrong in account, Error blocked setting", err));
                     })
