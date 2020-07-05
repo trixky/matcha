@@ -55,7 +55,6 @@ class People extends Component {
 				<div className='search-carousel-container'>
 					{this.state.profiles}
 				</div>
-				<input className='form-input search-carousel-more-input' type='submit' value='show more profiles' />
 			</div>
 		);
 	}
