@@ -1,0 +1,27 @@
+.message {
+	background: var(--main-grey-1);
+	width: max-content;
+	max-width: 230px;
+	text-align: left;
+	padding: 10px;
+	margin-bottom: 15px;
+}
+
+.message > p {
+	margin: 0;
+}
+
+.message-time {
+	font-weight: bold;
+	padding-bottom: 5px;
+}
+
+.message-right {
+	margin-left: auto;
+	margin-right: 0;
+}
+
+.message-left {
+	margin-left: 0;
+	margin-right: auto;
+}

@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 
 import './Chat.css'
+import Message from './components/Message'
 
 class Chat extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			data: null,
+			messages: [],
 			value: ''
 		}
 		this.componentDidMount = this.componentDidMount.bind(this);
@@ -34,7 +35,7 @@ class Chat extends Component {
 		fetch('/messages/' + current_user, requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data)
+				this.setState({ messages: data._data })
 			});
 	}
 
@@ -54,28 +55,15 @@ class Chat extends Component {
 			body
 		};
 		fetch('/messages', requestOptions)
-			.then(response => response.json())
-			.then(data => {
-				console.log('------------ message :')
-				console.log(data)
-				console.log('------------ fin de message')
-			});
+		this.setState({value: ''})
 	}
 
 	render() {
-		const data = this.state.data;
 		return (
 			<div className='intern-page chat-container'>
 				<h2 className='profil-title'>{this.pretender}</h2>
 				<div className='message-container'>
-					<div className='message message-right'>
-						<p className='message-time'>xx:xx:xxxx</p>
-						<p>that is a message !</p>
-					</div>
-					<div className='message message-left'>
-						<p className='message-time'>xx:xx:xxxx</p>
-						<p>that is a message !</p>
-					</div>
+					{this.state.messages.map((message, index, array) => <Message key={message.created + Date.now()} info={array[index]} pretender={this.pretender} />)}
 				</div>
 				<form onSubmit={this.handleSubmit}>
 					<input className='form-input chat-message-input' name="username" type='text' value={this.state.value} onChange={this.handleChange} placeholder='your message...' required />

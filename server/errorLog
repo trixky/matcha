@@ -1644,3 +1644,15 @@ QueryResultError {
     received: 0
     query: "SELECT * FROM messages WHERE 8 = ANY (usersid) AND 0 = ANY (usersid);"
 }
+QueryResultError {
+    code: queryResultErrorCode.multiple
+    message: "Multiple rows were not expected."
+    received: 3
+    query: "SELECT * FROM blocked WHERE 0 = (blockedid) AND 8 = (userid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM messages WHERE 8 = ANY (usersid) AND 0 = ANY (usersid);"
+}
