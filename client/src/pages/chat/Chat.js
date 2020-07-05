@@ -55,20 +55,22 @@ class Chat extends Component {
 			body
 		};
 		fetch('/messages', requestOptions)
-		this.setState({value: ''})
+		this.setState({ value: '' })
 	}
 
 	render() {
 		return (
 			<div className='intern-page chat-container'>
 				<h2 className='profil-title'>{this.pretender}</h2>
-				<div className='message-container'>
-					{this.state.messages.map((message, index, array) => <Message key={message.created + Date.now()} info={array[index]} pretender={this.pretender} />)}
+				<div className='message-form-container'>
+					<div className='message-container'>
+						{this.state.messages.map((message, index, array) => <Message key={message.created + Date.now()} info={array[index]} pretender={this.pretender} />)}
+					</div>
+					<form onSubmit={this.handleSubmit}>
+						<input className='form-input chat-message-input' name="username" type='text' value={this.state.value} onChange={this.handleChange} placeholder='your message...' required />
+						<input className='form-input chat-send-input' type='submit' value='send' />
+					</form>
 				</div>
-				<form onSubmit={this.handleSubmit}>
-					<input className='form-input chat-message-input' name="username" type='text' value={this.state.value} onChange={this.handleChange} placeholder='your message...' required />
-					<input className='form-input chat-send-input' type='submit' value='send' />
-				</form>
 			</div>
 		);
 	}
