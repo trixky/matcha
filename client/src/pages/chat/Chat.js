@@ -6,10 +6,15 @@ class Chat extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			data: null
+			data: null,
+			value: ''
 		}
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.fetchMessage = this.fetchMessage.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+
+		this.pretender = window.location.pathname.split('/')[2];
 	}
 
 	componentDidMount() {
@@ -19,7 +24,7 @@ class Chat extends Component {
 	}
 
 	fetchMessage() {
-		const current_user = window.location.pathname.split('/')[2];
+		const current_user = this.pretender;
 
 		console.log(current_user)
 		const requestOptions = {
@@ -33,12 +38,35 @@ class Chat extends Component {
 			});
 	}
 
+	handleChange(e) {
+		this.setState({ value: e.currentTarget.value })
+	}
+
+	handleSubmit(e) {
+		e.preventDefault()
+
+		const body = JSON.stringify({ user: { username: this.pretender, message: this.state.value } });
+		const headers = { 'Content-Type': 'application/json' }
+
+		const requestOptions = {
+			method: 'POST',
+			headers,
+			body
+		};
+		fetch('/messages', requestOptions)
+			.then(response => response.json())
+			.then(data => {
+				console.log('------------ message :')
+				console.log(data)
+				console.log('------------ fin de message')
+			});
+	}
+
 	render() {
 		const data = this.state.data;
 		return (
 			<div className='intern-page chat-container'>
-				<h2 className='profil-title'>{data ? data.username : 'loading...'}</h2>
-				<h3 className='connection-status'>{data ? data.connected ? 'connected' : data.updated : 'loading...'}</h3>
+				<h2 className='profil-title'>{this.pretender}</h2>
 				<div className='message-container'>
 					<div className='message message-right'>
 						<p className='message-time'>xx:xx:xxxx</p>
@@ -49,8 +77,8 @@ class Chat extends Component {
 						<p>that is a message !</p>
 					</div>
 				</div>
-				<form>
-					<input className='form-input chat-message-input' name="username" type='text' placeholder='your message...' required />
+				<form onSubmit={this.handleSubmit}>
+					<input className='form-input chat-message-input' name="username" type='text' value={this.state.value} onChange={this.handleChange} placeholder='your message...' required />
 					<input className='form-input chat-send-input' type='submit' value='send' />
 				</form>
 			</div>
