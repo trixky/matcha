@@ -9,7 +9,6 @@ class Authentification extends Component {
 		super(props);
 
 		this.state = {
-			notification: false,
 			identical_password: {
 				password: '',
 				confirmation_password: ''

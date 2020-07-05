@@ -13,6 +13,7 @@ import Notification_icone from '../img/interface_icone/down-arrow.svg'
 class Header extends Component {
 	navConstructor() {
 		const page = this.props.readPage();
+		console.log('this.props.notification = ', this.props.notification)
 		if (page !== 'Authentification' &&
 			page !== 'ForgotUsername' &&
 			page !== 'ForgotPassword' &&
@@ -27,7 +28,7 @@ class Header extends Component {
 						<img className='header-img scale-hover' src={Heart_icone} alt='link to pretenders page' />
 					</Link>
 					<Link to='/notification'>
-						<img className='header-img scale-hover' src={Notification_icone} alt='link to notification page' />
+						<img className={'header-img scale-hover ' + (this.props.notification ? 'new_notification' : null)} src={Notification_icone} alt='link to notification page' />
 					</Link>
 					<Link to='/account'>
 						<img className='header-img scale-hover' src={Account_icone} alt='link to account page' />
@@ -38,7 +39,7 @@ class Header extends Component {
 			<Fragment>
 				<img className='header-img blocked-hander-img' src={Search_icone} alt='link to search page' />
 				<img className='header-img blocked-hander-img' src={Heart_icone} alt='link to pretenders page' />
-				<img className='header-img blocked-hander-img' src={Notification_icone} alt='link to notification page' />
+				<img className={'header-img blocked-hander-img ' + (this.props.notification ? 'new_notification' : null)} src={Notification_icone} alt='link to notification page' />
 				<img className='header-img blocked-hander-img' src={Account_icone} alt='link to account page' />
 			</Fragment>
 		)
