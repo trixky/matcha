@@ -1,6 +1,7 @@
 const socketio = require("socket.io")
 const session = require("express-session")
 const userDB  = require("../database/controllers/userDB")
+const utils = require("../Model/utils")
 
 var io
 var socketIo = {}
@@ -21,9 +22,10 @@ socketIo.notification = (id, notification)=>{
 }
 
 socketIo.messages = (id, sender, message)=>{
-    console.log("sending message")
+    const time = utils.getDate();
+    // console.log("sending message")
     if (io.clients[id])
-        io.clients[id].emit('messages', {sender: sender, message: message, notification: sender + " send you : " + message})
+        io.clients[id].emit('messages', {sender: sender, message: message, created :time,  notification: sender + " send you : " + message})
 }
 
 socketIo.matchNotification = (user1id, user2id) => {
