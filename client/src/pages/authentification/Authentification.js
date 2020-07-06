@@ -3,6 +3,9 @@ import { Link, withRouter } from "react-router-dom";
 
 import './Authentification.css'
 
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 class Authentification extends Component {
 
 	constructor(props) {
@@ -60,9 +63,9 @@ class Authentification extends Component {
 	componentDidMount() {
 		if (this.props.readPage() !== 'Authentification')
 			this.props.setPage('Authentification');
-		if (this.props.cookies.set('my_id') != undefined)
+		if (cookies.set('my_id') != undefined)
 			this.props.auth_disconnect();
-		this.props.cookies.set('my_id', undefined);
+		cookies.set('my_id', undefined);
 	}
 
 	handleLoginSuccess(url) {
@@ -144,7 +147,7 @@ class Authentification extends Component {
 					_this.setState({ invalid_input_login })
 				} else {
 					_this.handleLoginSuccess('/search')
-					_this.props.cookies.set('my_id', data._data.id);
+					cookies.set('my_id', data._data.id);
 				}
 			});
 	}

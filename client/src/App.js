@@ -45,8 +45,6 @@ class App extends Component {
 		this.readPage = this.readPage.bind(this);
 		this.reasetPagedPage = this.setPage.bind(this);
 		this.componentDidMount = this.componentDidMount.bind(this);
-		this.handleNotifs = this.handleNotifs.bind(this);
-		this.handleMessages = this.handleMessages.bind(this);
 	}
 
 	readPage = () => {
@@ -61,22 +59,7 @@ class App extends Component {
 		
 	}
 
-	handleNotifs(data) {
-		console.log('-------- S notif:')
-		console.log(data)
-		this.setState({ notification: true })
-		console.log('-------- E notif:')
-	}
-
-	handleMessages(data) {
-		console.log('message:')
-		console.log(data)
-	}
-
 	render() {
-		const id = cookies.get('my_id');
-		console.log('id id id = ', id);
-		console.log('this.state.notification = ', this.state.notification);
 		return (
 			<Router>
 				<div className="App">
@@ -85,7 +68,7 @@ class App extends Component {
 						<div className="page">
 							<Switch>
 								<Route exact path='/account'><Account readPage={this.readPage} setPage={this.setPage} /></Route>
-								<Route exact path='/authentification'><Authentification readPage={this.readPage} setPage={this.setPage} cookies={cookies} auth_disconnect={socket.disconnect} /></Route>
+								<Route exact path='/authentification'><Authentification readPage={this.readPage} setPage={this.setPage} /></Route>
 								<Route exact path='/chat/:username'><Chat readPage={this.readPage} setPage={this.setPage} /></Route>
 								<Route exact path='/forgotPassword'><ForgotPassword readPage={this.readPage} setPage={this.setPage} /></Route>
 								<Route exact path='/forgotPasswordSend'><ForgotPasswordSend readPage={this.readPage} setPage={this.setPage} /></Route>
@@ -95,7 +78,7 @@ class App extends Component {
 								<Route exact path='/'><Home readPage={this.readPage} setPage={this.setPage} /></Route>
 								<Route exact path='/notification'><Notification readPage={this.readPage} setPage={this.setPage} /></Route>
 								<Route exact path='/people'><People readPage={this.readPage} setPage={this.setPage} /></Route>
-								<Route exact path='/profile/:username'><Profile readPage={this.readPage} setPage={this.setPage} cookies={cookies} /></Route>
+								<Route exact path='/profile/:username'><Profile readPage={this.readPage} setPage={this.setPage} /></Route>
 								<Route exact path='/resetPassword'><ResetPassword readPage={this.readPage} setPage={this.setPage} /></Route>
 								<Route exact path='/search'><Search readPage={this.readPage} setPage={this.setPage} /></Route>
 								<Route exact path='/settings'><Settings readPage={this.readPage} setPage={this.setPage} /></Route>

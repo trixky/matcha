@@ -11,12 +11,28 @@ import Account_icone from '../img/interface_icone/user-1.svg'
 import Notification_icone from '../img/interface_icone/down-arrow.svg'
 
 // import socket
-import socket from "./Socket"
+import socket from "../../Socket"
 
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 class Header extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			notification: false
+		}
+		this.handleNotifs = this.handleNotifs.bind(this);
+		this.componentDidMount = this.componentDidMount.bind(this);
+		this.navConstructor = this.navConstructor.bind(this);
+		this.dontActiveNotification = this.dontActiveNotification.bind(this);
+	}
+
+	handleNotifs() {
+		this.setState({ notification: true })
+	}
+
 	componentDidMount() {
 		const id = cookies.get('my_id');
 		if (id != undefined) {
@@ -24,9 +40,19 @@ class Header extends Component {
 		}
 	}
 
+	dontActiveNotification() {
+		console.log(window.location.pathname.split('/')[1])
+		if (this.state.notification) {
+			if (window.location.pathname.split('/')[1] === 'notification') {
+				this.setState({ notification: false })
+			}
+		}
+	}
+
 	navConstructor() {
+		this.dontActiveNotification()
 		const page = this.props.readPage();
-		console.log('nononononotification = ', this.props.notification)
+		console.log('nononononotification = ', this.state.notification)
 		if (page !== 'Authentification' &&
 			page !== 'ForgotUsername' &&
 			page !== 'ForgotPassword' &&
@@ -41,7 +67,7 @@ class Header extends Component {
 						<img className='header-img scale-hover' src={Heart_icone} alt='link to pretenders page' />
 					</Link>
 					<Link to='/notification'>
-						<img className={'header-img scale-hover ' + (this.props.notification ? 'new_notification' : null)} src={Notification_icone} alt='link to notification page' />
+						<img className={'header-img scale-hover ' + (this.state.notification ? 'new_notification' : null)} src={Notification_icone} alt='link to notification page' />
 					</Link>
 					<Link to='/account'>
 						<img className='header-img scale-hover' src={Account_icone} alt='link to account page' />
@@ -52,7 +78,7 @@ class Header extends Component {
 			<Fragment>
 				<img className='header-img blocked-hander-img' src={Search_icone} alt='link to search page' />
 				<img className='header-img blocked-hander-img' src={Heart_icone} alt='link to pretenders page' />
-				<img className={'header-img blocked-hander-img ' + (this.props.notification ? 'new_notification' : null)} src={Notification_icone} alt='link to notification page' />
+				<img className={'header-img blocked-hander-img ' + (this.state.notification ? 'new_notification' : null)} src={Notification_icone} alt='link to notification page' />
 				<img className='header-img blocked-hander-img' src={Account_icone} alt='link to account page' />
 			</Fragment>
 		)
