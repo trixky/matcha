@@ -21,10 +21,11 @@ router.post("/", (req, res, next) => {
     const repuMin = req.body.user ? req.body.user.repuMin: null;
     const repuMax = req.body.user ? req.body.user.repuMax : null;
     const tags = req.body.user ? req.body.user.tags : [];
-
+    const gender = req.body.user ? req.body.user.gender : undefined;
+    
     userDB.findOneUserById(req.session.user)
     .then(user => {
-        filter.usersFilter(userid, ageMin, ageMax, repuMin, repuMax, tags)
+        filter.usersFilter(userid, ageMin, ageMax, repuMin, repuMax, gender, tags)
         .then(data => {
             filter.sort(user, data)
             .then(data => {

@@ -12,7 +12,7 @@ var userInfo =  "id ,email, username, firstname, name, gender, orientation, "
                 + "viewers, reputation, latitude, longitude, connected, updated, verified"
 
 
-filter.prepareQuery = (tags) => {
+filter.prepareQuery = (tags, gender) => {
 
     var query = `SELECT ${userInfo} FROM users WHERE `
                 + "id != $1 "
@@ -20,13 +20,16 @@ filter.prepareQuery = (tags) => {
                 + "AND reputation >= $4 AND reputation <= $5 "
 
     var i = 6;
-
+    if (gender){
+        query += "AND gender = $6 "
+        i = 7
+    }
     if (Array.isArray(tags))
         tags.forEach((e) => {
             query += `AND $${i++} = ANY (tags) `;
         })
     query += ";"
-
+        
     return query;
 }
 
@@ -64,7 +67,9 @@ filter.formatEntry = (ageMin , ageMax, repuMin, repuMax, tags) =>{
     return [ageMin, ageMax, repuMin, repuMax, tags];
 }
 
-filter.usersFilter = async (id, ageMin , ageMax, repuMin, repuMax, tags) => {
+filter.usersFilter = async (id, ageMin , ageMax, repuMin, repuMax, gender, tags) => {
+
+    const array = []
 
     if (!ageMin)
         ageMin = 0;
@@ -74,8 +79,16 @@ filter.usersFilter = async (id, ageMin , ageMax, repuMin, repuMax, tags) => {
         repuMin = 0;
     if (!repuMax)
         repuMax = 999;
+    array.push(id);array.push(ageMin);array.push(ageMax);array.push(repuMin);array.push(repuMax)
 
-    return userDB.findFilter(filter.prepareQuery(tags), [id, ageMin, ageMax, repuMin, repuMax, tags])
+    if(gender)
+        array.push(gender)
+
+    if(tags)
+        for(var i = 0; i < tags.length; i++)
+            array.push(tags[i])
+    
+    return userDB.findFilter(filter.prepareQuery(tags, gender), array)
     .then(data => data)
     .catch(err => err);
 }
