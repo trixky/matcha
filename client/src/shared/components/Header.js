@@ -24,12 +24,17 @@ class Header extends Component {
 			notification: false
 		}
 		this.handleNotifs = this.handleNotifs.bind(this);
+		this.handleMessages = this.handleMessages.bind(this);
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.navConstructor = this.navConstructor.bind(this);
 		this.dontActiveNotification = this.dontActiveNotification.bind(this);
 	}
 
 	handleNotifs() {
+		this.setState({ notification: true })
+	}
+
+	handleMessages() {
 		this.setState({ notification: true })
 	}
 
