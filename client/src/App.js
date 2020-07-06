@@ -7,10 +7,6 @@ import {
 } from "react-router-dom";
 import './App.css';
 
-import Cookies from 'universal-cookie';
-
-// import socket
-import socket from "./Socket"
 
 // import pages
 import Account from './pages/account/Account'
@@ -37,7 +33,6 @@ import NoMatch from './pages/noMatch/NoMatch'
 import Header from './shared/components/Header'
 import Footer from './shared/components/Footer'
 
-const cookies = new Cookies();
 
 class App extends Component {
 	constructor(props) {
@@ -63,10 +58,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		const id = cookies.get('my_id');
-		if (id != undefined) {
-			socket.connect(8, (data) => this.handleNotifs(data), (data) => this.handleMessages(data))
-		}
+		
 	}
 
 	handleNotifs(data) {
@@ -84,7 +76,7 @@ class App extends Component {
 	render() {
 		const id = cookies.get('my_id');
 		console.log('id id id = ', id);
-		console.log('thispropsnotification = ', this.state.notification);
+		console.log('this.state.notification = ', this.state.notification);
 		return (
 			<Router>
 				<div className="App">
@@ -112,8 +104,6 @@ class App extends Component {
 								<Route path='*'><NoMatch readPage={this.readPage} setPage={this.setPage} /></Route>
 							</Switch>
 						</div>
-						{/* a virer !!!!! */}
-						{id != undefined ? <button onClick={() => socket.connect(8, (data) => this.handleNotifs(data), (data) => this.handleMessages(data))}>connect</button> : null}
 						{/* {id != undefined ? <button onClick={() => socket.disconnect()}>disconnect</button> : null} */}
 					</div>
 					<Footer readPage={this.readPage} />
