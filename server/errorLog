@@ -1656,3 +1656,34 @@ QueryResultError {
     received: 0
     query: "SELECT * FROM messages WHERE 8 = ANY (usersid) AND 0 = ANY (usersid);"
 }
+Bad identifiant or password
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM users WHERE (email = '43@43.com' AND password = '44cb730c420480a0477b505ae68af508fb90f96cf0ec54c6ad16949dd427f13a')"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM messages WHERE 0 = ANY (usersid) AND 8 = ANY (usersid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM messages WHERE 8 = ANY (usersid) AND 0 = ANY (usersid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM messages WHERE 8 = ANY (usersid) AND 0 = ANY (usersid);"
+}
+QueryResultError {
+    code: queryResultErrorCode.noData
+    message: "No data returned from the query."
+    received: 0
+    query: "SELECT * FROM messages WHERE 0 = ANY (usersid) AND 8 = ANY (usersid);"
+}

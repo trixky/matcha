@@ -8,6 +8,9 @@ import ProfileListInfo from './components/ProfileListInfo'
 import Bio from './components/Bio'
 import Tags from './components/Tags'
 
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 class Profile extends Component {
 	state = {
 		data: null,
@@ -113,7 +116,7 @@ class Profile extends Component {
 	}
 
 	inputsGenerator() {
-		if (this.state.data && this.state.data.id != this.props.cookies.get('my_id')) {
+		if (this.state.data && this.state.data.id != cookies.get('my_id')) {
 			return (
 				<Fragment>
 					<input className='form-input' onClick={() => (this.handleLikeButton())} type='submit' value={this.state.like_button} disabled={this.state.like_button === 'loading...' || this.state.block_button === 'unblock'} />
