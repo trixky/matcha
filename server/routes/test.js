@@ -119,7 +119,8 @@ next()}
 ,(req, res, next) =>{
     gps.getCoordonned(req.params.ip)
     .then(data => {
-        response.response(res, data)
+        const rep = "Your coordoned is latitude : " + data.latitude  + " longitude : "+ data.longitude + " You live in " + data.country_name + " in the city : " + data.city
+        response.response(res, rep)
     })
     .catch(err => response.errorCatch(res, "Something went wrong in gps", err));
 });
