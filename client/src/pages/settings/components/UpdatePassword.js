@@ -49,7 +49,7 @@ class UpdatePassword extends Component {
 				},
 				body: JSON.stringify(body)
 			};
-			fetch('/account/myprofile', requestOptions)
+			fetch('/account/password', requestOptions)
 				.then((response) => response.json())
 				.then(data => {
 					if (data._status === -1) {

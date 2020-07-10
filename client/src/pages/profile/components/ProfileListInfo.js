@@ -19,7 +19,7 @@ class ProfileListInfo extends Component {
 						<p className='profil-state-type'>age</p><p className='profil-state-number'>{data ? data.age : 'loading...'}</p>
 					</li>
 					<li className='profil-state-line'>
-						<p className='profil-state-type'>distance</p><p className='profil-state-number'>{data ? data.age + ' km': 'loading...'}</p>
+						<p className='profil-state-type'>distance</p><p className='profil-state-number'>{data ? data.distance + ' km': 'loading...'}</p>
 					</li>
 					<li className='profil-state-line'>
 						<p className='profil-state-type'>reputation</p><p className='profil-state-number'>{data ? data.reputation + ' ⭐' : 'loading...'}</p>
