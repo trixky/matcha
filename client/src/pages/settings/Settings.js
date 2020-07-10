@@ -21,7 +21,6 @@ class Settings extends Component {
 
 	setData(data) {
 		this.setState({ data })
-		console.log(data)
 	}
 
 	refresh_profile() {

@@ -46,10 +46,6 @@ class UpdateFirstName extends Component {
 			body: JSON.stringify(body)
 		};
 		fetch('/account/myprofile', requestOptions)
-		.then((response) => response.json())
-		.then(data => {
-			console.log(data)
-		})
 	}
 
 	render() {

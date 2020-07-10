@@ -50,7 +50,6 @@ class UpdateEmail extends Component {
 		fetch('/account/myprofile', requestOptions)
 		.then((response) => response.json())
 		.then(data => {
-			console.log(data._status)
 			if (data._status === -1) {
 				_this.setState({email_err_message: data._data.email})
 			} else {

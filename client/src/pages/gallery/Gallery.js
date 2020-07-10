@@ -24,7 +24,6 @@ class Gallery extends Component {
 			this.props.setPage('Gallery');
 
 		const current_user = window.location.pathname.split('/')[2];
-		console.log(current_user)
 
 		const requestOptions = {
 			method: 'GET',
@@ -33,7 +32,6 @@ class Gallery extends Component {
 		fetch('/account/' + current_user, requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data)
 				this.setState({ data: data._data })
 			});
 	}

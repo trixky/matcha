@@ -135,11 +135,9 @@ class Authentification extends Component {
 			body: JSON.stringify(login)
 		};
 
-		console.log('logggin')
 		fetch('/users/login', requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data)
 				if (data._status === -1) {
 					let invalid_input_login = Object.assign(_this.state.invalid_input_login)
 					invalid_input_login.all_input.status = 'on';

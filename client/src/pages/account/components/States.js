@@ -36,7 +36,6 @@ class States extends Component {
 	render() {
 		const data = this.props.data;
 
-		console.log(data)
 		return (
 			<div className='states-containers'>
 				<ul>

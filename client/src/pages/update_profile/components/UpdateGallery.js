@@ -26,8 +26,6 @@ class UpdatePicture extends Component {
 			const formData = new FormData();
 			const url = (this.props.nbr === 0 ? 'picture/profile' : 'picture/' + this.props.nbr);
 
-			console.log(url)
-
 			formData.append(
 				"image",
 				this.state.selectedFileProfile,

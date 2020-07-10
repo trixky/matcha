@@ -46,7 +46,6 @@ class Header extends Component {
 	}
 
 	dontActiveNotification() {
-		console.log(window.location.pathname.split('/')[1])
 		if (this.state.notification) {
 			if (window.location.pathname.split('/')[1] === 'notification') {
 				this.setState({ notification: false })
@@ -57,7 +56,6 @@ class Header extends Component {
 	navConstructor() {
 		this.dontActiveNotification()
 		const page = this.props.readPage();
-		console.log('nononononotification = ', this.state.notification)
 		if (page !== 'Authentification' &&
 			page !== 'ForgotUsername' &&
 			page !== 'ForgotPassword' &&

@@ -32,7 +32,7 @@ class Chat extends Component {
 	}
 
 	handleNotifs(data) {
-		console.log(data)
+		// console.log(data)
 	}
 
 	handleMessages(data) {
@@ -53,7 +53,7 @@ class Chat extends Component {
 	fetchMessage() {
 		const current_user = this.pretender;
 
-		console.log(current_user)
+		// console.log(current_user)
 		const requestOptions = {
 			method: 'GET',
 		};

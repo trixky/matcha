@@ -29,7 +29,6 @@ class Notification extends Component {
 		fetch('/notifications', requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data)
 				this.setState({ notifications: data._data})
 			});
 	}

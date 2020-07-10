@@ -1687,3 +1687,5 @@ QueryResultError {
     received: 0
     query: "SELECT * FROM messages WHERE 0 = ANY (usersid) AND 8 = ANY (usersid);"
 }
+Something went wrong in account, Error database
+TypeError: Cannot read property 'distanceMax' of undefined

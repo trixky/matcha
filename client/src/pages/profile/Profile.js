@@ -30,7 +30,6 @@ class Profile extends Component {
 		fetch('/account/' + current_user, requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				console.log(data)
 				this.setState({ data: data._data })
 
 				const relation = data._data.relation
