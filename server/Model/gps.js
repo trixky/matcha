@@ -10,7 +10,7 @@ gps.getCoordonned  = async (ip) => {
     .then(response => {        
         return response.data
     })
-    .catch(err => console.log(err))
+    .catch(err => utils.log(err))
 }
 
 module.exports = gps;

@@ -81,7 +81,7 @@ router.put("/password", (req, res, next) => {
     var user = req.body.user;
 
     var err = check.password(user)
-
+    
     if (err)
         return response.errorResponse(res, err)
 
@@ -101,7 +101,7 @@ router.put("/myprofile", (req, res, next) => {
         return response.errorResponse(res, "You didn't put a body");
 
     var user = req.body.user;
-
+    
     if (user.email)
         userDB.findOneUserByEmail(user.email)
         .then(data => {
