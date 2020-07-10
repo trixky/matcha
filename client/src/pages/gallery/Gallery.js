@@ -75,7 +75,7 @@ class Gallery extends Component {
 		return (
 			<div className='intern-page'>
 				<h2>gallery</h2>
-				<h3>{this.state.selected}/{this.picture_nbr() != -1 ? this.picture_nbr() : 'loading...'}</h3>
+				<h3>{this.state.selected}/{this.picture_nbr() !== -1 ? this.picture_nbr() : 'loading...'}</h3>
 				<div className='gallery-img-container' onClick={this.handleNext}>
 					{url_img ? <img className='gallery-img' src={url_img} alt='link to account page' /> : 'loading'}
 				</div>

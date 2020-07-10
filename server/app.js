@@ -29,7 +29,7 @@ var testRouter = require("./routes/test")
 
 var app = express();
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(cors({credentials: true}))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

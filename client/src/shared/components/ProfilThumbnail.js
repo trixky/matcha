@@ -6,10 +6,6 @@ import InfoThumbnail from './InfoThumbnail'
 import './ProfilThumbnail.css'
 
 class ProfilThumbnail extends Component {
-	constructor(props) {
-		super(props);
-	}
-
 	handleClick(url) {
 		this.props.history.push(url);
 	}

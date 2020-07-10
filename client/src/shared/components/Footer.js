@@ -6,7 +6,6 @@ import './Footer.css'
 // import social network icone
 import Facebook from '../img/social_icone/Circle Black White/Facebook_2.svg'
 import Twitter from '../img/social_icone/Circle Black White/Twitter_2.svg'
-import Pinterest from '../img/social_icone/Circle Black White/Pinterest_2.svg'
 import Github from '../img/social_icone/Circle Black White/Github_2.svg'
 import Instagram from '../img/social_icone/Circle Black White/Instagram_2.svg'
 

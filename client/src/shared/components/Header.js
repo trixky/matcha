@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import './Header.css'
 
 import Search_icone from '../img/interface_icone/search.svg'
-import Chat_icone from '../img/interface_icone/speech-bubble-18.svg'
 import Heart_icone from '../img/interface_icone/heart-2.svg'
 import Account_icone from '../img/interface_icone/user-1.svg'
 import Notification_icone from '../img/interface_icone/down-arrow.svg'
@@ -40,7 +39,7 @@ class Header extends Component {
 
 	componentDidMount() {
 		const id = cookies.get('my_id');
-		if (id != undefined) {
+		if (id !== undefined) {
 			socket.connect(id, (data) => this.handleNotifs(data), (data) => this.handleMessages(data))
 		}
 	}
@@ -55,12 +54,13 @@ class Header extends Component {
 
 	navConstructor() {
 		this.dontActiveNotification()
-		const page = this.props.readPage();
+        const page = this.props.readPage();
 		if (page !== 'Authentification' &&
 			page !== 'ForgotUsername' &&
 			page !== 'ForgotPassword' &&
 			page !== 'ForgotPasswordSend' &&
-			page !== 'ForgotUsernameSend')
+            page !== 'ForgotUsernameSend' &&
+            page !== 'Home')
 			return (
 				<Fragment>
 					<Link to='/search'>

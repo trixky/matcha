@@ -63,7 +63,7 @@ class Authentification extends Component {
 	componentDidMount() {
 		if (this.props.readPage() !== 'Authentification')
 			this.props.setPage('Authentification');
-		if (cookies.set('my_id') != undefined)
+		if (cookies.set('my_id') !== undefined)
 			this.props.auth_disconnect();
 		cookies.set('my_id', undefined);
 	}

@@ -31,12 +31,12 @@ class Search extends Component {
 	refresh_users() {
 		const _this = this;
 		
-		console.log('distanceMax =' + this.distanceMax)
-		console.log('ageMin =' + this.ageMin)
-		console.log('ageMax =' + this.ageMax)
-		console.log('repuMin =' + this.repuMin)
-		console.log('repuMax =' + this.repuMax)
-		console.log('gender =' + this.gender)
+		// console.log('distanceMax =' + this.distanceMax)
+		// console.log('ageMin =' + this.ageMin)
+		// console.log('ageMax =' + this.ageMax)
+		// console.log('repuMin =' + this.repuMin)
+		// console.log('repuMax =' + this.repuMax)
+		// console.log('gender =' + this.gender)
 
 		let url = '/search?';
 

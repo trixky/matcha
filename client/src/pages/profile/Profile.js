@@ -115,7 +115,7 @@ class Profile extends Component {
 	}
 
 	inputsGenerator() {
-		if (this.state.data && this.state.data.id != cookies.get('my_id')) {
+		if (this.state.data && this.state.data.id !== cookies.get('my_id')) {
 			return (
 				<Fragment>
 					<input className='form-input' onClick={() => (this.handleLikeButton())} type='submit' value={this.state.like_button} disabled={this.state.like_button === 'loading...' || this.state.block_button === 'unblock'} />

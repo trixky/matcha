@@ -45,7 +45,7 @@ class Chat extends Component {
 			this.props.setPage('Chat');
 		this.fetchMessage();
 		const id = cookies.get('my_id');
-		if (id != undefined) {
+		if (id !== undefined) {
 			socket.connect(id, (data) => this.handleNotifs(data), (data) => this.handleMessages(data))
 		}
 	}

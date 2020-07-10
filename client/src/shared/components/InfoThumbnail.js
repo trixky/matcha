@@ -3,9 +3,6 @@ import React, { Component } from 'react'
 import './InfoThumbnail.css'
 
 class InfoThumbnail extends Component {
-	constructor(props) {
-		super(props);
-	}
 
 	render() {
 		const info = this.props.info;
