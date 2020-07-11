@@ -66,6 +66,12 @@ class Authentification extends Component {
 		if (cookies.set('my_id') !== undefined)
 			this.props.auth_disconnect();
 		cookies.set('my_id', undefined);
+
+		const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+        };
+        fetch('/disconnect', requestOptions)
 	}
 
 	handleLoginSuccess(url) {
