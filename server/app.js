@@ -23,7 +23,7 @@ var conversationsRouter = require("./routes/conversations")
 var disconnectedRouter = require("./routes/disconnected")
 var searchRouter = require("./routes/search")
 var viewersRouter = require("./routes/viewers")
-
+var fakeRouter = require("./routes/fake")
 var testRouter = require("./routes/test")
 
 
@@ -74,7 +74,7 @@ app.use("/conversations", conversationsRouter)
 app.use("/search", searchRouter)
 app.use("/disconnect", disconnectedRouter)
 app.use("/viewers", viewersRouter)
-
+app.use("/fake", fakeRouter)
 app.use("/test", testRouter)
 
 module.exports = app
