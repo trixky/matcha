@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
 
-// import ProfilThumbnail from './components/ProfilThumbnail'
 import PeopleSelection from './components/PeopleSelection'
 import ProfilThumbnail from '../../shared/components/ProfilThumbnail'
 
@@ -25,6 +25,8 @@ class People extends Component {
 	generateProfile(selected) {
 		let path = '/';
 
+		const _this = this;
+
 		if (selected === 'matched') {
 			path += 'matched';
 		} else if (selected === 'likers') {
@@ -43,8 +45,11 @@ class People extends Component {
 		fetch(path, requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				this.setState({ profiles: data._data.map((user, index, array) => (user ? <ProfilThumbnail key={user.id} info={array[index]} /> : null))})
-				// {this.state.data.map((user, index, array) => (user ? <ProfilThumbnail key={user.id} info={array[index]} /> : null))}
+				if (data._status === -1) {
+					_this.props.history.push('/authentification');
+				} else {
+					this.setState({ profiles: data._data.map((user, index, array) => (user ? <ProfilThumbnail key={user.id} info={array[index]} /> : null))})
+				}
 			});
 	}
 
@@ -60,4 +65,4 @@ class People extends Component {
 	}
 }
 
-export default People;
+export default withRouter(People);

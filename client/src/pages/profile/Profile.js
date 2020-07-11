@@ -20,6 +20,8 @@ class Profile extends Component {
 	}
 
 	componentDidMount() {
+		const _this = this;
+
 		if (this.props.readPage() !== 'Profile')
 			this.props.setPage('Profile');
 
@@ -30,17 +32,21 @@ class Profile extends Component {
 		fetch('/account/' + current_user, requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				this.setState({ data: data._data })
+				if (data._status === -1) {
+					_this.props.history.push('/authentification');
+				} else {
 
-				const relation = data._data.relation
-				if (!relation) {
-					this.setState({ like_button: 'like', chat_button: false, block_button: 'block' })
-				} else if (relation === 'matched') {
-					this.setState({ like_button: 'unlike', chat_button: true, block_button: 'block' })
-				} else if (relation === 'liked') {
-					this.setState({ like_button: 'unlike', chat_button: false, block_button: 'block' })
-				} else if (relation === 'blocked') {
-					this.setState({ like_button: 'like', chat_button: false, block_button: 'unblock' })
+					this.setState({ data: data._data })
+					const relation = data._data.relation
+					if (!relation) {
+						this.setState({ like_button: 'like', chat_button: false, block_button: 'block' })
+					} else if (relation === 'matched') {
+						this.setState({ like_button: 'unlike', chat_button: true, block_button: 'block' })
+					} else if (relation === 'liked') {
+						this.setState({ like_button: 'unlike', chat_button: false, block_button: 'block' })
+					} else if (relation === 'blocked') {
+						this.setState({ like_button: 'like', chat_button: false, block_button: 'unblock' })
+					}
 				}
 			});
 	}

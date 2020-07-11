@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { withRouter } from "react-router-dom";
+
 import ProfilThumbnail from '../../shared/components/ProfilThumbnail'
 import SearchCriteria from './components/SearchCriteria'
 
@@ -30,13 +32,6 @@ class Search extends Component {
 
 	refresh_users() {
 		const _this = this;
-		
-		// console.log('distanceMax =' + this.distanceMax)
-		// console.log('ageMin =' + this.ageMin)
-		// console.log('ageMax =' + this.ageMax)
-		// console.log('repuMin =' + this.repuMin)
-		// console.log('repuMax =' + this.repuMax)
-		// console.log('gender =' + this.gender)
 
 		let url = '/search?';
 
@@ -57,7 +52,11 @@ class Search extends Component {
 		fetch(url, requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				_this.setState({ data: data._data })
+				if (data._status === -1) {
+					_this.props.history.push('/authentification');
+				} else {
+					_this.setState({ data: data._data })
+				}
 			});
 	}
 
@@ -73,4 +72,4 @@ class Search extends Component {
 	}
 }
 
-export default Search;
+export default withRouter(Search);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
 
 import './Notification.css'
 
@@ -23,17 +24,20 @@ class Notification extends Component {
 	}
 
 	fetchNotification() {
+		const _this = this;
 		const requestOptions = {
 			method: 'GET',
 		};
 		fetch('/notifications', requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				this.setState({ notifications: data._data})
+				if (data._status === -1) {
+					_this.props.history.push('/authentification');
+				} else {
+					this.setState({ notifications: data._data})
+				}
 			});
 	}
-
-
 
 	render() {
 		return (
@@ -46,4 +50,4 @@ class Notification extends Component {
 	}
 }
 
-export default Notification;
+export default withRouter(Notification);
