@@ -9,7 +9,7 @@ class UpdateBirthday extends Component {
 		this.birthday_fetched = false;
 
 		this.state = {
-			value: '2000-00-00'
+			value: ''
 		}
 
 		this.componentDidUpdate = this.componentDidUpdate.bind(this);
