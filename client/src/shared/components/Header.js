@@ -31,12 +31,10 @@ class Header extends Component {
 	}
 
 	handleNotifs() {
-		console.log('recu notif')
 		this.setState({ notification: true })
 	}
 
 	handleMessages() {
-		console.log('recu message')
 		this.setState({ notification: true })
 	}
 
