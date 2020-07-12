@@ -120,6 +120,18 @@ class Profile extends Component {
 		}
 	}
 
+	handleReportButton() {
+		const body = JSON.stringify({ user: { username: this.state.data.username } });
+		const headers = { 'Content-Type': 'application/json' }
+
+		const requestOptions = {
+			method: 'POST',
+			headers,
+			body
+		};
+		fetch('/fake', requestOptions)
+	}
+
 	inputsGenerator() {
 		if (this.state.data && this.state.data.id !== cookies.get('my_id')) {
 			return (
@@ -127,6 +139,7 @@ class Profile extends Component {
 					<input className='form-input' onClick={() => (this.handleLikeButton())} type='submit' value={this.state.like_button} disabled={this.state.like_button === 'loading...' || this.state.block_button === 'unblock'} />
 					<input className='form-input' onClick={() => (this.handleBlockButton())} type='submit' value={this.state.block_button} />
 					<input className='form-input' onClick={() => (this.handleChatButton())} type='submit' value='chat' disabled={!this.state.chat_button} />
+					<input className='form-input' onClick={() => (this.handleReportButton())} type='submit' value='report' />
 				</Fragment>
 			)
 		}

@@ -31,6 +31,7 @@ header {
 
 .new_notification {
 	animation: pulse 2s infinite;
+	/* opacity: 0.4; */
 }
 
 @keyframes pulse {
