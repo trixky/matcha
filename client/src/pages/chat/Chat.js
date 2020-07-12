@@ -31,10 +31,6 @@ class Chat extends Component {
 		this.setState({ messages })
 	}
 
-	handleNotifs(data) {
-		// console.log(data)
-	}
-
 	handleMessages(data) {
 		if (data.sender === this.pretender)
 			this.addMessage(data)
@@ -53,7 +49,6 @@ class Chat extends Component {
 	fetchMessage() {
 		const current_user = this.pretender;
 
-		// console.log(current_user)
 		const requestOptions = {
 			method: 'GET',
 		};

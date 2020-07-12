@@ -7,7 +7,6 @@ router.get("/", (req, res, next) =>{
     notificationsDB.findAllById(req.session.user)
     .then(data => {
         if(data){
-            //console.log(req.session.user)
             data = utils.formateDateArray(data)
             data = utils.marketNotifications(data)
             return response.response(res, data)
