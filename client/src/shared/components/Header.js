@@ -27,6 +27,7 @@ class Header extends Component {
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.navConstructor = this.navConstructor.bind(this);
 		this.dontActiveNotification = this.dontActiveNotification.bind(this);
+		this.componentDidUpdate = this.componentDidUpdate.bind(this);
 	}
 
 	handleNotifs() {
@@ -54,8 +55,11 @@ class Header extends Component {
 		}
 	}
 
-	navConstructor() {
+	componentDidUpdate() {
 		this.dontActiveNotification()
+	}
+
+	navConstructor() {
         const page = this.props.readPage();
 		if (page !== 'Authentification' &&
 			page !== 'ForgotUsername' &&
