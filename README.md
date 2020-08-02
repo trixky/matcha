@@ -3,15 +3,13 @@
 A small, minimalist online dating site.
 You can find your soulmate according to your criteria (age, distance, gender etc...), you can chat with people who like you back, look at profiles who like you, who see your profile etc... __(docker-compose)__
 
-> Unfortunately, the project is not finished for reasons of time.
-
-![Recordit GIF](https://i.ibb.co/mSJsHL6/ezgif-com-resize.gif)
+![Recordit GIF](https://i.ibb.co/tMB0YJn/ezgif-com-gif-maker-1.gif)
 
 ## Mobile First
 
 The site is designed in mobile first.
 
-![Recordit GIF](https://i.ibb.co/d44xzj9/ezgif-com-crop-1.gif)
+![Recordit GIF](https://i.ibb.co/Lk9NMbr/ezgif-com-gif-maker.gif)
 
 ## Usage
 
