@@ -5,9 +5,9 @@ You can find your soulmate according to your criteria (age, distance, gender etc
 
 > Unfortunately, the project is not finished for reasons of time.
 
-![Recordit GIF](https://i.ibb.co/myjSLX2/ezgif-com-crop.gif)
+![Recordit GIF](https://i.ibb.co/mSJsHL6/ezgif-com-resize.gif)
 
-# Mobile First
+## Mobile First
 
 The site is designed in mobile first.
 
