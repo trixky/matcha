@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import './App.css';
 
-
 // import pages
 import Account from './pages/account/Account'
 import Authentification from './pages/authentification/Authentification'
@@ -32,6 +31,9 @@ import NoMatch from './pages/noMatch/NoMatch'
 import Header from './shared/components/Header'
 import Footer from './shared/components/Footer'
 
+import socket from "./Socket"
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 class App extends Component {
 	constructor(props) {
@@ -39,10 +41,13 @@ class App extends Component {
 
 		this.state = {
 			page: 'tyty',
-			notification: false
+			notification: false,
+			handle_message_func: {func: null}
 		}
 		this.readPage = this.readPage.bind(this);
 		this.reasetPagedPage = this.setPage.bind(this);
+		this.handleNotifs = this.handleMessages.bind(this);
+		this.handleMessages = this.handleMessages.bind(this);
 		this.componentDidMount = this.componentDidMount.bind(this);
 	}
 
@@ -54,21 +59,48 @@ class App extends Component {
 		this.setState({ page })
 	}
 
+	handleNotifs(data) {
+		this.setState({ notification: true })
+	}
+
+	handleMessages(data) {
+		const path_splitted = window.location.pathname.split('/');
+
+		if (path_splitted[1] !== 'chat' || path_splitted[2] !== data.sender) {
+			this.setState({ notification: true })
+		}
+
+		if (this.state.handle_message_func.func) {
+			this.state.handle_message_func.func(data)
+		}
+	}
+
 	componentDidMount() {
-		
+		const id = cookies.get('my_id');
+		if (id !== undefined) {
+			socket.connect(id, (data) => this.handleNotifs(data), (data) => this.handleMessages(data))
+		}
+	}
+
+	componentDidUpdate() {
+		if (window.location.pathname.split('/')[1] === 'notification' &&
+			this.state.notification) {
+			this.setState({ notification: false })
+		}
 	}
 
 	render() {
 		return (
 			<Router>
 				<div className="App">
-					<Header readPage={this.readPage} notification={this.state.notification}/>
+					<Header readPage={this.readPage} notification={this.state.notification} />
+					{/* <Header readPage={this.readPage} notification={true}/> */}
 					<div className="page-container">
 						<div className="page">
 							<Switch>
 								<Route exact path='/account'><Account readPage={this.readPage} setPage={this.setPage} /></Route>
 								<Route exact path='/authentification'><Authentification readPage={this.readPage} setPage={this.setPage} /></Route>
-								<Route exact path='/chat/:username'><Chat readPage={this.readPage} setPage={this.setPage} /></Route>
+								<Route exact path='/chat/:username'><Chat handle_message_func={this.state.handle_message_func} readPage={this.readPage} setPage={this.setPage} /></Route>
 								<Route exact path='/forgotPassword'><ForgotPassword readPage={this.readPage} setPage={this.setPage} /></Route>
 								<Route exact path='/forgotPasswordSend'><ForgotPasswordSend readPage={this.readPage} setPage={this.setPage} /></Route>
 								<Route exact path='/forgotUsername'><ForgotUsername readPage={this.readPage} setPage={this.setPage} /></Route>

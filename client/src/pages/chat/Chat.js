@@ -3,11 +3,6 @@ import React, { Component } from 'react'
 import './Chat.css'
 import Message from './components/Message'
 
-import socket from "../../Socket"
-
-import Cookies from 'universal-cookie';
-const cookies = new Cookies();
-
 class Chat extends Component {
 	constructor(props) {
 		super(props);
@@ -16,7 +11,9 @@ class Chat extends Component {
 			value: ''
 		}
 		this.addMessage = this.addMessage.bind(this);
+		this.handleMessages = this.handleMessages.bind(this);
 		this.componentDidMount = this.componentDidMount.bind(this);
+		this.componentWillUnmount = this.componentWillUnmount.bind(this);
 		this.fetchMessage = this.fetchMessage.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.formatDate = this.formatDate.bind(this);
@@ -28,7 +25,8 @@ class Chat extends Component {
 	addMessage(data) {
 		let messages = [...this.state.messages]
 		messages.push(data)
-		this.setState({ messages })
+		if (window.location.pathname.split('/')[1] === 'chat')
+			this.setState({ messages })
 	}
 
 	handleMessages(data) {
@@ -37,13 +35,16 @@ class Chat extends Component {
 	}
 
 	componentDidMount() {
+		this.props.handle_message_func.func = this.handleMessages
+
+
 		if (this.props.readPage() !== 'Chat')
 			this.props.setPage('Chat');
 		this.fetchMessage();
-		const id = cookies.get('my_id');
-		if (id !== undefined) {
-			socket.connect(id, (data) => this.handleNotifs(data), (data) => this.handleMessages(data))
-		}
+	}
+
+	componentWillUnmount() {
+		this.props.handle_message_func.func = this.handleMessages
 	}
 
 	fetchMessage() {
@@ -56,7 +57,8 @@ class Chat extends Component {
 		fetch('/messages/' + current_user, requestOptions)
 			.then(response => response.json())
 			.then(data => {
-				this.setState({ messages: data._data })
+				if (window.location.pathname.split('/')[1] === 'chat')
+					this.setState({ messages: data._data })
 			});
 	}
 
@@ -82,7 +84,7 @@ class Chat extends Component {
 			body
 		};
 		fetch('/messages', requestOptions)
-		this.addMessage({pretender: 'me', sender: 'me', message: this.state.value, created: this.formatDate() })
+		this.addMessage({ pretender: 'me', sender: 'me', message: this.state.value, created: this.formatDate() })
 		this.setState({ value: '' })
 	}
 

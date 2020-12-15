@@ -9,12 +9,6 @@ import Heart_icone from '../img/interface_icone/heart-2.svg'
 import Account_icone from '../img/interface_icone/user-1.svg'
 import Notification_icone from '../img/interface_icone/down-arrow.svg'
 
-// import socket
-import socket from "../../Socket"
-
-import Cookies from 'universal-cookie';
-const cookies = new Cookies();
-
 class Header extends Component {
 	constructor(props) {
 		super(props);
@@ -24,10 +18,7 @@ class Header extends Component {
 		}
 		this.handleNotifs = this.handleNotifs.bind(this);
 		this.handleMessages = this.handleMessages.bind(this);
-		this.componentDidMount = this.componentDidMount.bind(this);
 		this.navConstructor = this.navConstructor.bind(this);
-		this.dontActiveNotification = this.dontActiveNotification.bind(this);
-		this.componentDidUpdate = this.componentDidUpdate.bind(this);
 	}
 
 	handleNotifs() {
@@ -38,33 +29,14 @@ class Header extends Component {
 		this.setState({ notification: true })
 	}
 
-	componentDidMount() {
-		const id = cookies.get('my_id');
-		if (id !== undefined) {
-			socket.connect(id, (data) => this.handleNotifs(data), (data) => this.handleMessages(data))
-		}
-	}
-
-	dontActiveNotification() {
-		if (this.state.notification) {
-			if (window.location.pathname.split('/')[1] === 'notification') {
-				this.setState({ notification: false })
-			}
-		}
-	}
-
-	componentDidUpdate() {
-		this.dontActiveNotification()
-	}
-
 	navConstructor() {
-        const page = this.props.readPage();
+		const page = this.props.readPage();
 		if (page !== 'Authentification' &&
 			page !== 'ForgotUsername' &&
 			page !== 'ForgotPassword' &&
 			page !== 'ForgotPasswordSend' &&
-            page !== 'ForgotUsernameSend' &&
-            page !== 'Home')
+			page !== 'ForgotUsernameSend' &&
+			page !== 'Home')
 			return (
 				<Fragment>
 					<Link to='/search'>
@@ -74,7 +46,7 @@ class Header extends Component {
 						<img className='header-img scale-hover' src={Heart_icone} alt='link to pretenders page' />
 					</Link>
 					<Link to='/notification'>
-						<img className={'header-img scale-hover ' + (this.state.notification ? 'new_notification' : null)} src={Notification_icone} alt='link to notification page' />
+						<img className={'header-img scale-hover ' + (this.props.notification ? 'new_notification' : null)} src={Notification_icone} alt='link to notification page' />
 					</Link>
 					<Link to='/account'>
 						<img className='header-img scale-hover' src={Account_icone} alt='link to account page' />
