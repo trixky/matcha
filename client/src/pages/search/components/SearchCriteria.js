@@ -10,53 +10,67 @@ class SearchCriteria extends Component {
 		this.handleDistance = this.handleDistance.bind(this);
 		this.handleAge = this.handleAge.bind(this);
 		this.handleReputation = this.handleReputation.bind(this);
-	}
+		this.handleSortBy = this.handleSortBy.bind(this);
+	};
 
 	handleGender(event) {
 		const value = event.currentTarget.value;
 		
 		if (value === 'select a gender') {
-			this.props.parent.gender = undefined
+			this.props.parent.gender = undefined;
 		} else {
-			this.props.parent.gender = value
+			this.props.parent.gender = value;
 		}
 		this.props.parent.refresh_users()
-	}
+	};
 
 	handleDistance(event) {
 		const value = event.currentTarget.value;
 		
 		if (value === 'select a distance') {
-			this.props.parent.distanceMax = undefined
+			this.props.parent.distanceMax = undefined;
 		} else {
-			this.props.parent.distanceMax = parseInt(value, 10)
+			this.props.parent.distanceMax = parseInt(value, 10);
 		}
 		this.props.parent.refresh_users()
-	}
+	};
 	
 	handleReputation(event) {
 		const value = event.currentTarget.value;
 		
 		if (value === 'select a reputation') {
-			this.props.parent.repuMin = undefined
+			this.props.parent.repuMin = undefined;
 		} else {
-			this.props.parent.repuMin = parseInt(value, 10)
+			this.props.parent.repuMin = parseInt(value, 10);
 		}
 		this.props.parent.refresh_users()
-	}
+	};
 
 	handleAge(event) {
 		const value = event.currentTarget.value;
 		
 		if (value === 'select an age slice') {
-			this.props.parent.ageMin = undefined
-			this.props.parent.ageMax = undefined
+			this.props.parent.ageMin = undefined;
+			this.props.parent.ageMax = undefined;
 		} else {
-			this.props.parent.ageMin = parseInt(value.slice(0, 2), 10)
-			this.props.parent.ageMax = parseInt(value.slice(5, 8), 10)
+			this.props.parent.ageMin = parseInt(value.slice(0, 2), 10);
+			this.props.parent.ageMax = parseInt(value.slice(5, 8), 10);
 		}
 		this.props.parent.refresh_users()
-	}
+	};
+
+	handleSortBy(event) {
+		const value = event.currentTarget.value;
+		
+		if (value === 'sort by') {
+			this.props.parent.sort_by = undefined;
+			this.props.parent.sort_by = undefined;
+		} else {
+			this.props.parent.sort_by = value;
+			this.props.parent.sort_by = value;
+		}
+		this.props.parent.refresh_users()
+	};
 
 	render() {
 		return (
@@ -95,6 +109,15 @@ class SearchCriteria extends Component {
 					<option value="300">300 km</option>
 					<option value="1000">1000 km</option>
 					<option value="3000">3000 km</option>
+				</select>
+				<select onChange={this.handleSortBy} className='form-input' name="sort_by" id="sort_by">
+					<option value="sort by">sort by</option>
+					<option value="age_less">age -</option>
+					<option value="age_more">age +</option>
+					<option value="reputation_less">reputation -</option>
+					<option value="reputation_more">reputation +</option>
+					<option value="distance_less">distance -</option>
+					<option value="distance_more">distance +</option>
 				</select>
 			</div>
 		);

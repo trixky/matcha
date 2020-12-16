@@ -19,6 +19,7 @@ class Search extends Component {
 		this.repuMin = undefined;
 		this.repuMax = undefined;
 		this.gender = undefined;
+		this.sort_by = undefined;
 
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.refresh_users = this.refresh_users.bind(this);
@@ -35,14 +36,16 @@ class Search extends Component {
 
 		let url = '/search?';
 
-		const body = {user: {
-			distanceMax: this.distanceMax,
-			ageMin: this.ageMin,
-			ageMax: this.ageMax,
-			repuMin: this.repuMin,
-			repuMax: this.repuMax,
-			gender: this.gender
-		}}
+		const body = {
+			user: {
+				distanceMax: this.distanceMax,
+				ageMin: this.ageMin,
+				ageMax: this.ageMax,
+				repuMin: this.repuMin,
+				repuMax: this.repuMax,
+				gender: this.gender
+			}
+		}
 
 		const requestOptions = {
 			method: 'POST',
@@ -63,9 +66,29 @@ class Search extends Component {
 	render() {
 		return (
 			<div className='intern-page search-container'>
-				<SearchCriteria parent={this}/>
+				<SearchCriteria parent={this} />
 				<div className='search-carousel-container'>
-					{this.state.data.map((user, index, array) => (user ? <ProfilThumbnail key={user.id} info={array[index]} /> : null))}
+					{this.state.data.map((user, index, array) => (user ? <ProfilThumbnail key={user.id} info={array[index]} /> : null))
+						.sort((a, b) => {
+							if (a && b)
+								switch (this.sort_by) {
+									case 'age_less':
+										return a.props.info.age - b.props.info.age;
+									case 'age_more':
+										return b.props.info.age - a.props.info.age;
+									case 'reputation_less':
+										return a.props.info.reputation - b.props.info.reputation;
+									case 'reputation_more':
+										return b.props.info.reputation - a.props.info.reputation;
+									case 'distance_less':
+										return a.props.info.distance - b.props.info.distance;
+									case 'distance_more':
+										return b.props.info.distance - a.props.info.distance;
+									default:
+										break;
+								}
+							return true;
+						})}
 				</div>
 			</div>
 		);
